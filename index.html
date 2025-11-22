@@ -76,6 +76,70 @@
             margin-bottom: 1.5rem;
         }
 
+        .search-box {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .search-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .search-btn:hover {
+            background: var(--primary-light);
+        }
+
+        .clear-search {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .clear-search:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .search-info {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 0 2px;
+            font-weight: 500;
+        }
+
         .dhamma-content {
             min-height: 120px;
             display: flex;
@@ -294,6 +358,17 @@
         <!-- 法语展示区 -->
         <section class="dhamma-section">
             <h2>📿 法语甘露</h2>
+            
+            <!-- 搜索框 -->
+            <div class="search-box">
+                <input type="text" id="search-input" class="search-input" placeholder="输入关键词搜索法语..." onkeypress="if(event.key==='Enter') searchDhamma()">
+                <button class="search-btn" onclick="searchDhamma()">🔍 搜索</button>
+                <button class="clear-search" onclick="clearSearch()" id="clear-btn" style="display:none;">✕ 清除</button>
+            </div>
+            
+            <!-- 搜索结果信息 -->
+            <div id="search-info" class="search-info" style="display:none;"></div>
+            
             <div class="dhamma-content">
                 <div id="dhamma-display" class="dhamma-text">
                     加载中...
@@ -332,6 +407,11 @@
         let currentPage = 0;
         let currentFilter = 'all';
         const ITEMS_PER_PAGE = 5;
+        
+        // 搜索相关变量
+        let searchKeyword = '';
+        let filteredDhammaData = [];
+        let isSearching = false;
 
         // 页面加载后初始化
         function initPage() {
@@ -347,33 +427,44 @@
 
         // 显示当前页法语
         function displayDhamma() {
-            if (dhammaData.length === 0) return;
+            const dataSource = isSearching ? filteredDhammaData : dhammaData;
+            if (dataSource.length === 0) {
+                document.getElementById('dhamma-display').innerHTML = '<div style="text-align:center;color:#999;">未找到匹配的法语</div>';
+                document.getElementById('page-info').textContent = '无结果';
+                document.getElementById('prev-btn').disabled = true;
+                document.getElementById('next-btn').disabled = true;
+                return;
+            }
             
             const display = document.getElementById('dhamma-display');
             const startIdx = currentPage * ITEMS_PER_PAGE;
-            const endIdx = Math.min(startIdx + ITEMS_PER_PAGE, dhammaData.length);
-            const items = dhammaData.slice(startIdx, endIdx);
+            const endIdx = Math.min(startIdx + ITEMS_PER_PAGE, dataSource.length);
+            const items = dataSource.slice(startIdx, endIdx);
             
             display.style.opacity = '0';
             setTimeout(() => {
-                // 使用编号列表显示多条法语
-                display.innerHTML = items.map((text, idx) => 
-                    `<div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; ${idx < items.length - 1 ? 'border-bottom: 1px solid #e0e0e0;' : ''}">
-                        <div style="color: #a67c52; font-size: 0.85rem; margin-bottom: 0.5rem;">第 ${startIdx + idx + 1} 条</div>
-                        <div>${text}</div>
-                    </div>`
-                ).join('');
+                // 使用编号列表显示多条法语,带关键词高亮
+                display.innerHTML = items.map((item, idx) => {
+                    const text = item.text || item;
+                    const highlightedText = isSearching ? highlightKeyword(text, searchKeyword) : text;
+                    const actualIdx = item.index !== undefined ? item.index : startIdx + idx;
+                    
+                    return `<div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; ${idx < items.length - 1 ? 'border-bottom: 1px solid #e0e0e0;' : ''}">
+                        <div style="color: #a67c52; font-size: 0.85rem; margin-bottom: 0.5rem;">第 ${actualIdx + 1} 条</div>
+                        <div>${highlightedText}</div>
+                    </div>`;
+                }).join('');
                 
                 display.style.opacity = '1';
             }, 150);
             
             // 更新页码信息
-            const totalPages = Math.ceil(dhammaData.length / ITEMS_PER_PAGE);
+            const totalPages = Math.ceil(dataSource.length / ITEMS_PER_PAGE);
             document.getElementById('page-info').textContent = `第 ${currentPage + 1} 页 / 共 ${totalPages} 页`;
             
             // 更新按钮状态
             document.getElementById('prev-btn').disabled = currentPage === 0;
-            document.getElementById('next-btn').disabled = (currentPage + 1) * ITEMS_PER_PAGE >= dhammaData.length;
+            document.getElementById('next-btn').disabled = (currentPage + 1) * ITEMS_PER_PAGE >= dataSource.length;
         }
 
         function prevPage() {
@@ -385,7 +476,8 @@
         }
 
         function nextPage() {
-            const totalPages = Math.ceil(dhammaData.length / ITEMS_PER_PAGE);
+            const dataSource = isSearching ? filteredDhammaData : dhammaData;
+            const totalPages = Math.ceil(dataSource.length / ITEMS_PER_PAGE);
             if (currentPage < totalPages - 1) {
                 currentPage++;
                 displayDhamma();
@@ -398,10 +490,70 @@
         }
 
         function randomQuote() {
-            const totalPages = Math.ceil(dhammaData.length / ITEMS_PER_PAGE);
+            const dataSource = isSearching ? filteredDhammaData : dhammaData;
+            const totalPages = Math.ceil(dataSource.length / ITEMS_PER_PAGE);
             currentPage = Math.floor(Math.random() * totalPages);
             displayDhamma();
             scrollToTop();
+        }
+        
+        // 搜索功能
+        function searchDhamma() {
+            const searchInput = document.getElementById('search-input');
+            const keyword = searchInput.value.trim();
+            
+            if (!keyword) {
+                clearSearch();
+                return;
+            }
+            
+            searchKeyword = keyword;
+            isSearching = true;
+            
+            // 过滤包含关键词的法语,保留原始索引
+            filteredDhammaData = dhammaData
+                .map((text, index) => ({ text, index }))
+                .filter(item => item.text.toLowerCase().includes(keyword.toLowerCase()));
+            
+            // 重置到第一页
+            currentPage = 0;
+            
+            // 显示搜索结果信息
+            const searchInfo = document.getElementById('search-info');
+            searchInfo.textContent = `找到 ${filteredDhammaData.length} 条包含"${keyword}"的法语`;
+            searchInfo.style.display = 'block';
+            
+            // 显示清除按钮
+            document.getElementById('clear-btn').style.display = 'inline-block';
+            
+            // 更新显示
+            displayDhamma();
+        }
+        
+        // 清除搜索
+        function clearSearch() {
+            searchKeyword = '';
+            isSearching = false;
+            filteredDhammaData = [];
+            currentPage = 0;
+            
+            // 隐藏搜索信息
+            document.getElementById('search-info').style.display = 'none';
+            document.getElementById('clear-btn').style.display = 'none';
+            
+            // 清空输入框
+            document.getElementById('search-input').value = '';
+            
+            // 更新显示
+            displayDhamma();
+        }
+        
+        // 高亮关键词
+        function highlightKeyword(text, keyword) {
+            if (!keyword) return text;
+            
+            const regex = new RegExp(`(${keyword})`, 'gi');
+            return text.replace(regex, '<span class="highlight">$1</span>');
         }
 
         // 初始化类型过滤器
