@@ -967,5 +967,15 @@ const LINKS_DATA = [
     "url": "https://www.dhamma.com/zh/",
     "name": "Dhamma.com",
     "type": 3
+  },
+  {
+    "url": "https://www.earlybuddhism.org.hk/",
+    "name": "原始佛教研修会",
+    "type": 3
+  },
+  {
+    "url": "https://www.knownsee.com/%E9%A6%96%E9%A0%81",
+    "name": "如实知见",
+    "type": 3
   }
 ];
