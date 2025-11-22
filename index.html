@@ -115,6 +115,19 @@
             </div>
         </section>
 
+        <!-- 书籍下载区 -->
+        <section class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-normal text-dharma-brown mb-6 text-center flex items-center justify-center gap-2">
+                <i class="bi bi-book"></i>
+                <span>推荐书籍下载</span>
+            </h2>
+            
+            <!-- 书籍网格 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="books-grid">
+                <div class="text-center text-gray-400 col-span-full py-8">加载中...</div>
+            </div>
+        </section>
+
         <!-- 资源链接区 -->
         <section class="mb-12">
             <h2 class="text-2xl md:text-3xl font-normal text-dharma-brown mb-6 text-center flex items-center justify-center gap-2">
@@ -177,6 +190,9 @@
             
             // 初始化法语显示
             displayDhamma();
+            
+            // 显示书籍
+            displayBooks();
             
             // 初始化分类过滤器
             initTypeFilters();
@@ -369,6 +385,43 @@
             });
             
             displayLinks();
+        }
+
+        // 显示书籍
+        function displayBooks() {
+            const grid = document.getElementById('books-grid');
+            
+            if (typeof BOOKS_DATA === 'undefined' || !BOOKS_DATA || BOOKS_DATA.length === 0) {
+                grid.innerHTML = '<div class="text-center text-gray-400 col-span-full py-8">暂无书籍</div>';
+                return;
+            }
+            
+            grid.innerHTML = BOOKS_DATA.map(book => {
+                return `
+                    <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-20 bg-gradient-to-br from-dharma-brown to-dharma-light rounded flex items-center justify-center text-white">
+                                    <i class="bi bi-book text-3xl"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg font-medium text-dharma-brown mb-1 line-clamp-2">${book.title}</h3>
+                                ${book.author ? `<p class="text-sm text-gray-600 mb-2"><i class="bi bi-person"></i> ${book.author}</p>` : ''}
+                                ${book.description ? `<p class="text-sm text-gray-500 mb-3 line-clamp-2">${book.description}</p>` : ''}
+                                <div class="flex gap-2 flex-wrap">
+                                    ${book.download ? `<a href="${book.download}" class="inline-flex items-center gap-1 px-3 py-1 bg-dharma-brown text-white text-sm rounded-full hover:bg-dharma-light transition-colors" download>
+                                        <i class="bi bi-download"></i> 下载
+                                    </a>` : ''}
+                                    ${book.online ? `<a href="${book.online}" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 bg-white border border-dharma-brown text-dharma-brown text-sm rounded-full hover:bg-dharma-brown hover:text-white transition-colors">
+                                        <i class="bi bi-eye"></i> 在线阅读
+                                    </a>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
         // 显示链接
