@@ -4,400 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>法洲</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dharma-brown': '#8d5a2a',
+                        'dharma-light': '#a67c52',
+                        'dharma-bg': '#fdfbf7',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --primary-color: #8d5a2a;
-            --primary-light: #a67c52;
-            --bg-color: #fdfbf7;
-            --card-bg: #ffffff;
-            --text-main: #333333;
-            --text-light: #666666;
-            --border-color: #e0e0e0;
-            --border-radius: 8px;
-            --shadow: 0 2px 8px rgba(0,0,0,0.08);
-            --shadow-hover: 0 4px 12px rgba(0,0,0,0.12);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-
-        header {
-            text-align: center;
-            padding: 2.5rem 1rem;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-            color: white;
-            box-shadow: var(--shadow);
-        }
-
-        header h1 {
-            margin: 0;
-            font-weight: 300;
-            letter-spacing: 3px;
-            font-size: 2rem;
-        }
-
-        header p {
-            opacity: 0.95;
-            font-size: 0.95rem;
-            margin-top: 0.5rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-
-        /* 法语展示区 */
-        .dhamma-section {
-            background: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 3rem;
-            border-left: 4px solid var(--primary-color);
-        }
-
-        .dhamma-section h2 {
-            margin-top: 0;
-            color: var(--primary-color);
-            font-weight: 400;
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .search-box {
-            margin-bottom: 1.5rem;
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .search-input {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border: 2px solid var(--border-color);
-            border-radius: 25px;
-            font-size: 0.95rem;
-            outline: none;
-            transition: all 0.3s;
-        }
-
-        .search-input:focus {
-            border-color: var(--primary-color);
-        }
-
-        .search-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .search-btn:hover {
-            background: var(--primary-light);
-        }
-
-        .clear-search {
-            background: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-            padding: 0.75rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .clear-search:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .search-info {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
         .highlight {
-            background-color: #fff3cd;
+            background-color: #fef3c7;
             padding: 0 2px;
             font-weight: 500;
         }
-
-        .dhamma-content {
-            min-height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
+        
         .dhamma-text {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: var(--text-main);
-            text-align: justify;
             transition: opacity 0.3s ease;
         }
-
-        .dhamma-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .pagination {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .pagination button {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--primary-color);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.9rem;
-        }
-
-        .pagination button:hover:not(:disabled) {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
-        .pagination button:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .page-info {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin: 0 1rem;
-        }
-
-        .random-btn {
-            background: transparent;
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .random-btn:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        /* 资源链接区 */
-        .links-section {
-            margin-bottom: 3rem;
-        }
-
-        .links-section h2 {
-            color: var(--primary-color);
-            font-weight: 400;
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .type-filters {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .type-filter {
-            background: var(--card-bg);
-            border: 2px solid var(--border-color);
-            color: var(--text-main);
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .type-filter:hover {
-            border-color: var(--primary-light);
-        }
-
+        
         .type-filter.active {
-            background: var(--primary-color);
-            border-color: var(--primary-color);
-            color: white;
-        }
-
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .link-card {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: all 0.3s;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            border: 1px solid transparent;
-        }
-
-        .link-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary-color);
-        }
-
-        .link-card h3 {
-            margin: 0 0 0.5rem 0;
-            color: var(--primary-color);
-            font-size: 1.05rem;
-            font-weight: 500;
-        }
-
-        .link-card .url {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            word-break: break-all;
-            margin-top: 0.5rem;
-            opacity: 0.7;
-        }
-
-        .type-badge {
-            display: inline-block;
-            background: var(--primary-light);
-            color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            margin-top: 0.5rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-light);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border-color);
-            margin-top: 2rem;
-        }
-
-        .loading {
-            text-align: center;
-            color: var(--text-light);
-            padding: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            header h1 {
-                font-size: 1.5rem;
-            }
-
-            .dhamma-section {
-                padding: 1.5rem;
-            }
-
-            .dhamma-text {
-                font-size: 1rem;
-            }
-
-            .dhamma-controls {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .links-grid {
-                grid-template-columns: 1fr;
-            }
+            background-color: #8d5a2a !important;
+            border-color: #8d5a2a !important;
+            color: white !important;
         }
     </style>
 </head>
-<body>
-    <header>
-        <h1>法洲</h1>
-        <p>分享佛法智慧与修行资源</p>
+<body class="bg-dharma-bg font-sans">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-dharma-brown to-dharma-light text-white py-10 px-4 shadow-lg">
+        <h1 class="text-4xl md:text-5xl font-light tracking-widest text-center mb-2">法洲</h1>
+        <p class="text-center text-sm md:text-base opacity-95">分享佛法智慧与修行资源</p>
     </header>
 
-    <div class="container">
+    <div class="max-w-7xl mx-auto px-4 py-8">
         <!-- 法语展示区 -->
-        <section class="dhamma-section">
-            <h2>📿 法语甘露</h2>
+        <section class="bg-white rounded-lg shadow-md p-6 md:p-10 mb-12 border-l-4 border-dharma-brown">
+            <h2 class="text-2xl md:text-3xl font-normal text-dharma-brown mb-6 flex items-center gap-2">
+                <i class="bi bi-flower1"></i>
+                <span>法语甘露</span>
+            </h2>
             
             <!-- 搜索框 -->
-            <div class="search-box">
-                <input type="text" id="search-input" class="search-input" placeholder="输入关键词搜索法语..." onkeypress="if(event.key==='Enter') searchDhamma()">
-                <button class="search-btn" onclick="searchDhamma()">🔍 搜索</button>
-                <button class="clear-search" onclick="clearSearch()" id="clear-btn" style="display:none;">✕ 清除</button>
+            <div class="flex flex-wrap gap-2 mb-6">
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    class="flex-1 min-w-[200px] px-4 py-3 border-2 border-gray-200 rounded-full text-base outline-none transition-all duration-300 focus:border-dharma-brown focus:ring-2 focus:ring-dharma-brown focus:ring-opacity-20" 
+                    placeholder="输入关键词搜索法语..." 
+                    onkeypress="if(event.key==='Enter') searchDhamma()"
+                >
+                <button 
+                    class="px-6 py-3 bg-dharma-brown text-white rounded-full hover:bg-dharma-light transition-all duration-300 shadow-sm hover:shadow-md font-medium flex items-center gap-1"
+                    onclick="searchDhamma()"
+                >
+                    <i class="bi bi-search"></i> 搜索
+                </button>
+                <button 
+                    class="px-6 py-3 bg-white text-dharma-brown border-2 border-dharma-brown rounded-full hover:bg-dharma-brown hover:text-white transition-all duration-300 font-medium flex items-center gap-1"
+                    onclick="clearSearch()" 
+                    id="clear-btn" 
+                    style="display:none;"
+                >
+                    <i class="bi bi-x-circle"></i> 清除
+                </button>
             </div>
             
             <!-- 搜索结果信息 -->
-            <div id="search-info" class="search-info" style="display:none;"></div>
+            <div id="search-info" class="text-gray-600 text-sm text-center mb-4 py-2 bg-blue-50 rounded-lg" style="display:none;"></div>
             
-            <div class="dhamma-content">
-                <div id="dhamma-display" class="dhamma-text">
-                    加载中...
+            <!-- 法语内容 -->
+            <div class="min-h-[200px] flex items-center justify-center">
+                <div id="dhamma-display" class="dhamma-text text-lg md:text-xl leading-relaxed text-gray-800 text-justify w-full">
+                    <div class="text-center text-gray-400">加载中...</div>
                 </div>
             </div>
-            <div class="dhamma-controls">
-                <div class="pagination">
-                    <button id="prev-btn" onclick="prevPage()">‹ 上一页</button>
-                    <span class="page-info" id="page-info">-</span>
-                    <button id="next-btn" onclick="nextPage()">下一页 ›</button>
+            
+            <!-- 分页控制 -->
+            <div class="flex flex-col sm:flex-row justify-between items-center mt-8 pt-6 border-t border-gray-200 gap-4">
+                <div class="flex gap-2 items-center order-1 sm:order-none">
+                    <button 
+                        id="prev-btn" 
+                        onclick="prevPage()"
+                        class="px-4 py-2 bg-white border border-gray-300 text-dharma-brown rounded-lg hover:bg-dharma-brown hover:text-white hover:border-dharma-brown transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-dharma-brown disabled:hover:border-gray-300 flex items-center gap-1"
+                    >
+                        <i class="bi bi-chevron-left"></i> 上一页
+                    </button>
+                    <span class="page-info text-gray-600 text-sm mx-2" id="page-info">-</span>
+                    <button 
+                        id="next-btn" 
+                        onclick="nextPage()"
+                        class="px-4 py-2 bg-white border border-gray-300 text-dharma-brown rounded-lg hover:bg-dharma-brown hover:text-white hover:border-dharma-brown transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-dharma-brown disabled:hover:border-gray-300 flex items-center gap-1"
+                    >
+                        下一页 <i class="bi bi-chevron-right"></i>
+                    </button>
                 </div>
-                <button class="random-btn" onclick="randomQuote()">🎲 随机翻页</button>
+                <button 
+                    class="px-6 py-2 bg-white border border-dharma-brown text-dharma-brown rounded-full hover:bg-dharma-brown hover:text-white transition-all duration-300 order-2 sm:order-none flex items-center gap-1"
+                    onclick="randomQuote()"
+                >
+                    <i class="bi bi-shuffle"></i> 随机翻页
+                </button>
             </div>
         </section>
 
         <!-- 资源链接区 -->
-        <section class="links-section">
-            <h2>🔗 佛法资源链接</h2>
-            <div class="type-filters" id="type-filters">
-                <button class="type-filter active" data-type="all">全部</button>
+        <section class="mb-12">
+            <h2 class="text-2xl md:text-3xl font-normal text-dharma-brown mb-6 text-center flex items-center justify-center gap-2">
+                <i class="bi bi-link-45deg"></i>
+                <span>佛法资源链接</span>
+            </h2>
+            
+            <!-- 类型过滤器 -->
+            <div class="flex justify-center gap-3 mb-8 flex-wrap" id="type-filters">
+                <button class="type-filter px-6 py-2 bg-white border-2 border-gray-200 text-gray-700 rounded-full hover:border-dharma-light transition-all duration-300 active:bg-dharma-brown active:border-dharma-brown active:text-white" data-type="all">
+                    全部
+                </button>
             </div>
-            <div class="links-grid" id="links-grid">
-                <div class="loading">加载中...</div>
+            
+            <!-- 链接网格 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="links-grid">
+                <div class="text-center text-gray-400 col-span-full py-8">加载中...</div>
             </div>
         </section>
     </div>
 
-    <footer>
-        <p>&copy; 2025 法洲 | 愿正法久住 </p>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-6 text-center text-gray-600 text-sm mt-12">
+        <p>&copy; 2025 法洲 | 愿正法久住</p>
     </footer>
 
     <script src="data.js"></script>
@@ -602,18 +343,18 @@
         function initTypeFilters() {
             const types = [...new Set(linksData.map(link => link.type))].filter(t => t !== null).sort();
             const typeNames = {
-                1: '📚 经典文献',
-                2: '🎙️ 开示讲座',
-                3: '🌐 综合资源'
+                1: '<i class="bi bi-book"></i> 经典文献',
+                2: '<i class="bi bi-mic"></i> 开示讲座',
+                3: '<i class="bi bi-globe"></i> 综合资源'
             };
             
             const filtersContainer = document.getElementById('type-filters');
             
             types.forEach(type => {
                 const btn = document.createElement('button');
-                btn.className = 'type-filter';
+                btn.className = 'type-filter px-6 py-2 bg-white border-2 border-gray-200 text-gray-700 rounded-full hover:border-dharma-light transition-all duration-300 cursor-pointer flex items-center gap-1';
                 btn.dataset.type = type;
-                btn.textContent = typeNames[type] || `类型 ${type}`;
+                btn.innerHTML = typeNames[type] || `类型 ${type}`;
                 btn.onclick = () => filterByType(type);
                 filtersContainer.appendChild(btn);
             });
@@ -639,7 +380,7 @@
                 : linksData.filter(link => link.type == currentFilter);
             
             if (filteredLinks.length === 0) {
-                grid.innerHTML = '<div class="loading">暂无资源</div>';
+                grid.innerHTML = '<div class="text-center text-gray-400 col-span-full py-8">暂无资源</div>';
                 return;
             }
             
@@ -651,10 +392,10 @@
                 };
                 
                 return `
-                    <a href="${link.url}" target="_blank" class="link-card">
-                        <h3>${link.name || '未命名'}</h3>
-                        ${link.type ? `<span class="type-badge">${typeNames[link.type] || '其他'}</span>` : ''}
-                        <div class="url">${link.url}</div>
+                    <a href="${link.url}" target="_blank" class="block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
+                        <h3 class="text-lg font-medium text-dharma-brown mb-2 group-hover:text-dharma-light transition-colors">${link.name || '未命名'}</h3>
+                        ${link.type ? `<span class="inline-block bg-dharma-light text-white px-3 py-1 rounded-full text-xs mb-2">${typeNames[link.type] || '其他'}</span>` : ''}
+                        <div class="text-xs text-gray-500 break-all opacity-70 mt-2">${link.url}</div>
                     </a>
                 `;
             }).join('');
