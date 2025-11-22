@@ -6,13 +6,20 @@
     <title>法雨甘露 - 佛法资源分享</title>
     <style>
         :root {
-            --primary-color: #8d5a2a; /* 赭石色 */
-            --bg-color: #fdfbf7;      /* 米白色背景 */
+            --primary-color: #8d5a2a;
+            --primary-light: #a67c52;
+            --bg-color: #fdfbf7;
             --card-bg: #ffffff;
             --text-main: #333333;
             --text-light: #666666;
+            --border-color: #e0e0e0;
             --border-radius: 8px;
-            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+            --shadow: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-hover: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
@@ -22,213 +29,425 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
 
-        /* 头部样式 */
         header {
             text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--primary-color);
+            padding: 2.5rem 1rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
             color: white;
+            box-shadow: var(--shadow);
         }
 
         header h1 {
             margin: 0;
             font-weight: 300;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            font-size: 2rem;
         }
 
         header p {
-            opacity: 0.9;
-            font-size: 0.9rem;
+            opacity: 0.95;
+            font-size: 0.95rem;
             margin-top: 0.5rem;
         }
 
-        /* 主要内容区 */
-        main {
-            flex: 1;
-            max-width: 800px;
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem 1rem;
-            width: 100%;
-            box-sizing: border-box;
         }
 
-        /* 金句展示区 */
-        .quote-section {
+        /* 法语展示区 */
+        .dhamma-section {
             background: var(--card-bg);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
-            text-align: center;
             margin-bottom: 3rem;
-            border-top: 4px solid var(--primary-color);
+            border-left: 4px solid var(--primary-color);
         }
 
-        .quote-text {
-            font-size: 1.5rem;
-            font-family: "Georgia", serif;
+        .dhamma-section h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-weight: 400;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dhamma-content {
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dhamma-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
             color: var(--text-main);
-            margin-bottom: 1rem;
-            font-style: italic;
+            text-align: justify;
+            transition: opacity 0.3s ease;
         }
 
-        .quote-source {
+        .dhamma-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .pagination {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .pagination button {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .page-info {
             color: var(--text-light);
             font-size: 0.9rem;
-            display: block;
-            margin-top: 1rem;
+            margin: 0 1rem;
         }
 
-        .refresh-btn {
-            margin-top: 1.5rem;
+        .random-btn {
             background: transparent;
             border: 1px solid var(--primary-color);
             color: var(--primary-color);
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 1.5rem;
             border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
+            font-size: 0.9rem;
         }
 
-        .refresh-btn:hover {
+        .random-btn:hover {
             background: var(--primary-color);
             color: white;
         }
 
         /* 资源链接区 */
-        .resources-section h2 {
-            text-align: center;
-            font-weight: 300;
-            margin-bottom: 2rem;
-            color: var(--primary-color);
+        .links-section {
+            margin-bottom: 3rem;
         }
 
-        .grid {
+        .links-section h2 {
+            color: var(--primary-color);
+            font-weight: 400;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .type-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .type-filter {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .type-filter:hover {
+            border-color: var(--primary-light);
+        }
+
+        .type-filter.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
-        .card {
+        .link-card {
             background: var(--card-bg);
             padding: 1.5rem;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
-            transition: transform 0.2s;
+            transition: all 0.3s;
             text-decoration: none;
             color: inherit;
             display: block;
             border: 1px solid transparent;
         }
 
-        .card:hover {
-            transform: translateY(-3px);
+        .link-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
             border-color: var(--primary-color);
         }
 
-        .card h3 {
-            margin-top: 0;
+        .link-card h3 {
+            margin: 0 0 0.5rem 0;
             color: var(--primary-color);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            font-weight: 500;
         }
 
-        .card p {
-            font-size: 0.9rem;
+        .link-card .url {
+            font-size: 0.8rem;
             color: var(--text-light);
-            margin-bottom: 0;
+            word-break: break-all;
+            margin-top: 0.5rem;
+            opacity: 0.7;
         }
 
-        /* 页脚 */
+        .type-badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
         footer {
             text-align: center;
             padding: 2rem;
             color: var(--text-light);
-            font-size: 0.8rem;
-            border-top: 1px solid #eee;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+
+        .loading {
+            text-align: center;
+            color: var(--text-light);
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .dhamma-section {
+                padding: 1.5rem;
+            }
+
+            .dhamma-text {
+                font-size: 1rem;
+            }
+
+            .dhamma-controls {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-
     <header>
         <h1>法雨甘露</h1>
         <p>分享佛法智慧与修行资源</p>
     </header>
 
-    <main>
-        <!-- 每日金句 -->
-        <section class="quote-section">
-            <div id="quote-display">
-                <div class="quote-text">“诸恶莫作，众善奉行，自净其意，是诸佛教。”</div>
-                <span class="quote-source">—— 法句经</span>
+    <div class="container">
+        <!-- 法语展示区 -->
+        <section class="dhamma-section">
+            <h2>📿 法语甘露</h2>
+            <div class="dhamma-content">
+                <div id="dhamma-display" class="dhamma-text">
+                    加载中...
+                </div>
             </div>
-            <button class="refresh-btn" onclick="loadRandomQuote()">换一句</button>
+            <div class="dhamma-controls">
+                <div class="pagination">
+                    <button id="prev-btn" onclick="prevPage()">‹ 上一条</button>
+                    <span class="page-info" id="page-info">-</span>
+                    <button id="next-btn" onclick="nextPage()">下一条 ›</button>
+                </div>
+                <button class="random-btn" onclick="randomQuote()">🎲 随机一条</button>
+            </div>
         </section>
 
-        <!-- 资源链接 -->
-        <section class="resources-section">
-            <h2>推荐资源</h2>
-            <div class="grid">
-                <a href="https://suttacentral.net" target="_blank" class="card">
-                    <h3>SuttaCentral</h3>
-                    <p>早期佛教经典的各种语言翻译，包含巴利三藏。</p>
-                </a>
-                <a href="#" class="card">
-                    <h3>DhammaTalks</h3>
-                    <p>丰富的佛法开示音频与书籍下载。</p>
-                </a>
-                <a href="#" class="card">
-                    <h3>Access to Insight</h3>
-                    <p>经典的南传佛教英文资源库。</p>
-                </a>
-                <a href="#" class="card">
-                    <h3>Bilara Data</h3>
-                    <p>开放的佛典翻译数据项目。</p>
-                </a>
+        <!-- 资源链接区 -->
+        <section class="links-section">
+            <h2>🔗 佛法资源链接</h2>
+            <div class="type-filters" id="type-filters">
+                <button class="type-filter active" data-type="all">全部</button>
+            </div>
+            <div class="links-grid" id="links-grid">
+                <div class="loading">加载中...</div>
             </div>
         </section>
-    </main>
+    </div>
 
     <footer>
-        <p>&copy; 2025 佛法分享平台 | 愿正法久住</p>
+        <p>&copy; 2025 法雨甘露 | 愿正法久住 🙏</p>
     </footer>
 
+    <script src="data.js"></script>
     <script>
-        // 模拟数据：您可以稍后替换为从您的 JSON 文件读取
-        // 这里使用了您 workspace 中 xplayground1_root-pli-ms.json 的结构概念
-        const quotes = [
-            { text: "诸恶莫作，众善奉行，自净其意，是诸佛教。", source: "法句经 183" },
-            { text: "心是诸法的前导，心是主宰，诸法由心创造。", source: "法句经 1" },
-            { text: "胜者招致怨恨，败者生活在苦恼中。舍弃胜败，寂静者生活得安乐。", source: "法句经 201" },
-            { text: "This is just for playing around, but the Dhamma is serious.", source: "Playground Data" },
-            { text: "Do not commit this file to the main data repository.", source: "System Note" }
-        ];
+        let dhammaData = DHAMMA_DATA;
+        let linksData = LINKS_DATA;
+        let currentPage = 0;
+        let currentFilter = 'all';
 
-        function loadRandomQuote() {
-            const display = document.getElementById('quote-display');
-            // 简单的淡出效果
-            display.style.opacity = 0;
+        // 页面加载后初始化
+        function initPage() {
+            // 初始化法语显示
+            displayDhamma();
             
-            setTimeout(() => {
-                const randomIndex = Math.floor(Math.random() * quotes.length);
-                const quote = quotes[randomIndex];
-                
-                display.innerHTML = `
-                    <div class="quote-text">“${quote.text}”</div>
-                    <span class="quote-source">—— ${quote.source}</span>
-                `;
-                
-                // 淡入
-                display.style.opacity = 1;
-            }, 300);
+            // 初始化分类过滤器
+            initTypeFilters();
+            
+            // 显示链接
+            displayLinks();
         }
 
-        // 添加过渡样式
-        document.getElementById('quote-display').style.transition = 'opacity 0.3s ease';
+        // 显示当前页法语
+        function displayDhamma() {
+            if (dhammaData.length === 0) return;
+            
+            const display = document.getElementById('dhamma-display');
+            const text = dhammaData[currentPage];
+            
+            display.style.opacity = '0';
+            setTimeout(() => {
+                display.textContent = text;
+                display.style.opacity = '1';
+            }, 150);
+            
+            // 更新页码信息
+            document.getElementById('page-info').textContent = `${currentPage + 1} / ${dhammaData.length}`;
+            
+            // 更新按钮状态
+            document.getElementById('prev-btn').disabled = currentPage === 0;
+            document.getElementById('next-btn').disabled = currentPage === dhammaData.length - 1;
+        }
+
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                displayDhamma();
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < dhammaData.length - 1) {
+                currentPage++;
+                displayDhamma();
+            }
+        }
+
+        function randomQuote() {
+            currentPage = Math.floor(Math.random() * dhammaData.length);
+            displayDhamma();
+        }
+
+        // 初始化类型过滤器
+        function initTypeFilters() {
+            const types = [...new Set(linksData.map(link => link.type))].filter(t => t !== null).sort();
+            const typeNames = {
+                1: '📚 经典文献',
+                2: '🎙️ 开示讲座',
+                3: '🌐 综合资源'
+            };
+            
+            const filtersContainer = document.getElementById('type-filters');
+            
+            types.forEach(type => {
+                const btn = document.createElement('button');
+                btn.className = 'type-filter';
+                btn.dataset.type = type;
+                btn.textContent = typeNames[type] || `类型 ${type}`;
+                btn.onclick = () => filterByType(type);
+                filtersContainer.appendChild(btn);
+            });
+        }
+
+        function filterByType(type) {
+            currentFilter = type;
+            
+            // 更新按钮状态
+            document.querySelectorAll('.type-filter').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.type == type || (type === 'all' && btn.dataset.type === 'all'));
+            });
+            
+            displayLinks();
+        }
+
+        // 显示链接
+        function displayLinks() {
+            const grid = document.getElementById('links-grid');
+            
+            const filteredLinks = currentFilter === 'all' 
+                ? linksData 
+                : linksData.filter(link => link.type == currentFilter);
+            
+            if (filteredLinks.length === 0) {
+                grid.innerHTML = '<div class="loading">暂无资源</div>';
+                return;
+            }
+            
+            grid.innerHTML = filteredLinks.map(link => {
+                const typeNames = {
+                    1: '经典',
+                    2: '开示',
+                    3: '资源'
+                };
+                
+                return `
+                    <a href="${link.url}" target="_blank" class="link-card">
+                        <h3>${link.name || '未命名'}</h3>
+                        ${link.type ? `<span class="type-badge">${typeNames[link.type] || '其他'}</span>` : ''}
+                        <div class="url">${link.url}</div>
+                    </a>
+                `;
+            }).join('');
+        }
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', initPage);
     </script>
 </body>
 </html>
