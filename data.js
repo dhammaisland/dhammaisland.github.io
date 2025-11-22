@@ -724,6 +724,11 @@ const LINKS_DATA = [
     "type": 1
   },
   {
+    "url": "http://pathtorealization.blogspot.com",
+    "name": "《念住，通往证悟的直接之道》译注",
+    "type": 1
+  },
+  {
     "url": "https://nanda.online-dhamma.net/tipitaka/sutta/majjhima/maps-MN-Bodhi/",
     "name": "《中部尼柯耶》閱讀地圖",
     "type": 1
@@ -855,7 +860,7 @@ const LINKS_DATA = [
   },
   {
     "url": "http://www.gaya.org.tw/publisher/fasan/The_Vision_of_Dhamma/TheVision_ofDhamma.htm",
-    "name": "向智尊者《Dhamma view》",
+    "name": "向智尊者《法见》",
     "type": 2
   },
   {
@@ -864,13 +869,8 @@ const LINKS_DATA = [
     "type": 2
   },
   {
-    "url": "http://pathtorealization.blogspot.com",
-    "name": "《念住，通往证悟的直接之道》译注",
-    "type": 2
-  },
-  {
     "url": "http://www.theravadacn.org/",
-    "name": "上座部Buddhism文献选译集",
+    "name": "上座部佛教文献选译集",
     "type": 2
   },
   {
@@ -885,22 +885,22 @@ const LINKS_DATA = [
   },
   {
     "url": "http://www.fosss.org/Book/AJiangCha/",
-    "name": "阿姜查的禅修world",
+    "name": "阿姜查的禅修世界",
     "type": 2
   },
   {
     "url": "http://www.guanyin123.com/slzdfy.htm",
-    "name": "《森林中的Dhamma语》",
+    "name": "《森林中的法语》",
     "type": 2
   },
   {
     "url": "http://www.theravadacn.org/Gradual.htm",
-    "name": "约翰.布列特-Dhamma",
+    "name": "约翰.布列特-法",
     "type": 2
   },
   {
     "url": "http://www.oba.org.tw",
-    "name": "台湾原始Buddhism协会",
+    "name": "台湾原始佛教协会",
     "type": 3
   },
   {
