@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>法雨甘露 - 佛法资源分享</title>
+    <title>法洲</title>
     <style>
         :root {
             --primary-color: #8d5a2a;
@@ -286,7 +286,7 @@
 </head>
 <body>
     <header>
-        <h1>法雨甘露</h1>
+        <h1>法洲</h1>
         <p>分享佛法智慧与修行资源</p>
     </header>
 
@@ -301,11 +301,11 @@
             </div>
             <div class="dhamma-controls">
                 <div class="pagination">
-                    <button id="prev-btn" onclick="prevPage()">‹ 上一条</button>
+                    <button id="prev-btn" onclick="prevPage()">‹ 上一页</button>
                     <span class="page-info" id="page-info">-</span>
-                    <button id="next-btn" onclick="nextPage()">下一条 ›</button>
+                    <button id="next-btn" onclick="nextPage()">下一页 ›</button>
                 </div>
-                <button class="random-btn" onclick="randomQuote()">🎲 随机一条</button>
+                <button class="random-btn" onclick="randomQuote()">🎲 随机翻页</button>
             </div>
         </section>
 
@@ -322,7 +322,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 法雨甘露 | 愿正法久住 🙏</p>
+        <p>&copy; 2025 法洲 | 愿正法久住 </p>
     </footer>
 
     <script src="data.js"></script>
@@ -331,6 +331,7 @@
         let linksData = LINKS_DATA;
         let currentPage = 0;
         let currentFilter = 'all';
+        const ITEMS_PER_PAGE = 5;
 
         // 页面加载后初始化
         function initPage() {
@@ -349,39 +350,58 @@
             if (dhammaData.length === 0) return;
             
             const display = document.getElementById('dhamma-display');
-            const text = dhammaData[currentPage];
+            const startIdx = currentPage * ITEMS_PER_PAGE;
+            const endIdx = Math.min(startIdx + ITEMS_PER_PAGE, dhammaData.length);
+            const items = dhammaData.slice(startIdx, endIdx);
             
             display.style.opacity = '0';
             setTimeout(() => {
-                display.textContent = text;
+                // 使用编号列表显示多条法语
+                display.innerHTML = items.map((text, idx) => 
+                    `<div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; ${idx < items.length - 1 ? 'border-bottom: 1px solid #e0e0e0;' : ''}">
+                        <div style="color: #a67c52; font-size: 0.85rem; margin-bottom: 0.5rem;">第 ${startIdx + idx + 1} 条</div>
+                        <div>${text}</div>
+                    </div>`
+                ).join('');
+                
                 display.style.opacity = '1';
             }, 150);
             
             // 更新页码信息
-            document.getElementById('page-info').textContent = `${currentPage + 1} / ${dhammaData.length}`;
+            const totalPages = Math.ceil(dhammaData.length / ITEMS_PER_PAGE);
+            document.getElementById('page-info').textContent = `第 ${currentPage + 1} 页 / 共 ${totalPages} 页`;
             
             // 更新按钮状态
             document.getElementById('prev-btn').disabled = currentPage === 0;
-            document.getElementById('next-btn').disabled = currentPage === dhammaData.length - 1;
+            document.getElementById('next-btn').disabled = (currentPage + 1) * ITEMS_PER_PAGE >= dhammaData.length;
         }
 
         function prevPage() {
             if (currentPage > 0) {
                 currentPage--;
                 displayDhamma();
+                scrollToTop();
             }
         }
 
         function nextPage() {
-            if (currentPage < dhammaData.length - 1) {
+            const totalPages = Math.ceil(dhammaData.length / ITEMS_PER_PAGE);
+            if (currentPage < totalPages - 1) {
                 currentPage++;
                 displayDhamma();
+                scrollToTop();
             }
+        }
+        
+        function scrollToTop() {
+            document.querySelector('.dhamma-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function randomQuote() {
-            currentPage = Math.floor(Math.random() * dhammaData.length);
+            const totalPages = Math.ceil(dhammaData.length / ITEMS_PER_PAGE);
+            currentPage = Math.floor(Math.random() * totalPages);
             displayDhamma();
+            scrollToTop();
         }
 
         // 初始化类型过滤器
