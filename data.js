@@ -719,6 +719,11 @@ const LINKS_DATA = [
     "type": 1
   },
   {
+    "url": "https://www.earlybuddhism.org.hk/?wp=3.1",
+    "name": "蕭式球翻译的巴利语经典",
+    "type": 1
+  },
+  {
     "url": "https://nanda.online-dhamma.net/tipitaka/sutta/majjhima/maps-MN-Bodhi/",
     "name": "《中部尼柯耶》閱讀地圖",
     "type": 1
@@ -829,6 +834,11 @@ const LINKS_DATA = [
     "type": 1
   },
   {
+    "url": "https://sites.google.com/site/palishengdian/pali",
+    "name": "巴利圣典",
+    "type": 1
+  },
+  {
     "url": "http://www.godwin.org.hk/presentation.html",
     "name": "葛荣居士禅修讲录",
     "type": 2
@@ -847,11 +857,6 @@ const LINKS_DATA = [
     "url": "http://www.gaya.org.tw/publisher/fasan/The_Vision_of_Dhamma/TheVision_ofDhamma.htm",
     "name": "向智尊者《Dhamma view》",
     "type": 2
-  },
-  {
-    "url": "https://sites.google.com/site/palishengdian/pali",
-    "name": "巴利圣典",
-    "type": null
   },
   {
     "url": "http://www.dhammatalks.net/",
