@@ -412,9 +412,28 @@
         let searchKeyword = '';
         let filteredDhammaData = [];
         let isSearching = false;
+        
+        // 随机显示相关变量
+        let randomIndices = [];
+
+        // 生成随机索引数组
+        function generateRandomIndices(dataLength) {
+            const indices = Array.from({ length: dataLength }, (_, i) => i);
+            // Fisher-Yates 洗牌算法
+            for (let i = indices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [indices[i], indices[j]] = [indices[j], indices[i]];
+            }
+            return indices;
+        }
 
         // 页面加载后初始化
         function initPage() {
+            // 生成随机索引(仅在非搜索模式下)
+            if (!isSearching) {
+                randomIndices = generateRandomIndices(dhammaData.length);
+            }
+            
             // 初始化法语显示
             displayDhamma();
             
@@ -437,9 +456,22 @@
             }
             
             const display = document.getElementById('dhamma-display');
-            const startIdx = currentPage * ITEMS_PER_PAGE;
-            const endIdx = Math.min(startIdx + ITEMS_PER_PAGE, dataSource.length);
-            const items = dataSource.slice(startIdx, endIdx);
+            let items;
+            
+            if (isSearching) {
+                // 搜索模式:按顺序显示搜索结果
+                const startIdx = currentPage * ITEMS_PER_PAGE;
+                const endIdx = Math.min(startIdx + ITEMS_PER_PAGE, dataSource.length);
+                items = dataSource.slice(startIdx, endIdx);
+            } else {
+                // 非搜索模式:使用随机索引
+                const startIdx = currentPage * ITEMS_PER_PAGE;
+                const endIdx = Math.min(startIdx + ITEMS_PER_PAGE, randomIndices.length);
+                items = randomIndices.slice(startIdx, endIdx).map(idx => ({
+                    text: dhammaData[idx],
+                    index: idx
+                }));
+            }
             
             display.style.opacity = '0';
             setTimeout(() => {
@@ -447,7 +479,7 @@
                 display.innerHTML = items.map((item, idx) => {
                     const text = item.text || item;
                     const highlightedText = isSearching ? highlightKeyword(text, searchKeyword) : text;
-                    const actualIdx = item.index !== undefined ? item.index : startIdx + idx;
+                    const actualIdx = item.index !== undefined ? item.index : currentPage * ITEMS_PER_PAGE + idx;
                     
                     return `<div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; ${idx < items.length - 1 ? 'border-bottom: 1px solid #e0e0e0;' : ''}">
                         <div style="color: #a67c52; font-size: 0.85rem; margin-bottom: 0.5rem;">第 ${actualIdx + 1} 条</div>
@@ -490,9 +522,16 @@
         }
 
         function randomQuote() {
-            const dataSource = isSearching ? filteredDhammaData : dhammaData;
-            const totalPages = Math.ceil(dataSource.length / ITEMS_PER_PAGE);
-            currentPage = Math.floor(Math.random() * totalPages);
+            if (isSearching) {
+                // 搜索模式:随机跳转到某页
+                const totalPages = Math.ceil(filteredDhammaData.length / ITEMS_PER_PAGE);
+                currentPage = Math.floor(Math.random() * totalPages);
+            } else {
+                // 非搜索模式:重新生成随机索引并跳转到随机页
+                randomIndices = generateRandomIndices(dhammaData.length);
+                const totalPages = Math.ceil(dhammaData.length / ITEMS_PER_PAGE);
+                currentPage = Math.floor(Math.random() * totalPages);
+            }
             displayDhamma();
             scrollToTop();
         }
@@ -536,6 +575,9 @@
             isSearching = false;
             filteredDhammaData = [];
             currentPage = 0;
+            
+            // 重新生成随机索引
+            randomIndices = generateRandomIndices(dhammaData.length);
             
             // 隐藏搜索信息
             document.getElementById('search-info').style.display = 'none';
