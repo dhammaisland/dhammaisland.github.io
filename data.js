@@ -709,17 +709,17 @@ const DHAMMA_DATA = [
 
 const LINKS_DATA = [
   {
+    "url": "https://suttacentral.net",
+    "name": "SuttaCentral",
+    "type": 1
+  },
+  {
     "url": "http://agama.buddhason.org",
     "name": "庄春江工作站",
     "type": 1
   },
   {
-    "url": "http://www.chilin.edu.hk/edu/report_section.asp?section_id=5",
-    "name": "志莲净苑",
-    "type": 1
-  },
-  {
-    "url": "http://myweb.ncku.edu.tw/~lsn46/Tipitaka/Sutta/Majjhima/maps-MN-Bodhi.html",
+    "url": "https://nanda.online-dhamma.net/tipitaka/sutta/majjhima/maps-MN-Bodhi/",
     "name": "《中部尼柯耶》閱讀地圖",
     "type": 1
   },
@@ -739,23 +739,13 @@ const LINKS_DATA = [
     "type": 1
   },
   {
-    "url": "http://jcedu.org/dispdir.php?class=001260",
+    "url": "https://www.jcedu.org/200601/5689.html",
     "name": "戒幢-阿含经专题",
     "type": 1
   },
   {
     "url": "http://jingwen.buddh.cn",
     "name": "三藏经典",
-    "type": 1
-  },
-  {
-    "url": "http://myweb.ncku.edu.tw/~lsn46/Tipitaka/tipitaka.htm",
-    "name": "Tipitaka 南傳大藏經",
-    "type": 1
-  },
-  {
-    "url": "http://blog.sina.com.cn/s/articlelist_1680480721_0_32.html",
-    "name": "白话杂阿含经",
     "type": 1
   },
   {
@@ -774,27 +764,17 @@ const LINKS_DATA = [
     "type": 1
   },
   {
-    "url": "https://suttacentral.net",
-    "name": "SuttaCentral",
-    "type": 1
-  },
-  {
-    "url": "http://www.charity.idv.tw",
-    "name": "祇树给孤独园林",
-    "type": 1
-  },
-  {
     "url": "http://yifert210.blogspot.com",
     "name": "《Dhammapada》校勘與標點",
     "type": 1
   },
   {
     "url": "http://kennethyee22d-03b01.blogspot.com",
-    "name": "Dhammapada",
+    "name": "法句经",
     "type": 1
   },
   {
-    "url": "https://sites.google.com/site/palishengdian/",
+    "url": "https://sites.google.com/site/palishengdian/pali/va/dv/dv3",
     "name": "巴利圣典",
     "type": 1
   },
@@ -829,11 +809,6 @@ const LINKS_DATA = [
     "type": 1
   },
   {
-    "url": "http://tripitaka.cbeta.org/mobile/index.php?index=N",
-    "name": "漢譯南傳大藏經(手机版)",
-    "type": 1
-  },
-  {
     "url": "https://www.tipitaka.org",
     "name": "VRI 緬甸版巴利大藏經",
     "type": 1
@@ -841,11 +816,6 @@ const LINKS_DATA = [
   {
     "url": "https://www.accesstoinsight.org/index.html",
     "name": "Access to Insight",
-    "type": 1
-  },
-  {
-    "url": "http://myweb.ncku.edu.tw/~lsn46/tipitaka/tipitaka/",
-    "name": "Tipiṭaka 南傳巴利大藏經",
     "type": 1
   },
   {
@@ -934,18 +904,8 @@ const LINKS_DATA = [
     "type": 3
   },
   {
-    "url": "http://blog.sina.com.cn/u/3973309727",
-    "name": "禅窗",
-    "type": 3
-  },
-  {
     "url": "http://www.dhammarain.org.tw/canon/canon1.html",
-    "name": "Dhamma rain道场",
-    "type": 3
-  },
-  {
-    "url": "http://kusala.online-dhamma.net/文字資料/南傳佛教圖書館%20Theravada%20Buddhism%20E-Library/",
-    "name": "南傳Buddhism圖書館",
+    "name": "法雨道场",
     "type": 3
   },
   {
@@ -965,7 +925,7 @@ const LINKS_DATA = [
   },
   {
     "url": "https://www.dhamma.com/zh/",
-    "name": "Dhamma.com",
+    "name": "隆波帕默法谈",
     "type": 3
   },
   {
