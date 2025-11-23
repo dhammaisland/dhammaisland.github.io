@@ -839,6 +839,21 @@ const LINKS_DATA = [
     "type": 1
   },
   {
+    "url": "http://theravadacn.com/Buddha.htm",
+    "name": "佛：巴利经典中的佛陀生平",
+    "type": 1
+  },
+  {
+    "url": "http://www.theravadacn.org/Gradual.htm",
+    "name": "法：佛陀的次第说法",
+    "type": 1
+  },
+  {
+    "url": "http://theravadacn.com/Sangha.htm",
+    "name": "僧：巴利经文中僧伽的定义",
+    "type": 1
+  },
+  {
     "url": "http://cbetaonline.cn/zh/T0001_001",
     "name": "大藏经",
     "type": 1
@@ -896,21 +911,6 @@ const LINKS_DATA = [
   {
     "url": "http://www.guanyin123.com/slzdfy.htm",
     "name": "《森林中的法语》",
-    "type": 2
-  },
-  {
-    "url": "http://theravadacn.com/Buddha.htm",
-    "name": "佛：巴利经典中的佛陀生平",
-    "type": 2
-  },
-  {
-    "url": "http://www.theravadacn.org/Gradual.htm",
-    "name": "法：佛陀的次第说法",
-    "type": 2
-  },
-  {
-    "url": "http://theravadacn.com/Sangha.htm",
-    "name": "僧：巴利经文中僧伽的定义",
     "type": 2
   },
   {
