@@ -440,16 +440,18 @@
             }
             
             grid.innerHTML = filteredLinks.map(link => {
-                const typeNames = {
-                    1: '经典',
-                    2: '开示',
-                    3: '资源'
+                const typeConfig = {
+                    1: { name: '经典', color: '#059669', bgColor: '#d1fae5', borderColor: '#059669' },  // 绿色 - 经典文献
+                    2: { name: '开示', color: '#dc2626', bgColor: '#fee2e2', borderColor: '#dc2626' },  // 红色 - 开示讲座
+                    3: { name: '资源', color: '#2563eb', bgColor: '#dbeafe', borderColor: '#2563eb' }   // 蓝色 - 综合资源
                 };
                 
+                const config = typeConfig[link.type] || { name: '其他', color: '#8d5a2a', bgColor: '#fdfbf7', borderColor: '#8d5a2a' };
+                
                 return `
-                    <a href="${link.url}" target="_blank" class="block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
-                        <h3 class="text-lg font-medium text-dharma-brown mb-2 group-hover:text-dharma-light transition-colors">${link.name || '未命名'}</h3>
-                        ${link.type ? `<span class="inline-block bg-dharma-light text-white px-3 py-1 rounded-full text-xs mb-2">${typeNames[link.type] || '其他'}</span>` : ''}
+                    <a href="${link.url}" target="_blank" class="block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border-2 hover:-translate-y-1 group" style="border-color: ${config.borderColor}33;">
+                        <h3 class="text-lg font-medium mb-2 transition-colors" style="color: ${config.color};">${link.name || '未命名'}</h3>
+                        ${link.type ? `<span class="inline-block px-3 py-1 rounded-full text-xs mb-2 font-medium" style="background-color: ${config.bgColor}; color: ${config.color};">${config.name}</span>` : ''}
                         <div class="text-xs text-gray-500 break-all opacity-70 mt-2">${link.url}</div>
                     </a>
                 `;
