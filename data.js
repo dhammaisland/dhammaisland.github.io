@@ -909,11 +909,6 @@ const LINKS_DATA = [
     "type": 2
   },
   {
-    "url": "http://www.guanyin123.com/slzdfy.htm",
-    "name": "《森林中的法语》",
-    "type": 2
-  },
-  {
     "url": "http://www.oba.org.tw",
     "name": "台湾原始佛教协会",
     "type": 3
