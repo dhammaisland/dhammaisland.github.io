@@ -775,7 +775,7 @@ const LINKS_DATA = [
   },
   {
     "url": "http://yifert210.blogspot.com",
-    "name": "《Dhammapada》校勘與標點",
+    "name": "《法句经》校勘與標點",
     "type": 1
   },
   {
@@ -830,11 +830,6 @@ const LINKS_DATA = [
   },
   {
     "url": "http://cbetaonline.cn/zh/T0001_001",
-    "name": "大藏经",
-    "type": 1
-  },
-  {
-    "url": "https://cbetaonline.dila.edu.tw/zh/T0001_001",
     "name": "大藏经",
     "type": 1
   },
@@ -894,8 +889,18 @@ const LINKS_DATA = [
     "type": 2
   },
   {
+    "url": "http://theravadacn.com/Buddha.htm",
+    "name": "佛：巴利经典中的佛陀生平",
+    "type": 2
+  },
+  {
     "url": "http://www.theravadacn.org/Gradual.htm",
-    "name": "约翰.布列特-法",
+    "name": "法：佛陀的次第说法",
+    "type": 2
+  },
+  {
+    "url": "http://theravadacn.com/Sangha.htm",
+    "name": "僧：巴利经文中僧伽的定义",
     "type": 2
   },
   {
