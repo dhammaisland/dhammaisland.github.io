@@ -899,11 +899,6 @@ const LINKS_DATA = [
     "type": 2
   },
   {
-    "url": "http://www.udaya.dhamma.org/discourse.htm",
-    "name": "开示-葛印卡",
-    "type": 2
-  },
-  {
     "url": "http://www.fosss.org/Book/AJiangCha/",
     "name": "阿姜查的禅修世界",
     "type": 2
@@ -925,7 +920,7 @@ const LINKS_DATA = [
   },
   {
     "url": "http://yifertw.blogspot.com/",
-    "name": "buddha博客",
+    "name": "台語與佛典",
     "type": 3
   },
   {
