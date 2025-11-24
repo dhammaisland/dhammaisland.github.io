@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- Favicon - 使用 SVG 格式的花朵图标 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='%238d5a2a' d='M6.174 1.184a2 2 0 0 1 3.652 0A2 2 0 0 1 12.99 3.01a2 2 0 0 1 1.826 3.164 2 2 0 0 1 0 3.652 2 2 0 0 1-1.826 3.164 2 2 0 0 1-3.164 1.826 2 2 0 0 1-3.652 0A2 2 0 0 1 3.01 12.99a2 2 0 0 1-1.826-3.164 2 2 0 0 1 0-3.652A2 2 0 0 1 3.01 3.01a2 2 0 0 1 3.164-1.826M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4'/></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="证果 五取蕴 须陀洹 斯陀含 阿那含 阿罗汉 舍利弗 佛教 南传佛教" />
+    <meta name="description" content="如何证果 - 舍利弗尊者开示如理作意五取蕴以证得圣果的方法" />
+    <title>如何证果 - 法洲</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dharma-brown': '#8d5a2a',
+                        'dharma-light': '#a67c52',
+                        'dharma-bg': '#fdfbf7',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .quote-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        
+        .sutra-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        
+        .teaching-box {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        
+        .divider {
+            border-top: 2px solid #d1d5db;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: '✦';
+            position: absolute;
+            left: 50%;
+            top: -12px;
+            transform: translateX(-50%);
+            background: #fdfbf7;
+            padding: 0 1rem;
+            color: #8d5a2a;
+            font-size: 1.2rem;
+        }
+        
+        .content-text {
+            line-height: 2;
+            font-size: 1.125rem;
+        }
+        
+        .dialogue-text {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-text {
+            color: #8d5a2a;
+            font-weight: 600;
+        }
+        
+        .fruit-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin: 0.25rem;
+        }
+        
+        .fruit-1 { background: linear-gradient(135deg, #fef3c7, #fde68a); color: #92400e; }
+        .fruit-2 { background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #1e40af; }
+        .fruit-3 { background: linear-gradient(135deg, #fce7f3, #fbcfe8); color: #9f1239; }
+        .fruit-4 { background: linear-gradient(135deg, #e0e7ff, #c7d2fe); color: #3730a3; }
+    </style>
+</head>
+<body class="bg-dharma-bg font-sans">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-dharma-brown to-dharma-light text-white py-10 px-4 shadow-lg">
+        <h1 class="text-4xl md:text-5xl font-light tracking-widest text-center mb-2">
+            <i class="bi bi-flower1"></i> 法洲
+        </h1>
+        <p class="text-center text-sm md:text-base opacity-95">分享佛法智慧与修行资源</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-dharma-brown hover:text-dharma-light transition-colors flex items-center gap-1">
+                    <i class="bi bi-house-door"></i> 返回首页
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-12">
+        <!-- 文章标题 -->
+        <article class="bg-white rounded-lg shadow-md p-8 md:p-12">
+            <h1 class="text-3xl md:text-4xl font-normal text-dharma-brown mb-8 text-center border-b-2 border-dharma-brown pb-4">
+                <i class="bi bi-trophy"></i> 如何证果
+            </h1>
+            
+            <!-- 引言 -->
+            <div class="teaching-box">
+                <p class="content-text text-gray-800 leading-loose font-medium">
+                    这是同一篇经文的不同版本和翻译，这篇经文明确了，要证得<span class="highlight-text">须陀洹、斯陀含、阿那含、阿罗汉</span>，都要如理作意<span class="highlight-text">五取蕴为病、为癰、为刺、为殺，无常、苦、空、非我</span>，持续如此，当条件成熟，则能取证圣果。
+                </p>
+            </div>
+            
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+            
+            <!-- 第一部分：杂阿含259经 -->
+            <div class="prose max-w-none mb-8">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-book"></i> 杂阿含259经
+                </h2>
+                
+                <div class="text-sm text-gray-500 mb-4">
+                    [正闻本42经/佛光本36经](阴相应/五阴诵/修多罗)(庄春江标点)
+                </div>
+                
+                <div class="sutra-box">
+                    <p class="content-text text-gray-700 leading-loose mb-4">
+                        如是我闻：
+                    </p>
+                    <p class="content-text text-gray-700 leading-loose mb-4">
+                        一时，佛住王舍城迦兰陀竹园。
+                    </p>
+                    <p class="content-text text-gray-700 leading-loose mb-4">
+                        尔时，尊者舍利弗共摩诃拘絺罗在耆阇崛山。
+                    </p>
+                    <p class="content-text text-gray-700 leading-loose mb-4">
+                        摩诃拘絺罗晡时从禅起，诣舍利弗所，共相问讯，相娱悦已，却坐一面。
+                    </p>
+                </div>
+                
+                <h3 class="text-xl font-medium text-dharma-brown mb-4 mt-6 flex items-center gap-2">
+                    <i class="bi bi-chat-left-quote"></i> 舍利弗与拘絺罗的对话
+                </h3>
+                
+                <div class="space-y-6">
+                    <!-- 未证初果者 -->
+                    <div>
+                        <p class="content-text text-gray-700 leading-loose dialogue-text mb-3">
+                            时，摩诃拘絺罗语舍利弗：「欲有所问，仁者宁有闲暇见答以不？」
+                        </p>
+                        <p class="content-text text-gray-700 leading-loose dialogue-text mb-3">
+                            舍利弗言：「仁者且问，知者当答。」
+                        </p>
+                        <p class="content-text text-gray-700 leading-loose dialogue-text mb-3">
+                            时摩诃拘絺罗问舍利弗言：「若比丘未得无间等法，欲求无间等法，云何方便求？思惟何等法？」
+                        </p>
+                        <div class="quote-box">
+                            <p class="content-text text-gray-800 font-medium mb-2">
+                                舍利弗言：
+                            </p>
+                            <p class="content-text text-gray-800 leading-loose">
+                                「若比丘未得无间等法，欲求无间等法，精勤思惟：<span class="highlight-text">五受阴为病、为癰、为刺、为杀，无常、苦、空、非我</span>，所以者何？是所应处故。若比丘于此五受阴精勤思惟，<span class="fruit-badge fruit-1">得须陀洹果证</span>。」
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 须陀洹至斯陀含 -->
+                    <div>
+                        <p class="content-text text-gray-700 leading-loose dialogue-text mb-3">
+                            又问舍利弗：「得须陀洹果证已，欲得斯陀含果证者，当思惟何等法？」
+                        </p>
+                        <div class="quote-box">
+                            <p class="content-text text-gray-800 font-medium mb-2">
+                                舍利弗言：
+                            </p>
+                            <p class="content-text text-gray-800 leading-loose">
+                                「拘絺罗！已得须陀洹果证已，欲得斯陀含果证者，亦当精勤思惟：<span class="highlight-text">此五受阴法为病、为癰、为刺、为杀，无常、苦、空、非我</span>，所以者何？是所应处故。若比丘于此五受阴精勤思惟，<span class="fruit-badge fruit-2">得斯陀含果证</span>。」
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 斯陀含至阿那含 -->
+                    <div>
+                        <p class="content-text text-gray-700 leading-loose dialogue-text mb-3">
+                            摩诃拘絺罗又问舍利弗言：「得斯陀含果证已，欲得阿那含果证者，当思惟何等法？」
+                        </p>
+                        <div class="quote-box">
+                            <p class="content-text text-gray-800 font-medium mb-2">
+                                舍利弗言：
+                            </p>
+                            <p class="content-text text-gray-800 leading-loose">
+                                「拘絺罗！得斯陀含果证已，欲得阿那含果证者，当复精勤思惟：<span class="highlight-text">此五受阴法为病、为癰、为刺、为杀，无常、苦、空、非我</span>，所以者何？是所应处故。若比丘于此五受阴精勤思惟，<span class="fruit-badge fruit-3">得阿那含果证</span>。」
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 阿那含至阿罗汉 -->
+                    <div>
+                        <p class="content-text text-gray-700 leading-loose dialogue-text mb-3">
+                            摩诃拘絺罗又问舍利弗言：「得阿那含果证已，欲得阿罗汉果证者，当思惟何等法？」
+                        </p>
+                        <div class="quote-box">
+                            <p class="content-text text-gray-800 font-medium mb-2">
+                                舍利弗言：
+                            </p>
+                            <p class="content-text text-gray-800 leading-loose">
+                                「拘絺罗！得阿那含果证已，欲得阿罗汉果证者，当复精勤思惟：<span class="highlight-text">此五受阴法为病、为癰、为刺、为杀，无常、苦、空、非我</span>，所以者何？是所应处故。若比丘于此五受阴法精勤思惟，<span class="fruit-badge fruit-4">得阿罗汉果证</span>。」
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 阿罗汉 -->
+                    <div>
+                        <p class="content-text text-gray-700 leading-loose dialogue-text mb-3">
+                            摩诃拘絺罗又问舍利弗：「得阿罗汉果证已，复思惟何等法？」
+                        </p>
+                        <div class="teaching-box">
+                            <p class="content-text text-gray-800 font-medium mb-2">
+                                舍利弗言：
+                            </p>
+                            <p class="content-text text-gray-800 leading-loose">
+                                「摩诃拘絺罗！阿罗汉亦复思惟：<span class="highlight-text">此五受阴法为病、为癰、为刺、为杀，无常、苦、空、非我</span>，所以者何？为得未得故，证未证故，见法乐住故。」
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="content-text text-gray-700 leading-loose mt-6 italic text-center">
+                    时，二正士各闻所说，欢喜而去。
+                </p>
+            </div>
+            
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+            
+            <!-- 第二部分：增壹阿含34品1经 -->
+            <div class="prose max-w-none mb-8">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-book"></i> 增壹阿含34品1经
+                </h2>
+                
+                <div class="text-sm text-gray-500 mb-4">
+                    [佛光本298经/5法](等见品)(庄春江标点)
+                </div>
+                
+                <div class="sutra-box">
+                    <p class="content-text text-gray-700 leading-loose mb-4">
+                        闻如是：
+                    </p>
+                    <p class="content-text text-gray-700 leading-loose mb-4">
+                        一时，尊者舍利弗在舍卫城祇树林给孤独园，与大比丘众五百人俱。
+                    </p>
+                    <p class="content-text text-gray-700 leading-loose mb-4">
+                        尔时，众多比丘到舍利弗所，共相问讯，在一面坐。尔时，众多比丘白舍利弗言：「戒成就比丘当思惟何等法？」
+                    </p>
+                </div>
+                
+                <div class="space-y-6 mt-6">
+                    <div class="quote-box">
+                        <p class="content-text text-gray-800 font-medium mb-2">
+                            舍利弗报言：
+                        </p>
+                        <p class="content-text text-gray-800 leading-loose">
+                            「戒成就比丘当思惟<span class="highlight-text">五盛阴无常、为苦、为恼、为多痛畏，亦当思惟苦、空、无我</span>，云何为五？所谓：色阴、痛阴、想阴、行阴、识阴。尔时，戒成就比丘思惟此五盛阴，<span class="fruit-badge fruit-1">便成须陀洹道</span>。」
+                        </p>
+                    </div>
+                    
+                    <div class="quote-box">
+                        <p class="content-text text-gray-800 leading-loose mb-2">
+                            比丘白舍利弗言：「须陀洹比丘当思惟何等法？」
+                        </p>
+                        <p class="content-text text-gray-800 leading-loose">
+                            舍利弗报言：「须陀洹比丘亦当思惟此<span class="highlight-text">五盛阴为苦、为恼、为多痛畏，亦当思惟苦、空、无我</span>。诸贤！当知若须陀洹比丘思惟此五盛阴时，<span class="fruit-badge fruit-2">便成斯陀含果</span>。」
+                        </p>
+                    </div>
+                    
+                    <div class="quote-box">
+                        <p class="content-text text-gray-800 leading-loose mb-2">
+                            诸比丘问曰：「斯陀含比丘当思惟何等法？」
+                        </p>
+                        <p class="content-text text-gray-800 leading-loose">
+                            舍利弗报言：「斯陀含比丘亦当思惟此<span class="highlight-text">五盛阴为苦、为恼、为多痛畏，亦当思惟苦、空、无我</span>。尔时，斯陀含比丘当思惟此五盛阴时，<span class="fruit-badge fruit-3">便成阿那含果</span>。」
+                        </p>
+                    </div>
+                    
+                    <div class="quote-box">
+                        <p class="content-text text-gray-800 leading-loose mb-2">
+                            诸比丘问曰：「阿那含比丘当思惟何等法？」
+                        </p>
+                        <p class="content-text text-gray-800 leading-loose">
+                            舍利弗报言：「阿那含比丘亦当思惟此<span class="highlight-text">五盛阴为苦、为恼、为多痛畏，亦当思惟此五盛阴苦、空、无我</span>。尔时，<span class="fruit-badge fruit-4">便成阿罗汉</span>。」
+                        </p>
+                    </div>
+                    
+                    <div class="teaching-box">
+                        <p class="content-text text-gray-800 leading-loose mb-2">
+                            诸比丘问曰：「阿罗汉比丘当思惟何等法？」
+                        </p>
+                        <p class="content-text text-gray-800 font-medium leading-loose">
+                            舍利弗报言：「汝等所问何其过乎！罗汉比丘所作以过，更不造行，有漏心得解脱，不向五趣生死之海，更不受有，有所造作。
+                        </p>
+                        <p class="content-text text-gray-800 font-medium leading-loose mt-4">
+                            是故，诸贤！持戒比丘、须陀洹、斯陀含、阿那含当思惟此五盛阴。如是，诸比丘！当作是学。」
+                        </p>
+                    </div>
+                </div>
+                
+                <p class="content-text text-gray-700 leading-loose mt-6 italic text-center">
+                    尔时，诸比丘闻舍利弗所说，欢喜奉行。
+                </p>
+            </div>
+            
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+            
+            <!-- 第三部分：相应部22相应122经 -->
+            <div class="prose max-w-none mb-8">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-book"></i> 相应部22相应122经/持戒者经
+                </h2>
+                
+                <div class="text-sm text-gray-500 mb-4">
+                    (蕴相应/蕴篇/修多罗)(庄春江译)
+                </div>
+                
+                <div class="sutra-box">
+                    <p class="content-text text-gray-700 leading-loose mb-4">
+                        有一次，尊者舍利弗与尊者摩诃拘絺罗住在波罗奈鹿野苑的仙人坠落处。
+                    </p>
+                    <p class="content-text text-gray-700 leading-loose mb-4">
+                        那时，尊者摩诃拘絺罗在傍晚时，从静坐禅修中起来，去见尊者舍利弗。
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg mt-6 space-y-4">
+                    <div>
+                        <p class="content-text text-gray-700 mb-3">
+                            「舍利弗学友！持戒的比丘应该如理作意什么法？」
+                        </p>
+                        <div class="quote-box">
+                            <p class="content-text text-gray-800 leading-loose">
+                                「拘絺罗学友！持戒的比丘应该如理作意五取蕴为<span class="highlight-text">无常的、苦的、病的、肿瘤的、箭的、祸的、疾病的、另一边的、败坏的、空的、无我的</span>，哪五个呢？即：色取蕴、受取蕴、想取蕴、行取蕴、识取蕴。又，学友！这是可能的：持戒的比丘如理作意这些五取蕴为无常的、……无我的，<span class="fruit-badge fruit-1">则可能证入流果</span>。」
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <p class="content-text text-gray-700 mb-3">
+                            「而，舍利弗学友！入流者比丘应该如理作意什么法？」
+                        </p>
+                        <div class="quote-box">
+                            <p class="content-text text-gray-800 leading-loose">
+                                「拘絺罗学友！入流者比丘也应该如理作意这些五取蕴为无常的、……无我的。又，学友！这是可能的：入流者比丘如理作意这些五取蕴为无常的、……无我的，<span class="fruit-badge fruit-2">则可能证一来果</span>。」
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <p class="content-text text-gray-700 mb-3">
+                            「而，舍利弗学友！一来者比丘应该如理作意什么法？」
+                        </p>
+                        <div class="quote-box">
+                            <p class="content-text text-gray-800 leading-loose">
+                                「拘絺罗学友！一来者比丘也应该如理作意这些五取蕴为无常的、……无我的。又，学友！这是可能的：一来者比丘如理作意这些五取蕴为无常的、……无我的，<span class="fruit-badge fruit-3">则可能证不还果</span>。」
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <p class="content-text text-gray-700 mb-3">
+                            「而，舍利弗学友！不还者比丘应该如理作意什么法？」
+                        </p>
+                        <div class="quote-box">
+                            <p class="content-text text-gray-800 leading-loose">
+                                「拘絺罗学友！不还者比丘也应该如理作意这些五取蕴为无常的、……无我的。又，学友！这是可能的：不还者比丘如理作意这些五取蕴为无常的、……无我的，<span class="fruit-badge fruit-4">则可能证阿罗汉果</span>。」
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <p class="content-text text-gray-700 mb-3">
+                            「而，舍利弗学友！阿罗汉比丘应该如理作意什么法？」
+                        </p>
+                        <div class="teaching-box">
+                            <p class="content-text text-gray-800 leading-loose">
+                                「拘絺罗学友！阿罗汉比丘也应该如理作意这些五取蕴为<span class="highlight-text">无常的、苦的、病的、肿瘤的、箭的、祸的、疾病的、另一边的、败坏的、空的、无我的</span>。学友！阿罗汉不再有更进一步应作的，或对已作的增加[什么]，但当这些法已修习、已多修习时，当生导向乐的住处，以及正念与正知。」
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+            
+            <!-- 第四部分：萧式球译本 -->
+            <div class="prose max-w-none">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-book"></i> 相应部22相应122经/持戒者经
+                </h2>
+                
+                <div class="text-sm text-gray-500 mb-4">
+                    (蕴相应/蕴篇/修多罗)(萧式球译)
+                </div>
+                
+                <div class="sutra-box mb-6">
+                    <p class="content-text text-gray-700 leading-loose">
+                        有一次，舍利弗尊者和大拘絺罗尊者住在波罗奈的仙人住处鹿野苑。这时候，大拘絺罗尊者在黄昏离开静处前往舍利弗尊者那里，和舍利弗尊者互相问候，作了一番悦意的交谈，坐在一边。
+                    </p>
+                </div>
+                
+                <div class="teaching-box">
+                    <p class="content-text text-gray-800 leading-loose mb-4">
+                        「一位具有戒行的比丘应要如理思维五取蕴为<span class="highlight-text">无常、苦、侵害、脓疮、中箭、不幸、病、敌人、破灭、空、无我</span>。什么是五取蕴呢？色取蕴、受取蕴、想取蕴、行取蕴、识取蕴。」
+                    </p>
+                    <p class="content-text text-gray-800 leading-loose mb-4">
+                        「一位具有戒行的比丘如理思维五取蕴为无常、苦、侵害、脓疮、中箭、不幸、病、敌人、破灭、空、无我，<span class="fruit-badge fruit-1">能取得须陀洹果</span>。」
+                    </p>
+                    <p class="content-text text-gray-800 leading-loose mb-4">
+                        「一位须陀洹比丘也是应要如理思维五取蕴为无常、苦、侵害、脓疮、中箭、不幸、病、敌人、破灭、空、无我，<span class="fruit-badge fruit-2">能取得斯陀含果</span>。」
+                    </p>
+                    <p class="content-text text-gray-800 leading-loose mb-4">
+                        「一位斯陀含比丘也是应要如理思维五取蕴为无常、苦、侵害、脓疮、中箭、不幸、病、敌人、破灭、空、无我，<span class="fruit-badge fruit-3">能取得阿那含果</span>。」
+                    </p>
+                    <p class="content-text text-gray-800 leading-loose mb-4">
+                        「一位阿那含比丘也是应要如理思维五取蕴为无常、苦、侵害、脓疮、中箭、不幸、病、敌人、破灭、空、无我，<span class="fruit-badge fruit-4">能取得阿罗汉果</span>。」
+                    </p>
+                    <p class="content-text text-gray-800 font-medium leading-loose">
+                        「一位阿罗汉勤修这种如理思维不是为了还有更高的修行工作需要做，也不是为了提升自己，而是为了当下安住在乐之中和带来念和觉知。」
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 底部信息 -->
+            <div class="mt-12 pt-6 border-t border-gray-200">
+                <div class="flex items-center justify-between text-sm text-gray-500 flex-wrap gap-4">
+                    <div class="flex items-center gap-2">
+                        <i class="bi bi-journal-text"></i>
+                        <span>杂阿含259经 · 增壹阿含34品1经 · 相应部22相应122经</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="bi bi-tag"></i>
+                        <span>五取蕴 · 证果 · 如理作意</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+        
+        <!-- 相关链接 -->
+        <div class="mt-8 bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-xl font-medium text-dharma-brown mb-4 flex items-center gap-2">
+                <i class="bi bi-link-45deg"></i> 相关资源
+            </h3>
+            <div class="space-y-3">
+                <a href="index.html" class="block p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200">
+                    <div class="flex items-center gap-2 text-dharma-brown hover:text-dharma-light">
+                        <i class="bi bi-arrow-left-circle"></i>
+                        <span>返回首页查看更多法语</span>
+                    </div>
+                </a>
+                <a href="index.html#articles" class="block p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200">
+                    <div class="flex items-center gap-2 text-dharma-brown hover:text-dharma-light">
+                        <i class="bi bi-journal-text"></i>
+                        <span>浏览更多法义文章</span>
+                    </div>
+                </a>
+                <a href="index.html#books" class="block p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200">
+                    <div class="flex items-center gap-2 text-dharma-brown hover:text-dharma-light">
+                        <i class="bi bi-book"></i>
+                        <span>浏览推荐书籍</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-6 text-center text-gray-600 text-sm mt-12">
+        <p>&copy; 2025 法洲 | 愿正法久住</p>
+    </footer>
+</body>
+</html>
