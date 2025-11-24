@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- Favicon - 使用 SVG 格式的花朵图标 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='%238d5a2a' d='M6.174 1.184a2 2 0 0 1 3.652 0A2 2 0 0 1 12.99 3.01a2 2 0 0 1 1.826 3.164 2 2 0 0 1 0 3.652 2 2 0 0 1-1.826 3.164 2 2 0 0 1-3.164 1.826 2 2 0 0 1-3.652 0A2 2 0 0 1 3.01 12.99a2 2 0 0 1-1.826-3.164 2 2 0 0 1 0-3.652A2 2 0 0 1 3.01 3.01a2 2 0 0 1 3.164-1.826M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4'/></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="迫切感 禅修 无常 班迪达 佛教 南传佛教 观禅" />
+    <meta name="description" content="心生迫切感 - 班迪达大师开示，关于禅修动力与生命无常的深刻教导" />
+    <title>心生迫切感 - 法洲</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dharma-brown': '#8d5a2a',
+                        'dharma-light': '#a67c52',
+                        'dharma-bg': '#fdfbf7',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .quote-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        
+        .story-box {
+            background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+            border-left: 4px solid #8b5cf6;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        
+        .divider {
+            border-top: 2px solid #d1d5db;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: '✦';
+            position: absolute;
+            left: 50%;
+            top: -12px;
+            transform: translateX(-50%);
+            background: #fdfbf7;
+            padding: 0 1rem;
+            color: #8d5a2a;
+            font-size: 1.2rem;
+        }
+        
+        .content-text {
+            line-height: 2;
+            font-size: 1.125rem;
+        }
+        
+        .highlight-text {
+            color: #8d5a2a;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-dharma-bg font-sans">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-dharma-brown to-dharma-light text-white py-10 px-4 shadow-lg">
+        <h1 class="text-4xl md:text-5xl font-light tracking-widest text-center mb-2">
+            <i class="bi bi-flower1"></i> 法洲
+        </h1>
+        <p class="text-center text-sm md:text-base opacity-95">分享佛法智慧与修行资源</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-dharma-brown hover:text-dharma-light transition-colors flex items-center gap-1">
+                    <i class="bi bi-house-door"></i> 返回首页
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-12">
+        <!-- 文章标题 -->
+        <article class="bg-white rounded-lg shadow-md p-8 md:p-12">
+            <h1 class="text-3xl md:text-4xl font-normal text-dharma-brown mb-8 text-center border-b-2 border-dharma-brown pb-4">
+                <i class="bi bi-heart-pulse"></i> 心生迫切感
+            </h1>
+            
+            <!-- 故事引入 -->
+            <div class="story-box">
+                <p class="content-text text-gray-800 leading-loose mb-4">
+                    佛陀时代，有位来自富裕家庭的年轻比丘，年轻健壮的他，出家前享受各种娱乐。他很富有，也有众多亲友，财富让他拥有各种嗜好。然而，他放弃这一切而寻求解脱。
+                </p>
+                <p class="content-text text-gray-800 leading-loose mb-4">
+                    有一天，国王骑马经过森林，遇见这位比丘，国王说：「尊贵的比丘！你年轻健壮，正值青春，又生在富裕的家庭，有许多享受的机会，你为何要离家，穿上僧袍，过隐居的生活呢？你不觉得寂寞吗？不会觉得厌倦吗？」
+                </p>
+                <p class="content-text text-gray-800 leading-loose italic font-medium">
+                    这位比丘答道：「哦！伟大的国王，当我听到佛陀的开示，心中生起<span class="highlight-text">迫切感</span>，我希望在死前，及时从身体中萃取珍宝，所以，我放弃了富裕的生活而穿上僧袍。」
+                </p>
+            </div>
+            
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+            
+            <!-- 第一部分：生命无常 -->
+            <div class="prose max-w-none mb-8">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-hourglass-split"></i> 生命的无常
+                </h2>
+                
+                <p class="content-text text-gray-700 leading-loose mb-4">
+                    如果你还没有宁舍身命的迫切感，尚未被说服去禅修，佛陀的话或许对你有所帮助。佛陀说人应该要了解整个有情世间，其实是由不断生灭的心法与色法所组成，它们不会在一剎那中停留，它们不断变迁，一旦我们发现自己在这样的身心生灭现象中，就会知道无法阻止它们发生。
+                </p>
+                
+                <p class="content-text text-gray-700 leading-loose mb-4">
+                    当我们年轻时，希望能快点长大；当老去时，却又陷入不可逆转的衰老中。我们希望身体健康，但这希望无法保证实现，我们一生都会被疾病、受伤、疼痛、不适所苦。长生不老是不可能的，所有的人都会死。死亡与我们的希望相反，我们无法避免死亡，死亡迟早会来临。
+                </p>
+                
+                <p class="content-text text-gray-700 leading-loose mb-4">
+                    没有人可以保证我们成长、健康与长生不老，人们却拒绝接受这事实，老年人希望看起来年轻，科学家发明各种疗程来延缓人类老化的过程，他们甚至试着要让人起死回生！当生病时，我们服药来让自己感到舒服，但即使痊愈后，还会再生病。
+                </p>
+                
+                <div class="quote-box">
+                    <p class="content-text text-gray-800 font-medium">
+                        我们无法逃避年老与死亡。这是有情众生的主要弱点：<span class="highlight-text">众生缺乏保障，没有可以避开年老、疾病与死亡的安全庇护所。</span>
+                    </p>
+                </div>
+                
+                <p class="content-text text-gray-700 leading-loose">
+                    看看其他众生，看看动物，而最重要的是看看自己。如果你深入禅修，对这些事实就不会感到意外。如果你能看见心法与色法如何剎那、剎那生灭，便会了解没有任何庇护所可以让你逃避，你没有任何保障。然而，如果你尚未领悟这点，也许思考生命的无常能引发迫切感，激发想禅修的动力。观禅可以引领你到一个超越这些恐惧的地方。
+                </p>
+            </div>
+            
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+            
+            <!-- 第二部分：无财产 -->
+            <div class="prose max-w-none">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-bag-x"></i> 无财产的真相
+                </h2>
+                
+                <p class="content-text text-gray-700 leading-loose mb-4">
+                    另外，有情众生还有个很大的弱点：<span class="highlight-text">没有财产</span>。这听起来也许有点奇怪，我们一出生，立刻开始吸收知识，获得证书。大多数人找到工作，然后以薪水购买很多物品，称它们为「自己的财产」。
+                </p>
+                
+                <p class="content-text text-gray-700 leading-loose mb-4">
+                    如果财产真正属于我们，我们就永远不会与之分开；如果我们能恒久拥有，那么，它们还会破碎、遗失或遭窃吗？人死亡时，没有任何东西可以带走，一切所获得、累积、储存的东西都会留下来，所以说一切众生都没有财产。我们所有的财产都会在死亡那刻留下。
+                </p>
+                
+                <div class="bg-gray-50 p-6 rounded-lg mb-4 border-l-4 border-dharma-brown">
+                    <h3 class="text-lg font-medium text-dharma-brown mb-4">财产的三种类型：</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start gap-2">
+                            <i class="bi bi-building text-dharma-brown mt-1"></i>
+                            <div>
+                                <strong>不动产：</strong>建筑物、土地与房地产等，这些暂时属于你，但在你死亡时必须留下它们。
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="bi bi-box text-dharma-brown mt-1"></i>
+                            <div>
+                                <strong>动产：</strong>椅子、牙刷与衣服，这是你四处旅游时带着走的东西。
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="bi bi-lightbulb text-dharma-brown mt-1"></i>
+                            <div>
+                                <strong>知识财产：</strong>知识、艺术、科学，以及你赖以维生的技术和其他知识。只要我们的身体处于良好状态，这知识财产便不可或缺，然而，也不保证它们不会遗失。
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <p class="content-text text-gray-700 leading-loose mb-4">
+                    你也许会忘记所知道的事，或由于政府的命令及其他不幸事件，让你无法发挥专长。若你是外科医生，有可能严重跌断手臂，或因安宁遭到破坏，而神经质到无法维持生计。
+                </p>
+                
+                <div class="quote-box">
+                    <p class="content-text text-gray-800 font-medium">
+                        没有任何财产可带来保障，更遑论下一世了。如果我们了解，<span class="highlight-text">人无法拥有任何东西，而生命如此短暂</span>，那么，当不可避免的事发生时，我们的内心就会平静许多。
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 底部信息 -->
+            <div class="mt-12 pt-6 border-t border-gray-200">
+                <div class="flex items-center justify-between text-sm text-gray-500">
+                    <div class="flex items-center gap-2">
+                        <i class="bi bi-person-circle"></i>
+                        <span>班迪达大师《就在今生》</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="bi bi-tag"></i>
+                        <span>无常 · 禅修 · 迫切感</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+        
+        <!-- 相关链接 -->
+        <div class="mt-8 bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-xl font-medium text-dharma-brown mb-4 flex items-center gap-2">
+                <i class="bi bi-link-45deg"></i> 相关资源
+            </h3>
+            <div class="space-y-3">
+                <a href="index.html" class="block p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200">
+                    <div class="flex items-center gap-2 text-dharma-brown hover:text-dharma-light">
+                        <i class="bi bi-arrow-left-circle"></i>
+                        <span>返回首页查看更多法语</span>
+                    </div>
+                </a>
+                <a href="index.html#books" class="block p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200">
+                    <div class="flex items-center gap-2 text-dharma-brown hover:text-dharma-light">
+                        <i class="bi bi-book"></i>
+                        <span>浏览推荐书籍</span>
+                    </div>
+                </a>
+                <a href="index.html#links" class="block p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200">
+                    <div class="flex items-center gap-2 text-dharma-brown hover:text-dharma-light">
+                        <i class="bi bi-globe"></i>
+                        <span>查看佛法资源链接</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-6 text-center text-gray-600 text-sm mt-12">
+        <p>&copy; 2025 法洲 | 愿正法久住</p>
+    </footer>
+</body>
+</html>
