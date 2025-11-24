@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- Favicon - 使用 SVG 格式的花朵图标 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='%238d5a2a' d='M6.174 1.184a2 2 0 0 1 3.652 0A2 2 0 0 1 12.99 3.01a2 2 0 0 1 1.826 3.164 2 2 0 0 1 0 3.652 2 2 0 0 1-1.826 3.164 2 2 0 0 1-3.164 1.826 2 2 0 0 1-3.652 0A2 2 0 0 1 3.01 12.99a2 2 0 0 1-1.826-3.164 2 2 0 0 1 0-3.652A2 2 0 0 1 3.01 3.01a2 2 0 0 1 3.164-1.826M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4'/></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="善友 善知识 亲近智者 大吉祥经 菩提比丘 佛教 南传佛教" />
+    <meta name="description" content="亲近智者 - 菩提比丘尊者开示善友对灵性发展的重要性" />
+    <title>亲近智者 - 法洲</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dharma-brown': '#8d5a2a',
+                        'dharma-light': '#a67c52',
+                        'dharma-bg': '#fdfbf7',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .quote-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        
+        .sutra-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        
+        .teaching-box {
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            border-left: 4px solid #ec4899;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        
+        .divider {
+            border-top: 2px solid #d1d5db;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: '✦';
+            position: absolute;
+            left: 50%;
+            top: -12px;
+            transform: translateX(-50%);
+            background: #fdfbf7;
+            padding: 0 1rem;
+            color: #8d5a2a;
+            font-size: 1.2rem;
+        }
+        
+        .content-text {
+            line-height: 2;
+            font-size: 1.125rem;
+        }
+        
+        .highlight-text {
+            color: #8d5a2a;
+            font-weight: 600;
+        }
+        
+        .pali-text {
+            font-style: italic;
+            color: #6b7280;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body class="bg-dharma-bg font-sans">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-dharma-brown to-dharma-light text-white py-10 px-4 shadow-lg">
+        <h1 class="text-4xl md:text-5xl font-light tracking-widest text-center mb-2">
+            <i class="bi bi-flower1"></i> 法洲
+        </h1>
+        <p class="text-center text-sm md:text-base opacity-95">分享佛法智慧与修行资源</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-dharma-brown hover:text-dharma-light transition-colors flex items-center gap-1">
+                    <i class="bi bi-house-door"></i> 返回首页
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-12">
+        <!-- 文章标题 -->
+        <article class="bg-white rounded-lg shadow-md p-8 md:p-12">
+            <h1 class="text-3xl md:text-4xl font-normal text-dharma-brown mb-8 text-center border-b-2 border-dharma-brown pb-4">
+                <i class="bi bi-people"></i> 亲近智者
+            </h1>
+            
+            <!-- 引言：大吉祥经 -->
+            <div class="sutra-box">
+                <h3 class="text-xl font-medium text-blue-800 mb-4 flex items-center gap-2">
+                    <i class="bi bi-star"></i> 大吉祥经的开示
+                </h3>
+                <p class="content-text text-gray-800 leading-loose mb-4">
+                    《大吉祥经》(Maha-Mangala Sutta)是一部最常为人们持诵、被收录于所有规范巴利课诵本内的佛教经文。在经文开端，一位美丽耀眼的天女于静夜降临大地，近诣柢树园中的薄伽梵，请为说至高的吉祥。
+                </p>
+                <p class="content-text text-gray-800 leading-loose font-medium">
+                    佛陀在应答初偈中宣称，<span class="highlight-text">至高的吉祥来自远离愚人、亲近智者</span> <span class="pali-text">(asevana ca balanam, panditanan ca sevana)</span>。由于余下经文叙述的，是包括世间与灵性诸侧面在内的一切人类福佑，亲近智者被置于经偈之首，意在强调一个关键点: <strong>佛法之道的进步有赖于正确选择我们的友伴。</strong>
+                </p>
+            </div>
+            
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+            
+            <!-- 第一部分：心灵的可塑性 -->
+            <div class="prose max-w-none mb-8">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-diagram-3"></i> 心灵的可塑性
+                </h2>
+                
+                <p class="content-text text-gray-700 leading-loose mb-6">
+                    与某些心理学理论相反，人类的心灵并非是一个密闭式的容器，在其中封存着由生物学规律与婴儿期体验所定型的性格。反之，个体在整个一生当中始终高度可塑，不断地回应其社会互动而自我再造。我们决非是以固有不变的心性踏入个人的交往圈子，相反，那些定期与频繁的社会接触，把我们置于一个心理濡染的连续过程，为我们提供成长与转化的宝贵机会。
+                </p>
+                
+                <div class="quote-box">
+                    <p class="content-text text-gray-800 leading-loose">
+                        正如活细胞与周围同伴进行着化学对话，<span class="highlight-text">我们的心持续地发送与接受着讯息与提示，它们甚至有可能在潜意识的诸层次上，造就深刻的变化。</span>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+            
+            <!-- 第二部分：佛陀的教导 -->
+            <div class="prose max-w-none mb-8">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-book"></i> 佛陀关于善友的教导
+                </h2>
+                
+                <p class="content-text text-gray-700 leading-loose mb-6">
+                    对于我们的灵性进步特别重要的，是朋友与同伴的选择，那些人对我们的个人命运能够起决定性的影响。佛陀之所以反复强调<span class="highlight-text">善友</span> <span class="pali-text">[kalyanamittata，善知识]</span>在精神生活中的价值，是因为他了解我们的心，何等易受友伴的左右。
+                </p>
+                
+                <div class="bg-gradient-to-r from-amber-50 to-yellow-50 p-6 rounded-lg mb-6 border-l-4 border-amber-500">
+                    <h3 class="text-lg font-medium text-amber-800 mb-4">佛陀的明确教导：</h3>
+                    <ul class="space-y-4 text-gray-700">
+                        <li class="flex items-start gap-3">
+                            <i class="bi bi-check-circle-fill text-amber-600 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <strong>关于恶法与善法：</strong>佛陀说，他不见任何其它事，对引生不善巧素质[恶法]，作用之大，如恶友伴者，他不见任何它事，对引生善巧素质[善法]，作用之大，如善友伴者。<span class="text-sm text-gray-500">(AN 1.vii,10; I.viii,1)</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="bi bi-check-circle-fill text-amber-600 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <strong>关于伤害与利益：</strong>他又说，他不见任何其它的外在因素，引生伤害之大，甚于恶友伴者，他不见任何其它的外在因素，引生利益之大，甚于善友伴者。<span class="text-sm text-gray-500">(AN 1.x,13,14)</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="bi bi-check-circle-fill text-amber-600 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <strong>关于解脱之道：</strong>正是借着善友的熏陶与指点，一位弟子在灭尽诸苦的八圣道上才得以进步。<span class="text-sm text-gray-500">(SN 45:2)</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+            
+            <!-- 第三部分：善友的意义 -->
+            <div class="prose max-w-none mb-8">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-heart"></i> 善友的真正意义
+                </h2>
+                
+                <div class="teaching-box">
+                    <p class="content-text text-gray-800 leading-loose mb-4">
+                        佛教意义上的善友，其内涵<strong>远甚于结交意气相投或与之有共同兴趣者</strong>。实际上它意味着寻找能够引导与指点自己的智侣。
+                    </p>
+                    <p class="content-text text-gray-800 leading-loose font-medium">
+                        圣友的任务不仅是行道的同伴; <span class="highlight-text">真正的智慧、慈悲之友，乃是一位心怀理解与同情，愿意批评、责备、指错、敦促、鼓励、视佛法中成长为友谊之终极目标者。</span>
+                    </p>
+                </div>
+                
+                <div class="quote-box">
+                    <h3 class="text-lg font-medium text-amber-800 mb-3">《法句经》的教导：</h3>
+                    <p class="content-text text-gray-800 leading-loose">
+                        "如果找到一位愿意指错、批评者，他应当追随这位智慧、贤明之士，如紧跟一位宝藏的向导。" <span class="text-sm text-gray-500">(Dhp 76)</span>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+            
+            <!-- 第四部分：为何如此重要 -->
+            <div class="prose max-w-none mb-8">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-gem"></i> 唤醒内在的灵性潜力
+                </h2>
+                
+                <p class="content-text text-gray-700 leading-loose mb-6">
+                    亲近智者对灵性进步之所以如此重要，是因为<span class="highlight-text">圣者的指点常常是唤醒与培育我们的灵性潜力使之开启的决定性因素</span>。未修之心具有广泛多样的潜在可能性，低至自私、自我中心、侵略性，高至智慧、奉献与慈悲。
+                </p>
+                
+                <p class="content-text text-gray-700 leading-loose mb-6">
+                    作为法的追随者，我们面临的任务，是抑制非善巧的心性，培育善巧的心性，长养那些趋向觉醒、自由、清净的素质。然而，我们的内在心性并非在真空中成熟或衰退。<strong>它们不断地受着环境的影响，其中最有力者乃是我们的同伴，我们尊为导师、顾问、朋友者。这些人潜移默化着我们自身隐藏的潜力，使之或者开启、或者枯败。</strong>
+                </p>
+            </div>
+            
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+            
+            <!-- 第五部分：选择友伴的重要性 -->
+            <div class="prose max-w-none mb-8">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-compass"></i> 如何选择友伴
+                </h2>
+                
+                <p class="content-text text-gray-700 leading-loose mb-6">
+                    因此在佛法修行之中，选择那些起码部分地体现我们希望藉修法而自摄之尊贵素质者作为向导与同伴，就成为一个关键的问题。这一点在我们灵性发展的早期阶段特别有必要，那时我们的求善志向尚为新生、柔弱，易受内在的不决感与非同道之损友的破坏。
+                </p>
+                
+                <div class="bg-gray-50 p-6 rounded-lg mb-6 border-l-4 border-dharma-brown">
+                    <h3 class="text-lg font-medium text-dharma-brown mb-4">心如变色龙的比喻：</h3>
+                    <p class="content-text text-gray-700 leading-loose">
+                        在这个早期阶段，我们的心如同变色龙，随着不同的背景变换色彩。正如这只奇异的蜥蜴入草而身绿，着地而色棕，<span class="highlight-text">我们在亲近愚人时亦会转愚，亲近智者时也将得智</span>。内在的转化通常非是骤然达成，而是逐渐地以可能不为自身觉察的微小幅度递增，我们的品格经历着一场最终有可能极其显著的形变。
+                    </p>
+                </div>
+                
+                <div class="quote-box">
+                    <h3 class="text-lg font-medium text-amber-800 mb-4">三种情况的对比：</h3>
+                    <ul class="space-y-4 text-gray-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-amber-600 font-bold">❌</span>
+                            <div>我们若与那些嗜好感官之乐、权力、财富与名声者过从密切，则不应想象自己有可能对那些瘾习保持免疫: 我们的心终究将逐渐地倾向同样的目标。</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-amber-600 font-bold">⚠️</span>
+                            <div>我们若与那些虽未放纵于道德之不端，然已舒适地纳入世俗惯习者频繁交往，也将继续沦陷于庸碌人生之旧辙。</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <div>我们若向往至高理想，欲达出世的智慧与解脱的高峰，则必须亲近那些体现着至高理想的人士。</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+            
+            <!-- 第六部分：如何识别善友 -->
+            <div class="prose max-w-none">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-search"></i> 如何识别善友与恶友
+                </h2>
+                
+                <p class="content-text text-gray-700 leading-loose mb-6">
+                    面对如何识别善友、区分善恶导师的问题，佛陀给予我们的忠告清晰明了。在《满月小经》(MN 110)中，他解释了非善士与善士两者的同伴之别。
+                </p>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <!-- 恶友的特征 -->
+                    <div class="bg-red-50 p-6 rounded-lg border-2 border-red-200">
+                        <h3 class="text-lg font-medium text-red-800 mb-4 flex items-center gap-2">
+                            <i class="bi bi-x-circle"></i> 非善士的友伴
+                        </h3>
+                        <ul class="space-y-2 text-gray-700 text-sm">
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500">•</span>
+                                <span>无信念</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500">•</span>
+                                <span>无惭意</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500">•</span>
+                                <span>不畏恶行</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500">•</span>
+                                <span>对灵性教导无知</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500">•</span>
+                                <span>怠惰</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500">•</span>
+                                <span>无念住</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500">•</span>
+                                <span>少智慧</span>
+                            </li>
+                        </ul>
+                        <p class="mt-4 text-sm text-red-700 font-medium">
+                            结果：害己、害人、两害，得到忧苦与不幸的果报。
+                        </p>
+                    </div>
+                    
+                    <!-- 善友的特征 -->
+                    <div class="bg-green-50 p-6 rounded-lg border-2 border-green-200">
+                        <h3 class="text-lg font-medium text-green-800 mb-4 flex items-center gap-2">
+                            <i class="bi bi-check-circle"></i> 善士的友伴
+                        </h3>
+                        <ul class="space-y-2 text-gray-700 text-sm">
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">•</span>
+                                <span>有信念</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">•</span>
+                                <span>知耻</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">•</span>
+                                <span>畏恶</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">•</span>
+                                <span>于法博学</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">•</span>
+                                <span>精勤修心</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">•</span>
+                                <span>有正念</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">•</span>
+                                <span>具智慧</span>
+                            </li>
+                        </ul>
+                        <p class="mt-4 text-sm text-green-700 font-medium">
+                            结果：越来越趋近解脱，成为他人的灯塔。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="teaching-box">
+                    <p class="content-text text-gray-800 leading-loose">
+                        求教于这等贤友，敬其为师长、向导，善士以同样的素质为追求理想，将其吸收纳入自己的心性。如此，<span class="highlight-text">随着他本人越来越趋近解脱，转而成为他人的灯塔</span>。这样的人，就能够为那些仍然在黑暗中摸索的人们担当起一个励志的榜样、一位可请得忠告与指点的智友。
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 底部信息 -->
+            <div class="mt-12 pt-6 border-t border-gray-200">
+                <div class="flex items-center justify-between text-sm text-gray-500 flex-wrap gap-4">
+                    <div class="flex items-center gap-2">
+                        <i class="bi bi-person-circle"></i>
+                        <span>菩提比丘 (Bhikkhu Bodhi)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="bi bi-tag"></i>
+                        <span>善知识 · 大吉祥经 · 灵性友伴</span>
+                    </div>
+                </div>
+                <div class="mt-4 text-sm text-gray-500">
+                    <p>英文原文：Association with the Wise by Bhikkhu Bodhi</p>
+                    <p>中译：良稹</p>
+                </div>
+            </div>
+        </article>
+        
+        <!-- 相关链接 -->
+        <div class="mt-8 bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-xl font-medium text-dharma-brown mb-4 flex items-center gap-2">
+                <i class="bi bi-link-45deg"></i> 相关资源
+            </h3>
+            <div class="space-y-3">
+                <a href="index.html" class="block p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200">
+                    <div class="flex items-center gap-2 text-dharma-brown hover:text-dharma-light">
+                        <i class="bi bi-arrow-left-circle"></i>
+                        <span>返回首页查看更多法语</span>
+                    </div>
+                </a>
+                <a href="index.html#articles" class="block p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200">
+                    <div class="flex items-center gap-2 text-dharma-brown hover:text-dharma-light">
+                        <i class="bi bi-journal-text"></i>
+                        <span>浏览更多法义文章</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-6 text-center text-gray-600 text-sm mt-12">
+        <p>&copy; 2025 法洲 | 愿正法久住</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- Favicon - 使用 SVG 格式的花朵图标 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='%238d5a2a' d='M6.174 1.184a2 2 0 0 1 3.652 0A2 2 0 0 1 12.99 3.01a2 2 0 0 1 1.826 3.164 2 2 0 0 1 0 3.652 2 2 0 0 1-1.826 3.164 2 2 0 0 1-3.164 1.826 2 2 0 0 1-3.652 0A2 2 0 0 1 3.01 12.99a2 2 0 0 1-1.826-3.164 2 2 0 0 1 0-3.652A2 2 0 0 1 3.01 3.01a2 2 0 0 1 3.164-1.826M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4'/></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="内观定 止禅定 德加尼亚 禅修 正精进 佛教 南传佛教 观禅" />
+    <meta name="description" content="内观定 - 德加尼亚禅师开示，关于内观定与止禅定的区别及修习方法" />
+    <title>内观定 - 法洲</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dharma-brown': '#8d5a2a',
+                        'dharma-light': '#a67c52',
+                        'dharma-bg': '#fdfbf7',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .quote-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        
+        .teaching-box {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        
+        .dialogue-box {
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            border-left: 4px solid #6366f1;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        
+        .divider {
+            border-top: 2px solid #d1d5db;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: '✦';
+            position: absolute;
+            left: 50%;
+            top: -12px;
+            transform: translateX(-50%);
+            background: #fdfbf7;
+            padding: 0 1rem;
+            color: #8d5a2a;
+            font-size: 1.2rem;
+        }
+        
+        .content-text {
+            line-height: 2;
+            font-size: 1.125rem;
+        }
+        
+        .highlight-text {
+            color: #8d5a2a;
+            font-weight: 600;
+        }
+        
+        .wisdom-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin: 0.25rem;
+        }
+        
+        .wisdom-1 { background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #1e40af; }
+        .wisdom-2 { background: linear-gradient(135deg, #fce7f3, #fbcfe8); color: #9f1239; }
+        .wisdom-3 { background: linear-gradient(135deg, #dcfce7, #bbf7d0); color: #15803d; }
+    </style>
+</head>
+<body class="bg-dharma-bg font-sans">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-dharma-brown to-dharma-light text-white py-10 px-4 shadow-lg">
+        <h1 class="text-4xl md:text-5xl font-light tracking-widest text-center mb-2">
+            <i class="bi bi-flower1"></i> 法洲
+        </h1>
+        <p class="text-center text-sm md:text-base opacity-95">分享佛法智慧与修行资源</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-dharma-brown hover:text-dharma-light transition-colors flex items-center gap-1">
+                    <i class="bi bi-house-door"></i> 返回首页
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-12">
+        <!-- 文章标题 -->
+        <article class="bg-white rounded-lg shadow-md p-8 md:p-12">
+            <h1 class="text-3xl md:text-4xl font-normal text-dharma-brown mb-8 text-center border-b-2 border-dharma-brown pb-4">
+                <i class="bi bi-droplet"></i> 内观定
+            </h1>
+            
+            <!-- 对话引入 -->
+            <div class="dialogue-box">
+                <p class="content-text text-gray-700 leading-loose mb-4">
+                    <strong class="text-indigo-700">禅修者：</strong>我听你谈到内观定，但是我仍旧不理解。到底什么是内观定，我们又怎样才能发展它呢？
+                </p>
+            </div>
+            
+            <!-- 第一部分：内观定的本质 -->
+            <div class="prose max-w-none mb-8">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-yin-yang"></i> 内观定与止禅定的区别
+                </h2>
+                
+                <div class="teaching-box">
+                    <p class="content-text text-gray-800 font-medium mb-2">
+                        <strong class="text-green-700">禅师：</strong>
+                    </p>
+                    <p class="content-text text-gray-800 leading-loose mb-4">
+                        <span class="highlight-text">止禅定</span>是通过反复地去集中注意力在一个目标上而获得。它建立一种专注，这种专注是强烈的，有点沉重和刻板。
+                    </p>
+                    <p class="content-text text-gray-800 leading-loose mb-4">
+                        为了培养<span class="highlight-text">内观定</span>，你需要拥有智慧。这可能是正确的信息，或者通过你自己的反思和经验所理解到的东西。因为这种智慧，心从不会想要或者排斥什么东西。因为这种智慧，心感觉到平稳；心里没有对目标的反应。这就是内观定，<strong>领悟只有从这种定中才能生起</strong>。
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+            
+            <!-- 第二部分：三种智慧 -->
+            <div class="prose max-w-none mb-8">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-lightbulb"></i> 三种智慧
+                </h2>
+                
+                <p class="content-text text-gray-700 leading-loose mb-6">
+                    运用在我们的心背后工作的正确的信息（<span class="wisdom-badge wisdom-1">闻慧</span>）以及我们的理智（<span class="wisdom-badge wisdom-2">思慧</span>）去禅修是绝对必需的。为了得到洞察和领悟（<span class="wisdom-badge wisdom-3">修慧</span>），这第三种智慧，我们需要运用前面两种智慧。<strong>如果这两种智慧没有充分发展，修慧也不会产生。</strong>
+                </p>
+                
+                <div class="quote-box">
+                    <p class="content-text text-gray-800 leading-loose">
+                        如果我们太努力地专注在一个目标上，心就不再能够思维很多的东西，所以觉知的能力就很弱。心不只是不思考不善的事情，它也不能思考任何善的事情，所以智慧也变弱。因为这样的原因，<span class="highlight-text">只要当我们运用一种止禅的定时，领悟就不能产生</span>。如果我们真正想发展洞察力和领悟，我们需要修习内观定。
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+            
+            <!-- 第三部分：培养内观定 -->
+            <div class="prose max-w-none mb-8">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-compass"></i> 如何培养内观定
+                </h2>
+                
+                <p class="content-text text-gray-700 leading-loose mb-6">
+                    为了培养内观定，我们需要拥有<span class="highlight-text">正确的态度和连续的觉知</span>。没有正确的态度，我们不能得到定，心就会始终感到不安。错误的态度意味着心里有喜欢或者厌恶，这会使心波动起伏。定的意思是拥有一个稳定的心。正精进并不是说投入很多的精力，而是要耐心和坚持不懈地禅修。
+                </p>
+                
+                <div class="teaching-box">
+                    <h3 class="text-xl font-medium text-green-800 mb-4">长期修习的重要性</h3>
+                    <p class="content-text text-gray-800 leading-loose mb-4">
+                        <span class="highlight-text">内观是你需要在你的余生中持续地去实践的一种禅修。你不能停下来歇息。</span>但是，如果你投入大量的精力，你就不能一直持续地禅修。你需要记住，这是一种长期的，需要稳定地进行的禅修。尽你可能多的去练习，但是要平稳地进行。
+                    </p>
+                    <p class="content-text text-gray-800 leading-loose">
+                        如果我们使用太多的精力，我们就不能持续这种禅修，那么即使我们一再地去禅修中心静修许多年，我们也许得不到任何的领悟。当我们长时间地做任何一种工作的时候，我们会学到许多关于那个领域的东西，但是当我们只是短期偶尔地从事那种相同种类的工作时，我们永远也不能高水平的精通它。
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+            
+            <!-- 第四部分：正精进的真义 -->
+            <div class="prose max-w-none">
+                <h2 class="text-2xl font-medium text-dharma-brown mb-6 flex items-center gap-2">
+                    <i class="bi bi-arrow-repeat"></i> 正精进的真义
+                </h2>
+                
+                <div class="quote-box">
+                    <p class="content-text text-gray-800 leading-loose mb-4">
+                        <span class="highlight-text">内观是一个学习的过程。</span>为了真正理解某些东西，我们必须长时间地调查那个领域。如果我们只是短期地观察事物，深刻的理解就不能产生；我们的理解就只能停留在表面上。因为我们需要长期地做这种禅修，我们必须学会怎样持续一贯地去进行。
+                    </p>
+                    <p class="content-text text-gray-800 font-medium leading-loose">
+                        <span class="highlight-text">正精进的意思是坚持不懈，百折不挠。</span>我们理解这种禅修是重要的，所以我们保持一以贯之地去做。正精进之所以"正"，是因为有大量的智慧在那里。
+                    </p>
+                </div>
+                
+
+            </div>
+            
+            <!-- 底部信息 -->
+            <div class="mt-12 pt-6 border-t border-gray-200">
+                <div class="flex items-center justify-between text-sm text-gray-500">
+                    <div class="flex items-center gap-2">
+                        <i class="bi bi-person-circle"></i>
+                        <span>德加尼亚禅师</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="bi bi-tag"></i>
+                        <span>内观定 · 正精进 · 三慧</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+        
+        <!-- 相关链接 -->
+        <div class="mt-8 bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-xl font-medium text-dharma-brown mb-4 flex items-center gap-2">
+                <i class="bi bi-link-45deg"></i> 相关资源
+            </h3>
+            <div class="space-y-3">
+                <a href="index.html" class="block p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200">
+                    <div class="flex items-center gap-2 text-dharma-brown hover:text-dharma-light">
+                        <i class="bi bi-arrow-left-circle"></i>
+                        <span>返回首页查看更多法语</span>
+                    </div>
+                </a>
+                <a href="index.html#articles" class="block p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200">
+                    <div class="flex items-center gap-2 text-dharma-brown hover:text-dharma-light">
+                        <i class="bi bi-journal-text"></i>
+                        <span>浏览更多法义文章</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-6 text-center text-gray-600 text-sm mt-12">
+        <p>&copy; 2025 法洲 | 愿正法久住</p>
+    </footer>
+</body>
+</html>
