@@ -305,7 +305,9 @@
         <p>&copy; 2025 法洲 | 愿正法久住</p>
     </footer>
 
-    <script src="data.js"></script>
+    <script src="link.js"></script>
+    <script src="dhamma.js"></script>
+    <script src="book.js"></script>
     <script>
         let dhammaData = DHAMMA_DATA;
         let linksData = LINKS_DATA;
@@ -376,7 +378,8 @@
                 const startIdx = currentPage * ITEMS_PER_PAGE;
                 const endIdx = Math.min(startIdx + ITEMS_PER_PAGE, randomIndices.length);
                 items = randomIndices.slice(startIdx, endIdx).map(idx => ({
-                    text: dhammaData[idx],
+                    text: dhammaData[idx].sentence,
+                    url: dhammaData[idx].url,
                     index: idx
                 }));
             }
@@ -385,14 +388,21 @@
             setTimeout(() => {
                 // 使用编号列表显示多条法语,带关键词高亮
                 display.innerHTML = items.map((item, idx) => {
-                    const text = item.text || item;
+                    const text = item.text || item.sentence || item;
+                    const url = item.url || '';
                     const highlightedText = isSearching ? highlightKeyword(text, searchKeyword) : text;
                     const actualIdx = item.index !== undefined ? item.index : currentPage * ITEMS_PER_PAGE + idx;
                     
-                    return `<div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; ${idx < items.length - 1 ? 'border-bottom: 1px solid #e0e0e0;' : ''}">
+                    let content = `<div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; ${idx < items.length - 1 ? 'border-bottom: 1px solid #e0e0e0;' : ''}">
                         <div style="color: #a67c52; font-size: 0.85rem; margin-bottom: 0.5rem;">第 ${actualIdx + 1} 条</div>
-                        <div>${highlightedText}</div>
-                    </div>`;
+                        <div>${highlightedText}</div>`;
+                    
+                    if (url && url !== '') {
+                        content += `<div style="margin-top: 0.75rem;"><a href="${url}" style="color: #8d5a2a; text-decoration: none; font-size: 0.9rem; border-bottom: 1px solid #8d5a2a;" target="_blank">📖 阅读更多</a></div>`;
+                    }
+                    
+                    content += `</div>`;
+                    return content;
                 }).join('');
                 
                 display.style.opacity = '1';
@@ -459,7 +469,7 @@
             
             // 过滤包含关键词的法语,保留原始索引
             filteredDhammaData = dhammaData
-                .map((text, index) => ({ text, index }))
+                .map((item, index) => ({ text: item.sentence, url: item.url, index }))
                 .filter(item => item.text.toLowerCase().includes(keyword.toLowerCase()));
             
             // 重置到第一页
