@@ -2866,5 +2866,9 @@ const DHAMMA_DATA = [
     {
       "sentence":"<p>对真理的证悟在刹那间发生，但需要在之前有对心灵有足够的培育和开发。就像昙花在一夜之间开放，但是需要之前阳光、水分、土地的滋养。</p>",
       "url":""
+    },
+    {
+      "sentence":"<p>真谛是最上之甘味。-SN1.73 <p>",
+      "url":"https://suttacentral.net/sn1.73/zh/zhuang"
     }
 ]
