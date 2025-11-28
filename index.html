@@ -120,9 +120,185 @@
             85% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
             100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
         }
+        
+        /* 主题切换按钮 */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(141, 90, 42, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(141, 90, 42, 0.25);
+            border-color: rgba(141, 90, 42, 0.4);
+        }
+        
+        .theme-toggle i {
+            font-size: 24px;
+            color: #8d5a2a;
+            transition: all 0.3s ease;
+        }
+        
+        /* 暗色主题样式 */
+        body.dark-theme {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-theme .theme-toggle {
+            background: rgba(30, 30, 30, 0.95);
+            border-color: rgba(166, 124, 82, 0.3);
+        }
+        
+        body.dark-theme .theme-toggle i {
+            color: #d4a574;
+        }
+        
+        body.dark-theme header {
+            background: linear-gradient(135deg, #2d1810 0%, #3d2415 100%);
+        }
+        
+        body.dark-theme .md3-container {
+            background: linear-gradient(135deg, #252525 0%, #2a2a2a 100%);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+        
+        body.dark-theme .md3-search-field {
+            background-color: #333;
+            color: #e0e0e0;
+            border-color: rgba(166, 124, 82, 0.2);
+        }
+        
+        body.dark-theme .md3-search-field::placeholder {
+            color: #888;
+        }
+        
+        body.dark-theme .md3-search-field:hover {
+            background-color: #3a3a3a;
+        }
+        
+        body.dark-theme .md3-search-field:focus {
+            background-color: #2a2a2a;
+            border-color: #a67c52;
+        }
+        
+        body.dark-theme .md3-chip {
+            background-color: #333;
+            color: #d0d0d0;
+        }
+        
+        body.dark-theme .md3-chip:hover {
+            background-color: #3a3a3a;
+        }
+        
+        body.dark-theme .md3-surface {
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+        }
+        
+        body.dark-theme #dhamma-display {
+            color: #e8e8e8;
+        }
+        
+        body.dark-theme #dhamma-display > div > div:last-child {
+            color: #d8d8d8;
+        }
+        
+        body.dark-theme .md3-fab {
+            background-color: #2a2a2a;
+            color: #d4a574;
+            border-color: rgba(166, 124, 82, 0.3);
+        }
+        
+        body.dark-theme .md3-fab:hover {
+            background-color: #333;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3), 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+        
+        body.dark-theme .md3-outlined-button {
+            border-color: #a67c52;
+            color: #d4a574;
+        }
+        
+        body.dark-theme .md3-outlined-button:hover {
+            background-color: rgba(166, 124, 82, 0.15);
+        }
+        
+        body.dark-theme #latest-dhamma {
+            background: linear-gradient(135deg, #3a2816 0%, #442d1a 100%);
+            border-color: #a67c52;
+        }
+        
+        body.dark-theme #latest-dhamma-text {
+            color: #e8d5c0;
+        }
+        
+        body.dark-theme .highlight {
+            background-color: #5a4a2a;
+            color: #ffd966;
+        }
+        
+        body.dark-theme .md3-divider {
+            background: linear-gradient(90deg, transparent, #444 20%, #444 80%, transparent);
+        }
+        
+        body.dark-theme section h2 {
+            color: #d4a574;
+        }
+        
+        body.dark-theme .bg-white {
+            background-color: #2a2a2a !important;
+        }
+        
+        body.dark-theme .text-gray-700 {
+            color: #c0c0c0 !important;
+        }
+        
+        body.dark-theme .text-gray-500 {
+            color: #888 !important;
+        }
+        
+        body.dark-theme .text-gray-400 {
+            color: #666 !important;
+        }
+        
+        body.dark-theme .border-gray-200 {
+            border-color: rgba(166, 124, 82, 0.2) !important;
+        }
+        
+        body.dark-theme footer {
+            background-color: #1f1f1f;
+            border-top-color: #333;
+            color: #a0a0a0;
+        }
+        
+        body.dark-theme #search-info {
+            background-color: #2a3a4a;
+            border-color: #3a4a5a;
+            color: #c0d0e0;
+        }
     </style>
 </head>
 <body class="bg-dharma-bg font-sans">
+    <!-- 主题切换按钮 -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="切换主题">
+        <i id="theme-icon" class="bi bi-moon-stars-fill"></i>
+    </button>
+    
     <!-- Header -->
     <header class="bg-gradient-to-r from-dharma-brown to-dharma-light text-white py-10 px-4 shadow-lg">
         <h1 class="text-4xl md:text-5xl font-light tracking-widest text-center mb-2"><i class="bi bi-flower1"></i>法洲</h1>
@@ -895,8 +1071,38 @@
             }).join('');
         }
 
+        // 主题切换功能
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const isDark = body.classList.toggle('dark-theme');
+            
+            // 更新图标
+            if (isDark) {
+                themeIcon.className = 'bi bi-sun-fill';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.className = 'bi bi-moon-stars-fill';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+        
+        // 页面加载时恢复主题设置
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeIcon.className = 'bi bi-sun-fill';
+            }
+        }
+        
         // 页面加载时初始化
-        document.addEventListener('DOMContentLoaded', initPage);
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTheme();
+            initPage();
+        });
     </script>
 </body>
 </html>
