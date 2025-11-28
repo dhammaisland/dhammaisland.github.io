@@ -113,6 +113,13 @@
             height: 1px;
             background: linear-gradient(90deg, transparent, #e0e0e0 20%, #e0e0e0 80%, transparent);
         }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            15% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            85% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+        }
     </style>
 </head>
 <body class="bg-dharma-bg font-sans">
@@ -497,8 +504,17 @@
                     const highlightedText = isSearching ? highlightKeyword(text, searchKeyword) : text;
                     const actualIdx = item.index !== undefined ? item.index : currentPage * ITEMS_PER_PAGE + idx;
                     
+                    // 转义引号以便在HTML属性中使用
+                    const escapedText = text.replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+                    
                     let content = `<div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; ${idx < items.length - 1 ? 'border-bottom: 1px solid #e0e0e0;' : ''}">
-                        <div style="color: #a67c52; font-size: 0.85rem; margin-bottom: 0.5rem;">第 ${actualIdx + 1} 条</div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <div style="color: #a67c52; font-size: 0.85rem;">第 ${actualIdx + 1} 条</div>
+                            <button onclick="copyDhamma('${escapedText}')" style="color: #8d5a2a; background: transparent; border: 1px solid #e0e0e0; border-radius: 8px; padding: 0.25rem 0.5rem; font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.25rem; transition: all 0.2s;" onmouseover="this.style.backgroundColor='#fdfbf7'; this.style.borderColor='#8d5a2a'" onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='#e0e0e0'" title="复制法语">
+                                <i class="bi bi-clipboard"></i>
+                                <span>复制</span>
+                            </button>
+                        </div>
                         <div>${highlightedText}</div>`;
                     
                     if (url && url !== '') {
@@ -544,6 +560,29 @@
             if (displayElement) {
                 displayElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
+        }
+        
+        // 复制法语文本
+        function copyDhamma(text) {
+            // 移除HTML标签，只保留纯文本
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = text;
+            const plainText = tempDiv.textContent || tempDiv.innerText || '';
+            
+            navigator.clipboard.writeText(plainText).then(() => {
+                // 显示复制成功提示
+                const toast = document.createElement('div');
+                toast.textContent = '✓ 已复制';
+                toast.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #8d5a2a; color: white; padding: 12px 24px; border-radius: 28px; font-size: 14px; z-index: 9999; box-shadow: 0 4px 12px rgba(0,0,0,0.15); animation: fadeInOut 2s ease-in-out;';
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.remove();
+                }, 2000);
+            }).catch(err => {
+                alert('复制失败，请手动复制');
+                console.error('复制失败:', err);
+            });
         }
 
         function randomQuote() {
