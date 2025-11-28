@@ -291,12 +291,112 @@
             border-color: #3a4a5a;
             color: #c0d0e0;
         }
+        
+        /* 紧凑模式样式 */
+        body.compact-mode .article-card,
+        body.compact-mode .book-card,
+        body.compact-mode .link-card {
+            padding: 1rem !important;
+        }
+        
+        body.compact-mode .article-card .icon-wrapper,
+        body.compact-mode .book-card .icon-wrapper {
+            width: 2.5rem !important;
+            height: 2.5rem !important;
+        }
+        
+        body.compact-mode .book-card .icon-wrapper {
+            width: 3rem !important;
+            height: 3.5rem !important;
+        }
+        
+        body.compact-mode .article-card .icon-wrapper i,
+        body.compact-mode .book-card .icon-wrapper i {
+            font-size: 1.25rem !important;
+        }
+        
+        body.compact-mode .book-card .icon-wrapper i {
+            font-size: 1.5rem !important;
+        }
+        
+        body.compact-mode .article-card h3,
+        body.compact-mode .book-card h3,
+        body.compact-mode .link-card h3 {
+            font-size: 0.95rem !important;
+            margin-bottom: 0.25rem !important;
+        }
+        
+        body.compact-mode .article-card p,
+        body.compact-mode .book-card p {
+            font-size: 0.8rem !important;
+            margin-bottom: 0.25rem !important;
+        }
+        
+        body.compact-mode .article-card .tag-wrapper,
+        body.compact-mode .book-card .book-actions {
+            margin-top: 0.5rem !important;
+        }
+        
+        body.compact-mode .link-card .type-badge {
+            padding: 0.15rem 0.5rem !important;
+            font-size: 0.7rem !important;
+        }
+        
+        body.compact-mode .link-card .url-display {
+            font-size: 0.65rem !important;
+        }
+        
+        /* 视图模式切换按钮 */
+        .view-toggle {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            z-index: 1000;
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(141, 90, 42, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .view-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(141, 90, 42, 0.25);
+            border-color: rgba(141, 90, 42, 0.4);
+        }
+        
+        .view-toggle i {
+            font-size: 24px;
+            color: #8d5a2a;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-theme .view-toggle {
+            background: rgba(30, 30, 30, 0.95);
+            border-color: rgba(166, 124, 82, 0.3);
+        }
+        
+        body.dark-theme .view-toggle i {
+            color: #d4a574;
+        }
     </style>
 </head>
 <body class="bg-dharma-bg font-sans">
     <!-- 主题切换按钮 -->
     <button class="theme-toggle" onclick="toggleTheme()" title="切换主题">
         <i id="theme-icon" class="bi bi-moon-stars-fill"></i>
+    </button>
+    
+    <!-- 视图模式切换按钮 -->
+    <button class="view-toggle" onclick="toggleViewMode()" title="切换视图密度">
+        <i id="view-icon" class="bi bi-grid-3x3-gap-fill"></i>
     </button>
     
     <!-- Header -->
@@ -474,9 +574,9 @@
             <!-- 文章列表 -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- 文章卡片 1 -->
-                <a href="article/四大法教.html" class="block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
+                <a href="article/四大法教.html" class="article-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
                     <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0">
+                        <div class="flex-shrink-0 icon-wrapper">
                             <div class="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center text-white">
                                 <i class="bi bi-file-text text-2xl"></i>
                             </div>
@@ -484,7 +584,7 @@
                         <div class="flex-1 min-w-0">
                             <h3 class="text-lg font-medium text-dharma-brown mb-2 group-hover:text-dharma-light transition-colors">关于四大法教</h3>
                             <p class="text-sm text-gray-500 mb-2 line-clamp-2">增支部AN VII.80经文解读，清晰定义法与律的标准</p>
-                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <div class="tag-wrapper flex items-center gap-2 text-xs text-gray-400">
                                 <i class="bi bi-tag"></i>
                                 <span>法教 · 经典</span>
                             </div>
@@ -493,9 +593,9 @@
                 </a>
                 
                 <!-- 文章卡片 2 -->
-                <a href="article/圣者与凡夫的不同视角.html" class="block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
+                <a href="article/圣者与凡夫的不同视角.html" class="article-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
                     <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0">
+                        <div class="flex-shrink-0 icon-wrapper">
                             <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white">
                                 <i class="bi bi-eye text-2xl"></i>
                             </div>
@@ -503,7 +603,7 @@
                         <div class="flex-1 min-w-0">
                             <h3 class="text-lg font-medium text-dharma-brown mb-2 group-hover:text-dharma-light transition-colors">圣者与凡夫的不同视角</h3>
                             <p class="text-sm text-gray-500 mb-2 line-clamp-2">相应部35相应80经解读，断除无明的知见</p>
-                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <div class="tag-wrapper flex items-center gap-2 text-xs text-gray-400">
                                 <i class="bi bi-tag"></i>
                                 <span>无明 · 六根</span>
                             </div>
@@ -512,9 +612,9 @@
                 </a>
                 
                 <!-- 文章卡片 3 -->
-                <a href="article/心生迫切感.html" class="block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
+                <a href="article/心生迫切感.html" class="article-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
                     <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0">
+                        <div class="flex-shrink-0 icon-wrapper">
                             <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center text-white">
                                 <i class="bi bi-heart-pulse text-2xl"></i>
                             </div>
@@ -522,7 +622,7 @@
                         <div class="flex-1 min-w-0">
                             <h3 class="text-lg font-medium text-dharma-brown mb-2 group-hover:text-dharma-light transition-colors">心生迫切感</h3>
                             <p class="text-sm text-gray-500 mb-2 line-clamp-2">班迪达大师开示，无常与无财产的真相</p>
-                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <div class="tag-wrapper flex items-center gap-2 text-xs text-gray-400">
                                 <i class="bi bi-tag"></i>
                                 <span>无常 · 禅修</span>
                             </div>
@@ -531,9 +631,9 @@
                 </a>
                 
                 <!-- 文章卡片 4 -->
-                <a href="article/如何证果.html" class="block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
+                <a href="article/如何证果.html" class="article-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
                     <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0">
+                        <div class="flex-shrink-0 icon-wrapper">
                             <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center text-white">
                                 <i class="bi bi-trophy text-2xl"></i>
                             </div>
@@ -541,7 +641,7 @@
                         <div class="flex-1 min-w-0">
                             <h3 class="text-lg font-medium text-dharma-brown mb-2 group-hover:text-dharma-light transition-colors">如何证果</h3>
                             <p class="text-sm text-gray-500 mb-2 line-clamp-2">舍利弗尊者开示如理作意五取蕴以证得圣果</p>
-                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <div class="tag-wrapper flex items-center gap-2 text-xs text-gray-400">
                                 <i class="bi bi-tag"></i>
                                 <span>五取蕴 · 证果</span>
                             </div>
@@ -550,9 +650,9 @@
                 </a>
                 
                 <!-- 文章卡片 5 -->
-                <a href="article/内观定.html" class="block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
+                <a href="article/内观定.html" class="article-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
                     <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0">
+                        <div class="flex-shrink-0 icon-wrapper">
                             <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center text-white">
                                 <i class="bi bi-droplet text-2xl"></i>
                             </div>
@@ -560,7 +660,7 @@
                         <div class="flex-1 min-w-0">
                             <h3 class="text-lg font-medium text-dharma-brown mb-2 group-hover:text-dharma-light transition-colors">内观定</h3>
                             <p class="text-sm text-gray-500 mb-2 line-clamp-2">德加尼亚禅师开示内观定与止禅定的区别</p>
-                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <div class="tag-wrapper flex items-center gap-2 text-xs text-gray-400">
                                 <i class="bi bi-tag"></i>
                                 <span>内观定 · 正精进</span>
                             </div>
@@ -569,9 +669,9 @@
                 </a>
                 
                 <!-- 文章卡片 6 -->
-                <a href="article/亲近智者.html" class="block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
+                <a href="article/亲近智者.html" class="article-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
                     <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0">
+                        <div class="flex-shrink-0 icon-wrapper">
                             <div class="w-12 h-12 bg-gradient-to-br from-rose-500 to-pink-600 rounded-lg flex items-center justify-center text-white">
                                 <i class="bi bi-people text-2xl"></i>
                             </div>
@@ -579,7 +679,7 @@
                         <div class="flex-1 min-w-0">
                             <h3 class="text-lg font-medium text-dharma-brown mb-2 group-hover:text-dharma-light transition-colors">亲近智者</h3>
                             <p class="text-sm text-gray-500 mb-2 line-clamp-2">菩提比丘开示善友对灵性发展的重要性</p>
-                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <div class="tag-wrapper flex items-center gap-2 text-xs text-gray-400">
                                 <i class="bi bi-tag"></i>
                                 <span>善知识 · 大吉祥经</span>
                             </div>
@@ -1013,9 +1113,9 @@
             
             grid.innerHTML = BOOKS_DATA.map(book => {
                 return `
-                    <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1">
+                    <div class="book-card bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1">
                         <div class="flex items-start gap-4">
-                            <div class="flex-shrink-0">
+                            <div class="flex-shrink-0 icon-wrapper">
                                 <div class="w-16 h-20 bg-gradient-to-br from-dharma-brown to-dharma-light rounded flex items-center justify-center text-white">
                                     <i class="bi bi-book text-3xl"></i>
                                 </div>
@@ -1024,7 +1124,7 @@
                                 <h3 class="text-lg font-medium text-dharma-brown mb-1 line-clamp-2">${book.title}</h3>
                                 ${book.author ? `<p class="text-sm text-gray-600 mb-2"><i class="bi bi-person"></i> ${book.author}</p>` : ''}
                                 ${book.description ? `<p class="text-sm text-gray-500 mb-3 line-clamp-2">${book.description}</p>` : ''}
-                                <div class="flex gap-2 flex-wrap">
+                                <div class="book-actions flex gap-2 flex-wrap">
                                     ${book.download ? `<a href="${book.download}" class="inline-flex items-center gap-1 px-3 py-1 bg-dharma-brown text-white text-sm rounded-full hover:bg-dharma-light transition-colors" download>
                                         <i class="bi bi-download"></i> 下载
                                     </a>` : ''}
@@ -1062,13 +1162,40 @@
                 const config = typeConfig[link.type] || { name: '其他', color: '#8d5a2a', bgColor: '#fdfbf7', borderColor: '#8d5a2a' };
                 
                 return `
-                    <a href="${link.url}" target="_blank" class="block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border-2 hover:-translate-y-1 group" style="border-color: ${config.borderColor}33;">
+                    <a href="${link.url}" target="_blank" class="link-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border-2 hover:-translate-y-1 group" style="border-color: ${config.borderColor}33;">
                         <h3 class="text-lg font-medium mb-2 transition-colors" style="color: ${config.color};">${link.name || '未命名'}</h3>
-                        ${link.type ? `<span class="inline-block px-3 py-1 rounded-full text-xs mb-2 font-medium" style="background-color: ${config.bgColor}; color: ${config.color};">${config.name}</span>` : ''}
-                        <div class="text-xs text-gray-500 break-all opacity-70 mt-2">${link.url}</div>
+                        ${link.type ? `<span class="type-badge inline-block px-3 py-1 rounded-full text-xs mb-2 font-medium" style="background-color: ${config.bgColor}; color: ${config.color};">${config.name}</span>` : ''}
+                        <div class="url-display text-xs text-gray-500 break-all opacity-70 mt-2">${link.url}</div>
                     </a>
                 `;
             }).join('');
+        }
+
+        // 视图模式切换功能
+        function toggleViewMode() {
+            const body = document.body;
+            const viewIcon = document.getElementById('view-icon');
+            const isCompact = body.classList.toggle('compact-mode');
+            
+            // 更新图标
+            if (isCompact) {
+                viewIcon.className = 'bi bi-grid-fill';
+                localStorage.setItem('viewMode', 'compact');
+            } else {
+                viewIcon.className = 'bi bi-grid-3x3-gap-fill';
+                localStorage.setItem('viewMode', 'normal');
+            }
+        }
+        
+        // 页面加载时恢复视图模式设置
+        function loadViewMode() {
+            const savedViewMode = localStorage.getItem('viewMode');
+            const viewIcon = document.getElementById('view-icon');
+            
+            if (savedViewMode === 'compact') {
+                document.body.classList.add('compact-mode');
+                viewIcon.className = 'bi bi-grid-fill';
+            }
         }
 
         // 主题切换功能
@@ -1101,6 +1228,7 @@
         // 页面加载时初始化
         document.addEventListener('DOMContentLoaded', () => {
             loadTheme();
+            loadViewMode();
             initPage();
         });
     </script>
