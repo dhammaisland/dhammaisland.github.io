@@ -142,26 +142,26 @@
             
             <!-- 搜索栏 - MD3 风格 -->
             <div class="mb-8">
-                <div class="flex flex-wrap gap-3">
-                    <div class="flex-1 min-w-[280px] relative">
+                <div class="flex gap-3">
+                    <div class="flex-1 relative">
                         <i class="bi bi-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-500 text-lg"></i>
                         <input 
                             type="text" 
                             id="search-input" 
-                            class="md3-search-field w-full pl-14 pr-6 py-4 text-base"
+                            class="md3-search-field w-full pl-14 pr-32 py-4 text-base"
                             placeholder="搜索法语..." 
                             onkeypress="if(event.key==='Enter') searchDhamma()"
                         >
+                        <button 
+                            class="absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2 bg-dharma-brown text-white font-medium rounded-full flex items-center gap-2 hover:bg-dharma-light transition-all duration-200 shadow-sm hover:shadow-md"
+                            onclick="searchDhamma()"
+                        >
+                            <i class="bi bi-search"></i>
+                            <span class="hidden sm:inline">搜索</span>
+                        </button>
                     </div>
                     <button 
-                        class="md3-fab px-8 py-4 bg-dharma-brown text-white font-medium flex items-center gap-2"
-                        onclick="searchDhamma()"
-                    >
-                        <i class="bi bi-search"></i>
-                        <span class="hidden sm:inline">搜索</span>
-                    </button>
-                    <button 
-                        class="md3-outlined-button px-6 py-4 text-dharma-brown font-medium flex items-center gap-2"
+                        class="md3-outlined-button px-6 py-4 text-dharma-brown font-medium flex items-center gap-2 flex-shrink-0"
                         onclick="clearSearch()" 
                         id="clear-btn" 
                         style="display:none;"
