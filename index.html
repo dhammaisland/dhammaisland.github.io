@@ -560,7 +560,13 @@
         function scrollToTop() {
             const displayElement = document.getElementById('dhamma-display');
             if (displayElement) {
-                displayElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // 检测是否为移动设备（屏幕宽度小于768px）
+                const isMobile = window.innerWidth < 768;
+                // 移动端滚动到顶部，桌面端滚动到中间
+                displayElement.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: isMobile ? 'start' : 'center' 
+                });
             }
         }
         
