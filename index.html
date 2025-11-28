@@ -39,6 +39,80 @@
             border-color: #8d5a2a !important;
             color: white !important;
         }
+        
+        /* Material Design 3 样式 */
+        .md3-container {
+            background: linear-gradient(135deg, #fdfbf7 0%, #f9f5f0 100%);
+            border-radius: 28px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 6px 16px rgba(141, 90, 42, 0.08);
+        }
+        
+        .md3-search-field {
+            background-color: #f5ebe0;
+            border: 1px solid transparent;
+            border-radius: 28px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .md3-search-field:hover {
+            background-color: #f0e6db;
+            box-shadow: 0 2px 4px rgba(141, 90, 42, 0.1);
+        }
+        
+        .md3-search-field:focus {
+            background-color: #fff;
+            border-color: #8d5a2a;
+            box-shadow: 0 2px 8px rgba(141, 90, 42, 0.15);
+            outline: none;
+        }
+        
+        .md3-fab {
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 4px 8px rgba(141, 90, 42, 0.2);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .md3-fab:hover {
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15), 0 8px 16px rgba(141, 90, 42, 0.25);
+            transform: translateY(-1px);
+        }
+        
+        .md3-fab:active {
+            transform: translateY(0);
+        }
+        
+        .md3-outlined-button {
+            border: 1px solid #8d5a2a;
+            border-radius: 20px;
+            background-color: transparent;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .md3-outlined-button:hover {
+            background-color: rgba(141, 90, 42, 0.08);
+        }
+        
+        .md3-chip {
+            border-radius: 8px;
+            background-color: #f5ebe0;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .md3-chip:hover {
+            background-color: #f0e6db;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .md3-surface {
+            background-color: #fefefe;
+            border-radius: 16px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .md3-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e0e0e0 20%, #e0e0e0 80%, transparent);
+        }
     </style>
 </head>
 <body class="bg-dharma-bg font-sans">
@@ -49,92 +123,114 @@
     </header>
 
     <div class="max-w-7xl mx-auto px-4 py-8">
-        <!-- 法语展示区 -->
-        <section class="bg-white rounded-lg shadow-md p-6 md:p-10 mb-12 border-l-4 border-dharma-brown">
-            <h2 class="text-2xl md:text-3xl font-normal text-dharma-brown mb-6 flex items-center gap-2">
-                <i class="bi bi-flower1"></i>
-                <span>法语甘露</span>
-            </h2>
-            
-            <!-- 搜索框 -->
-            <div class="flex flex-wrap gap-2 mb-6">
-                <input 
-                    type="text" 
-                    id="search-input" 
-                    class="flex-1 min-w-[200px] px-4 py-3 border-2 border-gray-200 rounded-full text-base outline-none transition-all duration-300 focus:border-dharma-brown focus:ring-2 focus:ring-dharma-brown focus:ring-opacity-20" 
-                    placeholder="输入关键词搜索法语..." 
-                    onkeypress="if(event.key==='Enter') searchDhamma()"
-                >
-                <button 
-                    class="px-6 py-3 bg-dharma-brown text-white rounded-full hover:bg-dharma-light transition-all duration-300 shadow-sm hover:shadow-md font-medium flex items-center gap-1"
-                    onclick="searchDhamma()"
-                >
-                    <i class="bi bi-search"></i> 搜索
-                </button>
-                <button 
-                    class="px-6 py-3 bg-white text-dharma-brown border-2 border-dharma-brown rounded-full hover:bg-dharma-brown hover:text-white transition-all duration-300 font-medium flex items-center gap-1"
-                    onclick="clearSearch()" 
-                    id="clear-btn" 
-                    style="display:none;"
-                >
-                    <i class="bi bi-x-circle"></i> 清除
-                </button>
+        <!-- 法语展示区 - Material Design 3 风格 -->
+        <section class="md3-container p-6 md:p-12 mb-12">
+            <!-- 标题区域 -->
+            <div class="mb-8">
+                <h2 class="text-3xl md:text-4xl font-medium text-dharma-brown mb-2 flex items-center gap-3">
+                    <i class="bi bi-flower1 text-4xl"></i>
+                    <span>法语甘露</span>
+                </h2>
             </div>
             
-            <!-- 页码跳转 -->
-            <div class="flex flex-wrap gap-2 mb-6 items-center justify-center">
-                <label for="page-jump" class="text-sm text-gray-600">跳转到第</label>
-                <input 
-                    type="number" 
-                    id="page-jump" 
-                    min="1"
-                    class="w-20 px-3 py-2 border-2 border-gray-200 rounded-lg text-center outline-none transition-all duration-300 focus:border-dharma-brown focus:ring-2 focus:ring-dharma-brown focus:ring-opacity-20" 
-                    placeholder="1"
-                    onkeypress="if(event.key==='Enter') jumpToPage()"
-                >
-                <label for="page-jump" class="text-sm text-gray-600">页</label>
-                <button 
-                    class="px-4 py-2 bg-dharma-brown text-white rounded-lg hover:bg-dharma-light transition-all duration-300 shadow-sm hover:shadow-md text-sm font-medium flex items-center gap-1"
-                    onclick="jumpToPage()"
-                >
-                    <i class="bi bi-arrow-right-circle"></i> 跳转
-                </button>
-            </div>
-            
-            <!-- 搜索结果信息 -->
-            <div id="search-info" class="text-gray-600 text-sm text-center mb-4 py-2 bg-blue-50 rounded-lg" style="display:none;"></div>
-            
-            <!-- 法语内容 -->
-            <div class="min-h-[200px] flex items-center justify-center">
-                <div id="dhamma-display" class="dhamma-text text-lg md:text-xl leading-relaxed text-gray-800 text-justify w-full">
-                    <div class="text-center text-gray-400">加载中...</div>
+            <!-- 搜索栏 - MD3 风格 -->
+            <div class="mb-8">
+                <div class="flex flex-wrap gap-3">
+                    <div class="flex-1 min-w-[280px] relative">
+                        <i class="bi bi-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-500 text-lg"></i>
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            class="md3-search-field w-full pl-14 pr-6 py-4 text-base"
+                            placeholder="搜索法语..." 
+                            onkeypress="if(event.key==='Enter') searchDhamma()"
+                        >
+                    </div>
+                    <button 
+                        class="md3-fab px-8 py-4 bg-dharma-brown text-white font-medium flex items-center gap-2"
+                        onclick="searchDhamma()"
+                    >
+                        <i class="bi bi-search"></i>
+                        <span class="hidden sm:inline">搜索</span>
+                    </button>
+                    <button 
+                        class="md3-outlined-button px-6 py-4 text-dharma-brown font-medium flex items-center gap-2"
+                        onclick="clearSearch()" 
+                        id="clear-btn" 
+                        style="display:none;"
+                    >
+                        <i class="bi bi-x-lg"></i>
+                        <span>清除</span>
+                    </button>
                 </div>
             </div>
             
-            <!-- 分页控制 -->
-            <div class="flex flex-col sm:flex-row justify-between items-center mt-8 pt-6 border-t border-gray-200 gap-4">
-                <div class="flex gap-2 items-center order-1 sm:order-none">
+            <!-- 页码跳转 - MD3 Chip 风格 -->
+            <div class="flex flex-wrap gap-3 mb-8 items-center justify-center">
+                <div class="md3-chip px-4 py-2 flex items-center gap-2">
+                    <span class="text-sm text-gray-700">跳转至</span>
+                    <input 
+                        type="number" 
+                        id="page-jump" 
+                        min="1"
+                        class="w-16 px-2 py-1 bg-white border border-gray-300 rounded-lg text-center text-sm focus:outline-none focus:border-dharma-brown" 
+                        placeholder="1"
+                        onkeypress="if(event.key==='Enter') jumpToPage()"
+                    >
+                    <span class="text-sm text-gray-700">页</span>
+                </div>
+                <button 
+                    class="md3-chip px-5 py-2 text-sm font-medium text-dharma-brown flex items-center gap-2 hover:shadow-md"
+                    onclick="jumpToPage()"
+                >
+                    <i class="bi bi-arrow-right-short text-lg"></i>
+                    跳转
+                </button>
+            </div>
+            
+            <!-- 搜索结果信息 - MD3 风格 -->
+            <div id="search-info" class="text-gray-700 text-sm text-center mb-6 py-3 px-6 bg-blue-50 rounded-2xl border border-blue-100" style="display:none;"></div>
+            
+            <!-- 法语内容区域 - MD3 Surface -->
+            <div class="md3-surface p-8 mb-8 min-h-[280px] flex items-center justify-center">
+                <div id="dhamma-display" class="dhamma-text text-lg md:text-xl leading-loose text-gray-800 w-full">
+                    <div class="text-center text-gray-400 flex flex-col items-center gap-3">
+                        <i class="bi bi-hourglass-split text-3xl"></i>
+                        <span>加载中...</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 分页控制 - MD3 风格 -->
+            <div class="md3-divider my-6"></div>
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-6 pt-4">
+                <div class="flex gap-2 items-center">
                     <button 
                         id="prev-btn" 
                         onclick="prevPage()"
-                        class="px-4 py-2 bg-white border border-gray-300 text-dharma-brown rounded-lg hover:bg-dharma-brown hover:text-white hover:border-dharma-brown transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-dharma-brown disabled:hover:border-gray-300 flex items-center gap-1"
+                        class="md3-fab px-5 py-3 bg-white border border-gray-200 text-dharma-brown disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2 font-medium"
                     >
-                        <i class="bi bi-chevron-left"></i> 上页
+                        <i class="bi bi-chevron-left"></i>
+                        <span>上一页</span>
                     </button>
-                    <span class="page-info text-gray-600 text-sm mx-2" id="page-info">-</span>
+                    <div class="md3-chip px-4 py-3 min-w-[140px] text-center">
+                        <span id="page-info" class="text-sm font-medium text-gray-700">-</span>
+                    </div>
                     <button 
                         id="next-btn" 
                         onclick="nextPage()"
-                        class="px-4 py-2 bg-white border border-gray-300 text-dharma-brown rounded-lg hover:bg-dharma-brown hover:text-white hover:border-dharma-brown transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-dharma-brown disabled:hover:border-gray-300 flex items-center gap-1"
+                        class="md3-fab px-5 py-3 bg-white border border-gray-200 text-dharma-brown disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2 font-medium"
                     >
-                        下页 <i class="bi bi-chevron-right"></i>
+                        <span>下一页</span>
+                        <i class="bi bi-chevron-right"></i>
                     </button>
                 </div>
                 <button 
-                    class="px-6 py-2 bg-white border border-dharma-brown text-dharma-brown rounded-full hover:bg-dharma-brown hover:text-white transition-all duration-300 order-2 sm:order-none flex items-center gap-1"
+                    class="md3-fab px-6 py-3 bg-gradient-to-r from-dharma-brown to-dharma-light text-white font-medium flex items-center gap-2"
                     onclick="randomQuote()"
                 >
-                    <i class="bi bi-shuffle"></i> 随机翻页
+                    <i class="bi bi-shuffle"></i>
+                    <span>随机浏览</span>
                 </button>
             </div>
         </section>
@@ -444,7 +540,10 @@
         }
         
         function scrollToTop() {
-            document.querySelector('.dhamma-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const displayElement = document.getElementById('dhamma-display');
+            if (displayElement) {
+                displayElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
 
         function randomQuote() {
