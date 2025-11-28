@@ -185,6 +185,7 @@
                         onkeypress="if(event.key==='Enter') jumpToPage()"
                     >
                     <span class="text-sm text-gray-700">页</span>
+                    <span class="text-sm text-gray-500 ml-1">/ 共 <span id="total-pages" class="font-medium text-dharma-brown">-</span> 页</span>
                 </div>
                 <button 
                     class="md3-chip px-5 py-2 text-sm font-medium text-dharma-brown flex items-center gap-2 hover:shadow-md"
@@ -531,6 +532,7 @@
             // 更新页码信息
             const totalPages = Math.ceil(dataSource.length / ITEMS_PER_PAGE);
             document.getElementById('page-info').textContent = `第 ${currentPage + 1} 页 / 共 ${totalPages} 页`;
+            document.getElementById('total-pages').textContent = totalPages;
             
             // 更新按钮状态
             document.getElementById('prev-btn').disabled = currentPage === 0;
