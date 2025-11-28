@@ -140,6 +140,51 @@
                 </h2>
             </div>
             
+            <!-- 最新法语 - 特别展示区 -->
+            <div id="latest-dhamma" class="mb-8 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 rounded-3xl p-6 md:p-8 border-2 border-dharma-brown shadow-lg relative overflow-hidden">
+                <!-- 装饰性背景 -->
+                <div class="absolute top-0 right-0 w-32 h-32 bg-dharma-brown opacity-5 rounded-full -mr-16 -mt-16"></div>
+                <div class="absolute bottom-0 left-0 w-24 h-24 bg-dharma-light opacity-5 rounded-full -ml-12 -mb-12"></div>
+                
+                <div class="relative z-10">
+                    <!-- 标签 -->
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-dharma-brown text-white text-sm font-medium rounded-full shadow-sm">
+                            <i class="bi bi-star-fill text-yellow-300"></i>
+                            <span>最新法语</span>
+                        </span>
+                        <span class="text-xs text-gray-500">第 <span id="latest-number" class="font-medium text-dharma-brown">-</span> 条</span>
+                    </div>
+                    
+                    <!-- 法语内容 -->
+                    <div id="latest-dhamma-text" class="text-xl md:text-2xl leading-relaxed text-gray-800 font-medium mb-4">
+                        加载中...
+                    </div>
+                    
+                    <!-- 操作按钮 -->
+                    <div class="flex flex-wrap gap-2 justify-end">
+                        <button 
+                            id="latest-copy-btn"
+                            class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-dharma-brown text-dharma-brown text-sm rounded-full hover:bg-dharma-brown hover:text-white transition-all duration-200 shadow-sm"
+                            onclick="copyLatestDhamma()"
+                        >
+                            <i class="bi bi-clipboard"></i>
+                            <span>复制</span>
+                        </button>
+                        <a 
+                            id="latest-read-more"
+                            href="#" 
+                            class="inline-flex items-center gap-2 px-4 py-2 bg-dharma-brown text-white text-sm rounded-full hover:bg-dharma-light transition-all duration-200 shadow-sm"
+                            target="_blank"
+                            style="display:none;"
+                        >
+                            <i class="bi bi-arrow-right-circle"></i>
+                            <span>阅读更多</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
             <!-- 搜索栏 - MD3 风格 -->
             <div class="mb-8">
                 <div class="flex gap-3">
@@ -448,6 +493,9 @@
 
         // 页面加载后初始化
         function initPage() {
+            // 显示最新法语
+            displayLatestDhamma();
+            
             // 生成随机索引(仅在非搜索模式下)
             if (!isSearching) {
                 randomIndices = generateRandomIndices(dhammaData.length);
@@ -464,6 +512,56 @@
             
             // 显示链接
             displayLinks();
+        }
+        
+        // 显示最新法语
+        function displayLatestDhamma() {
+            if (!dhammaData || dhammaData.length === 0) return;
+            
+            const latestIndex = dhammaData.length - 1;
+            const latestItem = dhammaData[latestIndex];
+            const text = latestItem.sentence || '';
+            const url = latestItem.url || '';
+            
+            // 更新法语编号
+            document.getElementById('latest-number').textContent = latestIndex + 1;
+            
+            // 更新法语内容 (支持HTML标签)
+            document.getElementById('latest-dhamma-text').innerHTML = text;
+            
+            // 存储纯文本用于复制
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = text;
+            window.latestDhammaText = tempDiv.textContent || tempDiv.innerText || text;
+            
+            // 如果有链接，显示"阅读更多"按钮
+            const readMoreBtn = document.getElementById('latest-read-more');
+            if (url && url !== '') {
+                readMoreBtn.href = url;
+                readMoreBtn.style.display = 'inline-flex';
+            } else {
+                readMoreBtn.style.display = 'none';
+            }
+        }
+        
+        // 复制最新法语
+        function copyLatestDhamma() {
+            const text = window.latestDhammaText || '';
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // 显示复制成功提示
+                const toast = document.createElement('div');
+                toast.textContent = '✓ 已复制最新法语';
+                toast.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #8d5a2a; color: white; padding: 12px 24px; border-radius: 28px; font-size: 14px; z-index: 9999; box-shadow: 0 4px 12px rgba(0,0,0,0.15); animation: fadeInOut 2s ease-in-out;';
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.remove();
+                }, 2000);
+            }).catch(err => {
+                alert('复制失败，请手动复制');
+                console.error('复制失败:', err);
+            });
         }
 
         // 显示当前页法语
