@@ -334,13 +334,27 @@
             font-size: 0.75rem !important;
         }
         
+        body.compact-mode .link-card h3 {
+            font-size: 0.95rem !important;
+        }
+        
         body.compact-mode .link-card .type-badge {
-            padding: 0.15rem 0.5rem !important;
+            padding: 0.25rem 0.5rem !important;
             font-size: 0.7rem !important;
         }
         
         body.compact-mode .link-card .url-display {
-            font-size: 0.65rem !important;
+            font-size: 0.7rem !important;
+            padding-top: 0.5rem !important;
+        }
+        
+        body.compact-mode .link-card > div:first-child > div {
+            width: 2rem !important;
+            height: 2rem !important;
+        }
+        
+        body.compact-mode .link-card > div:first-child > div i {
+            font-size: 0.9rem !important;
         }
         
         /* 视图模式切换按钮 */
@@ -1159,18 +1173,37 @@
             
             grid.innerHTML = filteredLinks.map(link => {
                 const typeConfig = {
-                    1: { name: '经典', color: '#059669', bgColor: '#d1fae5', borderColor: '#059669' },  // 绿色 - 经典文献
-                    2: { name: '开示', color: '#dc2626', bgColor: '#fee2e2', borderColor: '#dc2626' },  // 红色 - 开示讲座
-                    3: { name: '资源', color: '#2563eb', bgColor: '#dbeafe', borderColor: '#2563eb' }   // 蓝色 - 综合资源
+                    1: { name: '经典', icon: 'book', color: '#059669', bgColor: 'rgba(5, 150, 105, 0.1)' },
+                    2: { name: '开示', icon: 'mic', color: '#dc2626', bgColor: 'rgba(220, 38, 38, 0.1)' },
+                    3: { name: '资源', icon: 'globe2', color: '#2563eb', bgColor: 'rgba(37, 99, 235, 0.1)' }
                 };
                 
-                const config = typeConfig[link.type] || { name: '其他', color: '#8d5a2a', bgColor: '#fdfbf7', borderColor: '#8d5a2a' };
+                const config = typeConfig[link.type] || { name: '其他', icon: 'link-45deg', color: '#8d5a2a', bgColor: 'rgba(141, 90, 42, 0.1)' };
                 
                 return `
-                    <a href="${link.url}" target="_blank" class="link-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border-2 hover:-translate-y-1 group" style="border-color: ${config.borderColor}33;">
-                        <h3 class="text-lg font-medium mb-2 transition-colors" style="color: ${config.color};">${link.name || '未命名'}</h3>
-                        ${link.type ? `<span class="type-badge inline-block px-3 py-1 rounded-full text-xs mb-2 font-medium" style="background-color: ${config.bgColor}; color: ${config.color};">${config.name}</span>` : ''}
-                        <div class="url-display text-xs text-gray-500 break-all opacity-70 mt-2">${link.url}</div>
+                    <a href="${link.url}" target="_blank" class="link-card block bg-white rounded-3xl transition-all duration-300 p-6 border border-gray-100 hover:shadow-lg group">
+                        <!-- 顶部标题和图标 -->
+                        <div class="flex items-start justify-between gap-3 mb-3">
+                            <h3 class="text-lg font-medium text-gray-900 line-clamp-2 leading-snug flex-1">${link.name || '未命名'}</h3>
+                            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style="background-color: ${config.bgColor}; color: ${config.color};">
+                                <i class="bi bi-${config.icon} text-lg"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- 类型标签 -->
+                        ${link.type ? `<div class="mb-3">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium" style="background-color: ${config.bgColor}; color: ${config.color};">
+                                <i class="bi bi-tag"></i>
+                                <span>${config.name}</span>
+                            </span>
+                        </div>` : ''}
+                        
+                        <!-- URL 显示 -->
+                        <div class="url-display flex items-center gap-2 pt-3 border-t border-gray-100">
+                            <i class="bi bi-link-45deg text-gray-400 flex-shrink-0"></i>
+                            <span class="text-xs text-gray-500 truncate">${link.url}</span>
+                            <i class="bi bi-box-arrow-up-right text-gray-400 flex-shrink-0 text-xs ml-auto opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
                     </a>
                 `;
             }).join('');
