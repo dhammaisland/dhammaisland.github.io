@@ -10,6 +10,7 @@
     <title>法洲</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -397,6 +398,277 @@
         body.dark-theme .view-toggle i {
             color: #d4a574;
         }
+        
+        /* 留言板按钮 */
+        .message-board-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #8d5a2a 0%, #a67c52 100%);
+            box-shadow: 0 6px 20px rgba(141, 90, 42, 0.4);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .message-board-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 24px rgba(141, 90, 42, 0.5);
+        }
+        
+        .message-board-toggle i {
+            font-size: 26px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-theme .message-board-toggle {
+            background: linear-gradient(135deg, #a67c52 0%, #d4a574 100%);
+        }
+        
+        /* 留言板弹窗 */
+        .message-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .message-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .message-modal-content {
+            background: white;
+            border-radius: 28px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 85vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        body.dark-theme .message-modal-content {
+            background: #2a2a2a;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .message-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        body.dark-theme .message-header {
+            border-bottom-color: #404040;
+        }
+        
+        .message-body {
+            padding: 2rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+        
+        .message-item {
+            background: #f9fafb;
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #8d5a2a;
+            transition: all 0.3s ease;
+        }
+        
+        .message-item:hover {
+            background: #f3f4f6;
+            transform: translateX(4px);
+        }
+        
+        body.dark-theme .message-item {
+            background: #1f1f1f;
+            border-left-color: #d4a574;
+        }
+        
+        body.dark-theme .message-item:hover {
+            background: #252525;
+        }
+        
+        .message-form {
+            padding: 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        body.dark-theme .message-form {
+            border-top-color: #404040;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #8d5a2a;
+            box-shadow: 0 0 0 3px rgba(141, 90, 42, 0.1);
+        }
+        
+        body.dark-theme .form-input {
+            background: #1f1f1f;
+            border-color: #404040;
+            color: #e0e0e0;
+        }
+        
+        body.dark-theme .form-input:focus {
+            border-color: #d4a574;
+            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+        }
+        
+        textarea.form-input {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 0.875rem 1.5rem;
+            background: linear-gradient(135deg, #8d5a2a 0%, #a67c52 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(141, 90, 42, 0.3);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .close-modal-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            background: #f3f4f6;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal-btn:hover {
+            background: #e5e7eb;
+            transform: rotate(90deg);
+        }
+        
+        body.dark-theme .close-modal-btn {
+            background: #404040;
+            color: #e0e0e0;
+        }
+        
+        body.dark-theme .close-modal-btn:hover {
+            background: #4a4a4a;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #6b7280;
+        }
+        
+        .tab-btn.active {
+            background: #8d5a2a;
+            border-color: #8d5a2a;
+            color: white;
+        }
+        
+        body.dark-theme .tab-btn {
+            background: #1f1f1f;
+            border-color: #404040;
+            color: #9ca3af;
+        }
+        
+        body.dark-theme .tab-btn.active {
+            background: #d4a574;
+            border-color: #d4a574;
+            color: #1f1f1f;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #9ca3af;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body class="bg-dharma-bg font-sans">
@@ -409,6 +681,80 @@
     <button class="view-toggle" onclick="toggleViewMode()" title="切换视图密度">
         <i id="view-icon" class="bi bi-grid-3x3-gap-fill"></i>
     </button>
+    
+    <!-- 留言板按钮 -->
+    <button class="message-board-toggle" onclick="openMessageBoard()" title="留言板">
+        <i class="bi bi-chat-dots-fill"></i>
+    </button>
+    
+    <!-- 留言板弹窗 -->
+    <div class="message-modal" id="messageModal" onclick="closeMessageBoard(event)">
+        <div class="message-modal-content" onclick="event.stopPropagation()">
+            <!-- 头部 -->
+            <div class="message-header">
+                <h2 class="text-2xl font-medium text-dharma-brown flex items-center gap-2">
+                    <i class="bi bi-chat-dots"></i>
+                    <span>留言板</span>
+                </h2>
+                <button class="close-modal-btn" onclick="closeMessageBoard()">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            
+            <!-- 标签切换 -->
+            <div style="padding: 1.5rem 2rem 0;">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="switchTab('view')">
+                        <i class="bi bi-list-ul"></i> 查看留言
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('write')">
+                        <i class="bi bi-pencil-square"></i> 写留言
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 留言列表 -->
+            <div class="message-body" id="messageList">
+                <div class="empty-state">
+                    <i class="bi bi-hourglass-split"></i>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 留言表单 -->
+            <div class="message-form" id="messageForm" style="display: none;">
+                <div style="margin-bottom: 1rem;">
+                    <label class="block text-sm font-medium text-gray-700 mb-2" style="color: #8d5a2a;">
+                        <i class="bi bi-person"></i> 昵称 <span style="color: #dc2626;">*</span>
+                    </label>
+                    <input type="text" id="username" class="form-input" placeholder="请输入您的昵称" required>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label class="block text-sm font-medium text-gray-700 mb-2" style="color: #8d5a2a;">
+                        <i class="bi bi-envelope"></i> 邮箱（可选）
+                    </label>
+                    <input type="email" id="email" class="form-input" placeholder="your@email.com">
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label class="block text-sm font-medium text-gray-700 mb-2" style="color: #8d5a2a;">
+                        <i class="bi bi-chat-text"></i> 留言内容 <span style="color: #dc2626;">*</span>
+                    </label>
+                    <textarea id="content" class="form-input" placeholder="分享您的感悟、问题或建议..." required></textarea>
+                </div>
+                
+                <button class="submit-btn" onclick="submitMessage()">
+                    <i class="bi bi-send"></i>
+                    <span>提交留言</span>
+                </button>
+                
+                <p class="text-xs text-gray-500 mt-3 text-center">
+                    <i class="bi bi-info-circle"></i> 留言需要审核后才会显示
+                </p>
+            </div>
+        </div>
+    </div>
     
     <!-- Header -->
     <header class="bg-gradient-to-r from-dharma-brown to-dharma-light text-white py-10 px-4 shadow-lg">
@@ -753,6 +1099,202 @@
     <script src="dhamma.js"></script>
     <script src="book.js"></script>
     <script>
+        // 初始化 Supabase
+        const SUPABASE_URL = 'https://hjrfufuyivgddqpzdrzp.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqcmZ1ZnV5aXZnZGRxcHpkcnpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ0MDU3NTAsImV4cCI6MjA3OTk4MTc1MH0.EyFBzpiBuOy9Cm9nwNB-_c7j77Ny8E1F13ltB3BXojs';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        
+        let currentTab = 'view';
+        
+        // 打开留言板
+        function openMessageBoard() {
+            document.getElementById('messageModal').classList.add('active');
+            if (currentTab === 'view') {
+                loadMessages();
+            }
+        }
+        
+        // 关闭留言板
+        function closeMessageBoard(event) {
+            if (!event || event.target.id === 'messageModal') {
+                document.getElementById('messageModal').classList.remove('active');
+            }
+        }
+        
+        // 切换标签
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // 更新标签按钮状态
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.tab-btn').classList.add('active');
+            
+            // 切换显示内容
+            const messageList = document.getElementById('messageList');
+            const messageForm = document.getElementById('messageForm');
+            
+            if (tab === 'view') {
+                messageList.style.display = 'block';
+                messageForm.style.display = 'none';
+                loadMessages();
+            } else {
+                messageList.style.display = 'none';
+                messageForm.style.display = 'block';
+            }
+        }
+        
+        // 加载留言
+        async function loadMessages() {
+            const messageList = document.getElementById('messageList');
+            messageList.innerHTML = `
+                <div class="empty-state">
+                    <i class="bi bi-hourglass-split"></i>
+                    <p>加载中...</p>
+                </div>
+            `;
+            
+            try {
+                const { data, error } = await supabase
+                    .from('messages')
+                    .select('*')
+                    .eq('is_approved', true)
+                    .order('created_at', { ascending: false });
+                
+                if (error) throw error;
+                
+                if (!data || data.length === 0) {
+                    messageList.innerHTML = `
+                        <div class="empty-state">
+                            <i class="bi bi-chat-dots"></i>
+                            <p>暂无留言，来写第一条吧！</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                messageList.innerHTML = data.map(msg => {
+                    const date = new Date(msg.created_at);
+                    const formattedDate = date.toLocaleDateString('zh-CN', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    return `
+                        <div class="message-item">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <div style="width: 32px; height: 32px; border-radius: 16px; background: linear-gradient(135deg, #8d5a2a 0%, #a67c52 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.9rem;">
+                                        ${msg.username.charAt(0).toUpperCase()}
+                                    </div>
+                                    <span style="font-weight: 500; color: #8d5a2a;">${escapeHtml(msg.username)}</span>
+                                </div>
+                                <span style="font-size: 0.75rem; color: #9ca3af;">
+                                    <i class="bi bi-clock"></i> ${formattedDate}
+                                </span>
+                            </div>
+                            <p style="color: #4b5563; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(msg.content)}</p>
+                        </div>
+                    `;
+                }).join('');
+                
+            } catch (error) {
+                console.error('加载留言失败:', error);
+                messageList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <p>加载失败，请稍后重试</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // 提交留言
+        async function submitMessage() {
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const content = document.getElementById('content').value.trim();
+            
+            if (!username || !content) {
+                alert('请填写昵称和留言内容');
+                return;
+            }
+            
+            // 验证邮箱格式（如果填写了）
+            if (email && !isValidEmail(email)) {
+                alert('请输入有效的邮箱地址');
+                return;
+            }
+            
+            const submitBtn = event.target;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> 提交中...';
+            
+            try {
+                const { data, error } = await supabase
+                    .from('messages')
+                    .insert([
+                        {
+                            username: username,
+                            email: email || null,
+                            content: content,
+                            is_approved: false
+                        }
+                    ]);
+                
+                if (error) throw error;
+                
+                // 清空表单
+                document.getElementById('username').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('content').value = '';
+                
+                // 显示成功消息
+                showToast('✓ 留言提交成功，等待审核后显示');
+                
+                // 切换到查看标签
+                setTimeout(() => {
+                    document.querySelectorAll('.tab-btn')[0].click();
+                }, 1500);
+                
+            } catch (error) {
+                console.error('提交留言失败:', error);
+                showToast('✗ 提交失败，请稍后重试', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="bi bi-send"></i> <span>提交留言</span>';
+            }
+        }
+        
+        // HTML 转义函数
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // 验证邮箱
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+        
+        // 显示提示消息
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.textContent = message;
+            const bgColor = type === 'success' ? '#8d5a2a' : '#dc2626';
+            toast.style.cssText = `position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: ${bgColor}; color: white; padding: 16px 32px; border-radius: 28px; font-size: 15px; z-index: 9999; box-shadow: 0 8px 24px rgba(0,0,0,0.2); animation: fadeInOut 3s ease-in-out;`;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+        
         let dhammaData = DHAMMA_DATA;
         let linksData = LINKS_DATA;
         let currentPage = 0;
