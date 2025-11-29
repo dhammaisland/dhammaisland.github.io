@@ -305,18 +305,9 @@
             height: 2.5rem !important;
         }
         
-        body.compact-mode .book-card .icon-wrapper {
-            width: 3rem !important;
-            height: 3.5rem !important;
-        }
-        
         body.compact-mode .article-card .icon-wrapper i,
         body.compact-mode .book-card .icon-wrapper i {
             font-size: 1.25rem !important;
-        }
-        
-        body.compact-mode .book-card .icon-wrapper i {
-            font-size: 1.5rem !important;
         }
         
         body.compact-mode .article-card h3,
@@ -335,6 +326,12 @@
         body.compact-mode .article-card .tag-wrapper,
         body.compact-mode .book-card .book-actions {
             margin-top: 0.5rem !important;
+            padding-top: 0.5rem !important;
+        }
+        
+        body.compact-mode .book-card .book-actions a {
+            padding: 0.4rem 0.8rem !important;
+            font-size: 0.75rem !important;
         }
         
         body.compact-mode .link-card .type-badge {
@@ -1113,26 +1110,34 @@
             
             grid.innerHTML = BOOKS_DATA.map(book => {
                 return `
-                    <div class="book-card bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1">
-                        <div class="flex items-start gap-4">
-                            <div class="flex-shrink-0 icon-wrapper">
-                                <div class="w-16 h-20 bg-gradient-to-br from-dharma-brown to-dharma-light rounded flex items-center justify-center text-white">
-                                    <i class="bi bi-book text-3xl"></i>
-                                </div>
+                    <div class="book-card bg-white rounded-3xl transition-all duration-300 p-6 border border-gray-100 hover:shadow-lg overflow-hidden">
+                        <!-- 顶部书名区域 -->
+                        <div class="mb-4 flex items-start gap-3">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center text-dharma-brown bg-dharma-brown bg-opacity-10">
+                                <i class="bi bi-journal-text text-xl"></i>
                             </div>
                             <div class="flex-1 min-w-0">
-                                <h3 class="text-lg font-medium text-dharma-brown mb-1 line-clamp-2">${book.title}</h3>
-                                ${book.author ? `<p class="text-sm text-gray-600 mb-2"><i class="bi bi-person"></i> ${book.author}</p>` : ''}
-                                ${book.description ? `<p class="text-sm text-gray-500 mb-3 line-clamp-2">${book.description}</p>` : ''}
-                                <div class="book-actions flex gap-2 flex-wrap">
-                                    ${book.download ? `<a href="${book.download}" class="inline-flex items-center gap-1 px-3 py-1 bg-dharma-brown text-white text-sm rounded-full hover:bg-dharma-light transition-colors" download>
-                                        <i class="bi bi-download"></i> 下载
-                                    </a>` : ''}
-                                    ${book.online ? `<a href="${book.online}" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 bg-white border border-dharma-brown text-dharma-brown text-sm rounded-full hover:bg-dharma-brown hover:text-white transition-colors">
-                                        <i class="bi bi-eye"></i> 在线阅读
-                                    </a>` : ''}
-                                </div>
+                                <h3 class="text-lg font-medium text-gray-900 mb-2 line-clamp-2 leading-snug">${book.title}</h3>
+                                ${book.author ? `<p class="text-sm text-gray-500 flex items-center gap-1.5">
+                                    <i class="bi bi-person text-dharma-brown"></i>
+                                    <span>${book.author}</span>
+                                </p>` : ''}
                             </div>
+                        </div>
+                        
+                        <!-- 描述区域 -->
+                        ${book.description ? `<p class="text-sm text-gray-600 mb-4 line-clamp-3 leading-relaxed">${book.description}</p>` : ''}
+                        
+                        <!-- 底部操作按钮区域 -->
+                        <div class="book-actions flex gap-2 pt-4 border-t border-gray-100">
+                            ${book.download ? `<a href="${book.download}" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white text-dharma-brown text-sm font-medium rounded-xl hover:bg-dharma-brown hover:text-white transition-all duration-200 border-2 border-dharma-brown" download>
+                                <i class="bi bi-download text-base"></i>
+                                <span>下载</span>
+                            </a>` : ''}
+                            ${book.online ? `<a href="${book.online}" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white text-gray-600 text-sm font-medium rounded-xl hover:bg-gray-50 transition-all duration-200 border-2 border-gray-300 hover:border-gray-400">
+                                <i class="bi bi-eye text-base"></i>
+                                <span>阅读</span>
+                            </a>` : ''}
                         </div>
                     </div>
                 `;
