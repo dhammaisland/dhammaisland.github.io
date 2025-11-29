@@ -2894,5 +2894,9 @@ const DHAMMA_DATA = [
     {
       "sentence":"<p>轻安和喜乐有惊人的治疗力量，这是为什么你会听到：在他们禅修后，有些疾病会痊愈的原因。许多恐惧症、失眠也会治愈。当身心非常轻安时，禅修者不会去嘈杂、拥挤的地方。他们会避免不必要的活动、骚扰，他们想要住在非常安静的地方，只是为了禅修。--焦谛卡禅师 <p>",
       "url":""
+    },
+    {
+      "sentence":"<p style='text-align:center;'>&nbsp; &nbsp; &nbsp; &nbsp;《南传大藏经解题》长部第一经 梵网经</p><p>&nbsp;</p><p>&nbsp; &nbsp; &nbsp; &nbsp;本经相当于旧译长阿含卷第十四梵动经（大正藏一）及梵网六十二见经（大正藏二）。内容依二部构成，首说凡夫赞叹如来，类言琐细卑近之戒，其下分述小中大三戒。小戒所述，为与五戒或十戒相当之戒，中戒大戒，复将此诸戒，详为叙述。此部说法，见引于长部经典第一之多数经典中，为修道大纲之一部分，与后所分之三学、五分法身、以及五根五力中之戒相当，并为此等纲目所从出之根本。次说如来自证自知并现证而说甚深难见诸法，于此处述及六十二见。</p><p>&nbsp; &nbsp; &nbsp; &nbsp;据经典言，此六十二类见，属过去者十八，属未来者四十四。就见之种类言，分为我及世间之常住论、有常无常论、无因论、世间之有边无边论、诡辩论、死后之有想论、无想论、非有想非无想论、断灭论、现在涅槃论等，其中心问题，不出我及世间二者。而此诸说，或于深进思想，缺乏根底，或仅就余说折衷补遗，要皆为佛在世时，异学穷研细究之处。盖此部经典，极属重要，可视为当时思想界之缩图，且佛教立场，于焉阐明，而其所居地位，亦得由是察知。故在相应部经典之某经中，述本经处，则揭举经名，在中部经典之某经中，竟有显依本经中，或有预想本经者，其在阿含经典中地位之重要，殊堪注意。</p><p>&nbsp;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
+      "url":"https://suttacentral.net/dn1/zh/zhuang"
     }
 ]
