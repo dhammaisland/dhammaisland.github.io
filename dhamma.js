@@ -2914,5 +2914,9 @@ const DHAMMA_DATA = [
     {
       "sentence": "<p><p style='text-align:center;'>《南传大藏经解题》长部第五经 究罗檀经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;本经相当于旧译之长阿含卷第十五究罗檀头经（大正藏一）。内容，述婆罗门究罗檀头，欲设大祀，不谙仪礼，乃诣佛所，蒙示祭祀仪式，进而示説其根本精神，终得归依佛法。读本经可知佛陀时代婆罗门之施设祭祀，多囿于形式，抹煞根本精神，佛非仅反对婆罗门仪礼，而其态度，转足以化仪礼于精神，使之跃然有生气，此亦本经所显示之别一法门也。</p><br /><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p></p>",
       "url":"https://suttacentral.net/dn5/zh/zhuang"
+    },
+    {
+      "sentence": "<p><p style='text-align:center;'>《南传大藏经解题》长部第六经 摩诃梨经</p><p>&nbsp;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;旧译无。本经内容，述修习梵行之目的，在断诸结，与证无漏之心解脱及慧解脱，其实现法门，爲八圣道。次说若命身一异之论，则于修行禅定之比丘，全不适应。</p><br /><p style=\"text-align:center;\">--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
+      "url":"https://suttacentral.net/dn6/zh/zhuang"
     }
 ]
