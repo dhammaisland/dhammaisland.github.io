@@ -2918,5 +2918,9 @@ const DHAMMA_DATA = [
     {
       "sentence": "<p><p style='text-align:center;'>《南传大藏经解题》长部第六经 摩诃梨经</p><p>&nbsp;</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;旧译无。本经内容，述修习梵行之目的，在断诸结，与证无漏之心解脱及慧解脱，其实现法门，爲八圣道。次说若命身一异之论，则于修行禅定之比丘，全不适应。</p><br /><p style=\"text-align:center;\">--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
       "url":"https://suttacentral.net/dn6/zh/zhuang"
+    },
+    {
+      "sentence": "<p><p style='text-align:center;'>《南传大藏经解题》长部第七经 阇利经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;旧译无。本经除首尾数句与摩诃梨经相异外，全文与摩诃梨经一五至一九同。故此部分，概从略。</p><br /><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p></p>",
+      "url":"https://suttacentral.net/dn7/zh/zhuang"
     }
 ]
