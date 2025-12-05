@@ -2922,5 +2922,9 @@ const DHAMMA_DATA = [
     {
       "sentence": "<p><p style='text-align:center;'>《南传大藏经解题》长部第七经 阇利经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;旧译无。本经除首尾数句与摩诃梨经相异外，全文与摩诃梨经一五至一九同。故此部分，概从略。</p><br /><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p></p>",
       "url":"https://suttacentral.net/dn7/zh/zhuang"
+    },
+    {
+      "sentence": "<p><p style='text-align:center;'>《南传大藏经解题》长部第八经 迦叶师子吼经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;本经相当于旧译之长阿含卷第十六倮形梵志经（大正藏一）。本经初列举诸苦行。谓修此之人，虽有称爲沙门婆罗门者，然得戒具足、心具足、慧具足之人，始可称爲真正之沙门婆罗门，而佛于此点，则较任何众生爲优越。复谓异学之人，欲出家受戒，当先令留住四月期间。盖本经所述，以诸苦行，决非证道之方便，而其详举苦行种类之处，当注意也。</p><br /><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p></p>",
+      "url":"https://suttacentral.net/dn8/zh/zhuang"
     }
 ]
