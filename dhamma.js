@@ -2930,5 +2930,9 @@ const DHAMMA_DATA = [
     {
       "sentence": "<p><p style='text-align:center;'>《南传大藏经解题》长部第九经 布吒婆楼经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;本经相当于旧译之长阿含卷第十七布吒婆楼经（大正藏一）。本经内容分二部，第一部以想爲中心，论其生灭一多，想与智、想与我等问题。第二部示我得即我之正解，更于两部前后，举示佛所说法，有决定记、不决定记。按经中説，想爲有因有缘，依习修有生灭，由此生灭，论及想灭智定。其次，进论我与想之关係，以此二者，爲异学所难了解而讽人当入佛道。复于当时成问题之世间有常无常、有限无限、命身一异、如来死后事等，指爲与解脱无关而爲不决定记。斥外道所说我之常乐，示我得及灭所成功德，阐明一切悉皆有因有缘。</p><br /><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p></p>",
       "url":"https://suttacentral.net/dn9/zh/zhuang"
+    },
+    {
+      "sentence":"<p><p style='text-align:center;'>《南传大藏经解题》长部第十经 须婆经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;舊譯無。本經內容述阿難答須婆問，明示戒、定、慧三學，爲佛所稱贊所勸導使人入住之法。須婆承其開示，歸依三寶。</p><p>&nbsp;</p><br /><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p></p>",
+      "url":"https://suttacentral.net/dn10/zh/zhuang"
     }
 ]
