@@ -2950,9 +2950,5 @@ const DHAMMA_DATA = [
     {
       "sentence":"<p><p style='text-align:center;'>《南传大藏经解题》长部第十四经 大本经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;本经相当于旧译之长阿含卷第一大本经（大正藏一）本经与旧译二者相较，本经偈文不及其多，而散文所述较详，内容爲过去七佛之传记，以记毗婆尸佛者，实居大部分。先就七佛，列举其族、姓、寿量、成道处、主要弟子、僧会、父母、都城等。次爲毗婆尸佛传，自入胎起，至诵出最初波罗提木叉止。最后记述瞿昙佛至浄居天，诸天于毗婆尸佛传，瞿昙佛所，修行生天之事，而毗婆尸传内所述诸佛常法，则爲诸佛必经之类型的过程，此种传记，不仅爲王子出家故事，尤有二点特堪注意，一爲申述出家后之进程，二爲述说佛成道时之“十因缘，”所谓十二因缘中之无明与行，则未言及是也。</p><p>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p></pfile:///home/hongda/src/dhammaisland.github.io/index.html>",
       "url":"https://suttacentral.net/dn14/zh/zhuang"
-    },
-    {
-      "sentence": "",
-      "url":""
     }
 ]
