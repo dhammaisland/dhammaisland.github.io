@@ -1519,8 +1519,13 @@
                     const highlightedText = isSearching ? highlightKeyword(text, searchKeyword) : text;
                     const actualIdx = item.index !== undefined ? item.index : currentPage * ITEMS_PER_PAGE + idx;
                     
-                    // 转义引号以便在HTML属性中使用
-                    const escapedText = text.replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+                    // 转义特殊字符以便在单引号包裹的 JavaScript 字符串中使用
+                    const escapedText = text
+                        .replace(/\\/g, '\\\\')  // 先转义反斜杠
+                        .replace(/'/g, "\\'")    // 转义单引号
+                        .replace(/\n/g, '\\n')   // 转义换行符
+                        .replace(/\r/g, '\\r')   // 转义回车符
+                        .replace(/"/g, '\\"');   // 转义双引号（以防万一）
                     
                     let content = `<div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; ${idx < items.length - 1 ? 'border-bottom: 1px solid #e0e0e0;' : ''}">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
