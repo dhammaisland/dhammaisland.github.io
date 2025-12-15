@@ -1144,47 +1144,9 @@
         // 更新访问计数
         async function updateVisitCount() {
             try {
-                // 先检查是否有记录
-                const { data: existingData, error: selectError } = await supabase
-                    .from('visit_counts')
-                    .select('*')
-                    .limit(1);
-                
-                if (selectError) {
-                    console.error('查询访问计数失败:', selectError);
-                    return;
-                }
-                
-                const now = new Date();
-                const today = now.toISOString().split('T')[0]; // YYYY-MM-DD 格式
-                
-                if (existingData && existingData.length > 0) {
-                    // 更新现有记录
-                    const { error: updateError } = await supabase
-                        .from('visit_counts')
-                        .update({
-                            total_visits: existingData[0].total_visits + 1,
-                            last_visit_time: now.toISOString(),
-                            update_date: today
-                        })
-                        .eq('id', existingData[0].id);
-                    
-                    if (updateError) {
-                        console.error('更新访问计数失败:', updateError);
-                    }
-                } else {
-                    // 插入第一条记录
-                    const { error: insertError } = await supabase
-                        .from('visit_counts')
-                        .insert({
-                            total_visits: 1,
-                            last_visit_time: now.toISOString(),
-                            update_date: today
-                        });
-                    
-                    if (insertError) {
-                        console.error('插入访问计数失败:', insertError);
-                    }
+                const { error } = await supabase.rpc('increment_visit_count');
+                if (error) {
+                    console.error('更新访问计数失败:', error);
                 }
             } catch (err) {
                 console.error('访问计数异常:', err);
