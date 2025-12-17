@@ -1133,7 +1133,6 @@
     </footer>
 
     <script src="link.js"></script>
-    <script src="dhamma.js"></script>
     <script src="book.js"></script>
     <script>
         // 初始化 Supabase
@@ -1344,7 +1343,7 @@
             }, 3000);
         }
         
-        let dhammaData = DHAMMA_DATA;
+        let dhammaData = [];
         let linksData = LINKS_DATA;
         let currentPage = 0;
         let currentFilter = 'all';
@@ -1859,11 +1858,40 @@
             }
         }
         
+        // 加载法语数据
+        async function loadDhammaData() {
+            try {
+                // 尝试使用 fetch 加载 JSON (服务器环境更快)
+                const response = await fetch('dhamma.json');
+                if (!response.ok) throw new Error('Fetch failed');
+                return await response.json();
+            } catch (e) {
+                // 回退到传统脚本加载方式 (本地文件系统)
+                console.log('使用回退方式加载数据...');
+                return new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = 'dhamma.js';
+                    script.onload = () => resolve(window.DHAMMA_DATA || []);
+                    script.onerror = () => reject(new Error('加载失败'));
+                    document.head.appendChild(script);
+                });
+            }
+        }
+        
         // 页面加载时初始化
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             loadTheme();
             loadViewMode();
-            initPage();
+            
+            // 异步加载法语数据
+            try {
+                dhammaData = await loadDhammaData();
+                initPage();
+            } catch (err) {
+                console.error('加载法语数据失败:', err);
+                document.getElementById('dhamma-display').innerHTML = '<div style="text-align:center;color:#999;">数据加载失败，请刷新页面重试</div>';
+            }
+            
             updateVisitCount(); // 更新访问计数
         });
     </script>
