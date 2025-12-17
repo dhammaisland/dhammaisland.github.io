@@ -1139,12 +1139,12 @@
         // 初始化 Supabase
         const SUPABASE_URL = 'https://hjrfufuyivgddqpzdrzp.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqcmZ1ZnV5aXZnZGRxcHpkcnpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ0MDU3NTAsImV4cCI6MjA3OTk4MTc1MH0.EyFBzpiBuOy9Cm9nwNB-_c7j77Ny8E1F13ltB3BXojs';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         
         // 更新访问计数
         async function updateVisitCount() {
             try {
-                const { error } = await supabase.rpc('increment_visit_count');
+                const { error } = await supabaseClient.rpc('increment_visit_count');
                 if (error) {
                     console.error('更新访问计数失败:', error);
                 }
@@ -1205,7 +1205,7 @@
             `;
             
             try {
-                const { data, error } = await supabase
+                const { data, error } = await supabaseClient
                     .from('messages')
                     .select('*')
                     .eq('is_approved', true)
@@ -1284,7 +1284,7 @@
             submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> 提交中...';
             
             try {
-                const { data, error } = await supabase
+                const { data, error } = await supabaseClient
                     .from('messages')
                     .insert([
                         {
