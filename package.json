@@ -1,0 +1,16 @@
+{
+  "name": "dhammaisland.github.io",
+  "version": "1.0.0",
+  "description": "分享佛法智慧与修行资源 https://dhammaisland.online",
+  "main": "book.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "tailwindcss": "^4.1.18"
+  }
+}
