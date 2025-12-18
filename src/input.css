@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@theme {
+  --color-dharma-brown: #8d5a2a;
+  --color-dharma-light: #a67c52;
+  --color-dharma-bg: #fdfbf7;
+}
