@@ -25,7 +25,7 @@ const LINKS_DATA = [
     "type": 1
   },
   {
-    "url": "http://www.ahanjing.top",
+    "url": "http://www.ahanjing.com",
     "name": "阿含经在线阅读",
     "type": 1
   },
