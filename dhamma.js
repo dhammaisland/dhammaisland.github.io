@@ -2352,7 +2352,7 @@ const DHAMMA_DATA = [
         "url": "https://suttacentral.net/sn5.10/zh/zhuang"
     },
     {
-        "sentence": "<p><span style='font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'>增支部2集135经(庄春江译)&nbsp;</span></p><p><span style='font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'>　 &nbsp;「比丘们！具备二法，愚笨、无能的非善人维持自己被伤害、被损害，成为有罪过的与被智者们责备，并且产出许多非福德，哪二个呢？</span></p><p><span style='color: rgb(192, 0, 0); font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'><strong> &nbsp; &nbsp; &nbsp;&nbsp;不了知、未深解后，对适于责备的称赞；</strong></span></p><p><span style='color: rgb(192, 0, 0); font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'><strong>&nbsp; &nbsp; &nbsp; 不了知、未深解后，对适于称赞的贬损</strong>，</span></p><p><span style='font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'>&nbsp; &nbsp; &nbsp; 比丘们！具备这二法，愚笨、无能的非善人维持自己被伤害、被损害，成为有罪过的与被智者们责备，并且产出许多非福德。&nbsp;</span></p><p><span style='font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'><br/></span></p><p><span style='font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'>　　比丘们！具备二法，贤智、聪明的善人维持自己不被伤害、不被损害，成为无罪过的与不被智者们责备，并且产出许多福德，哪二个呢？</span></p><p><span style='color: rgb(192, 0, 0); font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'><strong>&nbsp; &nbsp; &nbsp; 了知、深解后，对适于责备的贬损；</strong></span></p><p><span style='color: rgb(192, 0, 0); font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'><strong>&nbsp; &nbsp; &nbsp; 了知、深解后，对适于称赞的称赞，</strong></span></p><p><span style='font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'>&nbsp; &nbsp; &nbsp; 比丘们！具备这二法，贤智、聪明的善人维持自己不被伤害、不被损害，成为无罪过的与不被智者们责备，并且产出许多福德。」</span></p>",
+        "sentence": "<p><span style='font-family: 微软雅黑, &#39;Microsoft YaHei&#39;'>增支部2集135经(庄春江译)&nbsp;</span></p><p><span style='font-family: 微软雅黑, &#39;Microsoft YaHei&#39;'>　 &nbsp;「比丘们！具备二法，愚笨、无能的非善人维持自己被伤害、被损害，成为有罪过的与被智者们责备，并且产出许多非福德，哪二个呢？</span></p><p><span style='color: rgb(192, 0, 0); font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'><strong> &nbsp; &nbsp; &nbsp;&nbsp;不了知、未深解后，对适于责备的称赞；</strong></span></p><p><span style='color: rgb(192, 0, 0); font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'><strong>&nbsp; &nbsp; &nbsp; 不了知、未深解后，对适于称赞的贬损</strong>，</span></p><p><span style='font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'>&nbsp; &nbsp; &nbsp; 比丘们！具备这二法，愚笨、无能的非善人维持自己被伤害、被损害，成为有罪过的与被智者们责备，并且产出许多非福德。&nbsp;</span></p><p><span style='font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'><br/></span></p><p><span style='font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'>　　比丘们！具备二法，贤智、聪明的善人维持自己不被伤害、不被损害，成为无罪过的与不被智者们责备，并且产出许多福德，哪二个呢？</span></p><p><span style='color: rgb(192, 0, 0); font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'><strong>&nbsp; &nbsp; &nbsp; 了知、深解后，对适于责备的贬损；</strong></span></p><p><span style='color: rgb(192, 0, 0); font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'><strong>&nbsp; &nbsp; &nbsp; 了知、深解后，对适于称赞的称赞，</strong></span></p><p><span style='font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;'>&nbsp; &nbsp; &nbsp; 比丘们！具备这二法，贤智、聪明的善人维持自己不被伤害、不被损害，成为无罪过的与不被智者们责备，并且产出许多福德。」</span></p>",
         "url": ""
     },
     {
@@ -2656,7 +2656,7 @@ const DHAMMA_DATA = [
         "url": ""
     },
     {
-        "sentence": "<p>只应该说这样的言语：不会使自己苦恼；&nbsp;</p><p>也不会恼害他人，那确实是被善说的言语。&nbsp;</p><p>只应该说可爱的言语，受欢迎的言语，&nbsp;</p><p>说那些不取恶的，对他人是可爱的。&nbsp;</p><p>确实，真实是不死的言语，这是过去以来的法，&nbsp;</p><p>善者说，利益与法被住立在真实上。&nbsp;</p><p>凡佛陀所说安稳之言语，为了涅槃之到达；&nbsp;</p><p>为了得到苦的结束者，那确实是最上的言语。</p><p>--<span class=\\\"\\\"sutra_name\\\"\\\">相应部8相应5经/善言说经</span></p>",
+        "sentence": "<p>只应该说这样的言语：不会使自己苦恼；&nbsp;</p><p>也不会恼害他人，那确实是被善说的言语。&nbsp;</p><p>只应该说可爱的言语，受欢迎的言语，&nbsp;</p><p>说那些不取恶的，对他人是可爱的。&nbsp;</p><p>确实，真实是不死的言语，这是过去以来的法，&nbsp;</p><p>善者说，利益与法被住立在真实上。&nbsp;</p><p>凡佛陀所说安稳之言语，为了涅槃之到达；&nbsp;</p><p>为了得到苦的结束者，那确实是最上的言语。</p><p>--<span class='sutra_name'>相应部8相应5经/善言说经</span></p>",
         "url": ""
     },
     {
@@ -3006,5 +3006,9 @@ const DHAMMA_DATA = [
     {
         "sentence": "<p style='text-align:center;'>《南传大藏经解题》长部第二十八经 自欢喜经</p><p><br>&nbsp; &nbsp; &nbsp; 本经相当于汉译长阿含卷第一二的自欢喜经（大正藏一），与信佛功德经（大正藏一八）。本经不是采用佛直说的方式，而是由长老舍利弗说出，再由佛陀加以认可。佛在那烂陀的波波利庵婆林时，长老舍利弗在世尊的面前，披陈自己对世尊等正觉的胜智，有绝大的信念。这是其余沙门婆罗门所远不及的。他高兴自己能依世尊的教示，幸运地获得胜智，安住于法。<br>&nbsp; &nbsp; &nbsp; 他赞叹世尊曾说的诸善法，十二处法、四种入胎、四种记心、四种见定、七种人施设、各种精勤、四种通行、言正行、士夫戒正行、四教诫法、他人解脱智、三常住论、宿住随念智、有情生死智、二种神通等法，并叙述自己的了解。世尊对其加以认可，并嘱咐舍利弗，加以宣说。<br>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
         "url": "https://suttacentral.net/dn28/zh/zhuang"
+    },
+    {
+        "sentence": "<p style='text-align:center;'>《南传大藏经解题》长部第二十九经 清浄经</p><p><br>&nbsp; &nbsp; &nbsp; 本经相当于汉译长阿含卷第一二清浄经（大正藏一）。佛在缅祇的庵罗林时，新来的比丘周陀，由波婆城来到阿难的住所，告诉阿难，尼乾子死后，其学徒之间分裂，斗争、及排斥其他主张的情形。阿难伴随周陀，到佛陀处禀陈一切，佛陀为警诫弟子们，故说本经。内容首先涉及师、法与弟子。其次，述说清浄梵行的成就，叙述四种安乐行及其果报。最后为使远离各种谬见，乃教人身、受、心、法的四念处。<br>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
+        "url": "https://suttacentral.net/dn29/zh/zhuang"
     }
 ]
