@@ -39,7 +39,9 @@
             width: 100%;
             max-width: 900px;
             margin: 0 auto;
-            padding: 60px 24px;
+            padding: 60px 24px 20px; /* Reduced bottom padding */
+            display: flex;
+            flex-direction: column;
         }
 
         /* Header / Hero */
@@ -56,7 +58,6 @@
 
         .bio {
             font-size: 18px;
-            color: var(--secondary-color);
             max-width: 600px;
             margin-bottom: 40px;
         }
@@ -66,6 +67,7 @@
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 60px;
+            flex: 1;
         }
 
         @media (max-width: 768px) {
@@ -118,7 +120,6 @@
 
         .item-desc {
             font-size: 14px;
-            color: var(--secondary-color);
         }
 
         /* Links */
@@ -289,6 +290,22 @@
             bottom: 140%;
         }
 
+
+        .job-title {
+            font-weight: bold;
+            margin-bottom: 12px;
+            /* margin-top: 36px; - Removed to allow closer fit */
+        }
+        
+        .right-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .job-info {
+            margin-top: auto;
+        }
+
         @media (max-width: 768px) {
             .quote-tooltip {
                 position: fixed;
@@ -360,31 +377,49 @@
 
         <div class="grid">
             <div class="right-col">
-                <div class="section"></div>
+                <div class="section">
                     <h1 class="section-title">逝者如斯夫</h1>
                     <div id="age-counter" class="age-display"></div>
                 </div>
 
-                <script>
-                    (function() {
-                        // Birthdate: 1980-05-25 10:00:00 (Local Time)
-                        // Month is 0-indexed in JS Date constructor (0=Jan, 4=May)
-                        const birthDate = new Date(1980, 4, 25, 10, 0, 0);
-                        const element = document.getElementById('age-counter');
-                        
-                        function updateAge() {
-                            const now = new Date();
-                            const diff = now - birthDate;
-                            // Year length: 365.242199 days (Tropical year for high precision) or 365.25
-                            // Using standard Gregorian average year: 365.2425 days = 31556952000 ms
-                            const age = diff / 31556952000;
-                            element.textContent = age.toFixed(16);
-                            requestAnimationFrame(updateAge);
-                        }
-                        
-                        updateAge();
-                    })();
-                </script>
+                <div class="section job-info">
+                    <h1 class="section-title job-title">职业</h1>
+                    <ul class="item-list">
+                        <li class="item">
+                            <div class="item-content">
+                                <span class="item-title"><a href="https://suttacentral.net" target="_blank">SuttaCentral.net</a></span>
+                                <span class="item-desc">开发工程师</span>
+                                <div class="item-desc" style="margin-top: 4px;">
+                                    <a href="https://github.com/suttacentral" target="_blank">
+                                        <i class="bi bi-github"></i> github.com/suttacentral
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>                
+            </div>
+
+            <script>
+                (function() {
+                    // Birthdate: 1980-05-25 10:00:00 (Local Time)
+                    // Month is 0-indexed in JS Date constructor (0=Jan, 4=May)
+                    const birthDate = new Date(1980, 4, 25, 10, 0, 0);
+                    const element = document.getElementById('age-counter');
+                    
+                    function updateAge() {
+                        const now = new Date();
+                        const diff = now - birthDate;
+                        // Year length: 365.242199 days (Tropical year for high precision) or 365.25
+                        // Using standard Gregorian average year: 365.2425 days = 31556952000 ms
+                        const age = diff / 31556952000;
+                        element.textContent = age.toFixed(16);
+                        requestAnimationFrame(updateAge);
+                    }
+                    
+                    updateAge();
+                })();
+            </script>
         </div>
     </main>
 
