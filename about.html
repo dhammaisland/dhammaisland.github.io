@@ -270,7 +270,7 @@
 
     <main>
         <header>
-            <h1 class="header-title"><p class="hello">你好，"我""是""洪达"。</p></h1>
+            <h1 class="header-title"><p class="hello">你好，<br/>"我"是"洪达"。</p></h1>
             <p class="bio">
                 法与禅修的爱好者，<br/>
                 这里是我的个人主页，用于分享佛陀的法与律、禅师法谈、相关书籍等。<br/>
@@ -298,7 +298,7 @@
                             // Year length: 365.242199 days (Tropical year for high precision) or 365.25
                             // Using standard Gregorian average year: 365.2425 days = 31556952000 ms
                             const age = diff / 31556952000;
-                            element.textContent = age.toFixed(20);
+                            element.textContent = age.toFixed(16);
                             requestAnimationFrame(updateAge);
                         }
                         
