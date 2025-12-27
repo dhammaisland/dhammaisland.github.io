@@ -289,6 +289,31 @@
             bottom: 140%;
         }
 
+        @media (max-width: 768px) {
+            .quote-tooltip {
+                position: fixed;
+                bottom: -100px;
+                left: 20px;
+                right: 20px;
+                width: auto;
+                transform: none;
+                z-index: 1001;
+                transition: all 0.3s ease;
+            }
+
+            .quote-tooltip::after {
+                display: none;
+            }
+
+            .dhamma:hover .quote-tooltip,
+            .longevity:hover .quote-tooltip,
+            .dhamma-enthusiasts:hover .quote-tooltip {
+                visibility: visible;
+                opacity: 1;
+                bottom: 80px;
+            }
+        }
+
         @keyframes crt-flicker {
             0% { opacity: 0.27861; }
             5% { opacity: 0.34769; }
