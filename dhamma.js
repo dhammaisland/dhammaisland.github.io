@@ -3022,5 +3022,9 @@ const DHAMMA_DATA = [
     {
         "sentence": "<p style='text-align:center;'>《南传大藏经解题》长部第三十二经 阿咤曩胝经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; 本经无相等的汉译本［参照毘沙门天王经（大正藏一二四五）］在Hoernle所编的：Manuscript Remains found in EasternTurkestan Vol.I，书中存有相当于本经的梵文AtānātiyaSūtra的断片。经文云：佛在灵鹫山时，昆沙门天王随诸夜叉而来，唱着阿咤曩胝护经，禀告佛陀云：诸夜叉中，如有不信顺佛语，有意妨碍佛弟子修行者，则为守护佛弟子，恳请佛陀接受阿咤曩胝护经。于是，佛陀默然许可。翌日佛陀即将其要旨训示诸比丘，劝勉他们奉持阿咤曩胝护经。<br>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
         "url": "https://suttacentral.net/dn32/zh/zhuang"
+    },
+    {
+        "sentence": "<p style='text-align:center;'>《南传大藏经解题》长部第三十三经 等诵经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; 本经相当于汉译阿含卷第八的众集经（大正藏一）与大集法门经（大正藏十二）在Hoernle所编的：Manuscript Remains found in Eastern Turkestan Vol.I，书中存有相当于本经的梵文Sangiti Sūtra 断简。经文记载，在波婆城的末罗族所建立的新公会堂里，佛使舍利弗代说本经。经文中具有颇为浓厚的阿毘达磨色彩。此即：以一法二、二法三十三、三法六十、四法五十、五法二十五、六法二十二、七法十四、八法十一、九法六、十法六之法数为标凖，列记十段二百二十九法。有部六足论之中的，集异门足论（大正藏一五三六），实即是依据有部的立场对本经所作的注释。<br>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
+        "url": "https://suttacentral.net/dn33/zh/zhuang"
     }
 ]
