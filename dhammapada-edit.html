@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑法句 | 法洲</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Quill 富文本编辑器 -->
+    <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --dharma-brown: #8d5a2a;
+            --dharma-light: #a67c52;
+            --dharma-bg: #fdfbf7;
+            --success-color: #059669;
+            --danger-color: #dc2626;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--dharma-bg);
+            min-height: 100vh;
+            color: #1f2937;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--dharma-brown) 0%, var(--dharma-light) 100%);
+            color: white;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(141, 90, 42, 0.2);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-left i {
+            font-size: 28px;
+        }
+
+        .header-left h1 {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .header-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--dharma-brown);
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 10px;
+        }
+
+        .form-label i {
+            color: var(--dharma-brown);
+            margin-right: 6px;
+        }
+
+        .form-label .required {
+            color: var(--danger-color);
+            margin-left: 4px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--dharma-brown);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(141, 90, 42, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #9ca3af;
+        }
+
+        /* Quill Editor Styles */
+        .editor-container {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .editor-container:focus-within {
+            border-color: var(--dharma-brown);
+            box-shadow: 0 0 0 4px rgba(141, 90, 42, 0.1);
+        }
+
+        .ql-toolbar.ql-snow {
+            border: none;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f9fafb;
+            padding: 12px;
+        }
+
+        .ql-container.ql-snow {
+            border: none;
+            font-size: 15px;
+            min-height: 300px;
+        }
+
+        .ql-editor {
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .ql-editor.ql-blank::before {
+            color: #9ca3af;
+            font-style: normal;
+        }
+
+        .ql-snow .ql-picker {
+            color: #374151;
+        }
+
+        .ql-snow .ql-stroke {
+            stroke: #374151;
+        }
+
+        .ql-snow .ql-fill {
+            fill: #374151;
+        }
+
+        .ql-snow .ql-picker.ql-expanded .ql-picker-label {
+            border-color: var(--dharma-brown);
+        }
+
+        .ql-snow .ql-picker.ql-expanded .ql-picker-options {
+            border-color: #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .ql-snow .ql-tooltip {
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .ql-snow .ql-tooltip input[type=text] {
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .ql-snow .ql-tooltip a.ql-action::after {
+            color: var(--dharma-brown);
+        }
+
+        /* Form Actions */
+        .form-actions {
+            display: flex;
+            gap: 16px;
+            margin-top: 36px;
+            padding-top: 28px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--dharma-brown) 0%, var(--dharma-light) 100%);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(141, 90, 42, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #6b7280;
+            border: 2px solid #e5e7eb;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #1f2937;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+
+        .toast.success {
+            background: var(--success-color);
+        }
+
+        .toast.error {
+            background: var(--danger-color);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .loading-overlay .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid #e5e7eb;
+            border-top-color: var(--dharma-brown);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        .loading-overlay p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* Character Count */
+        .char-count {
+            text-align: right;
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .header-right {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .container {
+                padding: 16px;
+            }
+
+            .form-card {
+                padding: 24px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* Dark Theme */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #1a1a1a;
+                color: #e5e7eb;
+            }
+
+            .form-card {
+                background: #2a2a2a;
+            }
+
+            .form-label {
+                color: #e5e7eb;
+            }
+
+            .form-input {
+                background: #1f1f1f;
+                border-color: #404040;
+                color: #e5e7eb;
+            }
+
+            .form-input:focus {
+                background: #252525;
+            }
+
+            .editor-container {
+                border-color: #404040;
+            }
+
+            .ql-toolbar.ql-snow {
+                background: #1f1f1f;
+                border-bottom-color: #404040;
+            }
+
+            .ql-container.ql-snow {
+                background: #252525;
+            }
+
+            .ql-editor {
+                color: #e5e7eb;
+            }
+
+            .ql-snow .ql-picker {
+                color: #e5e7eb;
+            }
+
+            .ql-snow .ql-stroke {
+                stroke: #e5e7eb;
+            }
+
+            .ql-snow .ql-fill {
+                fill: #e5e7eb;
+            }
+
+            .btn-secondary {
+                background: #374151;
+                border-color: #4b5563;
+                color: #e5e7eb;
+            }
+
+            .loading-overlay {
+                background: rgba(26, 26, 26, 0.95);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>加载中...</p>
+    </div>
+
+    <header class="header">
+        <div class="header-left">
+            <i class="bi bi-flower1"></i>
+            <h1 id="pageTitle">添加法句</h1>
+        </div>
+        <div class="header-right">
+            <a href="dhammapada-list.html" class="header-btn">
+                <i class="bi bi-arrow-left"></i>
+                <span>返回列表</span>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="form-card">
+            <h2 class="form-title">
+                <i class="bi bi-pencil-square"></i>
+                <span id="formTitle">添加新法句</span>
+            </h2>
+
+            <form id="editForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="bi bi-chat-quote"></i>
+                        法句内容
+                        <span class="required">*</span>
+                    </label>
+                    <div class="editor-container">
+                        <div id="editor"></div>
+                    </div>
+                    <div class="char-count">
+                        <span id="charCount">0</span> 字符
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="bi bi-link-45deg"></i>
+                        相关链接
+                    </label>
+                    <input 
+                        type="url" 
+                        id="urlInput" 
+                        class="form-input" 
+                        placeholder="https://example.com/source"
+                    >
+                </div>
+
+                <div class="form-actions">
+                    <a href="dhammapada-list.html" class="btn btn-secondary">
+                        <i class="bi bi-x-lg"></i>
+                        取消
+                    </a>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <i class="bi bi-check-lg"></i>
+                        <span id="submitText">保存</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Supabase 配置
+        const SUPABASE_URL = 'https://hjrfufuyivgddqpzdrzp.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqcmZ1ZnV5aXZnZGRxcHpkcnpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ0MDU3NTAsImV4cCI6MjA3OTk4MTc1MH0.EyFBzpiBuOy9Cm9nwNB-_c7j77Ny8E1F13ltB3BXojs';
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // 编辑器实例
+        let quill;
+        let editId = null;
+
+        // 初始化 Quill 编辑器
+        function initEditor() {
+            quill = new Quill('#editor', {
+                theme: 'snow',
+                placeholder: '在此输入法句内容，支持富文本格式...',
+                modules: {
+                    toolbar: [
+                        [{ 'header': [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'color': [] }, { 'background': [] }],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        [{ 'indent': '-1'}, { 'indent': '+1' }],
+                        [{ 'align': [] }],
+                        ['blockquote', 'code-block'],
+                        ['link', 'image'],
+                        ['clean']
+                    ]
+                }
+            });
+
+            // 监听内容变化更新字数
+            quill.on('text-change', () => {
+                const text = quill.getText().trim();
+                document.getElementById('charCount').textContent = text.length;
+            });
+        }
+
+        // 检查登录状态
+        async function checkAuth() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) {
+                window.location.href = 'login.html';
+                return null;
+            }
+            return session;
+        }
+
+        // 初始化
+        async function init() {
+            const session = await checkAuth();
+            if (!session) return;
+
+            initEditor();
+
+            // 检查是否是编辑模式
+            const urlParams = new URLSearchParams(window.location.search);
+            editId = urlParams.get('id');
+
+            if (editId) {
+                document.getElementById('pageTitle').textContent = '编辑法句';
+                document.getElementById('formTitle').textContent = '编辑法句';
+                await loadData(editId);
+            }
+        }
+
+        // 加载数据
+        async function loadData(id) {
+            showLoading(true);
+            
+            try {
+                const { data, error } = await supabaseClient
+                    .from('dhammapada')
+                    .select('*')
+                    .eq('id', id)
+                    .single();
+
+                if (error) throw error;
+
+                if (data) {
+                    // 设置编辑器内容
+                    quill.root.innerHTML = data.sentence || '';
+                    // 更新字数统计
+                    const text = quill.getText().trim();
+                    document.getElementById('charCount').textContent = text.length;
+                    // 设置 URL
+                    document.getElementById('urlInput').value = data.url || '';
+                }
+
+            } catch (error) {
+                console.error('加载数据失败:', error);
+                showToast('加载数据失败', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // 提交表单
+        async function handleSubmit(event) {
+            event.preventDefault();
+
+            const content = quill.root.innerHTML;
+            const textContent = quill.getText().trim();
+            const url = document.getElementById('urlInput').value.trim();
+
+            // 验证
+            if (!textContent) {
+                showToast('请输入法句内容', 'error');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<div class="spinner"></div><span>保存中...</span>';
+
+            try {
+                const dataToSave = {
+                    sentence: content,
+                    url: url || null
+                };
+
+                let result;
+                
+                if (editId) {
+                    // 更新
+                    result = await supabaseClient
+                        .from('dhammapada')
+                        .update(dataToSave)
+                        .eq('id', editId);
+                } else {
+                    // 新增
+                    result = await supabaseClient
+                        .from('dhammapada')
+                        .insert([dataToSave]);
+                }
+
+                if (result.error) throw result.error;
+
+                showToast(editId ? '更新成功' : '添加成功', 'success');
+                
+                // 延迟跳转
+                setTimeout(() => {
+                    window.location.href = 'dhammapada-list.html';
+                }, 1000);
+
+            } catch (error) {
+                console.error('保存失败:', error);
+                showToast('保存失败: ' + (error.message || '未知错误'), 'error');
+                
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="bi bi-check-lg"></i><span>保存</span>';
+            }
+        }
+
+        // 工具函数
+        function showLoading(show) {
+            document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
+        }
+
+        function showToast(message, type = 'info') {
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="bi bi-${type === 'success' ? 'check-circle' : type === 'error' ? 'x-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            document.body.appendChild(toast);
+
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // 初始化页面
+        init();
+    </script>
+</body>
+</html>

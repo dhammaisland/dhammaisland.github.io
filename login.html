@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理登录 | 法洲</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --dharma-brown: #8d5a2a;
+            --dharma-light: #a67c52;
+            --dharma-bg: #fdfbf7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #fdfbf7 0%, #f5ebe0 50%, #e8d5c4 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(141, 90, 42, 0.15);
+            width: 100%;
+            max-width: 420px;
+            overflow: hidden;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, var(--dharma-brown) 0%, var(--dharma-light) 100%);
+            color: white;
+            padding: 40px 32px;
+            text-align: center;
+        }
+
+        .login-header i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .login-header h1 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .login-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .login-form {
+            padding: 40px 32px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .form-group label i {
+            margin-right: 6px;
+            color: var(--dharma-brown);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--dharma-brown);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(141, 90, 42, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 4px;
+            font-size: 18px;
+            transition: color 0.2s;
+        }
+
+        .toggle-password:hover {
+            color: var(--dharma-brown);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, var(--dharma-brown) 0%, var(--dharma-light) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(141, 90, 42, 0.3);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .login-btn i {
+            font-size: 18px;
+        }
+
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .error-message.show {
+            display: flex;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 24px;
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--dharma-brown);
+        }
+
+        .back-link i {
+            margin-right: 4px;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Dark theme support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            }
+
+            .login-container {
+                background: #2a2a2a;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            }
+
+            .form-group label {
+                color: #e5e7eb;
+            }
+
+            .form-input {
+                background: #1f1f1f;
+                border-color: #404040;
+                color: #e5e7eb;
+            }
+
+            .form-input:focus {
+                background: #252525;
+                border-color: var(--dharma-light);
+            }
+
+            .back-link {
+                color: #9ca3af;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <i class="bi bi-flower1"></i>
+            <h1>管理后台</h1>
+            <p>请使用管理员账号登录</p>
+        </div>
+
+        <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
+            <div class="error-message" id="errorMessage">
+                <i class="bi bi-exclamation-circle"></i>
+                <span id="errorText">登录失败</span>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <i class="bi bi-envelope"></i>邮箱
+                </label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    class="form-input" 
+                    placeholder="请输入管理员邮箱"
+                    required
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <i class="bi bi-lock"></i>密码
+                </label>
+                <div class="input-wrapper">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        class="form-input" 
+                        placeholder="请输入密码"
+                        required
+                        autocomplete="current-password"
+                    >
+                    <button type="button" class="toggle-password" onclick="togglePassword()">
+                        <i class="bi bi-eye" id="passwordIcon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn">
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span>登录</span>
+            </button>
+
+            <a href="index.html" class="back-link">
+                <i class="bi bi-arrow-left"></i>返回首页
+            </a>
+        </form>
+    </div>
+
+    <script>
+        // Supabase 配置
+        const SUPABASE_URL = 'https://hjrfufuyivgddqpzdrzp.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqcmZ1ZnV5aXZnZGRxcHpkcnpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ0MDU3NTAsImV4cCI6MjA3OTk4MTc1MH0.EyFBzpiBuOy9Cm9nwNB-_c7j77Ny8E1F13ltB3BXojs';
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // 检查是否已登录
+        async function checkAuth() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (session) {
+                window.location.href = 'admin.html';
+            }
+        }
+
+        // 页面加载时检查登录状态
+        checkAuth();
+
+        // 切换密码显示
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const passwordIcon = document.getElementById('passwordIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordIcon.className = 'bi bi-eye-slash';
+            } else {
+                passwordInput.type = 'password';
+                passwordIcon.className = 'bi bi-eye';
+            }
+        }
+
+        // 显示错误信息
+        function showError(message) {
+            const errorEl = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            errorText.textContent = message;
+            errorEl.classList.add('show');
+        }
+
+        // 隐藏错误信息
+        function hideError() {
+            document.getElementById('errorMessage').classList.remove('show');
+        }
+
+        // 登录处理
+        async function handleLogin(event) {
+            event.preventDefault();
+            hideError();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+
+            // 禁用按钮，显示加载状态
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<div class="spinner"></div><span>登录中...</span>';
+
+            try {
+                const { data, error } = await supabaseClient.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
+                if (error) {
+                    throw error;
+                }
+
+                // 登录成功，跳转到管理页面
+                window.location.href = 'admin.html';
+
+            } catch (error) {
+                console.error('登录失败:', error);
+                
+                // 根据错误类型显示不同消息
+                let errorMessage = '登录失败，请检查邮箱和密码';
+                if (error.message.includes('Invalid login credentials')) {
+                    errorMessage = '邮箱或密码错误';
+                } else if (error.message.includes('Email not confirmed')) {
+                    errorMessage = '邮箱未验证，请先验证邮箱';
+                } else if (error.message.includes('Too many requests')) {
+                    errorMessage = '登录尝试次数过多，请稍后再试';
+                }
+                
+                showError(errorMessage);
+            } finally {
+                // 恢复按钮状态
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = '<i class="bi bi-box-arrow-in-right"></i><span>登录</span>';
+            }
+        }
+    </script>
+</body>
+</html>
