@@ -158,6 +158,16 @@
             color: var(--success-color);
         }
 
+        .stat-icon.visits {
+            background: rgba(37, 99, 235, 0.1);
+            color: #2563eb;
+        }
+
+        .stat-icon.time {
+            background: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6;
+        }
+
         .stat-content h3 {
             font-size: 28px;
             font-weight: 600;
@@ -583,6 +593,24 @@
                     <p>已通过</p>
                 </div>
             </div>
+            <div class="stat-card">
+                <div class="stat-icon visits">
+                    <i class="bi bi-eye"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="visitCount">--</h3>
+                    <p>网站访问</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon time">
+                    <i class="bi bi-clock-history"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="lastVisitTime" style="font-size: 18px;">--</h3>
+                    <p>最后访问</p>
+                </div>
+            </div>
         </div>
 
         <!-- Filter Tabs -->
@@ -640,8 +668,42 @@
             // 显示用户邮箱
             document.getElementById('userEmail').textContent = session.user.email;
 
-            // 加载留言
-            await loadMessages();
+            // 加载留言和访问统计
+            await Promise.all([loadMessages(), loadVisitStats()]);
+
+            // 每 5 分钟 (300,000 毫秒) 自动刷新一次访问统计
+            setInterval(loadVisitStats, 5 * 60 * 1000);
+        }
+
+        // 加载访问统计
+        async function loadVisitStats() {
+            try {
+                const { data, error } = await supabaseClient
+                    .from('visit_counts')
+                    .select('total_visits, last_visit_time')
+                    .single();
+
+                if (error) throw error;
+
+                if (data) {
+                    // 显示访问次数
+                    document.getElementById('visitCount').textContent = data.total_visits || 0;
+
+                    // 格式化并显示最后访问时间
+                    if (data.last_visit_time) {
+                        const date = new Date(data.last_visit_time);
+                        const formattedDate = date.toLocaleDateString('zh-CN', {
+                            month: '2-digit',
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                        document.getElementById('lastVisitTime').textContent = formattedDate;
+                    }
+                }
+            } catch (error) {
+                console.error('加载访问统计失败:', error);
+            }
         }
 
         // 加载留言
