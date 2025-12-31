@@ -691,19 +691,31 @@
 
                     // 格式化并显示最后访问时间
                     if (data.last_visit_time) {
-                        const date = new Date(data.last_visit_time);
-                        const formattedDate = date.toLocaleDateString('zh-CN', {
-                            month: '2-digit',
-                            day: '2-digit',
-                            hour: '2-digit',
-                            minute: '2-digit'
-                        });
-                        document.getElementById('lastVisitTime').textContent = formattedDate;
+                        document.getElementById('lastVisitTime').textContent = formatBeijingTime(data.last_visit_time);
                     }
                 }
             } catch (error) {
                 console.error('加载访问统计失败:', error);
             }
+        }
+
+        // 格式化为北京时间辅助函数
+        function formatBeijingTime(dateInput) {
+            if (!dateInput) return '--';
+            const date = new Date(dateInput);
+            const formatter = new Intl.DateTimeFormat('zh-CN', {
+                timeZone: 'UTC',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            const parts = formatter.formatToParts(date);
+            const map = new Map(parts.map(p => [p.type, p.value]));
+            return `${map.get('year')}-${map.get('month')}-${map.get('day')} ${map.get('hour')}:${map.get('minute')}:${map.get('second')}`;
         }
 
         // 加载留言
@@ -775,14 +787,7 @@
             }
 
             container.innerHTML = filteredMessages.map(msg => {
-                const date = new Date(msg.created_at);
-                const formattedDate = date.toLocaleDateString('zh-CN', {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
+                const formattedDate = formatBeijingTime(msg.created_at);
 
                 const statusClass = msg.is_approved ? 'approved' : 'pending';
                 const statusText = msg.is_approved ? '已通过' : '待审核';
