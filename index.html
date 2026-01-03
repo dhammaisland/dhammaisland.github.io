@@ -16,6 +16,7 @@
     <script src="book.js"></script>
     <script src="index.js"></script>
     <script type="module" src="src/components/di-site-footer.js"></script>
+    <script type="module" src="src/components/di-site-header.js"></script>
 </head>
 <body class="bg-dharma-bg font-sans">
     <!-- 主题切换按钮 -->
@@ -103,10 +104,7 @@
     </div>
     
     <!-- Header -->
-    <header class="bg-gradient-to-r from-dharma-brown to-dharma-light text-white py-10 px-4 shadow-lg">
-        <h1 class="text-4xl md:text-5xl font-light tracking-widest text-center mb-2"><i class="bi bi-flower1"></i>法洲</h1>
-        <p class="text-center text-sm md:text-base opacity-95">真理是最上之甘味</p>
-    </header>
+    <di-site-header></di-site-header>
 
     <div class="max-w-7xl mx-auto px-4 py-8">
         <!-- 法语展示区 - Material Design 3 风格 -->
