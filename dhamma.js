@@ -3062,5 +3062,9 @@ const DHAMMA_DATA = [
     {
         "sentence": "<p style='text-align:center;'>《南传大藏经解题》中部第六经 愿经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; 本经相当于旧译之中阿含一〇五愿经（大正藏一、五九五页）。参考A.X.71. Akankna。本经是教以若比丘怀有种种之愿望，为充满其愿望故，当先受戒而能守护。</p><p>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
         "url": "https://suttacentral.net/mn6/zh/zhuang"
+    },
+    {
+        "sentence": "<p style='text-align:center;'>《南传大藏经解题》中部第七经 布喻经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; 本经相当于旧译之中阿含九三水浄梵志经（大正藏一、五七五页），梵志计水浄经（大正藏一、八四三页），增一阿含一三、五，孙陀利（大正藏二、五七三页）。后半部杂阿含一一八五（大正藏二、三二一页），别译杂阿含九九（大正藏二、四〇八页）。本经是教以人若心秽，易堕恶趣，若心清浄，能豫期善趣。犹如污布，着染不鲜明，若是浄布，着染鲜明。次说种种心秽。最后说当常使心清浄，以诫婆罗门孙陀利迦颇罗堕瓦遮之崇尚沐浴行为不足法，示以唯心沐浴，是为最要者。</p><p>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
+        "url": "https://suttacentral.net/mn7/zh/zhuang"
     }
 ]
