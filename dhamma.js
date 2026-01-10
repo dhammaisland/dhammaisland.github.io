@@ -3074,5 +3074,9 @@ const DHAMMA_DATA = [
     {
         "sentence": "<p>佛告摩诃男：</p><p>「若优婆塞成就十六法者，是名优婆塞<strong>自安安他</strong>，何等为十六？</p><p>摩诃男！若优婆塞：</p><p><strong>具足正信，[亦以正信]建立他人；</strong></p><p><strong>自持净戒，亦以净戒建立他人；</strong></p><p><strong>自行布施，教人行施；</strong></p><p><strong>自诣塔寺见诸沙门，亦教人往见诸沙门；</strong></p><p><strong>自专听法，亦教人听；</strong></p><p><strong>自受持法，教人受持；</strong></p><p><strong>自观察义，教人观察；</strong></p><p><strong>自知深义，随顺修行，法、次法向，亦复教人解了深义，随顺修行，法、次法向，</strong></p><p>摩诃男！如是十六法成就者，是名优婆塞<strong>能自安慰，亦安慰他人</strong>。</p><p>摩诃男！若优婆塞成就如是十六法者，彼诸大众悉诣其所，谓：婆罗门众、刹利众、长者众、沙门众，于诸众中，威德显曜。譬如：日轮初、中、及后，光明显照，如是，优婆塞十六法成就者，初、中、及后，威德显照。</p><p>如是，摩诃男！若优婆塞十六法成就者，世间难得。」</p><p>--杂阿含929</p>",
         "url": "https://suttacentral.net/sa929/lzh/taisho"
+    },
+    {
+        "sentence": "<p style='text-align:center;'>《南传大藏经解题》中部第八经 损损经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; 本经相当于旧译之中阿含九一周那问见经（大正藏一、五七三页）。本经是对长老大周那说法。首示以舍离诸见之根本法，次示以五部门说损损诸恶欲得至究竟涅槃之方法。所谓五部门者，第一损损，第二于善法发，第三回避恶欲法，第四升于高处善法，第五到究竟涅槃法。</p><p>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
+        "url": "https://suttacentral.net/mn8/zh/zhuang"
     }
 ]
