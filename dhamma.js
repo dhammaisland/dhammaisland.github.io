@@ -3082,5 +3082,9 @@ const DHAMMA_DATA = [
     {
         "sentence": "<p style='text-align:center;'>《南传大藏经解题》中部第九经 正见经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; 本经相当于旧译之后半部增一阿含四九、五（大正藏二、七九七页）。本经是舍利弗答诸比丘所问，关于得正见而达于正法之方法。答者以次之诸部门而为详说，即一知不善与不善根本及善与善之根本，二知食与其集灭道，三知苦与其集灭道，四至十五，即关于自老死以下之生、有、取、欲、受、触、六处、名色、识、行、无明，知其一一支与其集灭道。十六知漏与其集灭道。</p><p>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
         "url": "https://suttacentral.net/mn9/zh/zhuang"
+    },
+    {
+        "sentence": "<p style='text-align:center;'>《南传大藏经解题》中部第十经 念处经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; 本经相当于旧译之中阿含九八念处经（大正藏一、五八二页），参考增一阿含一二、一（大正藏二、五六八页），新译长部二二大念处经（南传藏七，但本经缺彼之一八至二一，其他全合）。<span style='color:hsl(0, 75%, 60%);'><strong>本经以得究竟解脱涅槃为一乘，而说四念处。</strong></span></p><p>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
+        "url": "https://suttacentral.net/mn10/zh/zhuang"
     }
 ]
