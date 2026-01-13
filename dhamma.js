@@ -3086,5 +3086,9 @@ const DHAMMA_DATA = [
     {
         "sentence": "<p style='text-align:center;'>《南传大藏经解题》中部第十经 念处经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; 本经相当于旧译之中阿含九八念处经（大正藏一、五八二页），参考增一阿含一二、一（大正藏二、五六八页），新译长部二二大念处经（南传藏七，但本经缺彼之一八至二一，其他全合）。<span style='color:hsl(0, 75%, 60%);'><strong>本经以得究竟解脱涅槃为一乘，而说四念处。</strong></span></p><p>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
         "url": "https://suttacentral.net/mn10/zh/zhuang"
+    },
+    {
+        "sentence": "<p style='text-align:center;'>《南传大藏经解题》中部第十一经 师子吼小经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; 本经相当于旧译之中阿含一〇三师子吼经（大正藏一、五九〇页）。参考A.IV.239。本经是世尊教诸比丘言，“汝等应作大师子吼，唯于此处是有沙门，但无外道，得称沙门者。”复示其所以然，以外道虽亦有相似之目标，但彼等全不知取，故不能称为沙门。次更关于取及渴爱、受、触、六处、名色、识、行、无明之说明。</p><p>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
+        "url": "https://suttacentral.net/mn11/zh/zhuang"
     }
 ]
