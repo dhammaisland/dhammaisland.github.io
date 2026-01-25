@@ -3118,5 +3118,9 @@ const DHAMMA_DATA = [
     {
         "sentence": "<p style='text-align:center;'>《南传大藏经解题》中部第十八经 蜜丸经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; 即旧译之中阿含一一五蜜丸喻经（大正藏一、六〇三页），增一阿含四〇、一〇，甘露法味（大正藏二、七四三页）。本经是大迦旃延，详说世尊所略说之经。首先世尊对释迦族执杖者问世尊说法，是云何说，答之以“我说法时，不与任何人诤论及无诸妄想，”次则重为诸比丘说。一比丘问，“云何得至如是说之方法，”于是世尊略说若灭迷执想分生起时，则灭一切恶不善法，即起座入室。缘是诸比丘，请大迦旃延详说，迦旃延乃为详说，后得世尊印可。</p><p>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
         "url": "https://suttacentral.net/mn18/zh/zhuang"
+    },
+    {
+        "sentence": "<p style='text-align:center;'>《南传大藏经解题》中部第十九经 双思经</p><p><br>&nbsp; &nbsp; &nbsp; &nbsp; 即旧译之中阿含一〇二念经（大正藏一、五八九页）。本经是世尊说未成佛前修行中之一一体验，即欲、恚、害意等，为除去是等，特使起双双相对待之思惟，使前者灭，后者自能生起，复举种种譬喻以说明之。</p><p>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
+        "url": "https://suttacentral.net/mn19/zh/zhuang"
     }
 ]
