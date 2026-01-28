@@ -3126,5 +3126,9 @@ const DHAMMA_DATA = [
     {
         "sentence": "<p style='text-align:center;'>《南传大藏经解题》中部第二十经 息思经</p><p>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; 即旧译之中阿含一〇一增上心经（大藏经一、五八八页）。本经于实修增上心（禅定），说五个阶段。一恶不善思惟现时，即念善思惟。二若恶不善思惟犹现起者，则审察恶不善思惟过患。三恶不善思惟犹现起者，则关于彼彼一切忆念都不起思念。四恶不善思惟犹现起者，念止息彼思惟行。五然而恶不善思惟犹现起者，当修，禅定法门。</p><p>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
         "url": "https://suttacentral.net/mn20/zh/zhuang"
+    },
+    {
+        "sentence": "<p style='text-align:center;'>《南传大藏经解题》中部第二十一经 锯喻经</p><p>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; 即旧译之中阿含一九三牟犂破群那经（大正藏一、七四四页），增一阿含五〇、八（大正藏二、八一二页）。本经因长老牟犂群那与诸比丘尼数数会集，人若非难之者，即起大愤怒，<span style='color:hsl(0, 75%, 60%);'><strong>佛为是说法诫彼无论如何，不应瞋恚，应常住慈心</strong></span>，乃说保护婆罗树林喻，居士妇韦提希迦与其侍女喻，欲使大地为非地喻，欲绘画虚空喻，欲以干薪火炬煮沸恒河水喻，猫皮喻，锯喻。</p><p>&nbsp;</p><p style='text-align:center;'>--高楠顺次郎、平川彰合著，释显如、李凤媚翻译</p>",
+        "url": "https://suttacentral.net/mn21/zh/zhuang"
     }
 ]
