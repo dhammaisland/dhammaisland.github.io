@@ -127,6 +127,33 @@
             transition: all 0.3s ease;
         }
         
+        /* 首页背景图片 */
+        body.home-bg {
+            position: relative;
+        }
+        
+        body.home-bg::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('img/bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.20; /* 十分微弱，不喧宾夺主 */
+            z-index: -1;
+            pointer-events: none;
+            transition: opacity 0.3s ease, filter 0.3s ease;
+        }
+
+        body.dark-theme.home-bg::before {
+            opacity: 0.04; /* 暗色模式下更微弱 */
+            filter: grayscale(80%) brightness(0.8);
+        }
+        
         /* 暗色主题样式 */
         body.dark-theme {
             background-color: #1a1a1a;
