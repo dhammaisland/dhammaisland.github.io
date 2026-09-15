@@ -48,6 +48,7 @@
     uniform float iBlend;
     uniform float iFalloff;
     uniform float iOpacity;
+    uniform float iIsDark;
 
     float rayStrength(vec2 raySource, vec2 rayRefDirection, vec2 coord, float seedA, float seedB, float speed) {
       vec2 sourceToCoord = coord - raySource;
@@ -77,20 +78,40 @@
       vec2 rayRefDir1 = normalize(vec2(cos(0.785398 + halfSpread), sin(0.785398 + halfSpread)));
       vec2 rayRefDir2 = normalize(vec2(cos(0.785398 - halfSpread), sin(0.785398 - halfSpread)));
 
-      vec4 rays1 = vec4(iRayColor1, 1.0) * rayStrength(rayPos, rayRefDir1, tiltedCoord, 36.2214, 21.11349, iSpeed);
-      vec4 rays2 = vec4(iRayColor2, 1.0) * rayStrength(rayPos, rayRefDir2, tiltedCoord, 22.3991, 18.0234, iSpeed * 0.2);
+      float s1 = rayStrength(rayPos, rayRefDir1, tiltedCoord, 36.2214, 21.11349, iSpeed);
+      float s2 = rayStrength(rayPos, rayRefDir2, tiltedCoord, 22.3991, 18.0234, iSpeed * 0.2);
+
+      vec4 rays1 = vec4(iRayColor1, 1.0) * s1;
+      vec4 rays2 = vec4(iRayColor2, 1.0) * s2;
 
       vec4 color = rays1 * (1.0 - iBlend) * 0.9 + rays2 * iBlend * 0.9;
 
       float distanceToLight = length(fragCoord.xy - vec2(rayPos.x, iResolution.y - rayPos.y)) / iResolution.y;
-      float brightness = iIntensity * 0.4 / pow(max(distanceToLight, 0.001), iFalloff);
-      color.rgb *= brightness;
 
-      float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));
-      color.rgb = mix(vec3(gray), color.rgb, iSaturation);
+      if (iIsDark > 0.5) {
+        // 暗色模式：保留经典深空自发光模型
+        float brightness = iIntensity * 0.4 / pow(max(distanceToLight, 0.001), iFalloff);
+        color.rgb *= brightness;
 
-      color.a = clamp(max(color.r, max(color.g, color.b)) * iOpacity, 0.0, 1.0);
-      gl_FragColor = vec4(color.rgb * color.a, color.a);
+        float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+        color.rgb = mix(vec3(gray), color.rgb, iSaturation);
+
+        color.a = clamp(max(color.r, max(color.g, color.b)) * iOpacity, 0.0, 1.0);
+        gl_FragColor = vec4(color.rgb * color.a, color.a);
+      } else {
+        // 亮色模式：温润晨曦菩提光影模型（水彩漫反射与明暗层次）
+        float distFactor = clamp(1.0 - distanceToLight * 0.4, 0.35, 1.0);
+        float rayVal = mix(s1, s2, iBlend);
+
+        float contrastRays = smoothstep(0.18, 0.82, rayVal);
+        vec3 toneCol = mix(iRayColor2, iRayColor1, contrastRays);
+
+        float gray = dot(toneCol, vec3(0.299, 0.587, 0.114));
+        vec3 finalRgb = mix(vec3(gray), toneCol, iSaturation);
+
+        float finalA = clamp(contrastRays * distFactor * iOpacity * iIntensity, 0.0, 0.35);
+        gl_FragColor = vec4(finalRgb * finalA, finalA);
+      }
     }
   `;
 
@@ -184,26 +205,28 @@
       iSaturation: gl.getUniformLocation(program, 'iSaturation'),
       iBlend: gl.getUniformLocation(program, 'iBlend'),
       iFalloff: gl.getUniformLocation(program, 'iFalloff'),
-      iOpacity: gl.getUniformLocation(program, 'iOpacity')
+      iOpacity: gl.getUniformLocation(program, 'iOpacity'),
+      iIsDark: gl.getUniformLocation(program, 'iIsDark')
     };
 
-    // 配置参数定义（专为佛法氛围调优：舒缓沉静、温和护眼）
+    // 配置参数定义（专为佛法氛围调优：舒缓沉静、温和护眼、光亮与暗黑双模适配）
     const getThemeConfig = () => {
       const isDark = document.body.classList.contains('dark-theme') ||
                      document.documentElement.classList.contains('dark-theme') ||
                      (window.localStorage && localStorage.getItem('theme') === 'dark');
       return {
-        speed: 0.7,              // 沉稳流速，避免眩目
-        origin: 'top-right',     // 晨曦自右上拂下
+        isDark: isDark ? 1.0 : 0.0,
+        speed: isDark ? 0.7 : 0.55,                // 亮色模式微风拂动，静谧舒缓
+        origin: 'top-right',                       // 晨曦自右上拂下
         tilt: 0,
-        spread: 2.0,
-        saturation: 1.2,
-        blend: 0.75,
-        falloff: 1.6,
-        rayColor1: isDark ? '#f59e0b' : '#eab308', // 庄严佛光金
-        rayColor2: isDark ? '#38bdf8' : '#96c8ff', // 清凉天蓝
-        intensity: isDark ? 1.5 : 1.2,
-        opacity: isDark ? 0.6 : 0.40             // 亮色模式更柔和，阅读更舒适
+        spread: isDark ? 2.0 : 2.2,
+        saturation: isDark ? 1.2 : 1.35,
+        blend: isDark ? 0.75 : 0.65,
+        falloff: isDark ? 1.6 : 1.0,
+        rayColor1: isDark ? '#f59e0b' : '#c67d30', // 亮色模式：温润菩提琥珀茶金（#c67d30），对比度清晰
+        rayColor2: isDark ? '#38bdf8' : '#0ea5e9', // 亮色模式：清凉晨曦天青水色（#0ea5e9）
+        intensity: isDark ? 1.5 : 1.25,
+        opacity: isDark ? 0.6 : 0.28               // 亮色模式舒适可见（约 20%~25%），清晰可辨且阅读舒适
       };
     };
 
@@ -211,6 +234,7 @@
 
     const applyUniformConfig = (cfg) => {
       const [flipX, flipY] = originToFlip(cfg.origin);
+      gl.uniform1f(uLocations.iIsDark, cfg.isDark);
       gl.uniform1f(uLocations.iSpeed, cfg.speed);
       const c1 = hexToRgb(cfg.rayColor1);
       gl.uniform3f(uLocations.iRayColor1, c1[0], c1[1], c1[2]);
@@ -259,6 +283,7 @@
       }
     });
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
     // 动画循环与能耗优化
     let animId = null;
