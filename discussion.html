@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="法义讨论 佛法 早期佛教 禅修 法洲" />
+    <meta name="description" content="法洲法义讨论——以恭敬、如实之心交流，共同亲近正法" />
+    <title>法义讨论 - 法洲</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="dist/output.css">
+    <link rel="stylesheet" href="discussion.css">
+    <script type="module" src="src/components/di-site-footer.js"></script>
+    <script type="module" src="src/components/di-site-header.js"></script>
+    <script src="side-rays-background.js"></script>
+    <script src="discussion.js"></script>
+</head>
+<body class="bg-dharma-bg font-sans">
+    <!-- 主题切换按钮 -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="切换主题">
+        <i id="theme-icon" class="bi bi-moon-stars-fill"></i>
+    </button>
+
+    <!-- Header -->
+    <di-site-header></di-site-header>
+
+    <!-- 法义讨论主界面 -->
+    <div class="discussion-layout">
+        <!-- 顶部导航栏 -->
+        <header class="discussion-header">
+            <div class="discussion-header-inner">
+                <div class="discussion-logo">
+                    <i class="bi bi-flower1 text-dharma-brown text-2xl"></i>
+                    <h1 class="discussion-title">法义讨论</h1>
+                </div>
+                <div class="discussion-header-actions">
+                    <div class="discussion-search">
+                        <i class="bi bi-search text-gray-500"></i>
+                        <input type="text" placeholder="搜索讨论..." class="discussion-search-input">
+                    </div>
+                    <button class="discussion-new-post-btn">
+                        <i class="bi bi-plus-lg"></i>
+                        <span>发新帖</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <div class="discussion-main">
+            <!-- 左侧分类侧边栏 -->
+            <aside class="discussion-sidebar">
+                <p class="discussion-sidebar-title">讨论分类</p>
+                <nav class="discussion-nav">
+                    <a href="#" class="discussion-nav-item active">
+                        <i class="bi bi-list-ul"></i>
+                        <span>全部讨论</span>
+                    </a>
+                    <a href="#" class="discussion-nav-item">
+                        <i class="bi bi-book"></i>
+                        <span>经典解读</span>
+                    </a>
+                    <a href="#" class="discussion-nav-item">
+                        <i class="bi bi-droplet"></i>
+                        <span>禅修体会</span>
+                    </a>
+                    <a href="#" class="discussion-nav-item">
+                        <i class="bi bi-chat-dots"></i>
+                        <span>法义问答</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- 右侧内容区 -->
+            <main class="discussion-content">
+                <!-- 欢迎横幅 -->
+                <div class="discussion-banner">
+                    <i class="bi bi-pin-angle-fill"></i>
+                    <p>欢迎参与法义讨论，以恭敬、如实之心交流，共同亲近正法。</p>
+                </div>
+
+                <!-- 讨论列表标题 -->
+                <div class="discussion-section-header">
+                    <h2 class="discussion-section-title">最新讨论</h2>
+                    <span class="discussion-sort-label">按时间排序</span>
+                </div>
+
+                <!-- 讨论卡片列表 -->
+                <div class="discussion-list">
+                    <article class="discussion-card">
+                        <h3 class="discussion-card-title">关于四念处修习的次第问题</h3>
+                        <p class="discussion-card-preview">请问在修习身念住时，是否应当先达到某种程度的定力，再转入受念住？还是可以交替修习？</p>
+                        <div class="discussion-card-meta">
+                            <span class="discussion-card-author">法友 · 2小时前</span>
+                            <span class="discussion-card-tag">禅修</span>
+                            <span class="discussion-card-stats">12 回复</span>
+                        </div>
+                    </article>
+
+                    <article class="discussion-card">
+                        <h3 class="discussion-card-title">相应部35经中「圣者与凡夫」的解读</h3>
+                        <p class="discussion-card-preview">想请教各位法友，关于六根与六境的关系，经文中的「知」与「见」有何深意？</p>
+                        <div class="discussion-card-meta">
+                            <span class="discussion-card-author">求法者 · 5小时前</span>
+                            <span class="discussion-card-tag">经典</span>
+                            <span class="discussion-card-stats">8 回复</span>
+                        </div>
+                    </article>
+
+                    <article class="discussion-card">
+                        <h3 class="discussion-card-title">亲近善知识的重要性——大吉祥经解读</h3>
+                        <p class="discussion-card-preview">菩提比丘在开示中提到，善友是灵性发展的首要条件。大家如何理解「亲近智者」与「远离愚人」的平衡？</p>
+                        <div class="discussion-card-meta">
+                            <span class="discussion-card-author">行者 · 1天前</span>
+                            <span class="discussion-card-tag">善知识</span>
+                            <span class="discussion-card-stats">23 回复</span>
+                        </div>
+                    </article>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <di-site-footer></di-site-footer>
+</body>
+</html>

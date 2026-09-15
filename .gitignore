@@ -18,3 +18,12 @@ Thumbs.db
 # 临时文件
 *.tmp
 *.temp
+.venv/
+venv/
+
+.agent/
+.github/
+.letta/
+openspec/
+AGENTS.md
+.gitignore

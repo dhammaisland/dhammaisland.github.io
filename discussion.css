@@ -1,0 +1,389 @@
+/* 法义讨论界面样式 - 基于 Pencil 设计稿 */
+
+.discussion-layout {
+    min-height: calc(100vh - 200px);
+    background: #F7F6F3;
+}
+
+/* 顶部导航栏 */
+.discussion-header {
+    background: #fff;
+    border-bottom: 1px solid #E8E6E1;
+    padding: 0 2rem;
+}
+
+.discussion-header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+}
+
+.discussion-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.discussion-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #2D2D2D;
+}
+
+.discussion-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.discussion-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 240px;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #E8E6E1;
+    border-radius: 2px;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.discussion-search:hover {
+    border-color: #d1d5db;
+}
+
+.discussion-search:focus-within {
+    border-color: #8d5a2a;
+    box-shadow: 0 0 0 2px rgba(141, 90, 42, 0.1);
+}
+
+.discussion-search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 0.875rem;
+    color: #2D2D2D;
+}
+
+.discussion-search-input::placeholder {
+    color: #D1D5DB;
+}
+
+.discussion-new-post-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 20px;
+    background: #8d5a2a;
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.discussion-new-post-btn:hover {
+    background: #a67c52;
+    transform: translateY(-1px);
+}
+
+/* 主内容区布局 */
+.discussion-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    min-height: calc(100vh - 280px);
+}
+
+/* 左侧分类侧边栏 */
+.discussion-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    padding: 24px 0;
+    border-right: 1px solid #E8E6E1;
+}
+
+.discussion-sidebar-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+}
+
+.discussion-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.discussion-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 20px;
+    height: 40px;
+    color: #2D2D2D;
+    text-decoration: none;
+    font-size: 0.875rem;
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.discussion-nav-item:not(.active):hover {
+    background: rgba(141, 90, 42, 0.06);
+    color: #8d5a2a;
+}
+
+.discussion-nav-item.active {
+    background: #8d5a2a;
+    color: #fff;
+}
+
+.discussion-nav-item i {
+    font-size: 1rem;
+}
+
+/* 右侧内容区 */
+.discussion-content {
+    flex: 1;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* 欢迎横幅 */
+.discussion-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: #3D5A80;
+    color: #F7F6F3;
+    border-radius: 2px;
+    font-size: 0.875rem;
+}
+
+.discussion-banner i {
+    font-size: 1.125rem;
+    flex-shrink: 0;
+}
+
+/* 讨论列表标题 */
+.discussion-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.discussion-section-title {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #2D2D2D;
+}
+
+.discussion-sort-label {
+    font-size: 0.75rem;
+    color: #9CA3AF;
+}
+
+/* 讨论卡片列表 */
+.discussion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.discussion-card {
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #E8E6E1;
+    border-radius: 2px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.discussion-card:hover {
+    border-color: rgba(141, 90, 42, 0.3);
+    box-shadow: 0 2px 8px rgba(141, 90, 42, 0.08);
+}
+
+.discussion-card-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2D2D2D;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.discussion-card-preview {
+    font-size: 0.8125rem;
+    color: #6B7280;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.discussion-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.discussion-card-author {
+    font-size: 11px;
+    color: #9CA3AF;
+}
+
+.discussion-card-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: #F5ebe0;
+    color: #8d5a2a;
+    font-size: 11px;
+    border-radius: 2px;
+}
+
+.discussion-card-stats {
+    font-size: 11px;
+    color: #9CA3AF;
+}
+
+/* 暗色主题适配 */
+body.dark-theme .discussion-layout {
+    background: #1a1a1a;
+}
+
+body.dark-theme .discussion-header {
+    background: #2a2a2a;
+    border-bottom-color: #404040;
+}
+
+body.dark-theme .discussion-title {
+    color: #e0e0e0;
+}
+
+body.dark-theme .discussion-search {
+    background: #1f1f1f;
+    border-color: #404040;
+}
+
+body.dark-theme .discussion-search-input {
+    color: #e0e0e0;
+}
+
+body.dark-theme .discussion-search-input::placeholder {
+    color: #666;
+}
+
+body.dark-theme .discussion-search:focus-within {
+    border-color: #d4a574;
+}
+
+body.dark-theme .discussion-sidebar {
+    border-right-color: #404040;
+}
+
+body.dark-theme .discussion-sidebar-title {
+    color: #888;
+}
+
+body.dark-theme .discussion-nav-item:not(.active) {
+    color: #c0c0c0;
+}
+
+body.dark-theme .discussion-nav-item:not(.active):hover {
+    background: rgba(212, 165, 116, 0.1);
+    color: #d4a574;
+}
+
+body.dark-theme .discussion-nav-item.active {
+    background: #a67c52;
+}
+
+body.dark-theme .discussion-banner {
+    background: #2a4a6a;
+}
+
+body.dark-theme .discussion-section-title {
+    color: #e0e0e0;
+}
+
+body.dark-theme .discussion-sort-label {
+    color: #888;
+}
+
+body.dark-theme .discussion-card {
+    background: #2a2a2a;
+    border-color: #404040;
+}
+
+body.dark-theme .discussion-card:hover {
+    border-color: rgba(212, 165, 116, 0.3);
+}
+
+body.dark-theme .discussion-card-title {
+    color: #e8e8e8;
+}
+
+body.dark-theme .discussion-card-preview {
+    color: #a0a0a0;
+}
+
+body.dark-theme .discussion-card-author,
+body.dark-theme .discussion-card-stats {
+    color: #888;
+}
+
+body.dark-theme .discussion-card-tag {
+    background: rgba(212, 165, 116, 0.2);
+    color: #d4a574;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .discussion-main {
+        flex-direction: column;
+    }
+
+    .discussion-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #E8E6E1;
+        padding: 16px 0;
+    }
+
+    .discussion-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .discussion-nav-item {
+        padding: 8px 16px;
+        height: auto;
+    }
+
+    .discussion-header-inner {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 16px 0;
+    }
+
+    .discussion-search {
+        width: 100%;
+    }
+
+    .discussion-content {
+        padding: 20px 16px;
+    }
+}

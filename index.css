@@ -127,11 +127,19 @@
             transition: all 0.3s ease;
         }
         
-        /* 首页背景图片 */
+        /* 首页背景图片已经被 lotus-background.js 动态生成的纹样取代 */
         body.home-bg {
             position: relative;
+            background-color: #fdfbf7; /* 统一的基础背景色 */
+            --lotus-color: rgba(141, 90, 42, 0.15); /* 莲花纹样的基础色 (极为微弱) */
         }
         
+        body.dark-theme.home-bg {
+            background-color: #1a1a1a;
+            --lotus-color: rgba(212, 165, 116, 0.06); /* 暗色模式下更微弱 */
+        }
+
+        /* 
         body.home-bg::before {
             content: '';
             position: fixed;
@@ -143,15 +151,25 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            opacity: 0.20; /* 十分微弱，不喧宾夺主 */
+            opacity: 0.20;
             z-index: -1;
             pointer-events: none;
             transition: opacity 0.3s ease, filter 0.3s ease;
         }
 
         body.dark-theme.home-bg::before {
-            opacity: 0.04; /* 暗色模式下更微弱 */
+            opacity: 0.04;
             filter: grayscale(80%) brightness(0.8);
+        }
+        */
+        
+        .lotus-bg-container {
+            pointer-events: none;
+        }
+        
+        .lotus-item {
+            /* 基础动画或交互可以在这里添加 */
+            filter: blur(1.5px); /* 稍微模糊，增加氛围感 */
         }
         
         /* 暗色主题样式 */

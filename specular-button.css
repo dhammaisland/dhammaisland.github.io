@@ -1,0 +1,51 @@
+/* ==========================================================================
+   Specular Button CSS
+   提供基于 WebGL 边缘镜面光效果的样式支持与层级管理
+   ========================================================================== */
+
+/* 默认按钮样式：如果是普通流中按钮，设为 relative；如果已有 absolute，则保持 absolute */
+.specular-button {
+  --sb-radius: 16px;
+  --sb-line-color: #ffffff;
+  --sb-base-color: rgba(141, 90, 42, 0.45);
+
+  position: relative;
+  overflow: visible !important;
+}
+
+/* 绝对定位的按钮（如搜索栏内的搜索按钮），强制保持 absolute 定位，绝不破坏原有布局 */
+.specular-button.absolute {
+  position: absolute !important;
+}
+
+/* Canvas 容器：四向外延 20px，确保边缘高光辉光自然向外扩散 */
+.specular-button__fx {
+  position: absolute !important;
+  left: -20px !important;
+  top: -20px !important;
+  width: calc(100% + 40px) !important;
+  height: calc(100% + 40px) !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  display: block !important;
+}
+
+.specular-button__fx canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* 按钮内部原有的内容提升至 z-index: 2，浮在光效层上方 */
+.specular-button > *:not(.specular-button__fx) {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+/* 针对暗色模式的微调 */
+[data-theme="dark"] .specular-button {
+  --sb-line-color: #fff9e6;
+  --sb-base-color: rgba(255, 255, 255, 0.2);
+}
