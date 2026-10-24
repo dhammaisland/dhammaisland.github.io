@@ -137,13 +137,17 @@
             background-color: #1a1a1a;
         }
 
-/* 与首页 max-w-7xl（80rem）内容宽度对应，始终留在右侧空隙内。 */
+        /* 以高度缩放墨竹；右侧空隙较窄时裁切两侧，避免覆盖正文。 */
         .home-ink-bamboo {
             position: fixed;
             right: 8px;
             bottom: 2vh;
             width: max(0px, calc((100vw - 80rem) / 2 - 16px));
-            height: 67vh;
+            height: 72vh;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: hidden;
             z-index: 0;
             pointer-events: none;
             user-select: none;
@@ -152,10 +156,10 @@
 
         .home-ink-bamboo img {
             display: block;
-            width: 100%;
+            width: auto;
+            max-width: none;
             height: 100%;
-            object-fit: contain;
-            object-position: bottom center;
+            flex-shrink: 0;
         }
 
         body.dark-theme .home-ink-bamboo {
