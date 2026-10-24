@@ -22,7 +22,7 @@
     <script src="side-rays-background.js"></script>
     <script type="module" src="src/components/di-site-footer.js"></script>
     <script type="module" src="src/components/di-site-header.js"></script>
-    <script src="specular-button.js"></script>
+    <script src="specular-button.js" defer></script>
 </head>
 <body class="bg-dharma-bg font-sans home-bg">
     <!-- 墨竹背景：仅点缀宽屏右侧留白 -->
@@ -189,11 +189,17 @@
                             onkeypress="if(event.key==='Enter') searchDhamma()"
                         >
                         <button 
-                            class="specular-button absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2 bg-dharma-brown text-white font-medium rounded-full flex items-center gap-2 hover:bg-dharma-light transition-all duration-200 shadow-sm hover:shadow-md"
+                            id="search-button"
+                            type="button"
+                            aria-label="搜索法语"
+                            class="specular-button specular-button--search"
                             onclick="searchDhamma()"
                         >
-                            <i class="bi bi-search"></i>
-                            <span class="hidden sm:inline">搜索</span>
+                            <canvas class="specular-button__light" aria-hidden="true"></canvas>
+                            <span class="specular-button__label">
+                                <i class="bi bi-search" aria-hidden="true"></i>
+                                <span class="hidden sm:inline">搜索</span>
+                            </span>
                         </button>
                     </div>
                     <button 
@@ -270,11 +276,16 @@
                     </button>
                 </div>
                 <button 
-                    class="md3-fab specular-button px-6 py-3 bg-gradient-to-r from-dharma-brown to-dharma-light text-white font-medium flex items-center gap-2"
+                    id="random-button"
+                    type="button"
+                    class="specular-button"
                     onclick="randomQuote()"
                 >
-                    <i class="bi bi-shuffle"></i>
-                    <span>随机浏览</span>
+                    <canvas class="specular-button__light" aria-hidden="true"></canvas>
+                    <span class="specular-button__label">
+                        <i class="bi bi-shuffle" aria-hidden="true"></i>
+                        <span>随机浏览</span>
+                    </span>
                 </button>
             </div>
         </section>
