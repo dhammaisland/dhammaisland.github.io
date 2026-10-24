@@ -99,16 +99,16 @@ async function loadMessages() {
                 <div class="message-item">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
-                            <div style="width: 32px; height: 32px; border-radius: 16px; background: linear-gradient(135deg, #8d5a2a 0%, #a67c52 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.9rem;">
+                            <div style="width: 32px; height: 32px; border-radius: 16px; background: var(--color-primary, #8d5a2a); display: flex; align-items: center; justify-content: center; color: var(--home-on-primary, white); font-weight: 600; font-size: 0.9rem;">
                                 ${msg.username.charAt(0).toUpperCase()}
                             </div>
-                            <span style="font-weight: 500; color: #8d5a2a;">${escapeHtml(msg.username)}</span>
+                            <span style="font-weight: 500; color: var(--color-text-emphasized, #8d5a2a);">${escapeHtml(msg.username)}</span>
                         </div>
-                        <span style="font-size: 0.75rem; color: #9ca3af;">
+                        <span style="font-size: 0.75rem; color: var(--color-text-secondary, #9ca3af);">
                             <i class="bi bi-clock"></i> ${formattedDate}
                         </span>
                     </div>
-                    <p style="color: #4b5563; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(msg.content)}</p>
+                    <p style="color: var(--color-text, #4b5563); line-height: 1.6; white-space: pre-wrap;">${escapeHtml(msg.content)}</p>
                 </div>
             `;
         }).join('');
@@ -299,7 +299,7 @@ function copyLatestDhamma() {
         // 显示复制成功提示
         const toast = document.createElement('div');
         toast.textContent = '✓ 已复制最新法语';
-        toast.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #8d5a2a; color: white; padding: 12px 24px; border-radius: 28px; font-size: 14px; z-index: 9999; box-shadow: 0 4px 12px rgba(0,0,0,0.15); animation: fadeInOut 2s ease-in-out;';
+        toast.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--color-primary, #8d5a2a); color: var(--home-on-primary, white); padding: 12px 24px; border-radius: 28px; font-size: 14px; z-index: 9999; box-shadow: 0 4px 12px rgba(0,0,0,0.15); animation: fadeInOut 2s ease-in-out;';
         document.body.appendChild(toast);
         
         setTimeout(() => {
@@ -315,7 +315,7 @@ function copyLatestDhamma() {
 function displayDhamma() {
     const dataSource = isSearching ? filteredDhammaData : dhammaData;
     if (dataSource.length === 0) {
-        document.getElementById('dhamma-display').innerHTML = '<div style="text-align:center;color:#999;">未找到匹配的法语</div>';
+        document.getElementById('dhamma-display').innerHTML = '<div style="text-align:center;color:var(--color-text-secondary, #999);">未找到匹配的法语</div>';
         document.getElementById('page-info').textContent = '无结果';
         document.getElementById('prev-btn').disabled = true;
         document.getElementById('next-btn').disabled = true;
@@ -358,10 +358,10 @@ function displayDhamma() {
                 .replace(/\r/g, '\\r')   // 转义回车符
                 .replace(/"/g, '\\"');   // 转义双引号（以防万一）
             
-            let content = `<div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; ${idx < items.length - 1 ? 'border-bottom: 1px solid #e0e0e0;' : ''}">
+            let content = `<div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; ${idx < items.length - 1 ? 'border-bottom: 1px solid var(--color-border, #e0e0e0);' : ''}">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                    <div style="color: #a67c52; font-size: 0.85rem;">第 ${actualIdx + 1} 条</div>
-                    <button onclick="copyDhamma('${escapedText}')" style="color: #8d5a2a; background: transparent; border: 1px solid #e0e0e0; border-radius: 8px; padding: 0.25rem 0.5rem; font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.25rem; transition: all 0.2s;" onmouseover="this.style.backgroundColor='#fdfbf7'; this.style.borderColor='#8d5a2a'" onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='#e0e0e0'" title="复制法语">
+                    <div style="color: var(--color-text-secondary, #a67c52); font-size: 0.85rem;">第 ${actualIdx + 1} 条</div>
+                    <button onclick="copyDhamma('${escapedText}')" style="color: var(--color-text-emphasized, #8d5a2a); background: transparent; border: 1px solid var(--color-border, #e0e0e0); border-radius: 8px; padding: 0.25rem 0.5rem; font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.25rem; transition: all 0.2s;" onmouseover="this.style.backgroundColor='var(--color-background-tertiary, #fdfbf7)'; this.style.borderColor='var(--color-primary, #8d5a2a)'" onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='var(--color-border, #e0e0e0)'" title="复制法语">
                         <i class="bi bi-clipboard"></i>
                         <span>复制</span>
                     </button>
@@ -369,7 +369,7 @@ function displayDhamma() {
                 <div>${highlightedText}</div>`;
             
             if (url && url !== '') {
-                content += `<div style="margin-top: 0.75rem; text-align: right;"><a href="${url}" style="color: #8d5a2a; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.5rem; border-radius: 0.375rem; transition: all 0.3s; background-color: #fdfbf7;" target="_blank" onmouseover="this.style.backgroundColor='#f5ebe0'" onmouseout="this.style.backgroundColor='#fdfbf7'"><i class="bi bi-arrow-right-circle"></i> 阅读更多</a></div>`;
+                content += `<div style="margin-top: 0.75rem; text-align: right;"><a href="${url}" style="color: var(--color-text-emphasized, #8d5a2a); text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.5rem; border-radius: 0.375rem; transition: all 0.3s; background-color: var(--color-background-tertiary, #fdfbf7);" target="_blank" onmouseover="this.style.backgroundColor='var(--color-background-secondary, #f5ebe0)'" onmouseout="this.style.backgroundColor='var(--color-background-tertiary, #fdfbf7)'"><i class="bi bi-arrow-right-circle"></i> 阅读更多</a></div>`;
             }
             
             content += `</div>`;
@@ -431,7 +431,7 @@ function copyDhamma(text) {
         // 显示复制成功提示
         const toast = document.createElement('div');
         toast.textContent = '✓ 已复制';
-        toast.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #8d5a2a; color: white; padding: 12px 24px; border-radius: 28px; font-size: 14px; z-index: 9999; box-shadow: 0 4px 12px rgba(0,0,0,0.15); animation: fadeInOut 2s ease-in-out;';
+        toast.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--color-primary, #8d5a2a); color: var(--home-on-primary, white); padding: 12px 24px; border-radius: 28px; font-size: 14px; z-index: 9999; box-shadow: 0 4px 12px rgba(0,0,0,0.15); animation: fadeInOut 2s ease-in-out;';
         document.body.appendChild(toast);
         
         setTimeout(() => {
@@ -703,6 +703,10 @@ function loadViewMode() {
 
 // 主题切换功能
 function toggleTheme() {
+    if (window.DharmaTheme) {
+        window.DharmaTheme.toggle();
+        return;
+    }
     const body = document.body;
     const themeIcon = document.getElementById('theme-icon');
     const isDark = body.classList.toggle('dark-theme');
@@ -719,6 +723,10 @@ function toggleTheme() {
 
 // 页面加载时恢复主题设置
 function loadTheme() {
+    if (window.DharmaTheme) {
+        window.DharmaTheme.restore();
+        return;
+    }
     const savedTheme = localStorage.getItem('theme');
     const themeIcon = document.getElementById('theme-icon');
     
@@ -785,7 +793,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         displayDhamma();
     } catch (err) {
         console.error('加载法语数据失败:', err);
-        document.getElementById('dhamma-display').innerHTML = '<div style="text-align:center;color:#999;">数据加载失败，请刷新页面重试</div>';
+        document.getElementById('dhamma-display').innerHTML = '<div style="text-align:center;color:var(--color-text-secondary, #999);">数据加载失败，请刷新页面重试</div>';
     }
     
     updateVisitCount(); // 更新访问计数

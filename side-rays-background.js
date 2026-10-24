@@ -211,6 +211,12 @@
 
     // 配置参数定义（专为佛法氛围调优：舒缓沉静、温和护眼、光亮与暗黑双模适配）
     const getThemeConfig = () => {
+      const paletteStyle = document.documentElement.dataset.homePalette
+        ? getComputedStyle(document.documentElement) : null;
+      const paletteColor = (name, fallback) => {
+        const value = paletteStyle?.getPropertyValue(name).trim();
+        return ({ black: '#000000', crimson: '#dc143c' })[value] || value || fallback;
+      };
       const isDark = document.body.classList.contains('dark-theme') ||
                      document.documentElement.classList.contains('dark-theme') ||
                      (window.localStorage && localStorage.getItem('theme') === 'dark');
@@ -223,8 +229,8 @@
         saturation: isDark ? 1.2 : 1.35,
         blend: isDark ? 0.75 : 0.65,
         falloff: isDark ? 1.6 : 1.0,
-        rayColor1: isDark ? '#f59e0b' : '#c67d30', // 亮色模式：温润菩提琥珀茶金（#c67d30），对比度清晰
-        rayColor2: isDark ? '#38bdf8' : '#0ea5e9', // 亮色模式：清凉晨曦天青水色（#0ea5e9）
+        rayColor1: paletteColor('--color-primary', isDark ? '#f59e0b' : '#c67d30'),
+        rayColor2: paletteColor('--color-secondary', isDark ? '#38bdf8' : '#0ea5e9'),
         intensity: isDark ? 1.5 : 1.25,
         opacity: isDark ? 0.6 : 0.28               // 亮色模式舒适可见（约 20%~25%），清晰可辨且阅读舒适
       };
@@ -284,6 +290,10 @@
     });
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    document.addEventListener('home-palette-changed', () => {
+      currentConfig = getThemeConfig();
+      applyUniformConfig(currentConfig);
+    });
 
     // 动画循环与能耗优化
     let animId = null;

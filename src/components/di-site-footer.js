@@ -41,20 +41,20 @@ class DiSiteFooter extends LitElement {
     }
 
     footer {
-      background-color: white;
-      border-top: 1px solid #e5e7eb;
+      background-color: var(--color-background-secondary, white);
+      border-top: 1px solid var(--color-border, #e5e7eb);
       padding: 2rem 0;
       text-align: center;
-      color: #6b7280;
+      color: var(--color-text, #6b7280);
       font-size: 0.875rem;
       margin-top: 3rem;
       transition: all 0.3s ease;
     }
 
     :host([dark]) footer {
-      background-color: #1f1f1f;
-      border-top-color: #333;
-      color: #a0a0a0;
+      background-color: var(--color-background-secondary, #1f1f1f);
+      border-top-color: var(--color-border, #333);
+      color: var(--color-text, #a0a0a0);
     }
 
     .footer-container {
@@ -71,32 +71,32 @@ class DiSiteFooter extends LitElement {
     }
 
     .copyright {
-      color: #8d5a2a;
+      color: var(--color-text-emphasized, #8d5a2a);
       font-weight: 500;
     }
 
     :host([dark]) .copyright {
-      color: #d4a574;
+      color: var(--color-text-emphasized, #d4a574);
     }
 
     .email-link {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      color: #6b7280;
+      color: var(--color-text, #6b7280);
       transition: color 0.2s;
     }
 
     :host([dark]) .email-link {
-      color: #a0a0a0;
+      color: var(--color-text, #a0a0a0);
     }
 
     .email-link:hover {
-      color: #8d5a2a;
+      color: var(--color-text-emphasized, #8d5a2a);
     }
 
     :host([dark]) .email-link:hover {
-      color: #d4a574;
+      color: var(--color-text-emphasized, #d4a574);
     }
 
     .email-link a {
@@ -117,22 +117,22 @@ class DiSiteFooter extends LitElement {
       align-items: center;
       gap: 0.25rem;
       justify-content: center;
-      color: #9ca3af;
+      color: var(--color-text-secondary, #9ca3af);
       font-size: 0.75rem;
       text-decoration: none;
       transition: color 0.2s;
     }
 
     :host([dark]) .about-link {
-      color: #666;
+      color: var(--color-text-secondary, #666);
     }
 
     .about-link:hover {
-      color: #8d5a2a;
+      color: var(--color-text-emphasized, #8d5a2a);
     }
 
     :host([dark]) .about-link:hover {
-      color: #d4a574;
+      color: var(--color-text-emphasized, #d4a574);
     }
   `;
 
