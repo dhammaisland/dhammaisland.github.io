@@ -170,8 +170,38 @@
             filter: invert(100%);
         }
 
+        /* 兰草低于墨竹，完整收在左侧留白，保持叶尖与花朵的原有比例。 */
+        .home-ink-orchid {
+            position: fixed;
+            left: 8px;
+            bottom: 6vh;
+            width: max(0px, calc((100vw - 80rem) / 2 - 16px));
+            height: 40vh;
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+            opacity: 0.34;
+        }
+
+        .home-ink-orchid img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center bottom;
+        }
+
+        body.dark-theme .home-ink-orchid {
+            opacity: 0.28;
+        }
+
+        body.dark-theme .home-ink-orchid img {
+            filter: invert(100%);
+        }
+
         @media (max-width: 87.5rem) {
-            .home-ink-bamboo {
+            .home-ink-bamboo,
+            .home-ink-orchid {
                 display: none;
             }
         }
