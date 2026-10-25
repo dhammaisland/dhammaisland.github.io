@@ -315,7 +315,12 @@ function copyLatestDhamma() {
 function displayDhamma() {
     const dataSource = isSearching ? filteredDhammaData : dhammaData;
     if (dataSource.length === 0) {
-        document.getElementById('dhamma-display').innerHTML = '<div style="text-align:center;color:var(--color-text-secondary, #999);">未找到匹配的法语</div>';
+        document.getElementById('dhamma-display').innerHTML = `
+            <div class="zen-empty-slips">
+                <i class="bi bi-search"></i>
+                <p>未找到契合该关键词的法语，请尝试其他法义词汇</p>
+            </div>
+        `;
         document.getElementById('page-info').textContent = '无结果';
         document.getElementById('prev-btn').disabled = true;
         document.getElementById('next-btn').disabled = true;
@@ -343,7 +348,7 @@ function displayDhamma() {
     
     display.style.opacity = '0';
     setTimeout(() => {
-        // 使用编号列表显示多条法语,带关键词高亮
+        // 使用独立呼吸的「法语笺」展示每则法语
         display.innerHTML = items.map((item, idx) => {
             const text = item.text || item.sentence || item;
             const url = item.url || '';
@@ -352,28 +357,32 @@ function displayDhamma() {
             
             // 转义特殊字符以便在单引号包裹的 JavaScript 字符串中使用
             const escapedText = text
-                .replace(/\\/g, '\\\\')  // 先转义反斜杠
-                .replace(/'/g, "\\'")    // 转义单引号
-                .replace(/\n/g, '\\n')   // 转义换行符
-                .replace(/\r/g, '\\r')   // 转义回车符
-                .replace(/"/g, '\\"');   // 转义双引号（以防万一）
+                .replace(/\\/g, '\\\\')
+                .replace(/'/g, "\\'")
+                .replace(/\n/g, '\\n')
+                .replace(/\r/g, '\\r')
+                .replace(/"/g, '\\"');
             
-            let content = `<div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; ${idx < items.length - 1 ? 'border-bottom: 1px solid var(--color-border, #e0e0e0);' : ''}">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                    <div style="color: var(--color-text-secondary, #a67c52); font-size: 0.85rem;">第 ${actualIdx + 1} 条</div>
-                    <button onclick="copyDhamma('${escapedText}')" style="color: var(--color-text-emphasized, #8d5a2a); background: transparent; border: 1px solid var(--color-border, #e0e0e0); border-radius: 8px; padding: 0.25rem 0.5rem; font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.25rem; transition: all 0.2s;" onmouseover="this.style.backgroundColor='var(--color-background-tertiary, #fdfbf7)'; this.style.borderColor='var(--color-primary, #8d5a2a)'" onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='var(--color-border, #e0e0e0)'" title="复制法语">
-                        <i class="bi bi-clipboard"></i>
-                        <span>复制</span>
-                    </button>
-                </div>
-                <div>${highlightedText}</div>`;
-            
-            if (url && url !== '') {
-                content += `<div style="margin-top: 0.75rem; text-align: right;"><a href="${url}" style="color: var(--color-text-emphasized, #8d5a2a); text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.5rem; border-radius: 0.375rem; transition: all 0.3s; background-color: var(--color-background-tertiary, #fdfbf7);" target="_blank" onmouseover="this.style.backgroundColor='var(--color-background-secondary, #f5ebe0)'" onmouseout="this.style.backgroundColor='var(--color-background-tertiary, #fdfbf7)'"><i class="bi bi-arrow-right-circle"></i> 阅读更多</a></div>`;
-            }
-            
-            content += `</div>`;
-            return content;
+            return `
+                <article class="dhamma-slip">
+                    <div class="dhamma-slip__header">
+                        <span class="dhamma-slip__index">第 ${actualIdx + 1} 则</span>
+                        <div class="dhamma-slip__actions">
+                            <button type="button" class="dhamma-slip__btn" onclick="copyDhamma('${escapedText}')" title="复制法语">
+                                <i class="bi bi-clipboard"></i>
+                                <span>复制</span>
+                            </button>
+                            ${url && url !== '' ? `
+                                <a href="${url}" class="dhamma-slip__btn dhamma-slip__btn--source" target="_blank" rel="noopener noreferrer" title="阅读原典出处">
+                                    <span>阅读更多</span>
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            ` : ''}
+                        </div>
+                    </div>
+                    <div class="dhamma-slip__body">${highlightedText}</div>
+                </article>
+            `;
         }).join('');
         
         display.style.opacity = '1';
@@ -381,7 +390,7 @@ function displayDhamma() {
     
     // 更新页码信息
     const totalPages = Math.ceil(dataSource.length / ITEMS_PER_PAGE);
-    document.getElementById('page-info').textContent = `第 ${currentPage + 1} 页 / 共 ${totalPages} 页`;
+    document.getElementById('page-info').textContent = `第 ${currentPage + 1} 页`;
     document.getElementById('total-pages').textContent = totalPages;
     
     // 更新按钮状态
@@ -546,25 +555,51 @@ function jumpToPage() {
     input.value = '';
 }
 
+// 提取纯净域名用于名录展示
+function extractCleanDomain(url) {
+    if (!url) return '';
+    try {
+        const parsed = new URL(url);
+        return parsed.hostname.replace(/^www\./i, '');
+    } catch {
+        return url.replace(/^https?:\/\/(www\.)?/i, '').split('/')[0];
+    }
+}
+
 // 初始化类型过滤器
 function initTypeFilters() {
+    const filtersContainer = document.getElementById('type-filters');
+    if (!filtersContainer) return;
+
     const types = [...new Set(linksData.map(link => link.type))].filter(t => t !== null).sort();
     const typeNames = {
-        1: '<i class="bi bi-book"></i> 经典文献',
-        2: '<i class="bi bi-mic"></i> 开示讲座',
-        3: '<i class="bi bi-globe"></i> 综合资源'
+        1: { icon: 'bi-book', label: '经典文献' },
+        2: { icon: 'bi-mic', label: '开示讲座' },
+        3: { icon: 'bi-globe2', label: '综合资源' }
     };
-    
-    const filtersContainer = document.getElementById('type-filters');
-    
+
+    const allCount = linksData.length;
+    let html = `
+        <button class="type-filter ${currentFilter === 'all' ? 'active' : ''}" data-type="all" onclick="filterByType('all')">
+            <span>全部法源</span>
+            <span class="zen-filter-count">${allCount}</span>
+        </button>
+    `;
+
     types.forEach(type => {
-        const btn = document.createElement('button');
-        btn.className = 'type-filter px-6 py-2 bg-white border-2 border-gray-200 text-gray-700 rounded-full hover:border-dharma-light transition-all duration-300 cursor-pointer flex items-center gap-1';
-        btn.dataset.type = type;
-        btn.innerHTML = typeNames[type] || `类型 ${type}`;
-        btn.onclick = () => filterByType(type);
-        filtersContainer.appendChild(btn);
+        const count = linksData.filter(link => link.type == type).length;
+        const meta = typeNames[type] || { icon: 'bi-collection', label: `类型 ${type}` };
+        const isActive = currentFilter == type ? 'active' : '';
+        html += `
+            <button class="type-filter ${isActive}" data-type="${type}" onclick="filterByType(${type})">
+                <i class="bi ${meta.icon}"></i>
+                <span>${meta.label}</span>
+                <span class="zen-filter-count">${count}</span>
+            </button>
+        `;
     });
+
+    filtersContainer.innerHTML = html;
 }
 
 function filterByType(type) {
@@ -578,54 +613,76 @@ function filterByType(type) {
     displayLinks();
 }
 
-// 显示书籍
+// 显示书籍（藏经阁实体书脊装帧质感）
 function displayBooks() {
     const grid = document.getElementById('books-grid');
+    if (!grid) return;
     
     if (typeof BOOKS_DATA === 'undefined' || !BOOKS_DATA || BOOKS_DATA.length === 0) {
         grid.innerHTML = '<div class="text-center text-gray-400 col-span-full py-8">暂无书籍</div>';
         return;
     }
     
-    grid.innerHTML = BOOKS_DATA.map(book => {
+    grid.innerHTML = BOOKS_DATA.map((book, idx) => {
+        const isCanon = /长部|中部|相应部|增支部|大念住经/.test(book.title + (book.description || ''));
+        const categoryLabel = isCanon ? '巴利圣典译注' : '禅林实修法谈';
+        const volumeNum = String(idx + 1).padStart(2, '0');
+
         return `
-            <div class="book-card bg-white rounded-3xl transition-all duration-300 p-6 border border-gray-100 hover:border-dharma-brown hover:shadow-lg overflow-hidden">
-                <!-- 顶部书名区域 -->
-                <div class="mb-4 flex items-start gap-3">
-                    <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center text-dharma-brown bg-dharma-brown bg-opacity-10">
-                        <i class="bi bi-journal-text text-xl"></i>
+            <article class="book-card tactile-book">
+                <!-- 左侧实体书脊与线装压痕 -->
+                <div class="tactile-book__spine" aria-hidden="true">
+                    <span class="tactile-book__stitch"></span>
+                    <span class="tactile-book__stitch"></span>
+                    <span class="tactile-book__stitch"></span>
+                    <span class="tactile-book__stitch"></span>
+                </div>
+
+                <!-- 典籍封面主体 -->
+                <div class="tactile-book__cover">
+                    <div class="tactile-book__top">
+                        <span class="tactile-book__category">${categoryLabel}</span>
+                        <span class="tactile-book__vol">藏 · ${volumeNum}</span>
                     </div>
-                    <div class="flex-1 min-w-0">
-                        <h3 class="text-lg font-medium text-gray-900 mb-2 line-clamp-2 leading-snug">${book.title}</h3>
-                        ${book.author ? `<p class="text-sm text-gray-500 flex items-center gap-1.5">
-                            <i class="bi bi-person text-dharma-brown"></i>
-                            <span>${book.author}</span>
-                        </p>` : ''}
+
+                    <div class="tactile-book__main">
+                        <h3 class="tactile-book__title">${book.title}</h3>
+                        ${book.author ? `
+                            <p class="tactile-book__author">
+                                <i class="bi bi-feather"></i>
+                                <span>${book.author} 著/译</span>
+                            </p>
+                        ` : ''}
+                        ${book.description ? `
+                            <p class="tactile-book__desc">${book.description}</p>
+                        ` : ''}
+                    </div>
+
+                    <!-- 底部书签式操作区 -->
+                    <div class="book-actions tactile-book__actions">
+                        ${book.download ? `
+                            <a href="${book.download}" class="tactile-book__btn tactile-book__btn--primary" download>
+                                <i class="bi bi-download"></i>
+                                <span>PDF 下载</span>
+                            </a>
+                        ` : ''}
+                        ${book.online ? `
+                            <a href="${book.online}" target="_blank" rel="noopener noreferrer" class="tactile-book__btn tactile-book__btn--secondary">
+                                <i class="bi bi-book-half"></i>
+                                <span>在线捧读</span>
+                            </a>
+                        ` : ''}
                     </div>
                 </div>
-                
-                <!-- 描述区域 -->
-                ${book.description ? `<p class="text-sm text-gray-600 mb-4 line-clamp-3 leading-relaxed">${book.description}</p>` : ''}
-                
-                <!-- 底部操作按钮区域 -->
-                <div class="book-actions flex gap-2 pt-4 border-t border-gray-100">
-                    ${book.download ? `<a href="${book.download}" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white text-dharma-brown text-sm font-medium rounded-xl hover:bg-dharma-brown hover:text-white transition-all duration-200 border-2 border-dharma-brown" download>
-                        <i class="bi bi-download text-base"></i>
-                        <span>下载</span>
-                    </a>` : ''}
-                    ${book.online ? `<a href="${book.online}" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white text-gray-600 text-sm font-medium rounded-xl hover:bg-gray-50 transition-all duration-200 border-2 border-gray-300 hover:border-gray-400">
-                        <i class="bi bi-eye text-base"></i>
-                        <span>阅读</span>
-                    </a>` : ''}
-                </div>
-            </div>
+            </article>
         `;
     }).join('');
 }
 
-// 显示链接
+// 显示链接（高密度法源名录）
 function displayLinks() {
     const grid = document.getElementById('links-grid');
+    if (!grid) return;
     
     const filteredLinks = currentFilter === 'all' 
         ? linksData 
@@ -638,36 +695,30 @@ function displayLinks() {
     
     grid.innerHTML = filteredLinks.map(link => {
         const typeConfig = {
-            1: { name: '经典', icon: 'book', color: '#059669', bgColor: 'rgba(5, 150, 105, 0.1)' },
-            2: { name: '开示', icon: 'mic', color: '#dc2626', bgColor: 'rgba(220, 38, 38, 0.1)' },
-            3: { name: '资源', icon: 'globe2', color: '#2563eb', bgColor: 'rgba(37, 99, 235, 0.1)' }
+            1: { name: '经典', icon: 'book', modifier: 'canon' },
+            2: { name: '开示', icon: 'mic', modifier: 'talk' },
+            3: { name: '资源', icon: 'globe2', modifier: 'portal' }
         };
         
-        const config = typeConfig[link.type] || { name: '其他', icon: 'link-45deg', color: '#8d5a2a', bgColor: 'rgba(141, 90, 42, 0.1)' };
+        const config = typeConfig[link.type] || { name: '其他', icon: 'link-45deg', modifier: 'other' };
+        const cleanDomain = extractCleanDomain(link.url);
         
         return `
-            <a href="${link.url}" target="_blank" class="link-card block bg-white rounded-3xl transition-all duration-300 p-6 border border-gray-100 hover:border-dharma-brown hover:shadow-lg group">
-                <!-- 顶部标题和图标 -->
-                <div class="flex items-start justify-between gap-3 mb-3">
-                    <h3 class="text-lg font-medium text-gray-900 line-clamp-2 leading-snug flex-1">${link.name || '未命名'}</h3>
-                    <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style="background-color: ${config.bgColor}; color: ${config.color};">
-                        <i class="bi bi-${config.icon} text-lg"></i>
+            <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="link-card directory-item directory-item--${config.modifier} group" title="${link.name} (${link.url})">
+                <div class="directory-item__icon">
+                    <i class="bi bi-${config.icon}"></i>
+                </div>
+                <div class="directory-item__body">
+                    <div class="directory-item__title-row">
+                        <h3 class="directory-item__title">${link.name || '未命名'}</h3>
+                        ${link.type ? `<span class="type-badge directory-item__badge">${config.name}</span>` : ''}
+                    </div>
+                    <div class="url-display directory-item__domain">
+                        <span>${cleanDomain}</span>
                     </div>
                 </div>
-                
-                <!-- 类型标签 -->
-                ${link.type ? `<div class="mb-3">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium" style="background-color: ${config.bgColor}; color: ${config.color};">
-                        <i class="bi bi-tag"></i>
-                        <span>${config.name}</span>
-                    </span>
-                </div>` : ''}
-                
-                <!-- URL 显示 -->
-                <div class="url-display flex items-center gap-2 pt-3 border-t border-gray-100">
-                    <i class="bi bi-link-45deg text-gray-400 flex-shrink-0"></i>
-                    <span class="text-xs text-gray-500 truncate">${link.url}</span>
-                    <i class="bi bi-box-arrow-up-right text-gray-400 flex-shrink-0 text-xs ml-auto opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                <div class="directory-item__arrow" aria-hidden="true">
+                    <i class="bi bi-arrow-up-right"></i>
                 </div>
             </a>
         `;

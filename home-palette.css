@@ -1,96 +1,15 @@
-/* 将 Bilara 的语义配色映射到首页；布局及其他页面沿用现有样式。 */
+/* 将 Bilara 的语义配色映射到首页；与 index.css 禅意现代主义样式协同工作。 */
 :root[data-home-palette] body.home-bg {
     background: var(--color-background);
     color: var(--color-text);
 
-    & header {
-        background: var(--color-background-tertiary);
-        color: var(--color-text-emphasized);
-    }
-
-    & .home-palette-control {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 0.75rem;
-        margin-bottom: 1rem;
-        font-size: 0.875rem;
+    & .zen-header {
+        background: color-mix(in srgb, var(--color-background) 84%, transparent);
+        border-bottom-color: var(--color-border);
     }
 
     & #home-palette {
-        max-width: 100%;
-        min-height: 44px;
-        padding: 0.5rem 2rem 0.5rem 1rem;
-        border: 1px solid var(--color-border);
-        border-radius: 1rem;
-        background: var(--color-background-secondary);
-        color: var(--color-text);
-        cursor: pointer;
-    }
-
-    & .md3-container,
-    & .md3-surface,
-    & .message-modal-content,
-    & .bg-white {
-        background: var(--color-background-secondary) !important;
-        color: var(--color-text);
-    }
-
-    & .md3-container {
-        box-shadow: 0 1px 3px #0000000d, 0 6px 16px #00000014;
-    }
-
-    & #latest-dhamma,
-    & .md3-chip,
-    & .message-item,
-    & #search-info {
-        background: var(--color-background-tertiary);
-        border-color: var(--color-border);
-        color: var(--color-text);
-    }
-
-    & #latest-dhamma-text,
-    & #dhamma-display,
-    & #dhamma-display > div > div:last-child,
-    & [class*="text-gray-"],
-    & .empty-state {
-        color: var(--color-text) !important;
-    }
-
-    & section h2,
-    & .text-dharma-brown,
-    & .text-dharma-light,
-    & .theme-toggle i,
-    & .view-toggle i,
-    & .group:hover .group-hover\:text-dharma-light {
-        color: var(--color-text-emphasized) !important;
-    }
-
-    & .md3-search-field,
-    & .form-input,
-    & .tab-btn,
-    & .close-modal-btn,
-    & .md3-fab,
-    & .theme-toggle,
-    & .view-toggle {
-        background: var(--color-background-secondary);
-        border-color: var(--color-border);
-        color: var(--color-text);
-    }
-
-    & :is(.form-input, .md3-search-field)::placeholder {
-        color: var(--color-text-secondary);
-    }
-
-    & :is(.md3-search-field, .md3-chip, .md3-fab, .message-item, .close-modal-btn):hover {
-        background: var(--color-background-tertiary);
-    }
-
-    & :is(.form-input, .md3-search-field):focus,
-    & :is(.theme-toggle, .view-toggle):hover,
-    & .hover\:border-dharma-brown:hover,
-    & .hover\:border-dharma-light:hover {
-        border-color: var(--color-primary) !important;
+        color: var(--color-text-emphasized);
     }
 
     & :is(button, a, input, textarea, select):focus-visible {
@@ -98,61 +17,8 @@
         outline-offset: 3px;
     }
 
-    & .md3-outlined-button,
-    & .border-dharma-brown,
-    & .message-header,
-    & .message-form,
-    & [class*="border-gray-"] {
-        border-color: var(--color-border) !important;
-    }
-
-    & .md3-outlined-button {
-        color: var(--color-text-emphasized);
-    }
-
-    & .md3-outlined-button:hover {
-        background: var(--color-background-tertiary);
-    }
-
-    & .md3-divider {
-        background: linear-gradient(90deg, transparent, var(--color-border) 20%, var(--color-border) 80%, transparent);
-    }
-
     & .highlight {
-        background: var(--color-primary);
-        color: var(--home-on-primary);
-    }
-
-    & .bg-dharma-brown,
-    & .bg-dharma-light,
-    & .from-dharma-brown:not(header),
-    & .message-board-toggle,
-    & .submit-btn,
-    & .type-filter.active,
-    & .tab-btn.active,
-    & .hover\:bg-dharma-brown:hover,
-    & .hover\:bg-dharma-light:hover {
-        background: var(--color-primary) !important;
-        color: var(--home-on-primary) !important;
-        border-color: var(--color-primary) !important;
-    }
-
-    & .message-board-toggle i,
-    & .bg-dharma-brown .text-yellow-300 {
-        color: inherit;
-    }
-
-    & .bg-dharma-brown.bg-opacity-10 {
-        background: var(--color-background-tertiary) !important;
-        color: var(--color-text-emphasized) !important;
-    }
-
-    & .article-card .icon-wrapper > div {
-        background: var(--color-background-tertiary);
+        background: color-mix(in srgb, var(--color-primary) 26%, transparent);
         color: var(--color-text-emphasized);
-    }
-
-    & .message-item {
-        border-left-color: var(--color-primary);
     }
 }

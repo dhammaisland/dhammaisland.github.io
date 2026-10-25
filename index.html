@@ -7,10 +7,10 @@
     <meta name="baidu-site-verification" content="codeva-Tk7siYLedl" />
     <meta name="keywords" content="佛教 早期佛教 早期佛教经典 早期佛教经藏 早期佛教律藏 南传佛教 原始佛教 上座部佛教 佛陀的正法 阿含经 巴利三藏 南传大藏经 大藏经 禅修 自洲自依 法洲法依 正法律 巴利经典 别译杂阿含 尼柯耶 长部 中部 相应部 增支部 小部 杂阿含经 中阿含经 长阿含经 增一阿含经 经藏 律藏" />
     <meta name="description" content="法洲法依，自洲自依，分享佛陀正法、律、禅师法语、法谈、禅修经验、书籍推荐、下载，资源共享" />
-    <title>法洲</title>
+    <title>法洲 · 自洲自依 法洲法依</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="dist/output.css">
+    <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="home-palette.css">
     <script src="home-palettes.js"></script>
     <script src="home-theme.js"></script>
@@ -21,7 +21,6 @@
     <script src="index.js"></script>
     <script src="side-rays-background.js"></script>
     <script type="module" src="src/components/di-site-footer.js"></script>
-    <script type="module" src="src/components/di-site-header.js"></script>
     <script src="specular-button.js" defer></script>
 </head>
 <body class="bg-dharma-bg font-sans home-bg">
@@ -33,19 +32,11 @@
     <div class="home-ink-bamboo" aria-hidden="true">
         <img src="img/ink-bamboo.png" alt="" decoding="async">
     </div>
-    <!-- 主题切换按钮 -->
-    <button class="theme-toggle" onclick="toggleTheme()" title="切换主题">
-        <i id="theme-icon" class="bi bi-moon-stars-fill"></i>
-    </button>
-    
-    <!-- 视图模式切换按钮 -->
-    <button class="view-toggle" onclick="toggleViewMode()" title="切换视图密度">
-        <i id="view-icon" class="bi bi-grid-3x3-gap-fill"></i>
-    </button>
-    
-    <!-- 留言板按钮 -->
-    <button class="message-board-toggle" onclick="openMessageBoard()" title="留言板">
+
+    <!-- 留言板悬浮入口 -->
+    <button class="message-board-toggle" onclick="openMessageBoard()" title="法友留言板" aria-label="打开法友留言板">
         <i class="bi bi-chat-dots-fill"></i>
+        <span class="message-board-toggle__label">留言</span>
     </button>
     
     <!-- 留言板弹窗 -->
@@ -55,9 +46,9 @@
             <div class="message-header">
                 <h2 class="text-2xl font-medium text-dharma-brown flex items-center gap-2">
                     <i class="bi bi-chat-dots"></i>
-                    <span>留言板</span>
+                    <span>法友留言板</span>
                 </h2>
-                <button class="close-modal-btn" onclick="closeMessageBoard()">
+                <button class="close-modal-btn" onclick="closeMessageBoard()" aria-label="关闭留言板">
                     <i class="bi bi-x-lg"></i>
                 </button>
             </div>
@@ -117,79 +108,137 @@
         </div>
     </div>
     
-    <!-- Header -->
-    <di-site-header></di-site-header>
+    <!-- 一体式禅意顶栏（Sticky Zen Header） -->
+    <header class="zen-header">
+        <div class="zen-header__inner">
+            <!-- 品牌与法印 -->
+            <a href="#" class="zen-brand" aria-label="法洲首页">
+                <span class="zen-brand__seal" aria-hidden="true">
+                    <i class="bi bi-flower1"></i>
+                </span>
+                <div class="zen-brand__text">
+                    <span class="zen-brand__title">法洲</span>
+                    <span class="zen-brand__subtitle">真理是最上之甘味</span>
+                </div>
+            </a>
 
-    <div class="max-w-7xl mx-auto px-4 py-8">
-        <div class="home-palette-control">
-            <label for="home-palette">配色</label>
-            <select id="home-palette" aria-label="首页配色方案"></select>
-        </div>
-        <!-- 法语展示区 - Material Design 3 风格 -->
-        <section class="md3-container p-6 md:p-12 mb-12">
-            <!-- 标题区域 -->
-            <div class="mb-8">
-                <h2 class="text-3xl md:text-4xl font-medium text-dharma-brown mb-2 flex items-center gap-3">
-                    <i class="bi bi-flower1 text-4xl"></i>
+            <!-- 章节快速导览 -->
+            <nav class="zen-nav" aria-label="页面章节导航">
+                <a href="#section-dhamma" class="zen-nav__link">
+                    <i class="bi bi-droplet-half"></i>
                     <span>法语甘露</span>
-                </h2>
+                </a>
+                <a href="#section-articles" class="zen-nav__link">
+                    <i class="bi bi-journal-richtext"></i>
+                    <span>法义文章</span>
+                </a>
+                <a href="#section-books" class="zen-nav__link">
+                    <i class="bi bi-book"></i>
+                    <span>推荐典籍</span>
+                </a>
+                <a href="#section-links" class="zen-nav__link">
+                    <i class="bi bi-compass"></i>
+                    <span>法源名录</span>
+                </a>
+            </nav>
+
+            <!-- 右侧胶囊控制坞：整合配色选择、明暗切换、视图密度 -->
+            <div class="zen-control-dock" role="group" aria-label="界面外观与视图控制">
+                <div class="home-palette-control" title="切换首页配色方案">
+                    <i class="bi bi-palette2 zen-palette-icon" aria-hidden="true"></i>
+                    <label for="home-palette" class="sr-only">配色</label>
+                    <select id="home-palette" aria-label="首页配色方案"></select>
+                </div>
+                <span class="zen-dock-divider" aria-hidden="true"></span>
+                <button class="theme-toggle" onclick="toggleTheme()" title="切换明暗主题" aria-label="切换明暗主题">
+                    <i id="theme-icon" class="bi bi-moon-stars-fill"></i>
+                </button>
+                <button class="view-toggle" onclick="toggleViewMode()" title="切换紧凑/舒展视图" aria-label="切换紧凑或舒展视图">
+                    <i id="view-icon" class="bi bi-grid-3x3-gap-fill"></i>
+                </button>
             </div>
-            
-            <!-- 最新法语 - 特别展示区 -->
-            <div id="latest-dhamma" class="mb-8 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 rounded-3xl p-6 md:p-8 border-2 border-dharma-brown shadow-lg relative overflow-hidden">
-                <!-- 装饰性背景 -->
-                <div class="absolute top-0 right-0 w-32 h-32 bg-dharma-brown opacity-5 rounded-full -mr-16 -mt-16"></div>
-                <div class="absolute bottom-0 left-0 w-24 h-24 bg-dharma-light opacity-5 rounded-full -ml-12 -mb-12"></div>
-                
-                <div class="relative z-10">
-                    <!-- 标签 -->
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-dharma-brown text-white text-sm font-medium rounded-full shadow-sm">
-                            <i class="bi bi-star-fill text-yellow-300"></i>
-                            <span>最新法语</span>
+        </div>
+    </header>
+
+    <main class="zen-main max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <!-- 卷首禅牌：今日/最新法语独立展示区 -->
+        <section class="zen-hero mb-12 md:mb-16" aria-labelledby="latest-dhamma-heading">
+            <div id="latest-dhamma" class="zen-hero-card">
+                <!-- 四角折线古籍装饰 -->
+                <span class="zen-corner zen-corner--tl" aria-hidden="true"></span>
+                <span class="zen-corner zen-corner--tr" aria-hidden="true"></span>
+                <span class="zen-corner zen-corner--bl" aria-hidden="true"></span>
+                <span class="zen-corner zen-corner--br" aria-hidden="true"></span>
+
+                <div class="zen-hero-card__inner">
+                    <!-- 顶部题签 -->
+                    <div class="zen-hero-card__header">
+                        <span id="latest-dhamma-heading" class="zen-hero-badge">
+                            <i class="bi bi-flower1"></i>
+                            <span>今日一味 · 最新法语</span>
                         </span>
-                        <span class="text-xs text-gray-500" style="display: none;">第 <span id="latest-number" class="font-medium text-dharma-brown">-</span> 条</span>
+                        <span class="zen-hero-number">
+                            第 <span id="latest-number">-</span> 则
+                        </span>
                     </div>
-                    
-                    <!-- 法语内容 -->
-                    <div id="latest-dhamma-text" class="text-xl md:text-2xl leading-relaxed text-gray-800 font-medium mb-4">
+
+                    <!-- 法语核心内容（衬线书卷体） -->
+                    <blockquote id="latest-dhamma-text" class="zen-hero-quote">
                         加载中...
-                    </div>
-                    
-                    <!-- 操作按钮 -->
-                    <div class="flex flex-wrap gap-2 justify-end">
-                        <button 
-                            id="latest-copy-btn"
-                            class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-dharma-brown text-dharma-brown text-sm rounded-full hover:bg-dharma-brown hover:text-white transition-all duration-200 shadow-sm"
-                            onclick="copyLatestDhamma()"
-                        >
-                            <i class="bi bi-clipboard"></i>
-                            <span>复制</span>
-                        </button>
-                        <a 
-                            id="latest-read-more"
-                            href="#" 
-                            class="inline-flex items-center gap-2 px-4 py-2 bg-dharma-brown text-white text-sm rounded-full hover:bg-dharma-light transition-all duration-200 shadow-sm"
-                            target="_blank"
-                            style="display:none;"
-                        >
-                            <i class="bi bi-arrow-right-circle"></i>
-                            <span>阅读更多</span>
-                        </a>
+                    </blockquote>
+
+                    <!-- 底部静谧操作区 -->
+                    <div class="zen-hero-card__footer">
+                        <span class="zen-hero-motto">自洲自依 · 法洲法依</span>
+                        <div class="zen-hero-actions">
+                            <button 
+                                id="latest-copy-btn"
+                                type="button"
+                                class="zen-btn zen-btn--ghost"
+                                onclick="copyLatestDhamma()"
+                            >
+                                <i class="bi bi-clipboard"></i>
+                                <span>复制法语</span>
+                            </button>
+                            <a 
+                                id="latest-read-more"
+                                href="#" 
+                                class="zen-btn zen-btn--primary"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style="display:none;"
+                            >
+                                <span>溯源读经</span>
+                                <i class="bi bi-arrow-up-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- 搜索栏 - MD3 风格 -->
-            <div class="mb-8">
-                <div class="flex gap-3">
-                    <div class="flex-1 relative">
-                        <i class="bi bi-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-500 text-lg"></i>
+        </section>
+
+        <!-- 法语甘露 · 沉浸式阅经台 -->
+        <section id="section-dhamma" class="md3-container zen-reader-section mb-16 md:mb-20">
+            <!-- 阅经台头部与一体式寻法工具栏 -->
+            <div class="zen-section-header zen-section-header--reader">
+                <div class="zen-section-title-group">
+                    <span class="zen-section-eyebrow">DHAMMA NECTAR</span>
+                    <h2 class="zen-section-title">
+                        <i class="bi bi-droplet-half"></i>
+                        <span>法语甘露</span>
+                    </h2>
+                    <p class="zen-section-desc">漫步经藏与禅师法谈，检索契入心扉的法义</p>
+                </div>
+
+                <!-- 寻法工具栏：整合搜索与随机漫步 -->
+                <div class="zen-command-bar">
+                    <div class="zen-search-box">
+                        <i class="bi bi-search zen-search-box__icon" aria-hidden="true"></i>
                         <input 
                             type="text" 
                             id="search-input" 
-                            class="md3-search-field w-full pl-14 pr-32 py-4 text-base"
-                            placeholder="搜索法语..." 
+                            class="md3-search-field zen-search-input"
+                            placeholder="检索法语关键词（如：正念、无常、五蕴）..." 
                             onkeypress="if(event.key==='Enter') searchDhamma()"
                         >
                         <button 
@@ -202,12 +251,13 @@
                             <canvas class="specular-button__light" aria-hidden="true"></canvas>
                             <span class="specular-button__label">
                                 <i class="bi bi-search" aria-hidden="true"></i>
-                                <span class="hidden sm:inline">搜索</span>
+                                <span class="hidden sm:inline">寻法</span>
                             </span>
                         </button>
                     </div>
+
                     <button 
-                        class="md3-outlined-button px-6 py-4 text-dharma-brown font-medium flex items-center gap-2 flex-shrink-0"
+                        class="md3-outlined-button zen-clear-btn"
                         onclick="clearSearch()" 
                         id="clear-btn" 
                         style="display:none;"
@@ -215,245 +265,230 @@
                         <i class="bi bi-x-lg"></i>
                         <span>清除</span>
                     </button>
-                </div>
-            </div>
-            
-            <!-- 页码跳转 - MD3 Chip 风格 -->
-            <div class="flex flex-wrap gap-3 mb-8 items-center justify-center">
-                <div class="md3-chip px-4 py-2 flex items-center gap-2">
-                    <span class="text-sm text-gray-700">跳转至</span>
-                    <input 
-                        type="number" 
-                        id="page-jump" 
-                        min="1"
-                        class="w-16 px-2 py-1 bg-white border border-gray-300 rounded-lg text-center text-sm focus:outline-none focus:border-dharma-brown" 
-                        placeholder="1"
-                        onkeypress="if(event.key==='Enter') jumpToPage()"
+
+                    <button 
+                        id="random-button"
+                        type="button"
+                        class="specular-button zen-random-btn"
+                        onclick="randomQuote()"
+                        title="随机洗牌并漫步法语"
                     >
-                    <span class="text-sm text-gray-700">页</span>
-                    <span class="text-sm text-gray-500 ml-1">/ 共 <span id="total-pages" class="font-medium text-dharma-brown">-</span> 页</span>
+                        <canvas class="specular-button__light" aria-hidden="true"></canvas>
+                        <span class="specular-button__label">
+                            <i class="bi bi-shuffle" aria-hidden="true"></i>
+                            <span>随机漫步</span>
+                        </span>
+                    </button>
                 </div>
-                <button 
-                    class="md3-chip px-5 py-2 text-sm font-medium text-dharma-brown flex items-center gap-2 hover:shadow-md"
-                    onclick="jumpToPage()"
-                >
-                    <i class="bi bi-arrow-right-short text-lg"></i>
-                    跳转
-                </button>
             </div>
+
+            <!-- 搜索结果提示条 -->
+            <div id="search-info" class="zen-search-banner" style="display:none;"></div>
             
-            <!-- 搜索结果信息 - MD3 风格 -->
-            <div id="search-info" class="text-gray-700 text-sm text-center mb-6 py-3 px-6 bg-blue-50 rounded-2xl border border-blue-100" style="display:none;"></div>
-            
-            <!-- 法语内容区域 - MD3 Surface -->
-            <div class="md3-surface p-8 mb-8 min-h-[280px] flex items-center justify-center">
-                <div id="dhamma-display" class="dhamma-text text-lg md:text-xl leading-loose text-gray-800 w-full">
-                    <div class="text-center text-gray-400 flex flex-col items-center gap-3">
+            <!-- 法语笺展示列表 -->
+            <div class="md3-surface zen-slips-wrapper">
+                <div id="dhamma-display" class="dhamma-text zen-slips-list">
+                    <div class="zen-loading-state">
                         <i class="bi bi-hourglass-split text-3xl"></i>
-                        <span>加载中...</span>
+                        <span>正在展卷...</span>
                     </div>
                 </div>
             </div>
             
-            <!-- 分页控制 - MD3 风格 -->
-            <div class="md3-divider my-6"></div>
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-6 pt-4">
-                <div class="flex gap-2 items-center">
-                    <button 
-                        id="prev-btn" 
-                        onclick="prevPage()"
-                        class="md3-fab px-5 py-3 bg-white border border-gray-200 text-dharma-brown disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2 font-medium"
-                    >
-                        <i class="bi bi-chevron-left"></i>
-                        <span>上一页</span>
-                    </button>
-                    <div class="md3-chip px-4 py-3 min-w-[140px] text-center">
-                        <span id="page-info" class="text-sm font-medium text-gray-700">-</span>
-                    </div>
-                    <button 
-                        id="next-btn" 
-                        onclick="nextPage()"
-                        class="md3-fab px-5 py-3 bg-white border border-gray-200 text-dharma-brown disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2 font-medium"
-                    >
-                        <span>下一页</span>
-                        <i class="bi bi-chevron-right"></i>
-                    </button>
-                </div>
+            <!-- 合一式底部分页与页码直跳控制栏 -->
+            <div class="zen-pagination-bar">
                 <button 
-                    id="random-button"
-                    type="button"
-                    class="specular-button"
-                    onclick="randomQuote()"
+                    id="prev-btn" 
+                    onclick="prevPage()"
+                    class="md3-fab zen-page-nav-btn"
                 >
-                    <canvas class="specular-button__light" aria-hidden="true"></canvas>
-                    <span class="specular-button__label">
-                        <i class="bi bi-shuffle" aria-hidden="true"></i>
-                        <span>随机浏览</span>
-                    </span>
+                    <i class="bi bi-chevron-left"></i>
+                    <span>上一页</span>
+                </button>
+
+                <div class="zen-pagination-center">
+                    <span id="page-info" class="zen-page-current">第 - 页</span>
+                    <span class="zen-page-sep" aria-hidden="true">·</span>
+                    <div class="zen-page-jumper">
+                        <label for="page-jump" class="zen-page-jumper__label">跳至</label>
+                        <input 
+                            type="number" 
+                            id="page-jump" 
+                            min="1"
+                            class="zen-page-jumper__input" 
+                            placeholder="页码"
+                            onkeypress="if(event.key==='Enter') jumpToPage()"
+                        >
+                        <span class="zen-page-jumper__total">/ 共 <span id="total-pages">-</span> 页</span>
+                        <button 
+                            type="button"
+                            class="zen-page-jumper__btn"
+                            onclick="jumpToPage()"
+                            title="跳转到指定页码"
+                            aria-label="跳转到指定页码"
+                        >
+                            <i class="bi bi-arrow-right-short"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button 
+                    id="next-btn" 
+                    onclick="nextPage()"
+                    class="md3-fab zen-page-nav-btn"
+                >
+                    <span>下一页</span>
+                    <i class="bi bi-chevron-right"></i>
                 </button>
             </div>
         </section>
 
-        <!-- 文章专栏区 -->
-        <section class="mb-12">
-            <h2 class="text-2xl md:text-3xl font-normal text-dharma-brown mb-6 text-center flex items-center justify-center gap-2">
-                <i class="bi bi-journal-text"></i>
-                <span>法义文章</span>
-            </h2>
+        <!-- 法义文章 · 经院专栏区 -->
+        <section id="section-articles" class="zen-section mb-16 md:mb-20">
+            <div class="zen-section-header">
+                <div class="zen-section-title-group">
+                    <span class="zen-section-eyebrow">DHAMMA ESSAYS</span>
+                    <h2 class="zen-section-title">
+                        <i class="bi bi-journal-richtext"></i>
+                        <span>法义文章</span>
+                    </h2>
+                    <p class="zen-section-desc">早期佛教经文导读与当代南传尊者禅修开示</p>
+                </div>
+            </div>
             
-            <!-- 文章列表 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- 经院刊物式文章列表 -->
+            <div class="zen-editorial-grid">
                 <!-- 文章卡片 1 -->
-                <a href="article/四大法教.html" class="article-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 icon-wrapper">
-                            <div class="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center text-white">
-                                <i class="bi bi-file-text text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <h3 class="text-lg font-medium text-dharma-brown mb-2 group-hover:text-dharma-light transition-colors">关于四大法教</h3>
-                            <p class="text-sm text-gray-500 mb-2 line-clamp-2">增支部AN VII.80经文解读，清晰定义法与律的标准</p>
-                            <div class="tag-wrapper flex items-center gap-2 text-xs text-gray-400">
-                                <i class="bi bi-tag"></i>
-                                <span>法教 · 经典</span>
-                            </div>
-                        </div>
+                <a href="article/四大法教.html" class="article-card zen-editorial-card group">
+                    <div class="zen-editorial-card__meta">
+                        <span class="zen-canon-badge">AN 7.80 · 增支部</span>
+                        <span class="zen-editorial-card__index">壹</span>
+                    </div>
+                    <h3 class="zen-editorial-card__title">关于四大法教</h3>
+                    <p class="zen-editorial-card__excerpt">增支部 AN VII.80 经文解读，依佛陀所立四大判准，清晰抉择何为正法与毗奈耶。</p>
+                    <div class="tag-wrapper zen-editorial-card__footer">
+                        <span class="zen-tag"><i class="bi bi-bookmark"></i> 法教 · 经典</span>
+                        <span class="zen-read-link">展卷阅读 <i class="bi bi-arrow-right"></i></span>
                     </div>
                 </a>
                 
                 <!-- 文章卡片 2 -->
-                <a href="article/圣者与凡夫的不同视角.html" class="article-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 icon-wrapper">
-                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white">
-                                <i class="bi bi-eye text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <h3 class="text-lg font-medium text-dharma-brown mb-2 group-hover:text-dharma-light transition-colors">圣者与凡夫的不同视角</h3>
-                            <p class="text-sm text-gray-500 mb-2 line-clamp-2">相应部35相应80经解读，断除无明的知见</p>
-                            <div class="tag-wrapper flex items-center gap-2 text-xs text-gray-400">
-                                <i class="bi bi-tag"></i>
-                                <span>无明 · 六根</span>
-                            </div>
-                        </div>
+                <a href="article/圣者与凡夫的不同视角.html" class="article-card zen-editorial-card group">
+                    <div class="zen-editorial-card__meta">
+                        <span class="zen-canon-badge">SN 35.80 · 相应部</span>
+                        <span class="zen-editorial-card__index">贰</span>
+                    </div>
+                    <h3 class="zen-editorial-card__title">圣者与凡夫的不同视角</h3>
+                    <p class="zen-editorial-card__excerpt">相应部六处相应第 80 经解读，探讨如何于六根触境中断除无明、生起明知见。</p>
+                    <div class="tag-wrapper zen-editorial-card__footer">
+                        <span class="zen-tag"><i class="bi bi-bookmark"></i> 无明 · 六根</span>
+                        <span class="zen-read-link">展卷阅读 <i class="bi bi-arrow-right"></i></span>
                     </div>
                 </a>
                 
                 <!-- 文章卡片 3 -->
-                <a href="article/心生迫切感.html" class="article-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 icon-wrapper">
-                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center text-white">
-                                <i class="bi bi-heart-pulse text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <h3 class="text-lg font-medium text-dharma-brown mb-2 group-hover:text-dharma-light transition-colors">心生迫切感</h3>
-                            <p class="text-sm text-gray-500 mb-2 line-clamp-2">班迪达大师开示，无常与无财产的真相</p>
-                            <div class="tag-wrapper flex items-center gap-2 text-xs text-gray-400">
-                                <i class="bi bi-tag"></i>
-                                <span>无常 · 禅修</span>
-                            </div>
-                        </div>
+                <a href="article/心生迫切感.html" class="article-card zen-editorial-card group">
+                    <div class="zen-editorial-card__meta">
+                        <span class="zen-canon-badge">班迪达尊者 · 开示</span>
+                        <span class="zen-editorial-card__index">叁</span>
+                    </div>
+                    <h3 class="zen-editorial-card__title">心生迫切感</h3>
+                    <p class="zen-editorial-card__excerpt">乌·班迪达大师直指人心的开示，谛观生命无常与世间无真正依怙的真相，发起精进道心。</p>
+                    <div class="tag-wrapper zen-editorial-card__footer">
+                        <span class="zen-tag"><i class="bi bi-bookmark"></i> 无常 · 禅修</span>
+                        <span class="zen-read-link">展卷阅读 <i class="bi bi-arrow-right"></i></span>
                     </div>
                 </a>
                 
                 <!-- 文章卡片 4 -->
-                <a href="article/如何证果.html" class="article-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 icon-wrapper">
-                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center text-white">
-                                <i class="bi bi-trophy text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <h3 class="text-lg font-medium text-dharma-brown mb-2 group-hover:text-dharma-light transition-colors">如何证果</h3>
-                            <p class="text-sm text-gray-500 mb-2 line-clamp-2">舍利弗尊者开示如理作意五取蕴以证得圣果</p>
-                            <div class="tag-wrapper flex items-center gap-2 text-xs text-gray-400">
-                                <i class="bi bi-tag"></i>
-                                <span>五取蕴 · 证果</span>
-                            </div>
-                        </div>
+                <a href="article/如何证果.html" class="article-card zen-editorial-card group">
+                    <div class="zen-editorial-card__meta">
+                        <span class="zen-canon-badge">SN 22.122 · 戒经</span>
+                        <span class="zen-editorial-card__index">肆</span>
+                    </div>
+                    <h3 class="zen-editorial-card__title">如何证果</h3>
+                    <p class="zen-editorial-card__excerpt">舍利弗尊者详尽开示：无论凡夫乃至阿罗汉，皆应如理作意五取蕴之无常、苦、无我。</p>
+                    <div class="tag-wrapper zen-editorial-card__footer">
+                        <span class="zen-tag"><i class="bi bi-bookmark"></i> 五取蕴 · 证果</span>
+                        <span class="zen-read-link">展卷阅读 <i class="bi bi-arrow-right"></i></span>
                     </div>
                 </a>
                 
                 <!-- 文章卡片 5 -->
-                <a href="article/内观定.html" class="article-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 icon-wrapper">
-                            <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center text-white">
-                                <i class="bi bi-droplet text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <h3 class="text-lg font-medium text-dharma-brown mb-2 group-hover:text-dharma-light transition-colors">内观定</h3>
-                            <p class="text-sm text-gray-500 mb-2 line-clamp-2">德加尼亚禅师开示内观定与止禅定的区别</p>
-                            <div class="tag-wrapper flex items-center gap-2 text-xs text-gray-400">
-                                <i class="bi bi-tag"></i>
-                                <span>内观定 · 正精进</span>
-                            </div>
-                        </div>
+                <a href="article/内观定.html" class="article-card zen-editorial-card group">
+                    <div class="zen-editorial-card__meta">
+                        <span class="zen-canon-badge">德加尼亚禅师 · 开示</span>
+                        <span class="zen-editorial-card__index">伍</span>
+                    </div>
+                    <h3 class="zen-editorial-card__title">内观定</h3>
+                    <p class="zen-editorial-card__excerpt">德加尼亚禅师深入剖析毗婆舍那内观定（刹那定）与传统止禅定在用心方式上的本质区别。</p>
+                    <div class="tag-wrapper zen-editorial-card__footer">
+                        <span class="zen-tag"><i class="bi bi-bookmark"></i> 内观定 · 正精进</span>
+                        <span class="zen-read-link">展卷阅读 <i class="bi bi-arrow-right"></i></span>
                     </div>
                 </a>
                 
                 <!-- 文章卡片 6 -->
-                <a href="article/亲近智者.html" class="article-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-transparent hover:border-dharma-brown hover:-translate-y-1 group">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 icon-wrapper">
-                            <div class="w-12 h-12 bg-gradient-to-br from-rose-500 to-pink-600 rounded-lg flex items-center justify-center text-white">
-                                <i class="bi bi-people text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <h3 class="text-lg font-medium text-dharma-brown mb-2 group-hover:text-dharma-light transition-colors">亲近智者</h3>
-                            <p class="text-sm text-gray-500 mb-2 line-clamp-2">菩提比丘开示善友对灵性发展的重要性</p>
-                            <div class="tag-wrapper flex items-center gap-2 text-xs text-gray-400">
-                                <i class="bi bi-tag"></i>
-                                <span>善知识 · 大吉祥经</span>
-                            </div>
-                        </div>
+                <a href="article/亲近智者.html" class="article-card zen-editorial-card group">
+                    <div class="zen-editorial-card__meta">
+                        <span class="zen-canon-badge">菩提比丘 · 导读</span>
+                        <span class="zen-editorial-card__index">陆</span>
+                    </div>
+                    <h3 class="zen-editorial-card__title">亲近智者</h3>
+                    <p class="zen-editorial-card__excerpt">依《大吉祥经》为核心，菩提比丘开示抉择善知识与亲近智者对修行道途的决定性意义。</p>
+                    <div class="tag-wrapper zen-editorial-card__footer">
+                        <span class="zen-tag"><i class="bi bi-bookmark"></i> 善知识 · 大吉祥经</span>
+                        <span class="zen-read-link">展卷阅读 <i class="bi bi-arrow-right"></i></span>
                     </div>
                 </a>
-                
-                <!-- 可以继续添加更多文章 -->
             </div>
         </section>
 
-        <!-- 书籍下载区 -->
-        <section class="mb-12">
-            <h2 class="text-2xl md:text-3xl font-normal text-dharma-brown mb-6 text-center flex items-center justify-center gap-2">
-                <i class="bi bi-book"></i>
-                <span>推荐书籍下载</span>
-            </h2>
+        <!-- 推荐书籍下载 · 藏经阁实体书脊画廊 -->
+        <section id="section-books" class="zen-section mb-16 md:mb-20">
+            <div class="zen-section-header">
+                <div class="zen-section-title-group">
+                    <span class="zen-section-eyebrow">SACRED TEXTS &amp; BOOKS</span>
+                    <h2 class="zen-section-title">
+                        <i class="bi bi-book"></i>
+                        <span>推荐典籍下载</span>
+                    </h2>
+                    <p class="zen-section-desc">巴利四部尼柯耶译本与森林传统禅修指导典籍</p>
+                </div>
+            </div>
             
-            <!-- 书籍网格 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="books-grid">
+            <!-- 书籍画廊网格 -->
+            <div class="zen-books-grid" id="books-grid">
                 <div class="text-center text-gray-400 col-span-full py-8">加载中...</div>
             </div>
         </section>
 
-        <!-- 资源链接区 -->
-        <section class="mb-12">
-            <h2 class="text-2xl md:text-3xl font-normal text-dharma-brown mb-6 text-center flex items-center justify-center gap-2">
-                <i class="bi bi-link-45deg"></i>
-                <span>佛法资源链接</span>
-            </h2>
-            
-            <!-- 类型过滤器 -->
-            <div class="flex justify-center gap-3 mb-8 flex-wrap" id="type-filters">
-                <button class="type-filter px-6 py-2 bg-white border-2 border-gray-200 text-gray-700 rounded-full hover:border-dharma-light transition-all duration-300 active:bg-dharma-brown active:border-dharma-brown active:text-white" data-type="all" onclick="filterByType('all')">
-                    全部
-                </button>
+        <!-- 佛法资源链接 · 高密度法源名录 -->
+        <section id="section-links" class="zen-section mb-12">
+            <div class="zen-section-header zen-section-header--links">
+                <div class="zen-section-title-group">
+                    <span class="zen-section-eyebrow">DHAMMA DIRECTORY</span>
+                    <h2 class="zen-section-title">
+                        <i class="bi bi-compass"></i>
+                        <span>佛法资源名录</span>
+                    </h2>
+                    <p class="zen-section-desc">精选海内外三藏圣典检索、尊者开示与原始佛教研习站点</p>
+                </div>
+
+                <!-- 分段胶囊分类过滤器 -->
+                <div class="zen-filter-pills" id="type-filters" role="tablist" aria-label="资源分类筛选">
+                    <button class="type-filter active" data-type="all" onclick="filterByType('all')">
+                        <span>全部法源</span>
+                    </button>
+                </div>
             </div>
             
-            <!-- 链接网格 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="links-grid">
+            <!-- 高密度名录网格 -->
+            <div class="zen-directory-grid" id="links-grid">
                 <div class="text-center text-gray-400 col-span-full py-8">加载中...</div>
             </div>
         </section>
-    </div>
+    </main>
 
     <!-- Footer -->
     <di-site-footer></di-site-footer>
