@@ -579,6 +579,250 @@
             }
         }
 
+        /* ==========================================================================
+           六、「命根流沙」与「刹那尽朽粒子消散」 (Kāla Strand & Dissolution)
+           ========================================================================== */
+        /* 顶部吸顶命根流沙线 */
+        .kala-strand-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.04);
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .kala-strand-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #8d5a2a 0%, #d97706 40%, #f3be7a 75%, #ffffff 100%);
+            box-shadow: 0 0 10px rgba(243, 190, 122, 0.75);
+            position: relative;
+            transition: width 0.1s linear;
+        }
+
+        /* 前端燃烧微粒子火花 */
+        .kala-strand-spark {
+            position: absolute;
+            top: -3px;
+            right: -2px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 0 12px #f3be7a, 0 0 4px #ffffff;
+            animation: kala-spark-burn 0.8s infinite alternate ease-in-out;
+        }
+
+        @keyframes kala-spark-burn {
+            0% { transform: scale(0.85); opacity: 0.7; box-shadow: 0 0 8px #f3be7a; }
+            100% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 16px #f3be7a, 0 0 6px #ffffff; }
+        }
+
+        /* 顶部流沙信息胶囊 (低调微小) */
+        .kala-strand-info {
+            position: fixed;
+            top: 8px;
+            right: 18px;
+            z-index: 999;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 2px 10px;
+            border-radius: 9999px;
+            background: rgba(18, 15, 23, 0.7);
+            border: 1px solid rgba(243, 190, 122, 0.22);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            font-size: 11px;
+            color: var(--secondary-color);
+            transition: all 0.25s ease;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .kala-strand-info:hover {
+            border-color: rgba(243, 190, 122, 0.45);
+            background: rgba(18, 15, 23, 0.9);
+        }
+
+        .kala-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #f3be7a;
+            box-shadow: 0 0 6px #f3be7a;
+            animation: santana-pulse 1.2s infinite ease-in-out;
+        }
+
+        .kala-countdown {
+            font-family: 'Roboto Mono', monospace;
+            color: #f3be7a;
+            font-size: 11px;
+            font-variant-numeric: tabular-nums;
+            min-width: 24px;
+        }
+
+        .kala-quick-btn {
+            background: rgba(243, 190, 122, 0.15);
+            border: 1px solid rgba(243, 190, 122, 0.35);
+            color: #f3be7a;
+            border-radius: 9999px;
+            padding: 1px 7px;
+            font-size: 10px;
+            cursor: pointer;
+            line-height: 1.3;
+            transition: all 0.2s ease;
+        }
+
+        .kala-quick-btn:hover {
+            background: rgba(243, 190, 122, 0.3);
+            color: #ffffff;
+        }
+
+        /* 页面主体消散过渡状态 */
+        main, footer {
+            transition: filter 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.4s ease, transform 1.4s ease;
+        }
+
+        .page-dissolved main, .page-dissolved footer {
+            filter: blur(12px);
+            opacity: 0;
+            transform: scale(0.96);
+            pointer-events: none;
+        }
+
+        /* 全屏粒子崩解画布 */
+        #dissolution-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* 寂灭归空名偈浮层 */
+        .nibbana-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nibbana-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .nibbana-card {
+            max-width: 580px;
+            width: 100%;
+            text-align: center;
+            padding: 40px 32px;
+            background: rgba(20, 16, 24, 0.75);
+            border: 1px solid rgba(243, 190, 122, 0.3);
+            border-radius: 24px;
+            box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(243, 190, 122, 0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transform: scale(0.92);
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        body.light-mode .nibbana-card {
+            background: rgba(255, 255, 255, 0.88);
+            border-color: rgba(141, 90, 42, 0.28);
+            box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.15);
+        }
+
+        .nibbana-overlay.active .nibbana-card {
+            transform: scale(1);
+        }
+
+        .nibbana-sign {
+            font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+            font-size: 14px;
+            letter-spacing: 0.2em;
+            color: #f3be7a;
+            border-bottom: 1px dashed rgba(243, 190, 122, 0.4);
+            padding-bottom: 4px;
+        }
+
+        .nibbana-verse {
+            font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+            font-size: 24px;
+            line-height: 1.8;
+            font-weight: 500;
+            color: #ffffff;
+            letter-spacing: 0.08em;
+            text-shadow: 0 0 20px rgba(243, 190, 122, 0.5);
+            margin: 4px 0;
+        }
+
+        body.light-mode .nibbana-verse {
+            color: #1a1a1a;
+            text-shadow: 0 0 20px rgba(141, 90, 42, 0.2);
+        }
+
+        @media (max-width: 480px) {
+            .nibbana-verse {
+                font-size: 18px;
+                line-height: 1.7;
+            }
+        }
+
+        .nibbana-source {
+            font-size: 13px;
+            color: var(--secondary-color);
+            letter-spacing: 0.05em;
+        }
+
+        .nibbana-desc {
+            font-size: 12px;
+            color: #f3be7a;
+            opacity: 0.8;
+            font-style: italic;
+            letter-spacing: 0.06em;
+        }
+
+        .rebirth-btn {
+            background: rgba(243, 190, 122, 0.16);
+            border: 1px solid rgba(243, 190, 122, 0.45);
+            color: #f3be7a;
+            border-radius: 9999px;
+            padding: 8px 24px;
+            font-size: 13px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 16px rgba(243, 190, 122, 0.2);
+            margin-top: 6px;
+        }
+
+        .rebirth-btn:hover {
+            background: rgba(243, 190, 122, 0.28);
+            border-color: rgba(243, 190, 122, 0.7);
+            color: #ffffff;
+            box-shadow: 0 0 24px rgba(243, 190, 122, 0.45);
+            transform: translateY(-2px);
+        }
+
         /* 标题行与出入息念 (Ānāpāna) 律动 */
         .section-title-row {
             display: flex;
@@ -1159,7 +1403,39 @@
     </Style>
 </head>
 <body>
-    
+    <!-- 六、「命根流沙」吸顶进度条与刹那尽朽微印 -->
+    <div id="kala-strand-wrapper" class="kala-strand-wrapper" title="命根流逝 · 刹那尽朽（悬停暂停，点击灭度）">
+        <div class="kala-strand-bar" id="kala-strand-bar">
+            <div class="kala-strand-spark"></div>
+        </div>
+    </div>
+    <div class="kala-strand-info" id="kala-strand-info" title="命根流逝 · 刹那尽朽">
+        <div class="kala-dot" aria-hidden="true"></div>
+        <span>命根流逝</span>
+        <span class="kala-countdown" id="kala-countdown">24s</span>
+        <button type="button" class="kala-quick-btn" id="kala-quick-btn" title="立即体悟刹那尽朽">灭</button>
+    </div>
+
+    <!-- 全屏粒子瓦解物理画布 -->
+    <canvas id="dissolution-canvas"></canvas>
+
+    <!-- 寂灭归空名偈浮层 -->
+    <div id="nibbana-overlay" class="nibbana-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="一切有为法 · 刹那尽朽寂灭">
+        <div class="nibbana-card">
+            <div class="nibbana-sign">诸行无常 · 寂灭为乐</div>
+            <p class="nibbana-verse">
+                诸行无常，是生灭法；<br/>
+                生灭灭已，寂灭为乐。
+            </p>
+            <p class="nibbana-source">——《大般涅槃经》</p>
+            <div class="nibbana-desc">一切有为法 · 刹那时顷尽朽归空</div>
+            <button type="button" id="rebirth-btn" class="rebirth-btn" title="因缘重聚 · 万象复生">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                <span>因缘和合 · 重新聚起</span>
+            </button>
+        </div>
+    </div>
+
     <div class="interactive-corner" title="Home">
         <a href="index.html" style="display:block; width:100%; height:100%;">
             <div class="corner-fold"></div>
@@ -1704,6 +1980,262 @@
                         window.GrainientInstance.setCosmicCruise(step.hour);
                     }
                 });
+            })();
+
+            // 5. 命根流沙倒计时与刹那粒子消散引擎 (Kāla Strand & Dissolution)
+            (function() {
+                const strandBar = document.getElementById('kala-strand-bar');
+                const countdownEl = document.getElementById('kala-countdown');
+                const quickBtn = document.getElementById('kala-quick-btn');
+                const canvas = document.getElementById('dissolution-canvas');
+                const nibbanaOverlay = document.getElementById('nibbana-overlay');
+                const rebirthBtn = document.getElementById('rebirth-btn');
+                const body = document.body;
+
+                if (!strandBar || !canvas) return;
+
+                const ctx = canvas.getContext('2d');
+                const TOTAL_SECONDS = 24.0;
+                let elapsedSeconds = 0.0;
+                let isPaused = false;
+                let isDissolved = false;
+                let timerRaf = 0;
+                let lastTime = 0;
+
+                // 粒子物理池
+                let particles = [];
+                let particleRaf = 0;
+                let isReversing = false;
+
+                function resizeCanvas() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
+
+                // 采样 DOM 位置生成粒子
+                function spawnDissolutionParticles() {
+                    particles = [];
+                    const targets = [
+                        document.querySelector('header'),
+                        document.querySelector('.right-col'),
+                        document.querySelector('.cosmic-status-bar'),
+                        document.querySelector('footer')
+                    ].filter(Boolean);
+
+                    const colors = [
+                        'rgba(243, 190, 122, ',  // 金色
+                        'rgba(255, 255, 255, ',  // 暖白
+                        'rgba(141, 90, 42, ',    // 大地棕
+                        'rgba(148, 163, 184, '   // 苍灰
+                    ];
+
+                    targets.forEach(el => {
+                        const rect = el.getBoundingClientRect();
+                        const area = rect.width * rect.height;
+                        const count = Math.min(420, Math.max(70, Math.floor(area / 1800)));
+
+                        for (let i = 0; i < count; i++) {
+                            const rx = rect.left + Math.random() * rect.width;
+                            const ry = rect.top + Math.random() * rect.height;
+                            const colorPrefix = colors[Math.floor(Math.random() * colors.length)];
+                            const size = 1.2 + Math.random() * 2.2;
+                            const delay = (ry / Math.max(1, window.innerHeight)) * 0.45; // 自上而下顺风剥落
+
+                            particles.push({
+                                x: rx,
+                                y: ry,
+                                originX: rx,
+                                originY: ry,
+                                vx: 0.8 + Math.random() * 2.6,   // 受风向右
+                                vy: -1.2 - Math.random() * 3.2,  // 升腾向上
+                                size,
+                                colorPrefix,
+                                alpha: 0.8 + Math.random() * 0.2,
+                                maxAlpha: 0.9,
+                                life: 0,
+                                maxLife: 2.0 + Math.random() * 0.8,
+                                delay,
+                                active: false
+                            });
+                        }
+                    });
+                }
+
+                // 粒子动画循环
+                let particleStart = 0;
+                function updateParticles(now) {
+                    if (!particleStart) particleStart = now;
+                    const dt = Math.min(0.04, (now - (lastTime || now)) / 1000) || 0.016;
+                    lastTime = now;
+
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    let activeCount = 0;
+
+                    if (!isReversing) {
+                        // 正向消散飞散
+                        const elapsed = (now - particleStart) / 1000;
+                        particles.forEach(p => {
+                            if (elapsed < p.delay) return;
+                            p.active = true;
+                            p.life += dt;
+                            // 风力与轻微阻尼
+                            p.vx += 0.018;
+                            p.vy *= 0.985;
+                            p.x += p.vx;
+                            p.y += p.vy;
+
+                            // 透明度渐隐
+                            const progress = p.life / p.maxLife;
+                            const alpha = Math.max(0, p.maxAlpha * (1 - progress * progress));
+                            if (alpha > 0.01) {
+                                activeCount++;
+                                ctx.fillStyle = p.colorPrefix + alpha.toFixed(3) + ')';
+                                ctx.beginPath();
+                                ctx.arc(p.x, p.y, p.size * (1 - progress * 0.4), 0, Math.PI * 2);
+                                ctx.fill();
+                            }
+                        });
+
+                        if (activeCount > 0) {
+                            particleRaf = requestAnimationFrame(updateParticles);
+                        } else {
+                            ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        }
+                    } else {
+                        // 反向重聚收束 (Rebirth Convergence)
+                        let remainingDist = 0;
+                        particles.forEach(p => {
+                            const dx = p.originX - p.x;
+                            const dy = p.originY - p.y;
+                            const dist = Math.hypot(dx, dy);
+                            remainingDist += dist;
+
+                            // 弹性飞速拉回
+                            p.x += dx * 0.12;
+                            p.y += dy * 0.12;
+                            const alpha = Math.min(0.9, dist / 150 + 0.2);
+
+                            ctx.fillStyle = p.colorPrefix + alpha.toFixed(3) + ')';
+                            ctx.beginPath();
+                            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                            ctx.fill();
+                        });
+
+                        if (remainingDist > particles.length * 1.5) {
+                            particleRaf = requestAnimationFrame(updateParticles);
+                        } else {
+                            ctx.clearRect(0, 0, canvas.width, canvas.height);
+                            isReversing = false;
+                            body.classList.remove('page-dissolved');
+                        }
+                    }
+                }
+
+                // 触发刹那尽朽大消散
+                function triggerDissolution() {
+                    if (isDissolved) return;
+                    isDissolved = true;
+                    isPaused = true;
+                    cancelAnimationFrame(timerRaf);
+
+                    // 页面 DOM 模糊淡出
+                    body.classList.add('page-dissolved');
+
+                    // 生成粒子并开始动画
+                    spawnDissolutionParticles();
+                    particleStart = 0;
+                    lastTime = 0;
+                    cancelAnimationFrame(particleRaf);
+                    particleRaf = requestAnimationFrame(updateParticles);
+
+                    // 唤醒背景着色器泛起深远大浪
+                    if (window.GrainientInstance && window.GrainientInstance.wake) {
+                        window.GrainientInstance.wake();
+                    }
+
+                    // 2秒后缓缓显现寂灭名偈
+                    setTimeout(() => {
+                        if (nibbanaOverlay) {
+                            nibbanaOverlay.classList.add('active');
+                            nibbanaOverlay.setAttribute('aria-hidden', 'false');
+                        }
+                    }, 1800);
+                }
+
+                // 触发因缘重聚
+                function triggerRebirth() {
+                    if (!isDissolved) return;
+                    if (nibbanaOverlay) {
+                        nibbanaOverlay.classList.remove('active');
+                        nibbanaOverlay.setAttribute('aria-hidden', 'true');
+                    }
+
+                    // 开始粒子倒卷聚拢
+                    isReversing = true;
+                    lastTime = 0;
+                    cancelAnimationFrame(particleRaf);
+                    particleRaf = requestAnimationFrame(updateParticles);
+
+                    // 重设进度条
+                    isDissolved = false;
+                    elapsedSeconds = 0;
+                    isPaused = false;
+                    strandBar.style.width = '0%';
+                    countdownEl.textContent = '24s';
+                    lastTime = performance.now();
+                    timerRaf = requestAnimationFrame(tickProgress);
+                }
+
+                // 进度条主循环
+                function tickProgress(now) {
+                    if (!lastTime) lastTime = now;
+                    const dt = (now - lastTime) / 1000;
+                    lastTime = now;
+
+                    if (!isPaused && !isDissolved && !document.hidden) {
+                        elapsedSeconds += dt;
+                        const progress = Math.min(1, elapsedSeconds / TOTAL_SECONDS);
+                        const remaining = Math.max(0, Math.ceil(TOTAL_SECONDS - elapsedSeconds));
+
+                        strandBar.style.width = (progress * 100).toFixed(2) + '%';
+                        countdownEl.textContent = remaining + 's';
+
+                        if (progress >= 1.0) {
+                            triggerDissolution();
+                            return;
+                        }
+                    }
+
+                    if (!isDissolved) {
+                        timerRaf = requestAnimationFrame(tickProgress);
+                    }
+                }
+
+                // 鼠标悬停进度条暂停流逝
+                const wrapper = document.getElementById('kala-strand-wrapper');
+                if (wrapper) {
+                    wrapper.addEventListener('mouseenter', () => { isPaused = true; });
+                    wrapper.addEventListener('mouseleave', () => { if (!isDissolved) isPaused = false; });
+                }
+
+                // 立即体悟“灭”按钮
+                if (quickBtn) {
+                    quickBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        triggerDissolution();
+                    });
+                }
+
+                // 重生按钮
+                if (rebirthBtn) {
+                    rebirthBtn.addEventListener('click', triggerRebirth);
+                }
+
+                // 启动进度条倒计时
+                timerRaf = requestAnimationFrame(tickProgress);
             })();
         })();
     </script>
