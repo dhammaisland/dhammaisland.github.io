@@ -112,7 +112,9 @@
             }
         }
 
-        /* Anattā (五蕴刹那解构 · 无我) 微交互 */
+        /* ==========================================================================
+           一、「五蕴法相空性印」沉浸式虚空曼陀罗 (Zen Mandala Overlay)
+           ========================================================================== */
         .anatta-ego {
             position: relative;
             display: inline-block;
@@ -120,109 +122,326 @@
             user-select: none;
             -webkit-user-select: none;
             vertical-align: baseline;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        .anatta-ego:hover, .anatta-ego:focus-visible {
+            outline: none;
         }
 
         .anatta-ego-char {
             display: inline-block;
-            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                        filter 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease, opacity 0.35s ease;
+            border-bottom: 1.5px dashed rgba(243, 190, 122, 0.45);
+            padding-bottom: 2px;
         }
 
-        .anatta-ego:hover .anatta-ego-char,
-        .anatta-ego.active .anatta-ego-char {
-            opacity: 0.12;
-            filter: blur(2px);
-            transform: scale(0.88);
-        }
-
-        .skandha {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.2);
-            font-size: 13px;
-            font-weight: 600;
-            font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+        .anatta-ego:hover .anatta-ego-char {
+            transform: scale(1.06);
             color: #f3be7a;
-            text-shadow: 0 0 10px rgba(243, 190, 122, 0.65), 0 0 2px rgba(255, 255, 255, 0.9);
+            border-bottom-color: #f3be7a;
+            text-shadow: 0 0 16px rgba(243, 190, 122, 0.65);
+        }
+
+        .anatta-ego-hint {
+            position: absolute;
+            top: -10px;
+            right: -8px;
+            font-size: 10px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: rgba(243, 190, 122, 0.18);
+            color: #f3be7a;
+            border: 1px solid rgba(243, 190, 122, 0.35);
+            border-radius: 9999px;
+            padding: 1px 5px;
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(4px) scale(0.85);
+            transition: all 0.25s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .anatta-ego:hover .anatta-ego-hint {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* 沉浸式虚空遮罩 */
+        .skandha-mandala-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
             opacity: 0;
             pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .skandha-mandala-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mandala-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(9, 8, 14, 0.82);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: opacity 0.4s ease;
+        }
+
+        body.light-mode .mandala-backdrop {
+            background: rgba(246, 244, 238, 0.86);
+        }
+
+        .mandala-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 860px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: rgba(25, 20, 28, 0.78);
+            border: 1px solid rgba(243, 190, 122, 0.25);
+            border-radius: 24px;
+            padding: 32px 36px;
+            box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            transform: scale(0.92) translateY(12px);
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        body.light-mode .mandala-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(141, 90, 42, 0.24);
+            box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.15);
+        }
+
+        .skandha-mandala-overlay.active .mandala-container {
+            transform: scale(1) translateY(0);
+        }
+
+        /* 顶部栏 */
+        .mandala-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 16px;
+        }
+
+        body.light-mode .mandala-header {
+            border-bottom-color: rgba(0, 0, 0, 0.08);
+        }
+
+        .mandala-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            color: #f3be7a;
+            font-weight: 500;
+        }
+
+        .mandala-close-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-color);
+            border-radius: 9999px;
+            padding: 5px 14px;
+            font-size: 12px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .mandala-close-btn:hover {
+            background: rgba(243, 190, 122, 0.2);
+            border-color: rgba(243, 190, 122, 0.45);
+            color: #ffffff;
+        }
+
+        /* 中央五方法印网格 */
+        .mandala-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+            margin: 6px 0;
+        }
+
+        .skandha-card {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 18px;
+            padding: 22px 14px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.light-mode .skandha-card {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.06);
+        }
+
+        .skandha-card:hover {
+            transform: translateY(-4px);
+            background: rgba(243, 190, 122, 0.08);
+            border-color: rgba(243, 190, 122, 0.4);
+            box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.5);
+        }
+
+        body.light-mode .skandha-card:hover {
+            background: rgba(141, 90, 42, 0.08);
+            border-color: rgba(141, 90, 42, 0.35);
+        }
+
+        /* 五蕴大字 (38px 经院宋体) */
+        .skandha-glyph {
+            font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+            font-size: 38px;
+            font-weight: 600;
+            color: #f3be7a;
             line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 0 0 16px rgba(243, 190, 122, 0.45);
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .skandha-card:hover .skandha-glyph {
+            transform: scale(1.1);
+            text-shadow: 0 0 24px rgba(243, 190, 122, 0.8), 0 0 4px #ffffff;
+        }
+
+        .skandha-pali {
+            font-family: "Noto Serif SC", "Georgia", "Songti SC", serif;
+            font-style: italic;
+            font-size: 13px;
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+            letter-spacing: 0.04em;
+        }
+
+        .skandha-simile {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-color);
+            padding: 3px 8px;
+            background: rgba(243, 190, 122, 0.12);
+            border-radius: 6px;
+            margin-bottom: 8px;
             white-space: nowrap;
-            filter: blur(4px);
-            z-index: 10;
-            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-                        opacity 0.4s ease,
-                        filter 0.4s ease;
         }
 
-        /* 环形五方发散定位 */
-        /* 想 (Saññā) - 正上 */
-        .anatta-ego:hover .skandha-sanna,
-        .anatta-ego.active .skandha-sanna {
-            transform: translate(-50%, calc(-50% - 34px)) scale(1);
-            opacity: 0.95;
-            filter: blur(0);
-            transition-delay: 0ms;
+        .skandha-desc {
+            font-size: 11px;
+            color: var(--secondary-color);
+            line-height: 1.45;
+            opacity: 0.85;
         }
 
-        /* 受 (Vedanā) - 左上 */
-        .anatta-ego:hover .skandha-vedana,
-        .anatta-ego.active .skandha-vedana {
-            transform: translate(calc(-50% - 32px), calc(-50% - 20px)) scale(1);
-            opacity: 0.95;
-            filter: blur(0);
-            transition-delay: 20ms;
+        /* 底部经文引言 */
+        .mandala-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 16px;
+            text-align: center;
         }
 
-        /* 行 (Saṅkhāra) - 右上 */
-        .anatta-ego:hover .skandha-sankhara,
-        .anatta-ego.active .skandha-sankhara {
-            transform: translate(calc(-50% + 32px), calc(-50% - 20px)) scale(1);
-            opacity: 0.95;
-            filter: blur(0);
-            transition-delay: 40ms;
+        body.light-mode .mandala-footer {
+            border-top-color: rgba(0, 0, 0, 0.08);
         }
 
-        /* 色 (Rūpa) - 左下 */
-        .anatta-ego:hover .skandha-rupa,
-        .anatta-ego.active .skandha-rupa {
-            transform: translate(calc(-50% - 25px), calc(-50% + 24px)) scale(1);
-            opacity: 0.95;
-            filter: blur(0);
-            transition-delay: 60ms;
+        .mandala-verse {
+            font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+            font-size: 14px;
+            letter-spacing: 0.06em;
+            color: #f3be7a;
+            line-height: 1.6;
+            margin-bottom: 6px;
         }
 
-        /* 识 (Viññāṇa) - 右下 */
-        .anatta-ego:hover .skandha-vinnana,
-        .anatta-ego.active .skandha-vinnana {
-            transform: translate(calc(-50% + 25px), calc(-50% + 24px)) scale(1);
-            opacity: 0.95;
-            filter: blur(0);
-            transition-delay: 80ms;
+        .mandala-sub {
+            font-size: 11px;
+            color: var(--secondary-color);
+            opacity: 0.65;
+            display: block;
         }
 
-        @media (max-width: 480px) {
-            .anatta-ego:hover .skandha-sanna,
-            .anatta-ego.active .skandha-sanna {
-                transform: translate(-50%, calc(-50% - 26px)) scale(0.9);
+        /* 移动端响应式流式布局 */
+        @media (max-width: 720px) {
+            .mandala-container {
+                padding: 20px 16px;
+                gap: 16px;
+                border-radius: 20px;
             }
-            .anatta-ego:hover .skandha-vedana,
-            .anatta-ego.active .skandha-vedana {
-                transform: translate(calc(-50% - 24px), calc(-50% - 15px)) scale(0.9);
+
+            .mandala-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                max-height: 52vh;
+                overflow-y: auto;
+                padding-right: 4px;
             }
-            .anatta-ego:hover .skandha-sankhara,
-            .anatta-ego.active .skandha-sankhara {
-                transform: translate(calc(-50% + 24px), calc(-50% - 15px)) scale(0.9);
+
+            .skandha-card {
+                flex-direction: row;
+                text-align: left;
+                padding: 12px 14px;
+                gap: 14px;
+                align-items: center;
             }
-            .anatta-ego:hover .skandha-rupa,
-            .anatta-ego.active .skandha-rupa {
-                transform: translate(calc(-50% - 19px), calc(-50% + 18px)) scale(0.9);
+
+            .skandha-glyph {
+                font-size: 28px;
+                margin-bottom: 0;
+                min-width: 32px;
+                text-align: center;
             }
-            .anatta-ego:hover .skandha-vinnana,
-            .anatta-ego.active .skandha-vinnana {
-                transform: translate(calc(-50% + 19px), calc(-50% + 18px)) scale(0.9);
+
+            .skandha-meta-wrap {
+                flex: 1;
+            }
+
+            .skandha-top-row {
+                display: flex;
+                align-items: baseline;
+                gap: 8px;
+                margin-bottom: 2px;
+            }
+
+            .skandha-simile {
+                display: inline-block;
+                padding: 1px 6px;
+                font-size: 12px;
+                margin-bottom: 0;
+            }
+
+            .skandha-pali {
+                margin-bottom: 0;
+                font-size: 12px;
+            }
+
+            .skandha-desc {
+                font-size: 11px;
+            }
+
+            .mandala-verse {
+                font-size: 12px;
             }
         }
 
@@ -815,7 +1034,7 @@
 
     <main>
         <header>
-            <h1 class="header-title"><p class="hello">你好，<br/><span class="anatta-ego" title="五蕴因缘聚合，假名为'我'"><span class="anatta-ego-char">我</span><span class="skandha skandha-sanna" aria-hidden="true">想</span><span class="skandha skandha-vedana" aria-hidden="true">受</span><span class="skandha skandha-sankhara" aria-hidden="true">行</span><span class="skandha skandha-rupa" aria-hidden="true">色</span><span class="skandha skandha-vinnana" aria-hidden="true">识</span></span>是"洪达"。</p></h1>
+            <h1 class="header-title"><p class="hello">你好，<br/><span class="anatta-ego" id="anatta-ego" role="button" tabindex="0" title="点击参究：究竟法无我 · 五蕴离散聚灭" aria-haspopup="dialog" aria-expanded="false"><span class="anatta-ego-char">“我”</span><span class="anatta-ego-hint">五蕴解</span></span>是"洪達"。</p></h1>
             <p class="bio">
                 <span class="dhamma-enthusiasts">法与<span class="pali-drift" title="修习 · 培育"><span class="pali-drift-zh">禅修</span><span class="pali-drift-pi" aria-hidden="true">Bhāvanā</span></span>的爱好者，<span class="quote-tooltip">「乐于法者、爱好法者，审虑法者，<br/>　　　随念法的比丘，他不退失正法。<br/>　　　当行或站，坐或者卧时，<br/>　　　有向内会集的心，他就到达寂静。」--如是语86经</span></span><br/>
                 这里是我的<a href="index.html">个人主页</a>，用于分享佛陀的<span class="dhamma"><span class="pali-drift" title="正法律"><span class="pali-drift-zh">法与律</span><span class="pali-drift-pi" aria-hidden="true">Dhamma-Vinaya</span></span><span class="quote-tooltip">阿难！但，你们可能会这么想：『大师的教语已过去了，我们没有大师了。』但，阿难！不应该这样认为，阿难！凡你们被我教导、告知的法与律，我死后就是你们的大师。--《大般涅槃经》</span></span>、禅师法谈、相关书籍等。<br/>
@@ -993,19 +1212,139 @@
         </div>
     </footer>
 
+    <!-- 一、「五蕴法相空性印」沉浸式虚空曼陀罗 (Zen Mandala Overlay) -->
+    <div id="skandha-mandala-overlay" class="skandha-mandala-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="究竟法无我 · 五蕴法相空性印">
+        <div class="mandala-backdrop" id="mandala-backdrop"></div>
+        <div class="mandala-container">
+            <!-- 顶部标题与收束关闭按钮 -->
+            <div class="mandala-header">
+                <div class="mandala-badge">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+                    <span>究竟法无我 · Anattā 解构</span>
+                </div>
+                <button type="button" class="mandala-close-btn" id="mandala-close-btn" title="收束五蕴 · 归聚为我 (ESC)">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <span>归聚为“我”</span>
+                </button>
+            </div>
+
+            <!-- 中央五方法印网格 -->
+            <div class="mandala-grid">
+                <!-- 1. 色蕴 (Rūpa) -->
+                <div class="skandha-card">
+                    <div class="skandha-glyph">色</div>
+                    <div class="skandha-meta-wrap">
+                        <div class="skandha-top-row">
+                            <span class="skandha-simile">观色如聚沫</span>
+                            <span class="skandha-pali">Rūpa</span>
+                        </div>
+                        <div class="skandha-desc">地水火风 · 四大假合质碍</div>
+                    </div>
+                </div>
+
+                <!-- 2. 受蕴 (Vedanā) -->
+                <div class="skandha-card">
+                    <div class="skandha-glyph">受</div>
+                    <div class="skandha-meta-wrap">
+                        <div class="skandha-top-row">
+                            <span class="skandha-simile">受如水上泡</span>
+                            <span class="skandha-pali">Vedanā</span>
+                        </div>
+                        <div class="skandha-desc">苦乐舍受 · 触缘刹那领纳</div>
+                    </div>
+                </div>
+
+                <!-- 3. 想蕴 (Saññā) -->
+                <div class="skandha-card">
+                    <div class="skandha-glyph">想</div>
+                    <div class="skandha-meta-wrap">
+                        <div class="skandha-top-row">
+                            <span class="skandha-simile">想如春时焰</span>
+                            <span class="skandha-pali">Saññā</span>
+                        </div>
+                        <div class="skandha-desc">取相知表 · 阳焰认知分别</div>
+                    </div>
+                </div>
+
+                <!-- 4. 行蕴 (Saṅkhāra) -->
+                <div class="skandha-card">
+                    <div class="skandha-glyph">行</div>
+                    <div class="skandha-meta-wrap">
+                        <div class="skandha-top-row">
+                            <span class="skandha-simile">诸行如芭蕉</span>
+                            <span class="skandha-pali">Saṅkhāra</span>
+                        </div>
+                        <div class="skandha-desc">思愿造作 · 剥尽层层无核</div>
+                    </div>
+                </div>
+
+                <!-- 5. 识蕴 (Viññāṇa) -->
+                <div class="skandha-card">
+                    <div class="skandha-glyph">识</div>
+                    <div class="skandha-meta-wrap">
+                        <div class="skandha-top-row">
+                            <span class="skandha-simile">诸识法如幻</span>
+                            <span class="skandha-pali">Viññāṇa</span>
+                        </div>
+                        <div class="skandha-desc">六根六境 · 幻师变现了别</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部经典法语 -->
+            <div class="mandala-footer">
+                <p class="mandala-verse">“观色如聚沫，受如水上泡，想如春时焰，诸行如芭蕉，诸识法如幻。”</p>
+                <span class="mandala-sub">《杂阿含·265经》/《相相应部·泡沫经》SN 22.95 · 点击空白处或按 ESC 归聚</span>
+            </div>
+        </div>
+    </div>
+
     <script>
         (function() {
-            // 1. 五蕴解构点击交互 (移动端支持)
-            const ego = document.querySelector('.anatta-ego');
+            // 1. 五蕴法相空性印 (Anattā 曼陀罗交互)
+            const ego = document.getElementById('anatta-ego');
+            const overlay = document.getElementById('skandha-mandala-overlay');
+            const closeBtn = document.getElementById('mandala-close-btn');
+            const backdrop = document.getElementById('mandala-backdrop');
+
+            function openMandala() {
+                if (!overlay) return;
+                overlay.classList.add('active');
+                overlay.setAttribute('aria-hidden', 'false');
+                if (ego) ego.setAttribute('aria-expanded', 'true');
+                if (window.GrainientInstance && window.GrainientInstance.wake) {
+                    window.GrainientInstance.wake();
+                }
+            }
+
+            function closeMandala() {
+                if (!overlay) return;
+                overlay.classList.remove('active');
+                overlay.setAttribute('aria-hidden', 'true');
+                if (ego) ego.setAttribute('aria-expanded', 'false');
+            }
+
             if (ego) {
                 ego.addEventListener('click', function(e) {
-                    this.classList.toggle('active');
+                    e.preventDefault();
                     e.stopPropagation();
+                    openMandala();
                 });
-                document.addEventListener('click', function() {
-                    ego.classList.remove('active');
+                ego.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openMandala();
+                    }
                 });
             }
+
+            if (closeBtn) closeBtn.addEventListener('click', closeMandala);
+            if (backdrop) backdrop.addEventListener('click', closeMandala);
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && overlay && overlay.classList.contains('active')) {
+                    closeMandala();
+                }
+            });
 
             // 2. 字符衰变重组自动调度器 (偶发巴利倒影)
             const driftElements = document.querySelectorAll('.pali-drift');
