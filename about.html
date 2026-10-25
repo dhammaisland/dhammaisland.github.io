@@ -799,20 +799,40 @@
             letter-spacing: 0.06em;
         }
 
+        .nibbana-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .rebirth-btn,
+        .nibbana-home-btn {
+            box-sizing: border-box;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 38px;
+            padding: 0 22px;
+            font-size: 13px;
+            font-family: inherit;
+            line-height: 1;
+            border-radius: 9999px;
+            gap: 8px;
+            text-decoration: none;
+            margin: 0;
+            vertical-align: middle;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
         .rebirth-btn {
             background: rgba(243, 190, 122, 0.16);
             border: 1px solid rgba(243, 190, 122, 0.45);
             color: #f3be7a;
-            border-radius: 9999px;
-            padding: 8px 24px;
-            font-size: 13px;
             cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
             box-shadow: 0 0 16px rgba(243, 190, 122, 0.2);
-            margin-top: 6px;
         }
 
         .rebirth-btn:hover {
@@ -821,6 +841,31 @@
             color: #ffffff;
             box-shadow: 0 0 24px rgba(243, 190, 122, 0.45);
             transform: translateY(-2px);
+        }
+
+        .nibbana-home-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        body.light-mode .nibbana-home-btn {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.15);
+            color: var(--text-color);
+        }
+
+        .nibbana-home-btn:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        body.light-mode .nibbana-home-btn:hover {
+            background: rgba(0, 0, 0, 0.09);
+            color: #000000;
         }
 
         /* 标题行与出入息念 (Ānāpāna) 律动 */
@@ -1428,11 +1473,17 @@
                 生灭灭已，寂灭为乐。
             </p>
             <p class="nibbana-source">——《大般涅槃经》</p>
-            <div class="nibbana-desc">一切有为法 · 刹那时顷尽朽归空</div>
-            <button type="button" id="rebirth-btn" class="rebirth-btn" title="因缘重聚 · 万象复生">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-                <span>因缘和合 · 重新聚起</span>
-            </button>
+            <div class="nibbana-desc">比丘！諸行如幻，如炎，剎那時頃盡朽，不實來、實去。--《杂阿含》273经</div>
+            <div class="nibbana-actions">
+                <button type="button" id="rebirth-btn" class="rebirth-btn" title="因缘重聚 · 万象复生">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                    <span>因缘和合 · 重新聚起</span>
+                </button>
+                <a href="index.html" class="nibbana-home-btn" title="前往法洲主站 · 浏览经文典籍与法语甘露">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span>访问首页</span>
+                </a>
+            </div>
         </div>
     </div>
 
