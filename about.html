@@ -22,6 +22,11 @@
             padding: 0;
         }
 
+        html {
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: #120f17; /* Fallback color matching Grainient base */
             color: var(--text-color);
@@ -32,6 +37,9 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
 
         body.light-mode {
@@ -46,9 +54,15 @@
             width: 100%;
             max-width: 900px;
             margin: 0 auto;
-            padding: 60px 24px 20px; /* Reduced bottom padding */
+            padding: 60px 24px 20px;
             display: flex;
             flex-direction: column;
+        }
+
+        @media (max-width: 640px) {
+            main {
+                padding: 40px 16px 20px;
+            }
         }
 
         /* Header / Hero */
@@ -370,6 +384,50 @@
             color: #fed7aa;
         }
 
+        /* 天地四时与月相状态坞 */
+        .cosmic-status-bar {
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 9px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 12px;
+            font-size: 0.82rem;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .cosmic-cruise-btn {
+            background: rgba(141, 90, 42, 0.14);
+            border: 1px solid rgba(141, 90, 42, 0.28);
+            color: #f3be7a;
+            border-radius: 9999px;
+            padding: 3px 10px;
+            font-size: 0.72rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 480px) {
+            .cosmic-status-bar {
+                padding: 10px 12px;
+                gap: 8px;
+            }
+            .cosmic-status-info {
+                font-size: 0.76rem;
+                flex: 1;
+                min-width: 170px;
+            }
+        }
+
         /* ==========================================================================
            三、「风中细沙」—— 文本风化与不可执取 (Text Weathering)
            ========================================================================== */
@@ -566,6 +624,14 @@
             }
         }
 
+        @media (max-width: 640px) {
+            footer {
+                padding: 30px 16px;
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+        }
+
         .social-links {
             display: flex;
             gap: 20px;
@@ -581,12 +647,16 @@
 
         .age-display {
             font-family: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            font-size: 32px;
+            font-size: clamp(16px, 5.2vw, 32px);
             font-weight: 300;
             color: var(--text-color);
             letter-spacing: -0.5px;
             margin-top: 8px;
             font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: clip;
         }
 
         /* CRT Flicker Effect & Tooltip */
@@ -888,14 +958,14 @@
                 })();
             </script>
             <!-- 五、「天地四时」与月相微印 (Cosmic Diurnal & Lunar Status) -->
-            <div class="cosmic-status-bar" id="cosmic-status-bar" style="margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding: 9px 14px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.07); border-radius: 12px; font-size: 0.82rem; backdrop-filter: blur(8px);">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <span id="cosmic-moon-icon" style="font-size: 1.1rem; line-height: 1;" title="农历月相">🌕</span>
+            <div class="cosmic-status-bar" id="cosmic-status-bar">
+                <div class="cosmic-status-info" style="display: flex; align-items: center; flex-wrap: wrap; gap: 6px;">
+                    <span id="cosmic-moon-icon" style="font-size: 1.05rem; line-height: 1;" title="农历月相">🌕</span>
                     <span id="cosmic-season-text" style="color: var(--text-color); opacity: 0.9; font-weight: 500;">薄暮 · 落日斜阳</span>
                     <span style="opacity: 0.25;">·</span>
-                    <span id="cosmic-lunar-text" style="opacity: 0.65; font-size: 0.76rem;">满月望日 · 15日</span>
+                    <span id="cosmic-lunar-text" style="opacity: 0.65; font-size: 0.74rem;">满月望日 · 15日</span>
                 </div>
-                <button type="button" id="cosmic-cruise-btn" style="background: rgba(141, 90, 42, 0.14); border: 1px solid rgba(141, 90, 42, 0.28); color: #f3be7a; border-radius: 9999px; padding: 3px 10px; font-size: 0.72rem; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s ease;" title="点击切换预览四时更迭">
+                <button type="button" id="cosmic-cruise-btn" class="cosmic-cruise-btn" title="点击切换预览四时更迭">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.85;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                     <span id="cosmic-cruise-label">天地巡礼</span>
                 </button>
