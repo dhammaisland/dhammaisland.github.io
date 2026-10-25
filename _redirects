@@ -1,3 +1,3 @@
 # Cloudflare Pages Redirects
-# 访问网站根路径时，自动重定向到 /about.html
-/  /about.html  302
+# 历史路径平滑向后兼容：访问 /about.html 时永久重定向到根路径 /
+/about.html  /  301

@@ -158,7 +158,7 @@ class DiSiteFooter extends LitElement {
               <a href="mailto:paccakkha@yahoo.com">paccakkha@yahoo.com</a>
             </div>
             <div class="about-link-wrapper">
-              <a href="about.html" class="about-link">
+              <a href="index.html" class="about-link">
                 <i class="bi bi-info-circle"></i>
                 <span>关于"我"</span>
               </a>

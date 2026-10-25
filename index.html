@@ -2,495 +2,2294 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="baidu-site-verification" content="codeva-Tk7siYLedl" />
-    <meta name="keywords" content="佛教 早期佛教 早期佛教经典 早期佛教经藏 早期佛教律藏 南传佛教 原始佛教 上座部佛教 佛陀的正法 阿含经 巴利三藏 南传大藏经 大藏经 禅修 自洲自依 法洲法依 正法律 巴利经典 别译杂阿含 尼柯耶 长部 中部 相应部 增支部 小部 杂阿含经 中阿含经 长阿含经 增一阿含经 经藏 律藏" />
-    <meta name="description" content="法洲法依，自洲自依，分享佛陀正法、律、禅师法语、法谈、禅修经验、书籍推荐、下载，资源共享" />
-    <title>法洲 · 自洲自依 法洲法依</title>
+    <title>关于 | About</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="dist/output.css">
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="home-palette.css">
-    <script src="home-palettes.js"></script>
-    <script src="home-theme.js"></script>
-    <link rel="stylesheet" href="specular-button.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="link.js"></script>
-    <script src="book.js"></script>
-    <script src="index.js"></script>
-    <script src="side-rays-background.js"></script>
-    <script type="module" src="src/components/di-site-footer.js"></script>
-    <script src="specular-button.js" defer></script>
+    <Style>
+        :root {
+            --bg-color: transparent;
+            --text-color: #eeeeee;
+            --secondary-color: #999999;
+            --link-color: #eeeeee;
+            --hover-color: #ffffff;
+            --spacing-unit: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #120f17; /* Fallback color matching Grainient base */
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        body.light-mode {
+            --text-color: #1a1a1a;
+            --secondary-color: #555555;
+            --link-color: #1a1a1a;
+            --hover-color: #000000;
+        }
+
+        main {
+            flex: 1;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 24px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 640px) {
+            main {
+                padding: 40px 16px 20px;
+            }
+        }
+
+        /* Header / Hero */
+        header {
+            /* margin-bottom: 80px; */
+            padding-top: 40px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .bio {
+            margin-top: 24px;
+            font-size: 18px;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        #age-counter {
+            margin-top: 2px;
+        }
+
+        /* Layout Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        .header-title {
+            font-size: 48px;
+        }
+
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 36px;
+            }
+        }
+
+        /* ==========================================================================
+           一、「五蕴法相空性印」沉浸式虚空曼陀罗 (Zen Mandala Overlay)
+           ========================================================================== */
+        .anatta-ego {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            vertical-align: baseline;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        .anatta-ego:hover, .anatta-ego:focus-visible {
+            outline: none;
+        }
+
+        .anatta-ego-char {
+            display: inline-block;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease, opacity 0.35s ease;
+            border-bottom: 1.5px dashed rgba(243, 190, 122, 0.45);
+            padding-bottom: 2px;
+        }
+
+        .anatta-ego:hover .anatta-ego-char {
+            transform: scale(1.06);
+            color: #f3be7a;
+            border-bottom-color: #f3be7a;
+            text-shadow: 0 0 16px rgba(243, 190, 122, 0.65);
+        }
+
+        .anatta-ego-hint {
+            position: absolute;
+            top: -10px;
+            right: -8px;
+            font-size: 10px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: rgba(243, 190, 122, 0.18);
+            color: #f3be7a;
+            border: 1px solid rgba(243, 190, 122, 0.35);
+            border-radius: 9999px;
+            padding: 1px 5px;
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(4px) scale(0.85);
+            transition: all 0.25s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .anatta-ego:hover .anatta-ego-hint {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* 沉浸式虚空遮罩 */
+        .skandha-mandala-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .skandha-mandala-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mandala-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(9, 8, 14, 0.82);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: opacity 0.4s ease;
+        }
+
+        body.light-mode .mandala-backdrop {
+            background: rgba(246, 244, 238, 0.86);
+        }
+
+        .mandala-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 860px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: rgba(25, 20, 28, 0.78);
+            border: 1px solid rgba(243, 190, 122, 0.25);
+            border-radius: 24px;
+            padding: 32px 36px;
+            box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            transform: scale(0.92) translateY(12px);
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        body.light-mode .mandala-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(141, 90, 42, 0.24);
+            box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.15);
+        }
+
+        .skandha-mandala-overlay.active .mandala-container {
+            transform: scale(1) translateY(0);
+        }
+
+        /* 顶部栏 */
+        .mandala-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 16px;
+        }
+
+        body.light-mode .mandala-header {
+            border-bottom-color: rgba(0, 0, 0, 0.08);
+        }
+
+        .mandala-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            color: #f3be7a;
+            font-weight: 500;
+        }
+
+        .mandala-close-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-color);
+            border-radius: 9999px;
+            padding: 5px 14px;
+            font-size: 12px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .mandala-close-btn:hover {
+            background: rgba(243, 190, 122, 0.2);
+            border-color: rgba(243, 190, 122, 0.45);
+            color: #ffffff;
+        }
+
+        /* 刹那相续流转横幅 (Santāna Banner) */
+        .santana-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 8px 14px;
+            background: rgba(243, 190, 122, 0.05);
+            border: 1px dashed rgba(243, 190, 122, 0.22);
+            border-radius: 12px;
+            font-size: 12px;
+            color: var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .santana-banner {
+            background: rgba(141, 90, 42, 0.04);
+            border-color: rgba(141, 90, 42, 0.22);
+        }
+
+        .santana-status-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .santana-pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #f3be7a;
+            box-shadow: 0 0 8px rgba(243, 190, 122, 0.85);
+            animation: santana-pulse 1.25s infinite ease-in-out;
+            flex-shrink: 0;
+        }
+
+        .santana-banner.paused .santana-pulse-dot {
+            animation: none;
+            opacity: 0.45;
+            box-shadow: none;
+        }
+
+        @keyframes santana-pulse {
+            0%, 100% { transform: scale(0.8); opacity: 0.35; box-shadow: 0 0 4px rgba(243, 190, 122, 0.3); }
+            50% { transform: scale(1.35); opacity: 1; box-shadow: 0 0 12px rgba(243, 190, 122, 0.9), 0 0 3px #ffffff; }
+        }
+
+        .santana-toggle-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f3be7a;
+            border-radius: 9999px;
+            padding: 2px 10px;
+            font-size: 11px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s ease;
+        }
+
+        body.light-mode .santana-toggle-btn {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: #8d5a2a;
+        }
+
+        .santana-toggle-btn:hover {
+            background: rgba(243, 190, 122, 0.18);
+            border-color: rgba(243, 190, 122, 0.45);
+            color: #ffffff;
+        }
+
+        body.light-mode .santana-toggle-btn:hover {
+            background: rgba(141, 90, 42, 0.12);
+            color: #8d5a2a;
+        }
+
+        /* 中央五方法印网格 */
+        .mandala-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+            margin: 6px 0;
+        }
+
+        .skandha-card {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 18px;
+            padding: 22px 14px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        body.light-mode .skandha-card {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.06);
+        }
+
+        .skandha-card:hover {
+            transform: translateY(-4px);
+            background: rgba(243, 190, 122, 0.08);
+            border-color: rgba(243, 190, 122, 0.4);
+            box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.5);
+        }
+
+        body.light-mode .skandha-card:hover {
+            background: rgba(141, 90, 42, 0.08);
+            border-color: rgba(141, 90, 42, 0.35);
+        }
+
+        /* 方案1核心：相续流转激活态 (Active Flux) */
+        .skandha-card.active-flux {
+            transform: translateY(-6px);
+            background: rgba(243, 190, 122, 0.12);
+            border-color: rgba(243, 190, 122, 0.6);
+            box-shadow: 0 14px 34px -8px rgba(243, 190, 122, 0.3), 0 0 0 1px rgba(243, 190, 122, 0.35);
+        }
+
+        body.light-mode .skandha-card.active-flux {
+            background: rgba(141, 90, 42, 0.1);
+            border-color: rgba(141, 90, 42, 0.55);
+            box-shadow: 0 14px 34px -8px rgba(141, 90, 42, 0.2);
+        }
+
+        /* 刹那生灭呼吸光条 */
+        .skandha-flux-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f3be7a 50%, transparent);
+            opacity: 0;
+            transform: scaleX(0.2);
+            transition: all 0.35s ease;
+        }
+
+        .skandha-card.active-flux .skandha-flux-bar {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+
+        .skandha-card.active-flux .skandha-glyph {
+            transform: scale(1.15);
+            color: #ffffff;
+            text-shadow: 0 0 24px rgba(243, 190, 122, 0.95), 0 0 6px #ffffff;
+        }
+
+        body.light-mode .skandha-card.active-flux .skandha-glyph {
+            color: #8d5a2a;
+            text-shadow: 0 0 16px rgba(141, 90, 42, 0.45);
+        }
+
+        .skandha-card.active-flux .skandha-simile {
+            background: rgba(243, 190, 122, 0.25);
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(243, 190, 122, 0.35);
+        }
+
+        body.light-mode .skandha-card.active-flux .skandha-simile {
+            background: rgba(141, 90, 42, 0.2);
+            color: #8d5a2a;
+        }
+
+        /* 五蕴大字 (38px 经院宋体) */
+        .skandha-glyph {
+            font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+            font-size: 38px;
+            font-weight: 600;
+            color: #f3be7a;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 0 0 16px rgba(243, 190, 122, 0.45);
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .skandha-card:hover .skandha-glyph {
+            transform: scale(1.1);
+            text-shadow: 0 0 24px rgba(243, 190, 122, 0.8), 0 0 4px #ffffff;
+        }
+
+        .skandha-pali {
+            font-family: "Noto Serif SC", "Georgia", "Songti SC", serif;
+            font-style: italic;
+            font-size: 13px;
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+            letter-spacing: 0.04em;
+        }
+
+        .skandha-simile {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-color);
+            padding: 3px 8px;
+            background: rgba(243, 190, 122, 0.12);
+            border-radius: 6px;
+            margin-bottom: 8px;
+            white-space: nowrap;
+        }
+
+        .skandha-desc {
+            font-size: 11px;
+            color: var(--secondary-color);
+            line-height: 1.45;
+            opacity: 0.85;
+        }
+
+        /* 底部经文引言 */
+        .mandala-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 16px;
+            text-align: center;
+        }
+
+        body.light-mode .mandala-footer {
+            border-top-color: rgba(0, 0, 0, 0.08);
+        }
+
+        .mandala-verse {
+            font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+            font-size: 14px;
+            letter-spacing: 0.06em;
+            color: #f3be7a;
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+
+        .mandala-sub {
+            font-size: 11px;
+            color: var(--secondary-color);
+            opacity: 0.65;
+            display: block;
+        }
+
+        /* 移动端响应式流式布局 */
+        @media (max-width: 720px) {
+            .mandala-container {
+                padding: 20px 16px;
+                gap: 16px;
+                border-radius: 20px;
+            }
+
+            .mandala-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                max-height: 52vh;
+                overflow-y: auto;
+                padding-right: 4px;
+            }
+
+            .skandha-card {
+                flex-direction: row;
+                text-align: left;
+                padding: 12px 14px;
+                gap: 14px;
+                align-items: center;
+            }
+
+            .skandha-glyph {
+                font-size: 28px;
+                margin-bottom: 0;
+                min-width: 32px;
+                text-align: center;
+            }
+
+            .skandha-meta-wrap {
+                flex: 1;
+            }
+
+            .skandha-top-row {
+                display: flex;
+                align-items: baseline;
+                gap: 8px;
+                margin-bottom: 2px;
+            }
+
+            .skandha-simile {
+                display: inline-block;
+                padding: 1px 6px;
+                font-size: 12px;
+                margin-bottom: 0;
+            }
+
+            .skandha-pali {
+                margin-bottom: 0;
+                font-size: 12px;
+            }
+
+            .skandha-desc {
+                font-size: 11px;
+            }
+
+            .mandala-verse {
+                font-size: 12px;
+            }
+        }
+
+        /* ==========================================================================
+           六、「命根流沙」与「刹那尽朽粒子消散」 (Kāla Strand & Dissolution)
+           ========================================================================== */
+        /* 顶部吸顶命根流沙线 */
+        .kala-strand-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.04);
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .kala-strand-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #8d5a2a 0%, #d97706 40%, #f3be7a 75%, #ffffff 100%);
+            box-shadow: 0 0 10px rgba(243, 190, 122, 0.75);
+            position: relative;
+            transition: width 0.1s linear;
+        }
+
+        /* 前端燃烧微粒子火花 */
+        .kala-strand-spark {
+            position: absolute;
+            top: -3px;
+            right: -2px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 0 12px #f3be7a, 0 0 4px #ffffff;
+            animation: kala-spark-burn 0.8s infinite alternate ease-in-out;
+        }
+
+        @keyframes kala-spark-burn {
+            0% { transform: scale(0.85); opacity: 0.7; box-shadow: 0 0 8px #f3be7a; }
+            100% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 16px #f3be7a, 0 0 6px #ffffff; }
+        }
+
+        /* 顶部流沙信息胶囊 (低调微小) */
+        .kala-strand-info {
+            position: fixed;
+            top: 8px;
+            right: 18px;
+            z-index: 999;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 2px 10px;
+            border-radius: 9999px;
+            background: rgba(18, 15, 23, 0.7);
+            border: 1px solid rgba(243, 190, 122, 0.22);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            font-size: 11px;
+            color: var(--secondary-color);
+            transition: all 0.25s ease;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .kala-strand-info:hover {
+            border-color: rgba(243, 190, 122, 0.45);
+            background: rgba(18, 15, 23, 0.9);
+        }
+
+        .kala-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #f3be7a;
+            box-shadow: 0 0 6px #f3be7a;
+            animation: santana-pulse 1.2s infinite ease-in-out;
+        }
+
+        .kala-countdown {
+            font-family: 'Roboto Mono', monospace;
+            color: #f3be7a;
+            font-size: 11px;
+            font-variant-numeric: tabular-nums;
+            min-width: 24px;
+        }
+
+        .kala-quick-btn {
+            background: rgba(243, 190, 122, 0.15);
+            border: 1px solid rgba(243, 190, 122, 0.35);
+            color: #f3be7a;
+            border-radius: 9999px;
+            padding: 1px 7px;
+            font-size: 10px;
+            cursor: pointer;
+            line-height: 1.3;
+            transition: all 0.2s ease;
+        }
+
+        .kala-quick-btn:hover {
+            background: rgba(243, 190, 122, 0.3);
+            color: #ffffff;
+        }
+
+        /* 页面主体消散过渡状态 */
+        main, footer {
+            transition: filter 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.4s ease, transform 1.4s ease;
+        }
+
+        .page-dissolved main, .page-dissolved footer {
+            filter: blur(12px);
+            opacity: 0;
+            transform: scale(0.96);
+            pointer-events: none;
+        }
+
+        /* 全屏粒子崩解画布 */
+        #dissolution-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* 寂灭归空名偈浮层 */
+        .nibbana-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nibbana-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .nibbana-card {
+            max-width: 580px;
+            width: 100%;
+            text-align: center;
+            padding: 40px 32px;
+            background: rgba(20, 16, 24, 0.75);
+            border: 1px solid rgba(243, 190, 122, 0.3);
+            border-radius: 24px;
+            box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(243, 190, 122, 0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transform: scale(0.92);
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        body.light-mode .nibbana-card {
+            background: rgba(255, 255, 255, 0.88);
+            border-color: rgba(141, 90, 42, 0.28);
+            box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.15);
+        }
+
+        .nibbana-overlay.active .nibbana-card {
+            transform: scale(1);
+        }
+
+        .nibbana-sign {
+            font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+            font-size: 14px;
+            letter-spacing: 0.2em;
+            color: #f3be7a;
+            border-bottom: 1px dashed rgba(243, 190, 122, 0.4);
+            padding-bottom: 4px;
+        }
+
+        .nibbana-verse {
+            font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+            font-size: 24px;
+            line-height: 1.8;
+            font-weight: 500;
+            color: #ffffff;
+            letter-spacing: 0.08em;
+            text-shadow: 0 0 20px rgba(243, 190, 122, 0.5);
+            margin: 4px 0;
+        }
+
+        body.light-mode .nibbana-verse {
+            color: #1a1a1a;
+            text-shadow: 0 0 20px rgba(141, 90, 42, 0.2);
+        }
+
+        @media (max-width: 480px) {
+            .nibbana-verse {
+                font-size: 18px;
+                line-height: 1.7;
+            }
+        }
+
+        .nibbana-source {
+            font-size: 13px;
+            color: var(--secondary-color);
+            letter-spacing: 0.05em;
+        }
+
+        .nibbana-desc {
+            font-size: 12px;
+            color: #f3be7a;
+            opacity: 0.8;
+            font-style: italic;
+            letter-spacing: 0.06em;
+        }
+
+        .nibbana-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .rebirth-btn,
+        .nibbana-home-btn {
+            box-sizing: border-box;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 38px;
+            padding: 0 22px;
+            font-size: 13px;
+            font-family: inherit;
+            line-height: 1;
+            border-radius: 9999px;
+            gap: 8px;
+            text-decoration: none;
+            margin: 0;
+            vertical-align: middle;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .rebirth-btn {
+            background: rgba(243, 190, 122, 0.16);
+            border: 1px solid rgba(243, 190, 122, 0.45);
+            color: #f3be7a;
+            cursor: pointer;
+            box-shadow: 0 0 16px rgba(243, 190, 122, 0.2);
+        }
+
+        .rebirth-btn:hover {
+            background: rgba(243, 190, 122, 0.28);
+            border-color: rgba(243, 190, 122, 0.7);
+            color: #ffffff;
+            box-shadow: 0 0 24px rgba(243, 190, 122, 0.45);
+            transform: translateY(-2px);
+        }
+
+        .nibbana-home-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        body.light-mode .nibbana-home-btn {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.15);
+            color: var(--text-color);
+        }
+
+        .nibbana-home-btn:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        body.light-mode .nibbana-home-btn:hover {
+            background: rgba(0, 0, 0, 0.09);
+            color: #000000;
+        }
+
+        /* 标题行与出入息念 (Ānāpāna) 律动 */
+        .section-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .anapana-pulse {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 3px 10px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            font-size: 11px;
+            color: var(--secondary-color);
+            user-select: none;
+            -webkit-user-select: none;
+            cursor: help;
+            transition: all 0.25s ease;
+        }
+
+        .anapana-pulse:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(243, 190, 122, 0.4);
+        }
+
+        .anapana-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #f3be7a;
+            display: inline-block;
+            animation: anapana-cycle 10s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .anapana-text {
+            font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+            font-size: 11px;
+            font-weight: 600;
+            color: #f3be7a;
+            min-width: 14px;
+            text-align: center;
+        }
+
+        @keyframes anapana-cycle {
+            /* 0s ~ 4s 为吸气：光点柔和膨胀充盈 */
+            0% {
+                transform: scale(0.75);
+                opacity: 0.35;
+                box-shadow: 0 0 0 rgba(243, 190, 122, 0);
+            }
+            40% {
+                transform: scale(1.4);
+                opacity: 1;
+                box-shadow: 0 0 12px rgba(243, 190, 122, 0.85), 0 0 3px #ffffff;
+            }
+            /* 4s ~ 10s 为呼气：徐徐收拢释放微光 */
+            100% {
+                transform: scale(0.75);
+                opacity: 0.35;
+                box-shadow: 0 0 0 rgba(243, 190, 122, 0);
+            }
+        }
+
+        /* 死随念 (Memento Mori) 计数器盒 */
+        .memento-counter-box {
+            position: relative;
+            padding: 14px 18px;
+            margin-top: 10px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            transition: all 0.25s ease;
+        }
+
+        .memento-counter-box:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(243, 190, 122, 0.35);
+            box-shadow: 0 6px 24px -6px rgba(0, 0, 0, 0.6);
+        }
+
+        .memento-counter-box:focus-visible {
+            outline: 2px solid #f3be7a;
+            outline-offset: 2px;
+        }
+
+        .memento-counter-box .age-display {
+            margin-top: 0;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, color 0.25s ease;
+        }
+
+        .memento-counter-box.flip-active .age-display {
+            transform: scale(0.96);
+            opacity: 0.3;
+        }
+
+        /* 模式微提示文案 */
+        .memento-mode-hint {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--secondary-color);
+            margin-top: 6px;
+            opacity: 0.85;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .memento-counter-box:hover .memento-mode-hint {
+            opacity: 1;
+            color: #f3be7a;
+        }
+
+        .memento-mode-hint i {
+            font-size: 11px;
+            transition: transform 0.35s ease;
+        }
+
+        .memento-counter-box:hover .memento-mode-hint i {
+            transform: rotate(180deg);
+        }
+
+        /* 风化生命细线 (Life Strand) */
+        .life-strand-wrapper {
+            position: relative;
+            width: 100%;
+            height: 3px;
+            margin-top: 14px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .life-strand-bar {
+            height: 100%;
+            width: 0%;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #8d5a2a 0%, #f3be7a 70%, #ffffff 100%);
+            box-shadow: 0 0 8px rgba(243, 190, 122, 0.6);
+            transition: width 0.3s ease;
+        }
+
+        /* 倒计时模式（死随念·百岁尚余）微调 */
+        .memento-counter-box.mode-remaining .life-strand-bar {
+            background: linear-gradient(90deg, #b91c1c 0%, #ea580c 50%, #f3be7a 100%);
+            box-shadow: 0 0 10px rgba(234, 88, 12, 0.7);
+        }
+
+        .memento-counter-box.mode-remaining .age-display {
+            color: #fed7aa;
+        }
+
+        /* 天地四时与月相状态坞 */
+        .cosmic-status-bar {
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 9px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 12px;
+            font-size: 0.82rem;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .cosmic-cruise-btn {
+            background: rgba(141, 90, 42, 0.14);
+            border: 1px solid rgba(141, 90, 42, 0.28);
+            color: #f3be7a;
+            border-radius: 9999px;
+            padding: 3px 10px;
+            font-size: 0.72rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 480px) {
+            .cosmic-status-bar {
+                padding: 10px 12px;
+                gap: 8px;
+            }
+            .cosmic-status-info {
+                font-size: 0.76rem;
+                flex: 1;
+                min-width: 170px;
+            }
+        }
+
+        /* ==========================================================================
+           三、「风中细沙」—— 文本风化与不可执取 (Text Weathering)
+           ========================================================================== */
+
+        /* 瞬息水痕选区 (Text Selection) */
+        ::selection {
+            background: rgba(243, 190, 122, 0.28);
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(243, 190, 122, 0.65);
+        }
+
+        ::-moz-selection {
+            background: rgba(243, 190, 122, 0.28);
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(243, 190, 122, 0.65);
+        }
+
+        /* 抓不住的文字：框选释放时刹那生灭虚化 */
+        .text-weathered {
+            animation: text-evaporate 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes text-evaporate {
+            0% {
+                filter: blur(0);
+                opacity: 1;
+            }
+            30% {
+                filter: blur(2px);
+                opacity: 0.65;
+                text-shadow: 0 0 12px rgba(243, 190, 122, 0.85);
+            }
+            100% {
+                filter: blur(0);
+                opacity: 1;
+                text-shadow: none;
+            }
+        }
+
+        /* 字符衰变重组 · 巴利倒影 (Pāli Drift) */
+        .pali-drift {
+            position: relative;
+            display: inline-block;
+            vertical-align: baseline;
+            cursor: pointer;
+        }
+
+        .pali-drift-zh {
+            display: inline-block;
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .pali-drift-pi {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, calc(-50% + 4px)) scale(0.95);
+            opacity: 0;
+            filter: blur(3px);
+            font-family: "Noto Serif SC", "Georgia", "Songti SC", serif;
+            font-style: italic;
+            font-size: 0.88em;
+            letter-spacing: 0.05em;
+            color: #f3be7a;
+            text-shadow: 0 0 10px rgba(243, 190, 122, 0.75);
+            white-space: nowrap;
+            pointer-events: none;
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 5;
+        }
+
+        /* 激活动态倒影（悬停或自动周期微漾） */
+        .pali-drift:hover .pali-drift-zh,
+        .pali-drift.drifting .pali-drift-zh {
+            opacity: 0;
+            filter: blur(3px);
+            transform: translateY(-4px);
+        }
+
+        .pali-drift:hover .pali-drift-pi,
+        .pali-drift.drifting .pali-drift-pi {
+            opacity: 0.95;
+            filter: blur(0);
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            /* margin-bottom: 24px; */
+            font-weight: 500;
+        }
+
+        .item-list {
+            list-style: none;
+        }
+
+        .item {
+            margin-bottom: 24px;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .item-year {
+            font-family: monospace;
+            color: var(--secondary-color);
+            width: 60px;
+            flex-shrink: 0;
+            font-size: 14px;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-title {
+            font-weight: 500;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .item-desc {
+            font-size: 14px;
+        }
+
+        /* Links */
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: opacity 0.2s;
+            border-bottom: 1px solid transparent;
+        }
+
+        a:hover {
+            opacity: 0.7;
+        }
+        
+        .nav-link {
+           display: block;
+           margin-bottom: 12px; 
+        }
+
+        /* Floating interaction from reference */
+        .interactive-corner {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            overflow: hidden;
+            z-index: 100;
+        }
+        
+        .corner-fold {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 40px 40px 0;
+            border-color: transparent #333 transparent transparent; 
+            opacity: 0.1;
+            transition: all 0.3s ease;
+        }
+        
+        .interactive-corner:hover .corner-fold {
+            border-width: 0 50px 50px 0;
+            opacity: 0.2;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 24px;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            footer {
+                border-top-color: rgba(255,255,255,0.05);
+            }
+        }
+
+        @media (max-width: 640px) {
+            footer {
+                padding: 30px 16px;
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .social-links a {
+            font-size: 18px;
+        }
+        
+        .back-link {
+            font-size: 14px;
+        }
+
+        .age-display {
+            font-family: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: clamp(16px, 5.2vw, 32px);
+            font-weight: 300;
+            color: var(--text-color);
+            letter-spacing: -0.5px;
+            margin-top: 8px;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: clip;
+        }
+
+        /* CRT Flicker Effect & Tooltip */
+        .hello {
+            display: inline-block;
+            animation: crt-flicker 0.15s infinite;
+            text-shadow: 
+                2px 0 1px rgba(255,0,0,0.5),
+                -2px 0 1px rgba(0,255,255,0.5);
+            position: relative;
+        }
+
+        .dhamma, .longevity, .dhamma-enthusiasts {
+            position: relative;
+            cursor: help;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.4);
+            display: inline-block;
+        }
+
+        .hello::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .quote-tooltip {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            padding: 20px;
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #eeeeee;
+            font-size: 14px;
+            line-height: 1.6;
+            border-radius: 12px;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            font-weight: 300;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            text-shadow: none;
+            white-space: normal;
+            letter-spacing: normal;
+            text-transform: none;
+        }
+
+        .quote-tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px;
+            border-style: solid;
+            border-color: rgba(20, 20, 20, 0.7) transparent transparent transparent;
+        }
+
+        .dhamma:hover .quote-tooltip,
+        .longevity:hover .quote-tooltip,
+        .dhamma-enthusiasts:hover .quote-tooltip {
+            visibility: visible;
+            opacity: 1;
+            bottom: 140%;
+        }
+
+
+        .job-title {
+            font-weight: bold;
+            margin-bottom: 12px;
+            /* margin-top: 36px; - Removed to allow closer fit */
+        }
+        
+        .right-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .job-info {
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .quote-tooltip {
+                position: fixed;
+                bottom: -100px;
+                left: 20px;
+                right: 20px;
+                width: auto;
+                transform: none;
+                z-index: 1001;
+                transition: all 0.3s ease;
+            }
+
+            .quote-tooltip::after {
+                display: none;
+            }
+
+            .dhamma:hover .quote-tooltip,
+            .longevity:hover .quote-tooltip,
+            .dhamma-enthusiasts:hover .quote-tooltip {
+                visibility: visible;
+                opacity: 1;
+                bottom: 80px;
+            }
+        }
+
+        @keyframes crt-flicker {
+            0% { opacity: 0.27861; }
+            5% { opacity: 0.34769; }
+            10% { opacity: 0.23604; }
+            15% { opacity: 0.90626; }
+            20% { opacity: 0.18128; }
+            25% { opacity: 0.83891; }
+            30% { opacity: 0.65583; }
+            35% { opacity: 0.57807; }
+            40% { opacity: 0.26559; }
+            45% { opacity: 0.84693; }
+            50% { opacity: 0.96019; }
+            55% { opacity: 0.08594; }
+            60% { opacity: 0.20313; }
+            65% { opacity: 0.71988; }
+            70% { opacity: 0.34241; }
+            75% { opacity: 0.93039; }
+            80% { opacity: 0.55104; }
+            85% { opacity: 0.87113; }
+            90% { opacity: 0.42211; }
+            95% { opacity: 0.13397; }
+            100% { opacity: 0.35102; }
+        }
+
+    </Style>
 </head>
-<body class="bg-dharma-bg font-sans home-bg">
-    <!-- 左侧兰草：传马守真《兰石图》局部处理，来源见 img/ink-orchid-source.md。 -->
-    <div class="home-ink-orchid" aria-hidden="true">
-        <img src="img/ink-orchid.png" alt="" decoding="async">
+<body>
+    <!-- 六、「命根流沙」吸顶进度条与刹那尽朽微印 -->
+    <div id="kala-strand-wrapper" class="kala-strand-wrapper" title="命根流逝 · 刹那尽朽（悬停暂停，点击灭度）">
+        <div class="kala-strand-bar" id="kala-strand-bar">
+            <div class="kala-strand-spark"></div>
+        </div>
     </div>
-    <!-- 墨竹背景：仅点缀宽屏右侧留白 -->
-    <div class="home-ink-bamboo" aria-hidden="true">
-        <img src="img/ink-bamboo.png" alt="" decoding="async">
+    <div class="kala-strand-info" id="kala-strand-info" title="命根流逝 · 刹那尽朽">
+        <div class="kala-dot" aria-hidden="true"></div>
+        <span>命根流逝</span>
+        <span class="kala-countdown" id="kala-countdown">24s</span>
+        <button type="button" class="kala-quick-btn" id="kala-quick-btn" title="立即体悟刹那尽朽">灭</button>
     </div>
 
-    <!-- 留言板悬浮入口 -->
-    <button class="message-board-toggle" onclick="openMessageBoard()" title="法友留言板" aria-label="打开法友留言板">
-        <i class="bi bi-chat-dots-fill"></i>
-        <span class="message-board-toggle__label">留言</span>
-    </button>
-    
-    <!-- 留言板弹窗 -->
-    <div class="message-modal" id="messageModal" onclick="closeMessageBoard(event)">
-        <div class="message-modal-content" onclick="event.stopPropagation()">
-            <!-- 头部 -->
-            <div class="message-header">
-                <h2 class="text-2xl font-medium text-dharma-brown flex items-center gap-2">
-                    <i class="bi bi-chat-dots"></i>
-                    <span>法友留言板</span>
-                </h2>
-                <button class="close-modal-btn" onclick="closeMessageBoard()" aria-label="关闭留言板">
-                    <i class="bi bi-x-lg"></i>
+    <!-- 全屏粒子瓦解物理画布 -->
+    <canvas id="dissolution-canvas"></canvas>
+
+    <!-- 寂灭归空名偈浮层 -->
+    <div id="nibbana-overlay" class="nibbana-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="一切有为法 · 刹那尽朽寂灭">
+        <div class="nibbana-card">
+            <div class="nibbana-sign">诸行无常 · 寂灭为乐</div>
+            <p class="nibbana-verse">
+                诸行无常，是生灭法；<br/>
+                生灭灭已，寂灭为乐。
+            </p>
+            <p class="nibbana-source">——《大般涅槃经》</p>
+            <div class="nibbana-desc">比丘！諸行如幻，如炎，剎那時頃盡朽，不實來、實去。--《杂阿含》273经</div>
+            <div class="nibbana-actions">
+                <button type="button" id="rebirth-btn" class="rebirth-btn" title="因缘重聚 · 万象复生">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                    <span>因缘和合 · 重新聚起</span>
                 </button>
-            </div>
-            
-            <!-- 标签切换 -->
-            <div style="padding: 1.5rem 2rem 0;">
-                <div class="tab-buttons">
-                    <button class="tab-btn active" onclick="switchTab('view')">
-                        <i class="bi bi-list-ul"></i> 查看留言
-                    </button>
-                    <button class="tab-btn" onclick="switchTab('write')">
-                        <i class="bi bi-pencil-square"></i> 写留言
-                    </button>
-                </div>
-            </div>
-            
-            <!-- 留言列表 -->
-            <div class="message-body" id="messageList">
-                <div class="empty-state">
-                    <i class="bi bi-hourglass-split"></i>
-                    <p>加载中...</p>
-                </div>
-            </div>
-            
-            <!-- 留言表单 -->
-            <div class="message-form" id="messageForm" style="display: none;">
-                <div style="margin-bottom: 1rem;">
-                    <label class="block text-sm font-medium text-gray-700 mb-2" style="color: var(--color-text-emphasized, #8d5a2a);">
-                        <i class="bi bi-person"></i> 昵称 <span style="color: #dc2626;">*</span>
-                    </label>
-                    <input type="text" id="username" class="form-input" placeholder="请输入您的昵称" required>
-                </div>
-                
-                <div style="margin-bottom: 1rem;">
-                    <label class="block text-sm font-medium text-gray-700 mb-2" style="color: var(--color-text-emphasized, #8d5a2a);">
-                        <i class="bi bi-envelope"></i> 邮箱（可选）
-                    </label>
-                    <input type="email" id="email" class="form-input" placeholder="your@email.com">
-                </div>
-                
-                <div style="margin-bottom: 1.5rem;">
-                    <label class="block text-sm font-medium text-gray-700 mb-2" style="color: var(--color-text-emphasized, #8d5a2a);">
-                        <i class="bi bi-chat-text"></i> 留言内容 <span style="color: #dc2626;">*</span>
-                    </label>
-                    <textarea id="content" class="form-input" placeholder="分享您的感悟、问题或建议..." required></textarea>
-                </div>
-                
-                <button class="submit-btn" onclick="submitMessage()">
-                    <i class="bi bi-send"></i>
-                    <span>提交留言</span>
-                </button>
-                
-                <p class="text-xs text-gray-500 mt-3 text-center">
-                    <i class="bi bi-info-circle"></i> 留言需要审核后才会显示
-                </p>
+                <a href="home.html" class="nibbana-home-btn" title="前往法洲主站 · 浏览经文典籍与法语甘露">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span>访问首页</span>
+                </a>
             </div>
         </div>
     </div>
-    
-    <!-- 一体式禅意顶栏（Sticky Zen Header） -->
-    <header class="zen-header">
-        <div class="zen-header__inner">
-            <!-- 品牌与法印 -->
-            <a href="#" class="zen-brand" aria-label="法洲首页">
-                <span class="zen-brand__seal" aria-hidden="true">
-                    <i class="bi bi-flower1"></i>
-                </span>
-                <div class="zen-brand__text">
-                    <span class="zen-brand__title">法洲</span>
-                    <span class="zen-brand__subtitle">真理是最上之甘味</span>
-                </div>
-            </a>
 
-            <!-- 章节快速导览 -->
-            <nav class="zen-nav" aria-label="页面章节导航">
-                <a href="#section-dhamma" class="zen-nav__link">
-                    <i class="bi bi-droplet-half"></i>
-                    <span>法语甘露</span>
-                </a>
-                <a href="#section-articles" class="zen-nav__link">
-                    <i class="bi bi-journal-richtext"></i>
-                    <span>法义文章</span>
-                </a>
-                <a href="#section-books" class="zen-nav__link">
-                    <i class="bi bi-book"></i>
-                    <span>推荐典籍</span>
-                </a>
-                <a href="#section-links" class="zen-nav__link">
-                    <i class="bi bi-compass"></i>
-                    <span>法源名录</span>
-                </a>
-            </nav>
+    <div class="interactive-corner" title="Home">
+        <a href="home.html" style="display:block; width:100%; height:100%;">
+            <div class="corner-fold"></div>
+        </a>
+    </div>
 
-            <!-- 右侧胶囊控制坞：整合配色选择、明暗切换、视图密度 -->
-            <div class="zen-control-dock" role="group" aria-label="界面外观与视图控制">
-                <div class="home-palette-control" title="切换首页配色方案">
-                    <i class="bi bi-palette2 zen-palette-icon" aria-hidden="true"></i>
-                    <label for="home-palette" class="sr-only">配色</label>
-                    <select id="home-palette" aria-label="首页配色方案"></select>
-                </div>
-                <span class="zen-dock-divider" aria-hidden="true"></span>
-                <button class="theme-toggle" onclick="toggleTheme()" title="切换明暗主题" aria-label="切换明暗主题">
-                    <i id="theme-icon" class="bi bi-moon-stars-fill"></i>
-                </button>
-                <button class="view-toggle" onclick="toggleViewMode()" title="切换紧凑/舒展视图" aria-label="切换紧凑或舒展视图">
-                    <i id="view-icon" class="bi bi-grid-3x3-gap-fill"></i>
-                </button>
-            </div>
-        </div>
-    </header>
+    <main>
+        <header>
+            <h1 class="header-title"><p class="hello"><span class="anatta-ego" id="anatta-ego" role="button" tabindex="0" title="点击参究：究竟法无我 · 五蕴离散聚灭" aria-haspopup="dialog" aria-expanded="false"><span class="anatta-ego-char">“我”</span><span class="anatta-ego-hint">五蕴解</span></span>是"洪達"。</p></h1>
+            <p class="bio">
+                <span class="dhamma-enthusiasts">法与<span class="pali-drift" title="修习 · 培育"><span class="pali-drift-zh">禅修</span><span class="pali-drift-pi" aria-hidden="true">Bhāvanā</span></span>的爱好者，<span class="quote-tooltip">「乐于法者、爱好法者，审虑法者，<br/>　　　随念法的比丘，他不退失正法。<br/>　　　当行或站，坐或者卧时，<br/>　　　有向内会集的心，他就到达寂静。」--如是语86经</span></span><br/>
+                这里是我的<a href="home.html">法洲主站</a>，用于分享佛陀的<span class="dhamma"><span class="pali-drift" title="正法律"><span class="pali-drift-zh">法与律</span><span class="pali-drift-pi" aria-hidden="true">Dhamma-Vinaya</span></span><span class="quote-tooltip">阿难！但，你们可能会这么想：『大师的教语已过去了，我们没有大师了。』但，阿难！不应该这样认为，阿难！凡你们被我教导、告知的法与律，我死后就是你们的大师。--《大般涅槃经》</span></span>、禅师法谈、相关书籍等。<br/>
+                <span class="longevity">愿<span class="pali-drift" title="正法 · 清净之法"><span class="pali-drift-zh">正法</span><span class="pali-drift-pi" aria-hidden="true">Saddhamma</span></span>久住。<span class="quote-tooltip">阿难！我对你们这么说：「你们应该使被我设立的这个善的行法转起，不要成为最后一人。」--中部83经</span></span>
+            </p>
+        </header>
 
-    <main class="zen-main max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-        <!-- 卷首禅牌：今日/最新法语独立展示区 -->
-        <section class="zen-hero mb-12 md:mb-16" aria-labelledby="latest-dhamma-heading">
-            <div id="latest-dhamma" class="zen-hero-card">
-                <!-- 四角折线古籍装饰 -->
-                <span class="zen-corner zen-corner--tl" aria-hidden="true"></span>
-                <span class="zen-corner zen-corner--tr" aria-hidden="true"></span>
-                <span class="zen-corner zen-corner--bl" aria-hidden="true"></span>
-                <span class="zen-corner zen-corner--br" aria-hidden="true"></span>
-
-                <div class="zen-hero-card__inner">
-                    <!-- 顶部题签 -->
-                    <div class="zen-hero-card__header">
-                        <span id="latest-dhamma-heading" class="zen-hero-badge">
-                            <i class="bi bi-flower1"></i>
-                            <span>今日一味 · 最新法语</span>
-                        </span>
-                        <span class="zen-hero-number">
-                            第 <span id="latest-number">-</span> 则
-                        </span>
+        <div class="grid">
+            <div class="right-col">
+                <div class="section memento-mori-section">
+                    <div class="section-title-row">
+                        <h1 class="section-title" id="counter-title"><span class="pali-drift" id="title-drift" title="诸行无常"><span class="pali-drift-zh" id="title-drift-zh">逝者如斯夫</span><span class="pali-drift-pi" id="title-drift-pi" aria-hidden="true">Aniccā</span></span>：</h1>
+                        <!-- 出入息念环境微律动指示器 -->
+                        <div class="anapana-pulse" title="人命在呼吸间 · 出入息念（4秒入息 · 6秒出息）" aria-label="出入息律动">
+                            <span class="anapana-dot" aria-hidden="true"></span>
+                            <span class="anapana-text" id="anapana-state">吸</span>
+                        </div>
                     </div>
 
-                    <!-- 法语核心内容（衬线书卷体） -->
-                    <blockquote id="latest-dhamma-text" class="zen-hero-quote">
-                        加载中...
-                    </blockquote>
-
-                    <!-- 底部静谧操作区 -->
-                    <div class="zen-hero-card__footer">
-                        <span class="zen-hero-motto">自洲自依 · 法洲法依</span>
-                        <div class="zen-hero-actions">
-                            <button 
-                                id="latest-copy-btn"
-                                type="button"
-                                class="zen-btn zen-btn--ghost"
-                                onclick="copyLatestDhamma()"
-                            >
-                                <i class="bi bi-clipboard"></i>
-                                <span>复制法语</span>
-                            </button>
-                            <a 
-                                id="latest-read-more"
-                                href="#" 
-                                class="zen-btn zen-btn--primary"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style="display:none;"
-                            >
-                                <span>溯源读经</span>
-                                <i class="bi bi-arrow-up-right"></i>
-                            </a>
+                    <!-- 可点击翻转的生命计数容器 (已逝岁月 vs 百岁尚余) -->
+                    <div class="memento-counter-box" id="memento-box" role="button" tabindex="0" title="点击切换视角：已逝岁月 / 百岁尚余 (死随念)" aria-label="点击切换已逝岁月与百岁尚余视角">
+                        <div id="age-counter" class="age-display"></div>
+                        <div class="memento-mode-hint" id="memento-hint">
+                            <i class="bi bi-arrow-repeat"></i>
+                            <span id="memento-hint-text">已历岁月 · 逝者如斯（点击参死随念）</span>
+                        </div>
+                        <!-- 风化生命细线 (Life Strand) -->
+                        <div class="life-strand-wrapper" aria-hidden="true">
+                            <div class="life-strand-bar" id="life-strand-bar"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- 法语甘露 · 沉浸式阅经台 -->
-        <section id="section-dhamma" class="md3-container zen-reader-section mb-16 md:mb-20">
-            <!-- 阅经台头部与一体式寻法工具栏 -->
-            <div class="zen-section-header zen-section-header--reader">
-                <div class="zen-section-title-group">
-                    <span class="zen-section-eyebrow">DHAMMA NECTAR</span>
-                    <h2 class="zen-section-title">
-                        <i class="bi bi-droplet-half"></i>
-                        <span>法语甘露</span>
-                    </h2>
-                    <p class="zen-section-desc">漫步经藏与禅师法谈，检索契入心扉的法义</p>
-                </div>
-
-                <!-- 寻法工具栏：整合搜索与随机漫步 -->
-                <div class="zen-command-bar">
-                    <div class="zen-search-box">
-                        <i class="bi bi-search zen-search-box__icon" aria-hidden="true"></i>
-                        <input 
-                            type="text" 
-                            id="search-input" 
-                            class="md3-search-field zen-search-input"
-                            placeholder="检索法语关键词（如：正念、无常、五蕴）..." 
-                            onkeypress="if(event.key==='Enter') searchDhamma()"
-                        >
-                        <button 
-                            id="search-button"
-                            type="button"
-                            aria-label="搜索法语"
-                            class="specular-button specular-button--search"
-                            onclick="searchDhamma()"
-                        >
-                            <canvas class="specular-button__light" aria-hidden="true"></canvas>
-                            <span class="specular-button__label">
-                                <i class="bi bi-search" aria-hidden="true"></i>
-                                <span class="hidden sm:inline">寻法</span>
-                            </span>
-                        </button>
-                    </div>
-
-                    <button 
-                        class="md3-outlined-button zen-clear-btn"
-                        onclick="clearSearch()" 
-                        id="clear-btn" 
-                        style="display:none;"
-                    >
-                        <i class="bi bi-x-lg"></i>
-                        <span>清除</span>
-                    </button>
-
-                    <button 
-                        id="random-button"
-                        type="button"
-                        class="specular-button zen-random-btn"
-                        onclick="randomQuote()"
-                        title="随机洗牌并漫步法语"
-                    >
-                        <canvas class="specular-button__light" aria-hidden="true"></canvas>
-                        <span class="specular-button__label">
-                            <i class="bi bi-shuffle" aria-hidden="true"></i>
-                            <span>随机漫步</span>
-                        </span>
-                    </button>
-                </div>
+                <div class="section job-info">
+                    <h1 class="section-title job-title">事业</h1>
+                    <ul class="item-list">
+                        <li class="item">
+                            <div class="item-content">
+                                <span class="item-title"><a href="https://suttacentral.net" target="_blank">SuttaCentral.net</a></span>
+                                <span class="item-title"><a href="https://bilara.suttacentral.net" target="_blank">Bilara.SuttaCentral.net</a></span>
+                                <span class="item-desc">开发工程师</span>
+                                <div class="item-desc" style="margin-top: 4px;">
+                                    <a href="https://github.com/suttacentral" target="_blank">
+                                        <i class="bi bi-github"></i> github.com/suttacentral
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>                
             </div>
 
-            <!-- 搜索结果提示条 -->
-            <div id="search-info" class="zen-search-banner" style="display:none;"></div>
-            
-            <!-- 法语笺展示列表 -->
-            <div class="md3-surface zen-slips-wrapper">
-                <div id="dhamma-display" class="dhamma-text zen-slips-list">
-                    <div class="zen-loading-state">
-                        <i class="bi bi-hourglass-split text-3xl"></i>
-                        <span>正在展卷...</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 合一式底部分页与页码直跳控制栏 -->
-            <div class="zen-pagination-bar">
-                <button 
-                    id="prev-btn" 
-                    onclick="prevPage()"
-                    class="md3-fab zen-page-nav-btn"
-                >
-                    <i class="bi bi-chevron-left"></i>
-                    <span>上一页</span>
-                </button>
+            <script>
+                (function() {
+                    // Birthdate: 1980-05-25 10:00:00 (Local Time)
+                    const birthDate = new Date(1980, 4, 25, 10, 0, 0);
+                    const msPerYear = 31556952000;
+                    const maxLifespanYears = 80; // 人寿百岁死随念参照基准
 
-                <div class="zen-pagination-center">
-                    <span id="page-info" class="zen-page-current">第 - 页</span>
-                    <span class="zen-page-sep" aria-hidden="true">·</span>
-                    <div class="zen-page-jumper">
-                        <label for="page-jump" class="zen-page-jumper__label">跳至</label>
-                        <input 
-                            type="number" 
-                            id="page-jump" 
-                            min="1"
-                            class="zen-page-jumper__input" 
-                            placeholder="页码"
-                            onkeypress="if(event.key==='Enter') jumpToPage()"
-                        >
-                        <span class="zen-page-jumper__total">/ 共 <span id="total-pages">-</span> 页</span>
-                        <button 
-                            type="button"
-                            class="zen-page-jumper__btn"
-                            onclick="jumpToPage()"
-                            title="跳转到指定页码"
-                            aria-label="跳转到指定页码"
-                        >
-                            <i class="bi bi-arrow-right-short"></i>
-                        </button>
-                    </div>
-                </div>
+                    const element = document.getElementById('age-counter');
+                    const titleZhEl = document.getElementById('title-drift-zh');
+                    const titlePiEl = document.getElementById('title-drift-pi');
+                    const hintTextEl = document.getElementById('memento-hint-text');
+                    const boxEl = document.getElementById('memento-box');
+                    const strandBarEl = document.getElementById('life-strand-bar');
+                    const anapanaTextEl = document.getElementById('anapana-state');
 
-                <button 
-                    id="next-btn" 
-                    onclick="nextPage()"
-                    class="md3-fab zen-page-nav-btn"
-                >
-                    <span>下一页</span>
-                    <i class="bi bi-chevron-right"></i>
+                    // 模式持久化：'elapsed' (逝者如斯夫) 或 'remaining' (死随念·百岁尚余)
+                    let mode = localStorage.getItem('dhamma_memento_mode') || 'elapsed';
+
+                    function applyModeUI() {
+                        if (mode === 'remaining') {
+                            if (titleZhEl) titleZhEl.textContent = '死随念 · 尚余';
+                            if (titlePiEl) titlePiEl.textContent = 'Maraṇānussati';
+                            hintTextEl.textContent = '若寿八十 · 刹那递减（点击返回已逝）';
+                            boxEl.classList.add('mode-remaining');
+                        } else {
+                            if (titleZhEl) titleZhEl.textContent = '逝者如斯夫';
+                            if (titlePiEl) titlePiEl.textContent = 'Aniccā';
+                            hintTextEl.textContent = '已历岁月 · 逝者如斯（点击参死随念）';
+                            boxEl.classList.remove('mode-remaining');
+                        }
+                    }
+
+                    applyModeUI();
+
+                    function toggleMode() {
+                        mode = (mode === 'elapsed') ? 'remaining' : 'elapsed';
+                        try { localStorage.setItem('dhamma_memento_mode', mode); } catch(e) {}
+                        
+                        boxEl.classList.add('flip-active');
+                        setTimeout(() => {
+                            applyModeUI();
+                            boxEl.classList.remove('flip-active');
+                        }, 120);
+                    }
+
+                    boxEl.addEventListener('click', toggleMode);
+                    boxEl.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            toggleMode();
+                        }
+                    });
+
+                    // 呼吸文字同步 (周期 10 秒：前 4 秒吸气，后 6 秒呼气)
+                    let lastBreathPhase = '';
+                    function updateAnapana(nowMs) {
+                        const breathSec = (nowMs * 0.001) % 10.0;
+                        const state = (breathSec < 4.0) ? '吸' : '呼';
+                        if (state !== lastBreathPhase) {
+                            lastBreathPhase = state;
+                            if (anapanaTextEl) anapanaTextEl.textContent = state;
+                        }
+                    }
+
+                    function updateLoop(nowMs) {
+                        const now = new Date();
+                        const diff = now - birthDate;
+                        const age = diff / msPerYear;
+
+                        if (mode === 'remaining') {
+                            const remaining = Math.max(0, maxLifespanYears - age);
+                            element.textContent = remaining.toFixed(16);
+                            // 进度条显示百岁中尚存余年比例
+                            const percent = Math.min(100, Math.max(0, (remaining / maxLifespanYears) * 100));
+                            if (strandBarEl) strandBarEl.style.width = percent.toFixed(4) + '%';
+                        } else {
+                            element.textContent = age.toFixed(16);
+                            // 进度条显示百岁中已消耗的比例
+                            const percent = Math.min(100, Math.max(0, (age / maxLifespanYears) * 100));
+                            if (strandBarEl) strandBarEl.style.width = percent.toFixed(4) + '%';
+                        }
+
+                        updateAnapana(nowMs || performance.now());
+                        requestAnimationFrame(updateLoop);
+                    }
+
+                    requestAnimationFrame(updateLoop);
+                })();
+            </script>
+            <!-- 五、「天地四时」与月相微印 (Cosmic Diurnal & Lunar Status) -->
+            <div class="cosmic-status-bar" id="cosmic-status-bar">
+                <div class="cosmic-status-info" style="display: flex; align-items: center; flex-wrap: wrap; gap: 6px;">
+                    <span id="cosmic-moon-icon" style="font-size: 1.05rem; line-height: 1;" title="农历月相">🌕</span>
+                    <span id="cosmic-season-text" style="color: var(--text-color); opacity: 0.9; font-weight: 500;">薄暮 · 落日斜阳</span>
+                    <span style="opacity: 0.25;">·</span>
+                    <span id="cosmic-lunar-text" style="opacity: 0.65; font-size: 0.74rem;">满月望日 · 15日</span>
+                </div>
+                <button type="button" id="cosmic-cruise-btn" class="cosmic-cruise-btn" title="点击切换预览四时更迭">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.85;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span id="cosmic-cruise-label">天地巡礼</span>
                 </button>
             </div>
-        </section>
-
-        <!-- 法义文章 · 经院专栏区 -->
-        <section id="section-articles" class="zen-section mb-16 md:mb-20">
-            <div class="zen-section-header">
-                <div class="zen-section-title-group">
-                    <span class="zen-section-eyebrow">DHAMMA ESSAYS</span>
-                    <h2 class="zen-section-title">
-                        <i class="bi bi-journal-richtext"></i>
-                        <span>法义文章</span>
-                    </h2>
-                    <p class="zen-section-desc">早期佛教经文导读与当代南传尊者禅修开示</p>
-                </div>
+            <div class="void-trace-hint" style="margin-top: 1.8rem; padding-top: 1.25rem; border-top: 1px dashed rgba(141, 90, 42, 0.15); text-align: center; font-size: 0.78rem; color: var(--text-color, #a8a29e); opacity: 0.55; letter-spacing: 0.08em; font-style: italic;">
+                “如鸟飞虚空，无有足迹可寻” · 滑动页面体会造作留痕与随缘抚平
             </div>
-            
-            <!-- 经院刊物式文章列表 -->
-            <div class="zen-editorial-grid">
-                <!-- 文章卡片 1 -->
-                <a href="article/四大法教.html" class="article-card zen-editorial-card group">
-                    <div class="zen-editorial-card__meta">
-                        <span class="zen-canon-badge">AN 7.80 · 增支部</span>
-                        <span class="zen-editorial-card__index">壹</span>
-                    </div>
-                    <h3 class="zen-editorial-card__title">关于四大法教</h3>
-                    <p class="zen-editorial-card__excerpt">增支部 AN VII.80 经文解读，依佛陀所立四大判准，清晰抉择何为正法与毗奈耶。</p>
-                    <div class="tag-wrapper zen-editorial-card__footer">
-                        <span class="zen-tag"><i class="bi bi-bookmark"></i> 法教 · 经典</span>
-                        <span class="zen-read-link">展卷阅读 <i class="bi bi-arrow-right"></i></span>
-                    </div>
-                </a>
-                
-                <!-- 文章卡片 2 -->
-                <a href="article/圣者与凡夫的不同视角.html" class="article-card zen-editorial-card group">
-                    <div class="zen-editorial-card__meta">
-                        <span class="zen-canon-badge">SN 35.80 · 相应部</span>
-                        <span class="zen-editorial-card__index">贰</span>
-                    </div>
-                    <h3 class="zen-editorial-card__title">圣者与凡夫的不同视角</h3>
-                    <p class="zen-editorial-card__excerpt">相应部六处相应第 80 经解读，探讨如何于六根触境中断除无明、生起明知见。</p>
-                    <div class="tag-wrapper zen-editorial-card__footer">
-                        <span class="zen-tag"><i class="bi bi-bookmark"></i> 无明 · 六根</span>
-                        <span class="zen-read-link">展卷阅读 <i class="bi bi-arrow-right"></i></span>
-                    </div>
-                </a>
-                
-                <!-- 文章卡片 3 -->
-                <a href="article/心生迫切感.html" class="article-card zen-editorial-card group">
-                    <div class="zen-editorial-card__meta">
-                        <span class="zen-canon-badge">班迪达尊者 · 开示</span>
-                        <span class="zen-editorial-card__index">叁</span>
-                    </div>
-                    <h3 class="zen-editorial-card__title">心生迫切感</h3>
-                    <p class="zen-editorial-card__excerpt">乌·班迪达大师直指人心的开示，谛观生命无常与世间无真正依怙的真相，发起精进道心。</p>
-                    <div class="tag-wrapper zen-editorial-card__footer">
-                        <span class="zen-tag"><i class="bi bi-bookmark"></i> 无常 · 禅修</span>
-                        <span class="zen-read-link">展卷阅读 <i class="bi bi-arrow-right"></i></span>
-                    </div>
-                </a>
-                
-                <!-- 文章卡片 4 -->
-                <a href="article/如何证果.html" class="article-card zen-editorial-card group">
-                    <div class="zen-editorial-card__meta">
-                        <span class="zen-canon-badge">SN 22.122 · 戒经</span>
-                        <span class="zen-editorial-card__index">肆</span>
-                    </div>
-                    <h3 class="zen-editorial-card__title">如何证果</h3>
-                    <p class="zen-editorial-card__excerpt">舍利弗尊者详尽开示：无论凡夫乃至阿罗汉，皆应如理作意五取蕴之无常、苦、无我。</p>
-                    <div class="tag-wrapper zen-editorial-card__footer">
-                        <span class="zen-tag"><i class="bi bi-bookmark"></i> 五取蕴 · 证果</span>
-                        <span class="zen-read-link">展卷阅读 <i class="bi bi-arrow-right"></i></span>
-                    </div>
-                </a>
-                
-                <!-- 文章卡片 5 -->
-                <a href="article/内观定.html" class="article-card zen-editorial-card group">
-                    <div class="zen-editorial-card__meta">
-                        <span class="zen-canon-badge">德加尼亚禅师 · 开示</span>
-                        <span class="zen-editorial-card__index">伍</span>
-                    </div>
-                    <h3 class="zen-editorial-card__title">内观定</h3>
-                    <p class="zen-editorial-card__excerpt">德加尼亚禅师深入剖析毗婆舍那内观定（刹那定）与传统止禅定在用心方式上的本质区别。</p>
-                    <div class="tag-wrapper zen-editorial-card__footer">
-                        <span class="zen-tag"><i class="bi bi-bookmark"></i> 内观定 · 正精进</span>
-                        <span class="zen-read-link">展卷阅读 <i class="bi bi-arrow-right"></i></span>
-                    </div>
-                </a>
-                
-                <!-- 文章卡片 6 -->
-                <a href="article/亲近智者.html" class="article-card zen-editorial-card group">
-                    <div class="zen-editorial-card__meta">
-                        <span class="zen-canon-badge">菩提比丘 · 导读</span>
-                        <span class="zen-editorial-card__index">陆</span>
-                    </div>
-                    <h3 class="zen-editorial-card__title">亲近智者</h3>
-                    <p class="zen-editorial-card__excerpt">依《大吉祥经》为核心，菩提比丘开示抉择善知识与亲近智者对修行道途的决定性意义。</p>
-                    <div class="tag-wrapper zen-editorial-card__footer">
-                        <span class="zen-tag"><i class="bi bi-bookmark"></i> 善知识 · 大吉祥经</span>
-                        <span class="zen-read-link">展卷阅读 <i class="bi bi-arrow-right"></i></span>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- 推荐书籍下载 · 藏经阁实体书脊画廊 -->
-        <section id="section-books" class="zen-section mb-16 md:mb-20">
-            <div class="zen-section-header">
-                <div class="zen-section-title-group">
-                    <span class="zen-section-eyebrow">SACRED TEXTS &amp; BOOKS</span>
-                    <h2 class="zen-section-title">
-                        <i class="bi bi-book"></i>
-                        <span>推荐典籍下载</span>
-                    </h2>
-                    <p class="zen-section-desc">巴利四部尼柯耶译本与森林传统禅修指导典籍</p>
-                </div>
-            </div>
-            
-            <!-- 书籍画廊网格 -->
-            <div class="zen-books-grid" id="books-grid">
-                <div class="text-center text-gray-400 col-span-full py-8">加载中...</div>
-            </div>
-        </section>
-
-        <!-- 佛法资源链接 · 高密度法源名录 -->
-        <section id="section-links" class="zen-section mb-12">
-            <div class="zen-section-header zen-section-header--links">
-                <div class="zen-section-title-group">
-                    <span class="zen-section-eyebrow">DHAMMA DIRECTORY</span>
-                    <h2 class="zen-section-title">
-                        <i class="bi bi-compass"></i>
-                        <span>佛法资源名录</span>
-                    </h2>
-                    <p class="zen-section-desc">精选海内外三藏圣典检索、尊者开示与原始佛教研习站点</p>
-                </div>
-
-                <!-- 分段胶囊分类过滤器 -->
-                <div class="zen-filter-pills" id="type-filters" role="tablist" aria-label="资源分类筛选">
-                    <button class="type-filter active" data-type="all" onclick="filterByType('all')">
-                        <span>全部法源</span>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- 高密度名录网格 -->
-            <div class="zen-directory-grid" id="links-grid">
-                <div class="text-center text-gray-400 col-span-full py-8">加载中...</div>
-            </div>
-        </section>
+        </div>
     </main>
 
-    <!-- Footer -->
-    <di-site-footer></di-site-footer>
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/dhammaisland" target="_blank"><i class="bi bi-github"></i></a>
+            <a href="https://www.zhihu.com/people/paccakkha" target="_blank">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;">
+                    <path d="M5.721 0C2.251 0 0 2.25 0 5.719V18.28C0 21.751 2.252 24 5.721 24h12.56C21.751 24 24 21.75 24 18.281V5.72C24 2.249 21.75 0 18.281 0zm1.964 4.078c-.271.73-.5 1.434-.68 2.11h4.587c.545-.006.445 1.168.445 1.171H9.384a58.104 58.104 0 01-.112 3.797h2.712c.388.023.393 1.251.393 1.266H9.183a9.223 9.223 0 01-.408 2.102l.757-.604c.452.456 1.512 1.712 1.906 2.177.473.681.063 2.081.063 2.081l-2.794-3.382c-.653 2.518-1.845 3.607-1.845 3.607-.523.468-1.58.82-2.64.516 2.218-1.73 3.44-3.917 3.667-6.497H4.491c0-.015.197-1.243.806-1.266h2.71c.024-.32.086-3.254.086-3.797H6.598c-.136.406-.158.447-.268.753-.594 1.095-1.603 1.122-1.907 1.155.906-1.821 1.416-3.6 1.591-4.064.425-1.124 1.671-1.125 1.671-1.125zM13.078 6h6.377v11.33h-2.573l-2.184 1.373-.401-1.373h-1.219zm1.313 1.219v8.86h.623l.263.937 1.455-.938h1.456v-8.86z"/>
+                </svg>
+            </a>
+            <a href="mailto:paccakkha@yahoo.com"><i class="bi bi-envelope-fill"></i></a>
+        </div>
+        <div class="lang-switch">
+            <a href="home.html" class="back-link">阅读经文、法谈</a>
+            <span style="opacity: 0.3; margin: 0 8px;">|</span>
+            <a href="login.html" class="back-link" style="opacity: 0.5;">管理</a>
+        </div>
+    </footer>
+
+    <!-- 一、「五蕴法相空性印」沉浸式虚空曼陀罗 (Zen Mandala Overlay) -->
+    <div id="skandha-mandala-overlay" class="skandha-mandala-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="究竟法无我 · 五蕴法相空性印">
+        <div class="mandala-backdrop" id="mandala-backdrop"></div>
+        <div class="mandala-container">
+            <!-- 顶部标题与收束关闭按钮 -->
+            <div class="mandala-header">
+                <div class="mandala-badge">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+                    <span>究竟法无我 · Anattā 解构</span>
+                </div>
+                <button type="button" class="mandala-close-btn" id="mandala-close-btn" title="收束五蕴 · 归聚为我 (ESC)">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <span>归聚为“我”</span>
+                </button>
+            </div>
+
+            <!-- 刹那相续流转指示条 (Santāna Flux) -->
+            <div class="santana-banner" id="santana-banner">
+                <div class="santana-status-wrap">
+                    <div class="santana-pulse-dot" id="santana-dot" aria-hidden="true"></div>
+                    <span id="santana-status-text">相续流转中 · 刹那生灭相续（悬停或点击卡片可驻足观照）</span>
+                </div>
+                <button type="button" class="santana-toggle-btn" id="santana-toggle-btn" title="点击定格或继续五蕴生灭流转">
+                    <span id="santana-toggle-icon">⏸</span>
+                    <span id="santana-toggle-label">定格观照</span>
+                </button>
+            </div>
+
+            <!-- 中央五方法印网格 -->
+            <div class="mandala-grid" id="mandala-grid">
+                <!-- 1. 色蕴 (Rūpa) -->
+                <div class="skandha-card" data-index="0" data-pali="Rūpa" data-name="色">
+                    <div class="skandha-flux-bar" aria-hidden="true"></div>
+                    <div class="skandha-glyph">色</div>
+                    <div class="skandha-meta-wrap">
+                        <div class="skandha-top-row">
+                            <span class="skandha-simile">观色如聚沫</span>
+                            <span class="skandha-pali">Rūpa</span>
+                        </div>
+                        <div class="skandha-desc">地水火风 · 四大假合质碍</div>
+                    </div>
+                </div>
+
+                <!-- 2. 受蕴 (Vedanā) -->
+                <div class="skandha-card" data-index="1" data-pali="Vedanā" data-name="受">
+                    <div class="skandha-flux-bar" aria-hidden="true"></div>
+                    <div class="skandha-glyph">受</div>
+                    <div class="skandha-meta-wrap">
+                        <div class="skandha-top-row">
+                            <span class="skandha-simile">受如水上泡</span>
+                            <span class="skandha-pali">Vedanā</span>
+                        </div>
+                        <div class="skandha-desc">苦乐舍受 · 触缘刹那领纳</div>
+                    </div>
+                </div>
+
+                <!-- 3. 想蕴 (Saññā) -->
+                <div class="skandha-card" data-index="2" data-pali="Saññā" data-name="想">
+                    <div class="skandha-flux-bar" aria-hidden="true"></div>
+                    <div class="skandha-glyph">想</div>
+                    <div class="skandha-meta-wrap">
+                        <div class="skandha-top-row">
+                            <span class="skandha-simile">想如春时焰</span>
+                            <span class="skandha-pali">Saññā</span>
+                        </div>
+                        <div class="skandha-desc">取相知表 · 阳焰认知分别</div>
+                    </div>
+                </div>
+
+                <!-- 4. 行蕴 (Saṅkhāra) -->
+                <div class="skandha-card" data-index="3" data-pali="Saṅkhāra" data-name="行">
+                    <div class="skandha-flux-bar" aria-hidden="true"></div>
+                    <div class="skandha-glyph">行</div>
+                    <div class="skandha-meta-wrap">
+                        <div class="skandha-top-row">
+                            <span class="skandha-simile">诸行如芭蕉</span>
+                            <span class="skandha-pali">Saṅkhāra</span>
+                        </div>
+                        <div class="skandha-desc">思愿造作 · 剥尽层层无核</div>
+                    </div>
+                </div>
+
+                <!-- 5. 识蕴 (Viññāṇa) -->
+                <div class="skandha-card" data-index="4" data-pali="Viññāṇa" data-name="识">
+                    <div class="skandha-flux-bar" aria-hidden="true"></div>
+                    <div class="skandha-glyph">识</div>
+                    <div class="skandha-meta-wrap">
+                        <div class="skandha-top-row">
+                            <span class="skandha-simile">诸识法如幻</span>
+                            <span class="skandha-pali">Viññāṇa</span>
+                        </div>
+                        <div class="skandha-desc">六根六境 · 幻师变现了别</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部经典法语 -->
+            <div class="mandala-footer">
+                <p class="mandala-verse">“观色如聚沫，受如水上泡，想如春时焰，诸行如芭蕉，诸识法如幻。”</p>
+                <span class="mandala-sub">《杂阿含·265经》/《相相应部·泡沫经》SN 22.95 · 点击空白处或按 ESC 归聚</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // 1. 五蕴法相空性印 (Anattā 曼陀罗与相续生灭流交互)
+            const ego = document.getElementById('anatta-ego');
+            const overlay = document.getElementById('skandha-mandala-overlay');
+            const closeBtn = document.getElementById('mandala-close-btn');
+            const backdrop = document.getElementById('mandala-backdrop');
+            const cards = Array.from(document.querySelectorAll('.skandha-card'));
+            const santanaBanner = document.getElementById('santana-banner');
+            const santanaStatusText = document.getElementById('santana-status-text');
+            const santanaToggleBtn = document.getElementById('santana-toggle-btn');
+            const santanaToggleIcon = document.getElementById('santana-toggle-icon');
+            const santanaToggleLabel = document.getElementById('santana-toggle-label');
+
+            const SKANDHA_METAS = [
+                { name: '色 (Rūpa)', simile: '如聚沫', desc: '质碍四大' },
+                { name: '受 (Vedanā)', simile: '如水泡', desc: '苦乐领纳' },
+                { name: '想 (Saññā)', simile: '如春焰', desc: '阳焰取相' },
+                { name: '行 (Saṅkhāra)', simile: '如芭蕉', desc: '造作思愿' },
+                { name: '识 (Viññāṇa)', simile: '如幻术', desc: '幻师了别' }
+            ];
+
+            let activeFluxIndex = -1;
+            let fluxTimer = null;
+            let isManualPaused = false;
+            let isHoverPaused = false;
+
+            function applyFlux(index, isHover = false) {
+                cards.forEach((card, i) => {
+                    if (i === index) {
+                        card.classList.add('active-flux');
+                    } else {
+                        card.classList.remove('active-flux');
+                    }
+                });
+
+                if (santanaStatusText && index >= 0 && index < SKANDHA_METAS.length) {
+                    const m = SKANDHA_METAS[index];
+                    if (isHover) {
+                        santanaStatusText.textContent = `正念驻足观照 · 【${m.name}】 观其${m.simile}（移开后继续相续）`;
+                    } else if (isManualPaused) {
+                        santanaStatusText.textContent = `已定格观照 · 【${m.name}】 · 照见生灭，无常苦空`;
+                    } else {
+                        santanaStatusText.textContent = `刹那相续中 · 当前生起：【${m.name}】 观其${m.simile}`;
+                    }
+                }
+            }
+
+            function stepFlux() {
+                if (isManualPaused || isHoverPaused || !overlay || !overlay.classList.contains('active')) return;
+                activeFluxIndex = (activeFluxIndex + 1) % cards.length;
+                applyFlux(activeFluxIndex);
+                // 每一轮流转完成时微调一次背景光泽
+                if (activeFluxIndex === 0 && window.GrainientInstance && window.GrainientInstance.wake) {
+                    window.GrainientInstance.wake();
+                }
+            }
+
+            function startFlux() {
+                stopFlux();
+                activeFluxIndex = 0;
+                applyFlux(activeFluxIndex);
+                fluxTimer = setInterval(stepFlux, 1300);
+            }
+
+            function stopFlux() {
+                if (fluxTimer) {
+                    clearInterval(fluxTimer);
+                    fluxTimer = null;
+                }
+                cards.forEach(card => card.classList.remove('active-flux'));
+                activeFluxIndex = -1;
+            }
+
+            function openMandala() {
+                if (!overlay) return;
+                overlay.classList.add('active');
+                overlay.setAttribute('aria-hidden', 'false');
+                if (ego) ego.setAttribute('aria-expanded', 'true');
+                if (window.GrainientInstance && window.GrainientInstance.wake) {
+                    window.GrainientInstance.wake();
+                }
+                startFlux();
+            }
+
+            function closeMandala() {
+                if (!overlay) return;
+                overlay.classList.remove('active');
+                overlay.setAttribute('aria-hidden', 'true');
+                if (ego) ego.setAttribute('aria-expanded', 'false');
+                stopFlux();
+                // 恢复默认状态
+                isManualPaused = false;
+                isHoverPaused = false;
+                if (santanaBanner) santanaBanner.classList.remove('paused');
+                if (santanaToggleIcon) santanaToggleIcon.textContent = '⏸';
+                if (santanaToggleLabel) santanaToggleLabel.textContent = '定格观照';
+            }
+
+            // 卡片悬停/触控时驻足观照
+            cards.forEach((card, index) => {
+                card.addEventListener('mouseenter', function() {
+                    isHoverPaused = true;
+                    applyFlux(index, true);
+                });
+                card.addEventListener('mouseleave', function() {
+                    isHoverPaused = false;
+                    if (!isManualPaused) {
+                        applyFlux(activeFluxIndex >= 0 ? activeFluxIndex : index);
+                    }
+                });
+                card.addEventListener('click', function(e) {
+                    // 点击卡片直接锁定该卡片观照
+                    e.stopPropagation();
+                    activeFluxIndex = index;
+                    applyFlux(index, true);
+                });
+            });
+
+            // 手动定格/恢复按钮
+            if (santanaToggleBtn) {
+                santanaToggleBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    isManualPaused = !isManualPaused;
+                    if (isManualPaused) {
+                        if (santanaBanner) santanaBanner.classList.add('paused');
+                        if (santanaToggleIcon) santanaToggleIcon.textContent = '▶';
+                        if (santanaToggleLabel) santanaToggleLabel.textContent = '恢复相续';
+                        applyFlux(activeFluxIndex >= 0 ? activeFluxIndex : 0);
+                    } else {
+                        if (santanaBanner) santanaBanner.classList.remove('paused');
+                        if (santanaToggleIcon) santanaToggleIcon.textContent = '⏸';
+                        if (santanaToggleLabel) santanaToggleLabel.textContent = '定格观照';
+                        applyFlux(activeFluxIndex >= 0 ? activeFluxIndex : 0);
+                    }
+                });
+            }
+
+            if (ego) {
+                ego.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openMandala();
+                });
+                ego.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openMandala();
+                    }
+                });
+            }
+
+            if (closeBtn) closeBtn.addEventListener('click', closeMandala);
+            if (backdrop) backdrop.addEventListener('click', closeMandala);
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && overlay && overlay.classList.contains('active')) {
+                    closeMandala();
+                }
+            });
+
+            // 2. 字符衰变重组自动调度器 (偶发巴利倒影)
+            const driftElements = document.querySelectorAll('.pali-drift');
+            if (driftElements.length > 0) {
+                function scheduleDrift() {
+                    const interval = 14000 + Math.random() * 8000;
+                    setTimeout(() => {
+                        if (document.hidden) {
+                            scheduleDrift();
+                            return;
+                        }
+                        const target = driftElements[Math.floor(Math.random() * driftElements.length)];
+                        target.classList.add('drifting');
+                        setTimeout(() => {
+                            target.classList.remove('drifting');
+                            scheduleDrift();
+                        }, 2400);
+                    }, interval);
+                }
+                scheduleDrift();
+            }
+
+            // 3. 抓不住的文字：文本框选时刹那风化虚化
+            document.addEventListener('mouseup', function() {
+                const sel = window.getSelection();
+                if (!sel || sel.isCollapsed || !sel.rangeCount) return;
+                
+                const range = sel.getRangeAt(0);
+                const container = range.commonAncestorContainer;
+                const elem = (container.nodeType === 1) ? container : container.parentElement;
+                
+                if (elem && elem.closest('main')) {
+                    const targetBlock = elem.closest('p, .section, .item, header');
+                    if (targetBlock) {
+                        targetBlock.classList.add('text-weathered');
+                        setTimeout(() => {
+                            targetBlock.classList.remove('text-weathered');
+                        }, 1400);
+                    }
+                }
+            });
+
+            // 4. 天地四时与月相交互联动 (Cosmic Diurnal & Cruise)
+            (function() {
+                const seasonTextEl = document.getElementById('cosmic-season-text');
+                const lunarTextEl = document.getElementById('cosmic-lunar-text');
+                const moonIconEl = document.getElementById('cosmic-moon-icon');
+                const cruiseBtn = document.getElementById('cosmic-cruise-btn');
+                const cruiseLabel = document.getElementById('cosmic-cruise-label');
+
+                if (!seasonTextEl || !cruiseBtn) return;
+
+                // 巡礼档位
+                const CRUISE_STEPS = [
+                    { hour: null, label: '天地巡礼', desc: '随现实运转' },
+                    { hour: 6.0, label: '巡礼 · 拂晓', desc: '拂晓破晓 (06:00)' },
+                    { hour: 13.0, label: '巡礼 · 正午', desc: '正午遍照 (13:00)' },
+                    { hour: 18.5, label: '巡礼 · 薄暮', desc: '薄暮斜阳 (18:30)' },
+                    { hour: 23.5, label: '巡礼 · 子夜', desc: '子夜幽冥 (23:30)' }
+                ];
+                let currentStepIndex = 0;
+
+                function updateCosmicUI(state) {
+                    if (!state) return;
+                    if (moonIconEl) moonIconEl.textContent = state.lunar?.icon || '🌕';
+                    if (seasonTextEl) seasonTextEl.textContent = (state.isCruise ? '[巡礼] ' : '') + state.seasonName;
+                    if (lunarTextEl) lunarTextEl.textContent = `${state.lunar?.phaseName || ''} · 农历${state.lunar?.lunarDay || 15}日`;
+                    if (state.isCruise) {
+                        cruiseBtn.style.background = 'rgba(243, 190, 122, 0.24)';
+                        cruiseBtn.style.borderColor = 'rgba(243, 190, 122, 0.6)';
+                    } else {
+                        cruiseBtn.style.background = 'rgba(141, 90, 42, 0.14)';
+                        cruiseBtn.style.borderColor = 'rgba(141, 90, 42, 0.28)';
+                    }
+                }
+
+                function bindCosmic() {
+                    if (window.GrainientInstance && window.GrainientInstance.onCosmicUpdate) {
+                        window.GrainientInstance.onCosmicUpdate(updateCosmicUI);
+                    } else {
+                        setTimeout(bindCosmic, 80);
+                    }
+                }
+                bindCosmic();
+
+                cruiseBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentStepIndex = (currentStepIndex + 1) % CRUISE_STEPS.length;
+                    const step = CRUISE_STEPS[currentStepIndex];
+                    if (cruiseLabel) cruiseLabel.textContent = step.label;
+
+                    if (window.GrainientInstance && window.GrainientInstance.setCosmicCruise) {
+                        window.GrainientInstance.setCosmicCruise(step.hour);
+                    }
+                });
+            })();
+
+            // 5. 命根流沙倒计时与刹那粒子消散引擎 (Kāla Strand & Dissolution)
+            (function() {
+                const strandBar = document.getElementById('kala-strand-bar');
+                const countdownEl = document.getElementById('kala-countdown');
+                const quickBtn = document.getElementById('kala-quick-btn');
+                const canvas = document.getElementById('dissolution-canvas');
+                const nibbanaOverlay = document.getElementById('nibbana-overlay');
+                const rebirthBtn = document.getElementById('rebirth-btn');
+                const body = document.body;
+
+                if (!strandBar || !canvas) return;
+
+                const ctx = canvas.getContext('2d');
+                const TOTAL_SECONDS = 24.0;
+                let elapsedSeconds = 0.0;
+                let isPaused = false;
+                let isDissolved = false;
+                let timerRaf = 0;
+                let lastTime = 0;
+
+                // 粒子物理池
+                let particles = [];
+                let particleRaf = 0;
+                let isReversing = false;
+
+                function resizeCanvas() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
+
+                // 采样 DOM 位置生成粒子
+                function spawnDissolutionParticles() {
+                    particles = [];
+                    const targets = [
+                        document.querySelector('header'),
+                        document.querySelector('.right-col'),
+                        document.querySelector('.cosmic-status-bar'),
+                        document.querySelector('footer')
+                    ].filter(Boolean);
+
+                    const colors = [
+                        'rgba(243, 190, 122, ',  // 金色
+                        'rgba(255, 255, 255, ',  // 暖白
+                        'rgba(141, 90, 42, ',    // 大地棕
+                        'rgba(148, 163, 184, '   // 苍灰
+                    ];
+
+                    targets.forEach(el => {
+                        const rect = el.getBoundingClientRect();
+                        const area = rect.width * rect.height;
+                        const count = Math.min(420, Math.max(70, Math.floor(area / 1800)));
+
+                        for (let i = 0; i < count; i++) {
+                            const rx = rect.left + Math.random() * rect.width;
+                            const ry = rect.top + Math.random() * rect.height;
+                            const colorPrefix = colors[Math.floor(Math.random() * colors.length)];
+                            const size = 1.2 + Math.random() * 2.2;
+                            const delay = (ry / Math.max(1, window.innerHeight)) * 0.45; // 自上而下顺风剥落
+
+                            particles.push({
+                                x: rx,
+                                y: ry,
+                                originX: rx,
+                                originY: ry,
+                                vx: 0.8 + Math.random() * 2.6,   // 受风向右
+                                vy: -1.2 - Math.random() * 3.2,  // 升腾向上
+                                size,
+                                colorPrefix,
+                                alpha: 0.8 + Math.random() * 0.2,
+                                maxAlpha: 0.9,
+                                life: 0,
+                                maxLife: 2.0 + Math.random() * 0.8,
+                                delay,
+                                active: false
+                            });
+                        }
+                    });
+                }
+
+                // 粒子动画循环
+                let particleStart = 0;
+                function updateParticles(now) {
+                    if (!particleStart) particleStart = now;
+                    const dt = Math.min(0.04, (now - (lastTime || now)) / 1000) || 0.016;
+                    lastTime = now;
+
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    let activeCount = 0;
+
+                    if (!isReversing) {
+                        // 正向消散飞散
+                        const elapsed = (now - particleStart) / 1000;
+                        particles.forEach(p => {
+                            if (elapsed < p.delay) return;
+                            p.active = true;
+                            p.life += dt;
+                            // 风力与轻微阻尼
+                            p.vx += 0.018;
+                            p.vy *= 0.985;
+                            p.x += p.vx;
+                            p.y += p.vy;
+
+                            // 透明度渐隐
+                            const progress = p.life / p.maxLife;
+                            const alpha = Math.max(0, p.maxAlpha * (1 - progress * progress));
+                            if (alpha > 0.01) {
+                                activeCount++;
+                                ctx.fillStyle = p.colorPrefix + alpha.toFixed(3) + ')';
+                                ctx.beginPath();
+                                ctx.arc(p.x, p.y, p.size * (1 - progress * 0.4), 0, Math.PI * 2);
+                                ctx.fill();
+                            }
+                        });
+
+                        if (activeCount > 0) {
+                            particleRaf = requestAnimationFrame(updateParticles);
+                        } else {
+                            ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        }
+                    } else {
+                        // 反向重聚收束 (Rebirth Convergence)
+                        let remainingDist = 0;
+                        particles.forEach(p => {
+                            const dx = p.originX - p.x;
+                            const dy = p.originY - p.y;
+                            const dist = Math.hypot(dx, dy);
+                            remainingDist += dist;
+
+                            // 弹性飞速拉回
+                            p.x += dx * 0.12;
+                            p.y += dy * 0.12;
+                            const alpha = Math.min(0.9, dist / 150 + 0.2);
+
+                            ctx.fillStyle = p.colorPrefix + alpha.toFixed(3) + ')';
+                            ctx.beginPath();
+                            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                            ctx.fill();
+                        });
+
+                        if (remainingDist > particles.length * 1.5) {
+                            particleRaf = requestAnimationFrame(updateParticles);
+                        } else {
+                            ctx.clearRect(0, 0, canvas.width, canvas.height);
+                            isReversing = false;
+                            body.classList.remove('page-dissolved');
+                        }
+                    }
+                }
+
+                // 触发刹那尽朽大消散
+                function triggerDissolution() {
+                    if (isDissolved) return;
+                    isDissolved = true;
+                    isPaused = true;
+                    cancelAnimationFrame(timerRaf);
+
+                    // 页面 DOM 模糊淡出
+                    body.classList.add('page-dissolved');
+
+                    // 生成粒子并开始动画
+                    spawnDissolutionParticles();
+                    particleStart = 0;
+                    lastTime = 0;
+                    cancelAnimationFrame(particleRaf);
+                    particleRaf = requestAnimationFrame(updateParticles);
+
+                    // 唤醒背景着色器泛起深远大浪
+                    if (window.GrainientInstance && window.GrainientInstance.wake) {
+                        window.GrainientInstance.wake();
+                    }
+
+                    // 2秒后缓缓显现寂灭名偈
+                    setTimeout(() => {
+                        if (nibbanaOverlay) {
+                            nibbanaOverlay.classList.add('active');
+                            nibbanaOverlay.setAttribute('aria-hidden', 'false');
+                        }
+                    }, 1800);
+                }
+
+                // 触发因缘重聚
+                function triggerRebirth() {
+                    if (!isDissolved) return;
+                    if (nibbanaOverlay) {
+                        nibbanaOverlay.classList.remove('active');
+                        nibbanaOverlay.setAttribute('aria-hidden', 'true');
+                    }
+
+                    // 开始粒子倒卷聚拢
+                    isReversing = true;
+                    lastTime = 0;
+                    cancelAnimationFrame(particleRaf);
+                    particleRaf = requestAnimationFrame(updateParticles);
+
+                    // 重设进度条
+                    isDissolved = false;
+                    elapsedSeconds = 0;
+                    isPaused = false;
+                    strandBar.style.width = '0%';
+                    countdownEl.textContent = '24s';
+                    lastTime = performance.now();
+                    timerRaf = requestAnimationFrame(tickProgress);
+                }
+
+                // 进度条主循环
+                function tickProgress(now) {
+                    if (!lastTime) lastTime = now;
+                    const dt = (now - lastTime) / 1000;
+                    lastTime = now;
+
+                    if (!isPaused && !isDissolved && !document.hidden) {
+                        elapsedSeconds += dt;
+                        const progress = Math.min(1, elapsedSeconds / TOTAL_SECONDS);
+                        const remaining = Math.max(0, Math.ceil(TOTAL_SECONDS - elapsedSeconds));
+
+                        strandBar.style.width = (progress * 100).toFixed(2) + '%';
+                        countdownEl.textContent = remaining + 's';
+
+                        if (progress >= 1.0) {
+                            triggerDissolution();
+                            return;
+                        }
+                    }
+
+                    if (!isDissolved) {
+                        timerRaf = requestAnimationFrame(tickProgress);
+                    }
+                }
+
+                // 鼠标悬停进度条暂停流逝
+                const wrapper = document.getElementById('kala-strand-wrapper');
+                if (wrapper) {
+                    wrapper.addEventListener('mouseenter', () => { isPaused = true; });
+                    wrapper.addEventListener('mouseleave', () => { if (!isDissolved) isPaused = false; });
+                }
+
+                // 立即体悟“灭”按钮
+                if (quickBtn) {
+                    quickBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        triggerDissolution();
+                    });
+                }
+
+                // 重生按钮
+                if (rebirthBtn) {
+                    rebirthBtn.addEventListener('click', triggerRebirth);
+                }
+
+                // 启动进度条倒计时
+                timerRaf = requestAnimationFrame(tickProgress);
+            })();
+        })();
+    </script>
+    <script src="grainient-background.js"></script>
 </body>
 </html>
