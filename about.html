@@ -272,6 +272,85 @@
             color: #ffffff;
         }
 
+        /* 刹那相续流转横幅 (Santāna Banner) */
+        .santana-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 8px 14px;
+            background: rgba(243, 190, 122, 0.05);
+            border: 1px dashed rgba(243, 190, 122, 0.22);
+            border-radius: 12px;
+            font-size: 12px;
+            color: var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .santana-banner {
+            background: rgba(141, 90, 42, 0.04);
+            border-color: rgba(141, 90, 42, 0.22);
+        }
+
+        .santana-status-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .santana-pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #f3be7a;
+            box-shadow: 0 0 8px rgba(243, 190, 122, 0.85);
+            animation: santana-pulse 1.25s infinite ease-in-out;
+            flex-shrink: 0;
+        }
+
+        .santana-banner.paused .santana-pulse-dot {
+            animation: none;
+            opacity: 0.45;
+            box-shadow: none;
+        }
+
+        @keyframes santana-pulse {
+            0%, 100% { transform: scale(0.8); opacity: 0.35; box-shadow: 0 0 4px rgba(243, 190, 122, 0.3); }
+            50% { transform: scale(1.35); opacity: 1; box-shadow: 0 0 12px rgba(243, 190, 122, 0.9), 0 0 3px #ffffff; }
+        }
+
+        .santana-toggle-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f3be7a;
+            border-radius: 9999px;
+            padding: 2px 10px;
+            font-size: 11px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s ease;
+        }
+
+        body.light-mode .santana-toggle-btn {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: #8d5a2a;
+        }
+
+        .santana-toggle-btn:hover {
+            background: rgba(243, 190, 122, 0.18);
+            border-color: rgba(243, 190, 122, 0.45);
+            color: #ffffff;
+        }
+
+        body.light-mode .santana-toggle-btn:hover {
+            background: rgba(141, 90, 42, 0.12);
+            color: #8d5a2a;
+        }
+
         /* 中央五方法印网格 */
         .mandala-grid {
             display: grid;
@@ -292,6 +371,7 @@
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         body.light-mode .skandha-card {
@@ -309,6 +389,60 @@
         body.light-mode .skandha-card:hover {
             background: rgba(141, 90, 42, 0.08);
             border-color: rgba(141, 90, 42, 0.35);
+        }
+
+        /* 方案1核心：相续流转激活态 (Active Flux) */
+        .skandha-card.active-flux {
+            transform: translateY(-6px);
+            background: rgba(243, 190, 122, 0.12);
+            border-color: rgba(243, 190, 122, 0.6);
+            box-shadow: 0 14px 34px -8px rgba(243, 190, 122, 0.3), 0 0 0 1px rgba(243, 190, 122, 0.35);
+        }
+
+        body.light-mode .skandha-card.active-flux {
+            background: rgba(141, 90, 42, 0.1);
+            border-color: rgba(141, 90, 42, 0.55);
+            box-shadow: 0 14px 34px -8px rgba(141, 90, 42, 0.2);
+        }
+
+        /* 刹那生灭呼吸光条 */
+        .skandha-flux-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f3be7a 50%, transparent);
+            opacity: 0;
+            transform: scaleX(0.2);
+            transition: all 0.35s ease;
+        }
+
+        .skandha-card.active-flux .skandha-flux-bar {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+
+        .skandha-card.active-flux .skandha-glyph {
+            transform: scale(1.15);
+            color: #ffffff;
+            text-shadow: 0 0 24px rgba(243, 190, 122, 0.95), 0 0 6px #ffffff;
+        }
+
+        body.light-mode .skandha-card.active-flux .skandha-glyph {
+            color: #8d5a2a;
+            text-shadow: 0 0 16px rgba(141, 90, 42, 0.45);
+        }
+
+        .skandha-card.active-flux .skandha-simile {
+            background: rgba(243, 190, 122, 0.25);
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(243, 190, 122, 0.35);
+        }
+
+        body.light-mode .skandha-card.active-flux .skandha-simile {
+            background: rgba(141, 90, 42, 0.2);
+            color: #8d5a2a;
         }
 
         /* 五蕴大字 (38px 经院宋体) */
@@ -1034,7 +1168,7 @@
 
     <main>
         <header>
-            <h1 class="header-title"><p class="hello">你好，<br/><span class="anatta-ego" id="anatta-ego" role="button" tabindex="0" title="点击参究：究竟法无我 · 五蕴离散聚灭" aria-haspopup="dialog" aria-expanded="false"><span class="anatta-ego-char">“我”</span><span class="anatta-ego-hint">五蕴解</span></span>是"洪達"。</p></h1>
+            <h1 class="header-title"><p class="hello"><span class="anatta-ego" id="anatta-ego" role="button" tabindex="0" title="点击参究：究竟法无我 · 五蕴离散聚灭" aria-haspopup="dialog" aria-expanded="false"><span class="anatta-ego-char">“我”</span><span class="anatta-ego-hint">五蕴解</span></span>是"洪達"。</p></h1>
             <p class="bio">
                 <span class="dhamma-enthusiasts">法与<span class="pali-drift" title="修习 · 培育"><span class="pali-drift-zh">禅修</span><span class="pali-drift-pi" aria-hidden="true">Bhāvanā</span></span>的爱好者，<span class="quote-tooltip">「乐于法者、爱好法者，审虑法者，<br/>　　　随念法的比丘，他不退失正法。<br/>　　　当行或站，坐或者卧时，<br/>　　　有向内会集的心，他就到达寂静。」--如是语86经</span></span><br/>
                 这里是我的<a href="index.html">个人主页</a>，用于分享佛陀的<span class="dhamma"><span class="pali-drift" title="正法律"><span class="pali-drift-zh">法与律</span><span class="pali-drift-pi" aria-hidden="true">Dhamma-Vinaya</span></span><span class="quote-tooltip">阿难！但，你们可能会这么想：『大师的教语已过去了，我们没有大师了。』但，阿难！不应该这样认为，阿难！凡你们被我教导、告知的法与律，我死后就是你们的大师。--《大般涅槃经》</span></span>、禅师法谈、相关书籍等。<br/>
@@ -1228,10 +1362,23 @@
                 </button>
             </div>
 
+            <!-- 刹那相续流转指示条 (Santāna Flux) -->
+            <div class="santana-banner" id="santana-banner">
+                <div class="santana-status-wrap">
+                    <div class="santana-pulse-dot" id="santana-dot" aria-hidden="true"></div>
+                    <span id="santana-status-text">相续流转中 · 刹那生灭相续（悬停或点击卡片可驻足观照）</span>
+                </div>
+                <button type="button" class="santana-toggle-btn" id="santana-toggle-btn" title="点击定格或继续五蕴生灭流转">
+                    <span id="santana-toggle-icon">⏸</span>
+                    <span id="santana-toggle-label">定格观照</span>
+                </button>
+            </div>
+
             <!-- 中央五方法印网格 -->
-            <div class="mandala-grid">
+            <div class="mandala-grid" id="mandala-grid">
                 <!-- 1. 色蕴 (Rūpa) -->
-                <div class="skandha-card">
+                <div class="skandha-card" data-index="0" data-pali="Rūpa" data-name="色">
+                    <div class="skandha-flux-bar" aria-hidden="true"></div>
                     <div class="skandha-glyph">色</div>
                     <div class="skandha-meta-wrap">
                         <div class="skandha-top-row">
@@ -1243,7 +1390,8 @@
                 </div>
 
                 <!-- 2. 受蕴 (Vedanā) -->
-                <div class="skandha-card">
+                <div class="skandha-card" data-index="1" data-pali="Vedanā" data-name="受">
+                    <div class="skandha-flux-bar" aria-hidden="true"></div>
                     <div class="skandha-glyph">受</div>
                     <div class="skandha-meta-wrap">
                         <div class="skandha-top-row">
@@ -1255,7 +1403,8 @@
                 </div>
 
                 <!-- 3. 想蕴 (Saññā) -->
-                <div class="skandha-card">
+                <div class="skandha-card" data-index="2" data-pali="Saññā" data-name="想">
+                    <div class="skandha-flux-bar" aria-hidden="true"></div>
                     <div class="skandha-glyph">想</div>
                     <div class="skandha-meta-wrap">
                         <div class="skandha-top-row">
@@ -1267,7 +1416,8 @@
                 </div>
 
                 <!-- 4. 行蕴 (Saṅkhāra) -->
-                <div class="skandha-card">
+                <div class="skandha-card" data-index="3" data-pali="Saṅkhāra" data-name="行">
+                    <div class="skandha-flux-bar" aria-hidden="true"></div>
                     <div class="skandha-glyph">行</div>
                     <div class="skandha-meta-wrap">
                         <div class="skandha-top-row">
@@ -1279,7 +1429,8 @@
                 </div>
 
                 <!-- 5. 识蕴 (Viññāṇa) -->
-                <div class="skandha-card">
+                <div class="skandha-card" data-index="4" data-pali="Viññāṇa" data-name="识">
+                    <div class="skandha-flux-bar" aria-hidden="true"></div>
                     <div class="skandha-glyph">识</div>
                     <div class="skandha-meta-wrap">
                         <div class="skandha-top-row">
@@ -1301,11 +1452,77 @@
 
     <script>
         (function() {
-            // 1. 五蕴法相空性印 (Anattā 曼陀罗交互)
+            // 1. 五蕴法相空性印 (Anattā 曼陀罗与相续生灭流交互)
             const ego = document.getElementById('anatta-ego');
             const overlay = document.getElementById('skandha-mandala-overlay');
             const closeBtn = document.getElementById('mandala-close-btn');
             const backdrop = document.getElementById('mandala-backdrop');
+            const cards = Array.from(document.querySelectorAll('.skandha-card'));
+            const santanaBanner = document.getElementById('santana-banner');
+            const santanaStatusText = document.getElementById('santana-status-text');
+            const santanaToggleBtn = document.getElementById('santana-toggle-btn');
+            const santanaToggleIcon = document.getElementById('santana-toggle-icon');
+            const santanaToggleLabel = document.getElementById('santana-toggle-label');
+
+            const SKANDHA_METAS = [
+                { name: '色 (Rūpa)', simile: '如聚沫', desc: '质碍四大' },
+                { name: '受 (Vedanā)', simile: '如水泡', desc: '苦乐领纳' },
+                { name: '想 (Saññā)', simile: '如春焰', desc: '阳焰取相' },
+                { name: '行 (Saṅkhāra)', simile: '如芭蕉', desc: '造作思愿' },
+                { name: '识 (Viññāṇa)', simile: '如幻术', desc: '幻师了别' }
+            ];
+
+            let activeFluxIndex = -1;
+            let fluxTimer = null;
+            let isManualPaused = false;
+            let isHoverPaused = false;
+
+            function applyFlux(index, isHover = false) {
+                cards.forEach((card, i) => {
+                    if (i === index) {
+                        card.classList.add('active-flux');
+                    } else {
+                        card.classList.remove('active-flux');
+                    }
+                });
+
+                if (santanaStatusText && index >= 0 && index < SKANDHA_METAS.length) {
+                    const m = SKANDHA_METAS[index];
+                    if (isHover) {
+                        santanaStatusText.textContent = `正念驻足观照 · 【${m.name}】 观其${m.simile}（移开后继续相续）`;
+                    } else if (isManualPaused) {
+                        santanaStatusText.textContent = `已定格观照 · 【${m.name}】 · 照见生灭，无常苦空`;
+                    } else {
+                        santanaStatusText.textContent = `刹那相续中 · 当前生起：【${m.name}】 观其${m.simile} · 旋火成轮`;
+                    }
+                }
+            }
+
+            function stepFlux() {
+                if (isManualPaused || isHoverPaused || !overlay || !overlay.classList.contains('active')) return;
+                activeFluxIndex = (activeFluxIndex + 1) % cards.length;
+                applyFlux(activeFluxIndex);
+                // 每一轮流转完成时微调一次背景光泽
+                if (activeFluxIndex === 0 && window.GrainientInstance && window.GrainientInstance.wake) {
+                    window.GrainientInstance.wake();
+                }
+            }
+
+            function startFlux() {
+                stopFlux();
+                activeFluxIndex = 0;
+                applyFlux(activeFluxIndex);
+                fluxTimer = setInterval(stepFlux, 1300);
+            }
+
+            function stopFlux() {
+                if (fluxTimer) {
+                    clearInterval(fluxTimer);
+                    fluxTimer = null;
+                }
+                cards.forEach(card => card.classList.remove('active-flux'));
+                activeFluxIndex = -1;
+            }
 
             function openMandala() {
                 if (!overlay) return;
@@ -1315,6 +1532,7 @@
                 if (window.GrainientInstance && window.GrainientInstance.wake) {
                     window.GrainientInstance.wake();
                 }
+                startFlux();
             }
 
             function closeMandala() {
@@ -1322,6 +1540,52 @@
                 overlay.classList.remove('active');
                 overlay.setAttribute('aria-hidden', 'true');
                 if (ego) ego.setAttribute('aria-expanded', 'false');
+                stopFlux();
+                // 恢复默认状态
+                isManualPaused = false;
+                isHoverPaused = false;
+                if (santanaBanner) santanaBanner.classList.remove('paused');
+                if (santanaToggleIcon) santanaToggleIcon.textContent = '⏸';
+                if (santanaToggleLabel) santanaToggleLabel.textContent = '定格观照';
+            }
+
+            // 卡片悬停/触控时驻足观照
+            cards.forEach((card, index) => {
+                card.addEventListener('mouseenter', function() {
+                    isHoverPaused = true;
+                    applyFlux(index, true);
+                });
+                card.addEventListener('mouseleave', function() {
+                    isHoverPaused = false;
+                    if (!isManualPaused) {
+                        applyFlux(activeFluxIndex >= 0 ? activeFluxIndex : index);
+                    }
+                });
+                card.addEventListener('click', function(e) {
+                    // 点击卡片直接锁定该卡片观照
+                    e.stopPropagation();
+                    activeFluxIndex = index;
+                    applyFlux(index, true);
+                });
+            });
+
+            // 手动定格/恢复按钮
+            if (santanaToggleBtn) {
+                santanaToggleBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    isManualPaused = !isManualPaused;
+                    if (isManualPaused) {
+                        if (santanaBanner) santanaBanner.classList.add('paused');
+                        if (santanaToggleIcon) santanaToggleIcon.textContent = '▶';
+                        if (santanaToggleLabel) santanaToggleLabel.textContent = '恢复相续';
+                        applyFlux(activeFluxIndex >= 0 ? activeFluxIndex : 0);
+                    } else {
+                        if (santanaBanner) santanaBanner.classList.remove('paused');
+                        if (santanaToggleIcon) santanaToggleIcon.textContent = '⏸';
+                        if (santanaToggleLabel) santanaToggleLabel.textContent = '定格观照';
+                        applyFlux(activeFluxIndex >= 0 ? activeFluxIndex : 0);
+                    }
+                });
             }
 
             if (ego) {
