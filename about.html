@@ -23,7 +23,7 @@
         }
 
         body {
-            background-color: #090a0f; /* Fallback color matching canvas */
+            background-color: #120f17; /* Fallback color matching Grainient base */
             color: var(--text-color);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             font-size: 16px;
@@ -32,6 +32,13 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+        }
+
+        body.light-mode {
+            --text-color: #1a1a1a;
+            --secondary-color: #555555;
+            --link-color: #1a1a1a;
+            --hover-color: #000000;
         }
 
         main {
@@ -83,6 +90,374 @@
 
         .header-title {
             font-size: 48px;
+        }
+
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 36px;
+            }
+        }
+
+        /* Anattā (五蕴刹那解构 · 无我) 微交互 */
+        .anatta-ego {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            vertical-align: baseline;
+        }
+
+        .anatta-ego-char {
+            display: inline-block;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .anatta-ego:hover .anatta-ego-char,
+        .anatta-ego.active .anatta-ego-char {
+            opacity: 0.12;
+            filter: blur(2px);
+            transform: scale(0.88);
+        }
+
+        .skandha {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.2);
+            font-size: 13px;
+            font-weight: 600;
+            font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+            color: #f3be7a;
+            text-shadow: 0 0 10px rgba(243, 190, 122, 0.65), 0 0 2px rgba(255, 255, 255, 0.9);
+            opacity: 0;
+            pointer-events: none;
+            line-height: 1;
+            white-space: nowrap;
+            filter: blur(4px);
+            z-index: 10;
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.4s ease,
+                        filter 0.4s ease;
+        }
+
+        /* 环形五方发散定位 */
+        /* 想 (Saññā) - 正上 */
+        .anatta-ego:hover .skandha-sanna,
+        .anatta-ego.active .skandha-sanna {
+            transform: translate(-50%, calc(-50% - 34px)) scale(1);
+            opacity: 0.95;
+            filter: blur(0);
+            transition-delay: 0ms;
+        }
+
+        /* 受 (Vedanā) - 左上 */
+        .anatta-ego:hover .skandha-vedana,
+        .anatta-ego.active .skandha-vedana {
+            transform: translate(calc(-50% - 32px), calc(-50% - 20px)) scale(1);
+            opacity: 0.95;
+            filter: blur(0);
+            transition-delay: 20ms;
+        }
+
+        /* 行 (Saṅkhāra) - 右上 */
+        .anatta-ego:hover .skandha-sankhara,
+        .anatta-ego.active .skandha-sankhara {
+            transform: translate(calc(-50% + 32px), calc(-50% - 20px)) scale(1);
+            opacity: 0.95;
+            filter: blur(0);
+            transition-delay: 40ms;
+        }
+
+        /* 色 (Rūpa) - 左下 */
+        .anatta-ego:hover .skandha-rupa,
+        .anatta-ego.active .skandha-rupa {
+            transform: translate(calc(-50% - 25px), calc(-50% + 24px)) scale(1);
+            opacity: 0.95;
+            filter: blur(0);
+            transition-delay: 60ms;
+        }
+
+        /* 识 (Viññāṇa) - 右下 */
+        .anatta-ego:hover .skandha-vinnana,
+        .anatta-ego.active .skandha-vinnana {
+            transform: translate(calc(-50% + 25px), calc(-50% + 24px)) scale(1);
+            opacity: 0.95;
+            filter: blur(0);
+            transition-delay: 80ms;
+        }
+
+        @media (max-width: 480px) {
+            .anatta-ego:hover .skandha-sanna,
+            .anatta-ego.active .skandha-sanna {
+                transform: translate(-50%, calc(-50% - 26px)) scale(0.9);
+            }
+            .anatta-ego:hover .skandha-vedana,
+            .anatta-ego.active .skandha-vedana {
+                transform: translate(calc(-50% - 24px), calc(-50% - 15px)) scale(0.9);
+            }
+            .anatta-ego:hover .skandha-sankhara,
+            .anatta-ego.active .skandha-sankhara {
+                transform: translate(calc(-50% + 24px), calc(-50% - 15px)) scale(0.9);
+            }
+            .anatta-ego:hover .skandha-rupa,
+            .anatta-ego.active .skandha-rupa {
+                transform: translate(calc(-50% - 19px), calc(-50% + 18px)) scale(0.9);
+            }
+            .anatta-ego:hover .skandha-vinnana,
+            .anatta-ego.active .skandha-vinnana {
+                transform: translate(calc(-50% + 19px), calc(-50% + 18px)) scale(0.9);
+            }
+        }
+
+        /* 标题行与出入息念 (Ānāpāna) 律动 */
+        .section-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .anapana-pulse {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 3px 10px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            font-size: 11px;
+            color: var(--secondary-color);
+            user-select: none;
+            -webkit-user-select: none;
+            cursor: help;
+            transition: all 0.25s ease;
+        }
+
+        .anapana-pulse:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(243, 190, 122, 0.4);
+        }
+
+        .anapana-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #f3be7a;
+            display: inline-block;
+            animation: anapana-cycle 10s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .anapana-text {
+            font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+            font-size: 11px;
+            font-weight: 600;
+            color: #f3be7a;
+            min-width: 14px;
+            text-align: center;
+        }
+
+        @keyframes anapana-cycle {
+            /* 0s ~ 4s 为吸气：光点柔和膨胀充盈 */
+            0% {
+                transform: scale(0.75);
+                opacity: 0.35;
+                box-shadow: 0 0 0 rgba(243, 190, 122, 0);
+            }
+            40% {
+                transform: scale(1.4);
+                opacity: 1;
+                box-shadow: 0 0 12px rgba(243, 190, 122, 0.85), 0 0 3px #ffffff;
+            }
+            /* 4s ~ 10s 为呼气：徐徐收拢释放微光 */
+            100% {
+                transform: scale(0.75);
+                opacity: 0.35;
+                box-shadow: 0 0 0 rgba(243, 190, 122, 0);
+            }
+        }
+
+        /* 死随念 (Memento Mori) 计数器盒 */
+        .memento-counter-box {
+            position: relative;
+            padding: 14px 18px;
+            margin-top: 10px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            transition: all 0.25s ease;
+        }
+
+        .memento-counter-box:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(243, 190, 122, 0.35);
+            box-shadow: 0 6px 24px -6px rgba(0, 0, 0, 0.6);
+        }
+
+        .memento-counter-box:focus-visible {
+            outline: 2px solid #f3be7a;
+            outline-offset: 2px;
+        }
+
+        .memento-counter-box .age-display {
+            margin-top: 0;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, color 0.25s ease;
+        }
+
+        .memento-counter-box.flip-active .age-display {
+            transform: scale(0.96);
+            opacity: 0.3;
+        }
+
+        /* 模式微提示文案 */
+        .memento-mode-hint {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--secondary-color);
+            margin-top: 6px;
+            opacity: 0.85;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .memento-counter-box:hover .memento-mode-hint {
+            opacity: 1;
+            color: #f3be7a;
+        }
+
+        .memento-mode-hint i {
+            font-size: 11px;
+            transition: transform 0.35s ease;
+        }
+
+        .memento-counter-box:hover .memento-mode-hint i {
+            transform: rotate(180deg);
+        }
+
+        /* 风化生命细线 (Life Strand) */
+        .life-strand-wrapper {
+            position: relative;
+            width: 100%;
+            height: 3px;
+            margin-top: 14px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .life-strand-bar {
+            height: 100%;
+            width: 0%;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #8d5a2a 0%, #f3be7a 70%, #ffffff 100%);
+            box-shadow: 0 0 8px rgba(243, 190, 122, 0.6);
+            transition: width 0.3s ease;
+        }
+
+        /* 倒计时模式（死随念·百岁尚余）微调 */
+        .memento-counter-box.mode-remaining .life-strand-bar {
+            background: linear-gradient(90deg, #b91c1c 0%, #ea580c 50%, #f3be7a 100%);
+            box-shadow: 0 0 10px rgba(234, 88, 12, 0.7);
+        }
+
+        .memento-counter-box.mode-remaining .age-display {
+            color: #fed7aa;
+        }
+
+        /* ==========================================================================
+           三、「风中细沙」—— 文本风化与不可执取 (Text Weathering)
+           ========================================================================== */
+
+        /* 瞬息水痕选区 (Text Selection) */
+        ::selection {
+            background: rgba(243, 190, 122, 0.28);
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(243, 190, 122, 0.65);
+        }
+
+        ::-moz-selection {
+            background: rgba(243, 190, 122, 0.28);
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(243, 190, 122, 0.65);
+        }
+
+        /* 抓不住的文字：框选释放时刹那生灭虚化 */
+        .text-weathered {
+            animation: text-evaporate 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes text-evaporate {
+            0% {
+                filter: blur(0);
+                opacity: 1;
+            }
+            30% {
+                filter: blur(2px);
+                opacity: 0.65;
+                text-shadow: 0 0 12px rgba(243, 190, 122, 0.85);
+            }
+            100% {
+                filter: blur(0);
+                opacity: 1;
+                text-shadow: none;
+            }
+        }
+
+        /* 字符衰变重组 · 巴利倒影 (Pāli Drift) */
+        .pali-drift {
+            position: relative;
+            display: inline-block;
+            vertical-align: baseline;
+            cursor: pointer;
+        }
+
+        .pali-drift-zh {
+            display: inline-block;
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .pali-drift-pi {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, calc(-50% + 4px)) scale(0.95);
+            opacity: 0;
+            filter: blur(3px);
+            font-family: "Noto Serif SC", "Georgia", "Songti SC", serif;
+            font-style: italic;
+            font-size: 0.88em;
+            letter-spacing: 0.05em;
+            color: #f3be7a;
+            text-shadow: 0 0 10px rgba(243, 190, 122, 0.75);
+            white-space: nowrap;
+            pointer-events: none;
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 5;
+        }
+
+        /* 激活动态倒影（悬停或自动周期微漾） */
+        .pali-drift:hover .pali-drift-zh,
+        .pali-drift.drifting .pali-drift-zh {
+            opacity: 0;
+            filter: blur(3px);
+            transform: translateY(-4px);
+        }
+
+        .pali-drift:hover .pali-drift-pi,
+        .pali-drift.drifting .pali-drift-pi {
+            opacity: 0.95;
+            filter: blur(0);
+            transform: translate(-50%, -50%) scale(1);
         }
 
         /* Sections */
@@ -370,19 +745,38 @@
 
     <main>
         <header>
-            <h1 class="header-title"><p class="hello">你好，<br/>"我"是"洪达"。</p></h1>
+            <h1 class="header-title"><p class="hello">你好，<br/><span class="anatta-ego" title="五蕴因缘聚合，假名为'我'"><span class="anatta-ego-char">我</span><span class="skandha skandha-sanna" aria-hidden="true">想</span><span class="skandha skandha-vedana" aria-hidden="true">受</span><span class="skandha skandha-sankhara" aria-hidden="true">行</span><span class="skandha skandha-rupa" aria-hidden="true">色</span><span class="skandha skandha-vinnana" aria-hidden="true">识</span></span>是"洪达"。</p></h1>
             <p class="bio">
-                <span class="dhamma-enthusiasts">法与禅修的爱好者，<span class="quote-tooltip">「乐于法者、爱好法者，审虑法者，<br/>　　　随念法的比丘，他不退失正法。<br/>　　　当行或站，坐或者卧时，<br/>　　　有向内会集的心，他就到达寂静。」--如是语86经</span></span><br/>
-                这里是我的个人主页，用于分享佛陀的<span class="dhamma">法与律<span class="quote-tooltip">阿难！但，你们可能会这么想：『大师的教语已过去了，我们没有大师了。』但，阿难！不应该这样认为，阿难！凡你们被我教导、告知的法与律，我死后就是你们的大师。--《大般涅槃经》</span></span>、禅师法谈、相关书籍等。<br/>
-                <span class="longevity">愿正法久住。<span class="quote-tooltip">阿难！我对你们这么说：「你们应该使被我设立的这个善的行法转起，不要成为最后一人。」--中部83经</span></span>
+                <span class="dhamma-enthusiasts">法与<span class="pali-drift" title="修习 · 培育"><span class="pali-drift-zh">禅修</span><span class="pali-drift-pi" aria-hidden="true">Bhāvanā</span></span>的爱好者，<span class="quote-tooltip">「乐于法者、爱好法者，审虑法者，<br/>　　　随念法的比丘，他不退失正法。<br/>　　　当行或站，坐或者卧时，<br/>　　　有向内会集的心，他就到达寂静。」--如是语86经</span></span><br/>
+                这里是我的<a href="index.html">个人主页</a>，用于分享佛陀的<span class="dhamma"><span class="pali-drift" title="正法律"><span class="pali-drift-zh">法与律</span><span class="pali-drift-pi" aria-hidden="true">Dhamma-Vinaya</span></span><span class="quote-tooltip">阿难！但，你们可能会这么想：『大师的教语已过去了，我们没有大师了。』但，阿难！不应该这样认为，阿难！凡你们被我教导、告知的法与律，我死后就是你们的大师。--《大般涅槃经》</span></span>、禅师法谈、相关书籍等。<br/>
+                <span class="longevity">愿<span class="pali-drift" title="正法 · 清净之法"><span class="pali-drift-zh">正法</span><span class="pali-drift-pi" aria-hidden="true">Saddhamma</span></span>久住。<span class="quote-tooltip">阿难！我对你们这么说：「你们应该使被我设立的这个善的行法转起，不要成为最后一人。」--中部83经</span></span>
             </p>
         </header>
 
         <div class="grid">
             <div class="right-col">
-                <div class="section">
-                    <h1 class="section-title">逝者如斯夫：</h1>
-                    <div id="age-counter" class="age-display"></div>
+                <div class="section memento-mori-section">
+                    <div class="section-title-row">
+                        <h1 class="section-title" id="counter-title"><span class="pali-drift" id="title-drift" title="诸行无常"><span class="pali-drift-zh" id="title-drift-zh">逝者如斯夫</span><span class="pali-drift-pi" id="title-drift-pi" aria-hidden="true">Aniccā</span></span>：</h1>
+                        <!-- 出入息念环境微律动指示器 -->
+                        <div class="anapana-pulse" title="人命在呼吸间 · 出入息念（4秒入息 · 6秒出息）" aria-label="出入息律动">
+                            <span class="anapana-dot" aria-hidden="true"></span>
+                            <span class="anapana-text" id="anapana-state">吸</span>
+                        </div>
+                    </div>
+
+                    <!-- 可点击翻转的生命计数容器 (已逝岁月 vs 百岁尚余) -->
+                    <div class="memento-counter-box" id="memento-box" role="button" tabindex="0" title="点击切换视角：已逝岁月 / 百岁尚余 (死随念)" aria-label="点击切换已逝岁月与百岁尚余视角">
+                        <div id="age-counter" class="age-display"></div>
+                        <div class="memento-mode-hint" id="memento-hint">
+                            <i class="bi bi-arrow-repeat"></i>
+                            <span id="memento-hint-text">已历岁月 · 逝者如斯（点击参死随念）</span>
+                        </div>
+                        <!-- 风化生命细线 (Life Strand) -->
+                        <div class="life-strand-wrapper" aria-hidden="true">
+                            <div class="life-strand-bar" id="life-strand-bar"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="section job-info">
@@ -391,6 +785,7 @@
                         <li class="item">
                             <div class="item-content">
                                 <span class="item-title"><a href="https://suttacentral.net" target="_blank">SuttaCentral.net</a></span>
+                                <span class="item-title"><a href="https://bilara.suttacentral.net" target="_blank">Bilara.SuttaCentral.net</a></span>
                                 <span class="item-desc">开发工程师</span>
                                 <div class="item-desc" style="margin-top: 4px;">
                                     <a href="https://github.com/suttacentral" target="_blank">
@@ -406,23 +801,108 @@
             <script>
                 (function() {
                     // Birthdate: 1980-05-25 10:00:00 (Local Time)
-                    // Month is 0-indexed in JS Date constructor (0=Jan, 4=May)
                     const birthDate = new Date(1980, 4, 25, 10, 0, 0);
+                    const msPerYear = 31556952000;
+                    const maxLifespanYears = 80; // 人寿百岁死随念参照基准
+
                     const element = document.getElementById('age-counter');
-                    
-                    function updateAge() {
+                    const titleZhEl = document.getElementById('title-drift-zh');
+                    const titlePiEl = document.getElementById('title-drift-pi');
+                    const hintTextEl = document.getElementById('memento-hint-text');
+                    const boxEl = document.getElementById('memento-box');
+                    const strandBarEl = document.getElementById('life-strand-bar');
+                    const anapanaTextEl = document.getElementById('anapana-state');
+
+                    // 模式持久化：'elapsed' (逝者如斯夫) 或 'remaining' (死随念·百岁尚余)
+                    let mode = localStorage.getItem('dhamma_memento_mode') || 'elapsed';
+
+                    function applyModeUI() {
+                        if (mode === 'remaining') {
+                            if (titleZhEl) titleZhEl.textContent = '死随念 · 尚余';
+                            if (titlePiEl) titlePiEl.textContent = 'Maraṇānussati';
+                            hintTextEl.textContent = '若寿八十 · 刹那递减（点击返回已逝）';
+                            boxEl.classList.add('mode-remaining');
+                        } else {
+                            if (titleZhEl) titleZhEl.textContent = '逝者如斯夫';
+                            if (titlePiEl) titlePiEl.textContent = 'Aniccā';
+                            hintTextEl.textContent = '已历岁月 · 逝者如斯（点击参死随念）';
+                            boxEl.classList.remove('mode-remaining');
+                        }
+                    }
+
+                    applyModeUI();
+
+                    function toggleMode() {
+                        mode = (mode === 'elapsed') ? 'remaining' : 'elapsed';
+                        try { localStorage.setItem('dhamma_memento_mode', mode); } catch(e) {}
+                        
+                        boxEl.classList.add('flip-active');
+                        setTimeout(() => {
+                            applyModeUI();
+                            boxEl.classList.remove('flip-active');
+                        }, 120);
+                    }
+
+                    boxEl.addEventListener('click', toggleMode);
+                    boxEl.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            toggleMode();
+                        }
+                    });
+
+                    // 呼吸文字同步 (周期 10 秒：前 4 秒吸气，后 6 秒呼气)
+                    let lastBreathPhase = '';
+                    function updateAnapana(nowMs) {
+                        const breathSec = (nowMs * 0.001) % 10.0;
+                        const state = (breathSec < 4.0) ? '吸' : '呼';
+                        if (state !== lastBreathPhase) {
+                            lastBreathPhase = state;
+                            if (anapanaTextEl) anapanaTextEl.textContent = state;
+                        }
+                    }
+
+                    function updateLoop(nowMs) {
                         const now = new Date();
                         const diff = now - birthDate;
-                        // Year length: 365.242199 days (Tropical year for high precision) or 365.25
-                        // Using standard Gregorian average year: 365.2425 days = 31556952000 ms
-                        const age = diff / 31556952000;
-                        element.textContent = age.toFixed(16);
-                        requestAnimationFrame(updateAge);
+                        const age = diff / msPerYear;
+
+                        if (mode === 'remaining') {
+                            const remaining = Math.max(0, maxLifespanYears - age);
+                            element.textContent = remaining.toFixed(16);
+                            // 进度条显示百岁中尚存余年比例
+                            const percent = Math.min(100, Math.max(0, (remaining / maxLifespanYears) * 100));
+                            if (strandBarEl) strandBarEl.style.width = percent.toFixed(4) + '%';
+                        } else {
+                            element.textContent = age.toFixed(16);
+                            // 进度条显示百岁中已消耗的比例
+                            const percent = Math.min(100, Math.max(0, (age / maxLifespanYears) * 100));
+                            if (strandBarEl) strandBarEl.style.width = percent.toFixed(4) + '%';
+                        }
+
+                        updateAnapana(nowMs || performance.now());
+                        requestAnimationFrame(updateLoop);
                     }
-                    
-                    updateAge();
+
+                    requestAnimationFrame(updateLoop);
                 })();
             </script>
+            <!-- 五、「天地四时」与月相微印 (Cosmic Diurnal & Lunar Status) -->
+            <div class="cosmic-status-bar" id="cosmic-status-bar" style="margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding: 9px 14px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.07); border-radius: 12px; font-size: 0.82rem; backdrop-filter: blur(8px);">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span id="cosmic-moon-icon" style="font-size: 1.1rem; line-height: 1;" title="农历月相">🌕</span>
+                    <span id="cosmic-season-text" style="color: var(--text-color); opacity: 0.9; font-weight: 500;">薄暮 · 落日斜阳</span>
+                    <span style="opacity: 0.25;">·</span>
+                    <span id="cosmic-lunar-text" style="opacity: 0.65; font-size: 0.76rem;">满月望日 · 15日</span>
+                </div>
+                <button type="button" id="cosmic-cruise-btn" style="background: rgba(141, 90, 42, 0.14); border: 1px solid rgba(141, 90, 42, 0.28); color: #f3be7a; border-radius: 9999px; padding: 3px 10px; font-size: 0.72rem; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s ease;" title="点击切换预览四时更迭">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.85;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span id="cosmic-cruise-label">天地巡礼</span>
+                </button>
+            </div>
+            <div class="void-trace-hint" style="margin-top: 1.8rem; padding-top: 1.25rem; border-top: 1px dashed rgba(141, 90, 42, 0.15); text-align: center; font-size: 0.78rem; color: var(--text-color, #a8a29e); opacity: 0.55; letter-spacing: 0.08em; font-style: italic;">
+                “如鸟飞虚空，无有足迹可寻” · 滑动页面体会造作留痕与随缘抚平
+            </div>
         </div>
     </main>
 
@@ -443,7 +923,117 @@
         </div>
     </footer>
 
-    <script src="side-rays-background.js"></script>
-    <script src="space-background.js"></script>
+    <script>
+        (function() {
+            // 1. 五蕴解构点击交互 (移动端支持)
+            const ego = document.querySelector('.anatta-ego');
+            if (ego) {
+                ego.addEventListener('click', function(e) {
+                    this.classList.toggle('active');
+                    e.stopPropagation();
+                });
+                document.addEventListener('click', function() {
+                    ego.classList.remove('active');
+                });
+            }
+
+            // 2. 字符衰变重组自动调度器 (偶发巴利倒影)
+            const driftElements = document.querySelectorAll('.pali-drift');
+            if (driftElements.length > 0) {
+                function scheduleDrift() {
+                    const interval = 14000 + Math.random() * 8000;
+                    setTimeout(() => {
+                        if (document.hidden) {
+                            scheduleDrift();
+                            return;
+                        }
+                        const target = driftElements[Math.floor(Math.random() * driftElements.length)];
+                        target.classList.add('drifting');
+                        setTimeout(() => {
+                            target.classList.remove('drifting');
+                            scheduleDrift();
+                        }, 2400);
+                    }, interval);
+                }
+                scheduleDrift();
+            }
+
+            // 3. 抓不住的文字：文本框选时刹那风化虚化
+            document.addEventListener('mouseup', function() {
+                const sel = window.getSelection();
+                if (!sel || sel.isCollapsed || !sel.rangeCount) return;
+                
+                const range = sel.getRangeAt(0);
+                const container = range.commonAncestorContainer;
+                const elem = (container.nodeType === 1) ? container : container.parentElement;
+                
+                if (elem && elem.closest('main')) {
+                    const targetBlock = elem.closest('p, .section, .item, header');
+                    if (targetBlock) {
+                        targetBlock.classList.add('text-weathered');
+                        setTimeout(() => {
+                            targetBlock.classList.remove('text-weathered');
+                        }, 1400);
+                    }
+                }
+            });
+
+            // 4. 天地四时与月相交互联动 (Cosmic Diurnal & Cruise)
+            (function() {
+                const seasonTextEl = document.getElementById('cosmic-season-text');
+                const lunarTextEl = document.getElementById('cosmic-lunar-text');
+                const moonIconEl = document.getElementById('cosmic-moon-icon');
+                const cruiseBtn = document.getElementById('cosmic-cruise-btn');
+                const cruiseLabel = document.getElementById('cosmic-cruise-label');
+
+                if (!seasonTextEl || !cruiseBtn) return;
+
+                // 巡礼档位
+                const CRUISE_STEPS = [
+                    { hour: null, label: '天地巡礼', desc: '随现实运转' },
+                    { hour: 6.0, label: '巡礼 · 拂晓', desc: '拂晓破晓 (06:00)' },
+                    { hour: 13.0, label: '巡礼 · 正午', desc: '正午遍照 (13:00)' },
+                    { hour: 18.5, label: '巡礼 · 薄暮', desc: '薄暮斜阳 (18:30)' },
+                    { hour: 23.5, label: '巡礼 · 子夜', desc: '子夜幽冥 (23:30)' }
+                ];
+                let currentStepIndex = 0;
+
+                function updateCosmicUI(state) {
+                    if (!state) return;
+                    if (moonIconEl) moonIconEl.textContent = state.lunar?.icon || '🌕';
+                    if (seasonTextEl) seasonTextEl.textContent = (state.isCruise ? '[巡礼] ' : '') + state.seasonName;
+                    if (lunarTextEl) lunarTextEl.textContent = `${state.lunar?.phaseName || ''} · 农历${state.lunar?.lunarDay || 15}日`;
+                    if (state.isCruise) {
+                        cruiseBtn.style.background = 'rgba(243, 190, 122, 0.24)';
+                        cruiseBtn.style.borderColor = 'rgba(243, 190, 122, 0.6)';
+                    } else {
+                        cruiseBtn.style.background = 'rgba(141, 90, 42, 0.14)';
+                        cruiseBtn.style.borderColor = 'rgba(141, 90, 42, 0.28)';
+                    }
+                }
+
+                function bindCosmic() {
+                    if (window.GrainientInstance && window.GrainientInstance.onCosmicUpdate) {
+                        window.GrainientInstance.onCosmicUpdate(updateCosmicUI);
+                    } else {
+                        setTimeout(bindCosmic, 80);
+                    }
+                }
+                bindCosmic();
+
+                cruiseBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentStepIndex = (currentStepIndex + 1) % CRUISE_STEPS.length;
+                    const step = CRUISE_STEPS[currentStepIndex];
+                    if (cruiseLabel) cruiseLabel.textContent = step.label;
+
+                    if (window.GrainientInstance && window.GrainientInstance.setCosmicCruise) {
+                        window.GrainientInstance.setCosmicCruise(step.hour);
+                    }
+                });
+            })();
+        })();
+    </script>
+    <script src="grainient-background.js"></script>
 </body>
 </html>
