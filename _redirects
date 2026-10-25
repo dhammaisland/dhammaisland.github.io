@@ -1,0 +1,3 @@
+# Cloudflare Pages Redirects
+# 访问网站根路径时，自动重定向到 /about.html
+/  /about.html  302
