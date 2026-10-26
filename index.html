@@ -6,6 +6,7 @@
     <title>关于 | About</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <Style>
         :root {
             --bg-color: transparent;
@@ -1445,6 +1446,438 @@
             100% { opacity: 0.35102; }
         }
 
+        /* ==========================================================================
+           七、「因缘际会 · 落墨化沙」访客共鸣与无相留痕 (Paccaya & Sand Trace)
+           ========================================================================== */
+        .paccaya-card {
+            margin-top: 14px;
+            padding: 15px 18px;
+            background: rgba(255, 255, 255, 0.028);
+            border: 1px solid rgba(243, 190, 122, 0.18);
+            border-radius: 14px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .paccaya-card:hover {
+            border-color: rgba(243, 190, 122, 0.34);
+            background: rgba(255, 255, 255, 0.042);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.45);
+        }
+
+        body.light-mode .paccaya-card {
+            background: rgba(0, 0, 0, 0.025);
+            border-color: rgba(141, 90, 42, 0.2);
+        }
+
+        body.light-mode .paccaya-card:hover {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(141, 90, 42, 0.36);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+        }
+
+        .paccaya-main-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .paccaya-greeting {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.88rem;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+
+        .paccaya-seal {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 2px 9px;
+            border-radius: 9999px;
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
+            background: rgba(243, 190, 122, 0.12);
+            border: 1px solid rgba(243, 190, 122, 0.28);
+            color: #f3be7a;
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+
+        body.light-mode .paccaya-seal {
+            background: rgba(141, 90, 42, 0.1);
+            border-color: rgba(141, 90, 42, 0.28);
+            color: #8d5a2a;
+        }
+
+        .paccaya-count {
+            font-family: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-weight: 600;
+            font-size: 0.96rem;
+            color: #f3be7a;
+            padding: 0 4px;
+            border-bottom: 1px dashed rgba(243, 190, 122, 0.45);
+            text-shadow: 0 0 12px rgba(243, 190, 122, 0.55);
+            font-variant-numeric: tabular-nums;
+            transition: transform 0.3s ease, color 0.3s ease;
+            display: inline-block;
+        }
+
+        body.light-mode .paccaya-count {
+            color: #8d5a2a;
+            border-bottom-color: rgba(141, 90, 42, 0.45);
+            text-shadow: none;
+        }
+
+        .paccaya-actions {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .paccaya-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: var(--text-color);
+            border-radius: 9999px;
+            padding: 4px 12px;
+            font-size: 0.76rem;
+            font-family: inherit;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            line-height: 1.4;
+        }
+
+        .paccaya-btn:hover {
+            background: rgba(243, 190, 122, 0.18);
+            border-color: rgba(243, 190, 122, 0.48);
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .paccaya-btn--primary {
+            background: rgba(243, 190, 122, 0.14);
+            border-color: rgba(243, 190, 122, 0.38);
+            color: #f3be7a;
+        }
+
+        .paccaya-btn--primary:hover,
+        .paccaya-btn.active {
+            background: rgba(243, 190, 122, 0.26);
+            border-color: rgba(243, 190, 122, 0.65);
+            color: #ffffff;
+            box-shadow: 0 0 16px rgba(243, 190, 122, 0.28);
+        }
+
+        body.light-mode .paccaya-btn {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.14);
+            color: var(--text-color);
+        }
+
+        body.light-mode .paccaya-btn--primary {
+            background: rgba(141, 90, 42, 0.1);
+            border-color: rgba(141, 90, 42, 0.32);
+            color: #8d5a2a;
+        }
+
+        body.light-mode .paccaya-btn:hover,
+        body.light-mode .paccaya-btn.active {
+            background: rgba(141, 90, 42, 0.18);
+            border-color: rgba(141, 90, 42, 0.55);
+            color: #5c3816;
+            box-shadow: none;
+        }
+
+        /* 随喜一念 · 随机法句浮现条 */
+        .paccaya-mudita-box {
+            display: none;
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: rgba(243, 190, 122, 0.06);
+            border-left: 2px solid #f3be7a;
+            border-radius: 4px 10px 10px 4px;
+            font-size: 0.8rem;
+            color: var(--text-color);
+            animation: paccaya-slide-down 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .paccaya-mudita-box.active {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        body.light-mode .paccaya-mudita-box {
+            background: rgba(141, 90, 42, 0.06);
+            border-left-color: #8d5a2a;
+        }
+
+        .paccaya-mudita-text {
+            font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+            letter-spacing: 0.04em;
+            line-height: 1.6;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .paccaya-mudita-source {
+            color: #f3be7a;
+            font-size: 0.74rem;
+            margin-left: 6px;
+            opacity: 0.85;
+            white-space: nowrap;
+        }
+
+        body.light-mode .paccaya-mudita-source {
+            color: #8d5a2a;
+        }
+
+        /* 落墨留语 · 极简书笺抽屉 */
+        .paccaya-drawer {
+            display: none;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px dashed rgba(243, 190, 122, 0.2);
+            animation: paccaya-slide-down 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .paccaya-drawer.active {
+            display: block;
+        }
+
+        .paccaya-drawer.dissolving {
+            transition: opacity 0.6s ease, filter 0.6s ease, transform 0.6s ease;
+            opacity: 0;
+            filter: blur(6px);
+            transform: translateY(-6px) scale(0.98);
+            pointer-events: none;
+        }
+
+        @keyframes paccaya-slide-down {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .paccaya-form-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 560px) {
+            .paccaya-form-meta {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+        }
+
+        .paccaya-input,
+        .paccaya-textarea {
+            width: 100%;
+            background: rgba(12, 10, 16, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            padding: 8px 12px;
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            transition: all 0.25s ease;
+            outline: none;
+        }
+
+        body.light-mode .paccaya-input,
+        body.light-mode .paccaya-textarea {
+            background: rgba(255, 255, 255, 0.75);
+            border-color: rgba(0, 0, 0, 0.14);
+            color: #1a1a1a;
+        }
+
+        .paccaya-input::placeholder,
+        .paccaya-textarea::placeholder {
+            color: var(--secondary-color);
+            opacity: 0.68;
+        }
+
+        .paccaya-input:focus,
+        .paccaya-textarea:focus {
+            border-color: rgba(243, 190, 122, 0.6);
+            background: rgba(18, 15, 24, 0.65);
+            box-shadow: 0 0 0 2px rgba(243, 190, 122, 0.12);
+        }
+
+        body.light-mode .paccaya-input:focus,
+        body.light-mode .paccaya-textarea:focus {
+            border-color: rgba(141, 90, 42, 0.6);
+            background: #ffffff;
+            box-shadow: 0 0 0 2px rgba(141, 90, 42, 0.12);
+        }
+
+        .paccaya-textarea {
+            resize: vertical;
+            min-height: 64px;
+            max-height: 160px;
+            margin-bottom: 10px;
+        }
+
+        .paccaya-form-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .paccaya-pause-note {
+            font-size: 0.72rem;
+            color: var(--secondary-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0.85;
+        }
+
+        .paccaya-pause-note i {
+            color: #f3be7a;
+        }
+
+        body.light-mode .paccaya-pause-note i {
+            color: #8d5a2a;
+        }
+
+        /* 落墨化沙后的静谧回执 */
+        .paccaya-receipt {
+            display: none;
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: rgba(243, 190, 122, 0.08);
+            border: 1px dashed rgba(243, 190, 122, 0.35);
+            font-size: 0.8rem;
+            color: #f3be7a;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            animation: paccaya-slide-down 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .paccaya-receipt.active {
+            display: flex;
+        }
+
+        body.light-mode .paccaya-receipt {
+            background: rgba(141, 90, 42, 0.07);
+            border-color: rgba(141, 90, 42, 0.35);
+            color: #8d5a2a;
+        }
+
+        /* 往昔法友回响单行流转条 */
+        .paccaya-echo-bar {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 0.76rem;
+            color: var(--secondary-color);
+        }
+
+        body.light-mode .paccaya-echo-bar {
+            border-top-color: rgba(0, 0, 0, 0.08);
+        }
+
+        .paccaya-echo-left {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .paccaya-echo-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #f3be7a;
+            opacity: 0.75;
+            flex-shrink: 0;
+            animation: santana-pulse 2.4s infinite ease-in-out;
+        }
+
+        .paccaya-echo-label {
+            color: #f3be7a;
+            opacity: 0.85;
+            flex-shrink: 0;
+            font-weight: 500;
+        }
+
+        body.light-mode .paccaya-echo-label {
+            color: #8d5a2a;
+        }
+
+        .paccaya-echo-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text-color);
+            opacity: 0.78;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .paccaya-echo-text.switching {
+            opacity: 0;
+            transform: translateY(3px);
+        }
+
+        .paccaya-echo-next {
+            background: transparent;
+            border: none;
+            color: var(--secondary-color);
+            font-size: 0.72rem;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .paccaya-echo-next:hover {
+            color: #f3be7a;
+            background: rgba(243, 190, 122, 0.1);
+        }
+
+        body.light-mode .paccaya-echo-next:hover {
+            color: #8d5a2a;
+            background: rgba(141, 90, 42, 0.08);
+        }
+
     </Style>
 </head>
 <body>
@@ -1637,22 +2070,105 @@
                     requestAnimationFrame(updateLoop);
                 })();
             </script>
-            <!-- 五、「天地四时」与月相微印 (Cosmic Diurnal & Lunar Status) -->
-            <div class="cosmic-status-bar" id="cosmic-status-bar">
-                <div class="cosmic-status-info" style="display: flex; align-items: center; flex-wrap: wrap; gap: 6px;">
-                    <span id="cosmic-moon-icon" style="font-size: 1.05rem; line-height: 1;" title="农历月相">🌕</span>
-                    <span id="cosmic-season-text" style="color: var(--text-color); opacity: 0.9; font-weight: 500;">薄暮 · 落日斜阳</span>
-                    <span style="opacity: 0.25;">·</span>
-                    <span id="cosmic-lunar-text" style="opacity: 0.65; font-size: 0.74rem;">满月望日 · 15日</span>
+        </div>
+
+        <!-- 五、「天地四时」与月相微印 (Cosmic Diurnal & Lunar Status) -->
+        <div class="cosmic-status-bar" id="cosmic-status-bar">
+            <div class="cosmic-status-info" style="display: flex; align-items: center; flex-wrap: wrap; gap: 6px;">
+                <span id="cosmic-moon-icon" style="font-size: 1.05rem; line-height: 1;" title="农历月相">🌕</span>
+                <span id="cosmic-season-text" style="color: var(--text-color); opacity: 0.9; font-weight: 500;">薄暮 · 落日斜阳</span>
+                <span style="opacity: 0.25;">·</span>
+                <span id="cosmic-lunar-text" style="opacity: 0.65; font-size: 0.74rem;">满月望日 · 15日</span>
+            </div>
+            <button type="button" id="cosmic-cruise-btn" class="cosmic-cruise-btn" title="点击切换预览四时更迭">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.85;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span id="cosmic-cruise-label">天地巡礼</span>
+            </button>
+        </div>
+
+        <!-- 七、「因缘际会 · 落墨化沙」访客序数与无相留痕 (Paccaya & Sand Trace) -->
+        <section class="paccaya-card" id="paccaya-card" aria-label="因缘际会访客共鸣与留言">
+            <div class="paccaya-main-row">
+                <div class="paccaya-greeting">
+                    <span class="paccaya-seal" title="此有故彼有，此生故彼生 · 缘起际会">
+                        <i class="bi bi-flower1"></i>
+                        <span class="pali-drift"><span class="pali-drift-zh">因缘一会</span><span class="pali-drift-pi" aria-hidden="true">Paccaya</span></span>
+                    </span>
+                    <span>
+                        你是第 <span class="paccaya-count" id="paccaya-visit-count" title="法洲累计因缘交会序数">···</span> 位驻足此间的寻法者，不留下点什么？
+                    </span>
                 </div>
-                <button type="button" id="cosmic-cruise-btn" class="cosmic-cruise-btn" title="点击切换预览四时更迭">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.85;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    <span id="cosmic-cruise-label">天地巡礼</span>
+                <div class="paccaya-actions">
+                    <button type="button" class="paccaya-btn" id="paccaya-mudita-btn" title="无需落字 · 随喜一念并抽取一句法语回向">
+                        <i class="bi bi-stars"></i>
+                        <span id="paccaya-mudita-label">随喜一念</span>
+                    </button>
+                    <button type="button" class="paccaya-btn paccaya-btn--primary" id="paccaya-write-btn" aria-expanded="false" aria-controls="paccaya-drawer" title="展开书笺 · 留下一句感悟或叩问">
+                        <i class="bi bi-feather"></i>
+                        <span id="paccaya-write-label">落墨留语</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 随喜一念：法句微光回向 -->
+            <div class="paccaya-mudita-box" id="paccaya-mudita-box" role="status" aria-live="polite">
+                <div class="paccaya-mudita-text">
+                    <span id="paccaya-mudita-quote">“诸恶莫作，众善奉行，自净其意，是诸佛教。”</span>
+                    <span class="paccaya-mudita-source" id="paccaya-mudita-source">——《法句经·183偈》</span>
+                </div>
+                <button type="button" class="paccaya-echo-next" id="paccaya-mudita-next" title="再诵一偈">
+                    <i class="bi bi-arrow-repeat"></i>
+                    <span>换一偈</span>
                 </button>
             </div>
-            <div class="void-trace-hint" style="margin-top: 1.8rem; padding-top: 1.25rem; border-top: 1px dashed rgba(141, 90, 42, 0.15); text-align: center; font-size: 0.78rem; color: var(--text-color, #a8a29e); opacity: 0.55; letter-spacing: 0.08em; font-style: italic;">
-                “如鸟飞虚空，无有足迹可寻” · 滑动页面体会造作留痕与随缘抚平
+
+            <!-- 落墨留语：极简书笺输入面板 -->
+            <div class="paccaya-drawer" id="paccaya-drawer" aria-hidden="true">
+                <div class="paccaya-form-meta">
+                    <input type="text" id="paccaya-username" class="paccaya-input" maxlength="32" placeholder="称呼（选填，留空即作「寻法者」）">
+                    <input type="email" id="paccaya-email" class="paccaya-input" maxlength="64" placeholder="邮箱（选填，仅用于法义回复）">
+                </div>
+                <textarea id="paccaya-content" class="paccaya-textarea" maxlength="500" placeholder="写下一句感悟、随喜或法义叩问……提交刹那字化金沙入虚空，善念长存法洲。"></textarea>
+                <div class="paccaya-form-footer">
+                    <span class="paccaya-pause-note">
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>落墨驻足间，命根流沙已为您暂歇</span>
+                    </span>
+                    <div class="paccaya-actions">
+                        <button type="button" class="paccaya-btn" id="paccaya-cancel-btn">收起</button>
+                        <button type="button" class="paccaya-btn paccaya-btn--primary" id="paccaya-submit-btn">
+                            <i class="bi bi-wind"></i>
+                            <span id="paccaya-submit-label">印入虚空</span>
+                        </button>
+                    </div>
+                </div>
             </div>
+
+            <!-- 提交后回执 -->
+            <div class="paccaya-receipt" id="paccaya-receipt" role="status" aria-live="polite">
+                <span><i class="bi bi-sparkles"></i> 字虽化作金沙归于虚空，法缘已深结。你留下的心语待审后将汇入下方回响。</span>
+                <button type="button" class="paccaya-echo-next" id="paccaya-again-btn">
+                    <i class="bi bi-pencil"></i>
+                    <span>再留一语</span>
+                </button>
+            </div>
+
+            <!-- 往昔法友回响条 -->
+            <div class="paccaya-echo-bar" id="paccaya-echo-bar">
+                <div class="paccaya-echo-left">
+                    <span class="paccaya-echo-dot" aria-hidden="true"></span>
+                    <span class="paccaya-echo-label">往昔回响</span>
+                    <span class="paccaya-echo-text" id="paccaya-echo-text">正在谛听过往法友留下的足音……</span>
+                </div>
+                <button type="button" class="paccaya-echo-next" id="paccaya-echo-next" title="聆听下一则法友回响">
+                    <span>下一则</span>
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <div class="void-trace-hint" style="margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px dashed rgba(141, 90, 42, 0.15); text-align: center; font-size: 0.78rem; color: var(--text-color, #a8a29e); opacity: 0.55; letter-spacing: 0.08em; font-style: italic;">
+            “如鸟飞虚空，无有足迹可寻” · 滑动页面体会造作留痕与随缘抚平
         </div>
     </main>
 
@@ -2049,6 +2565,7 @@
                 const TOTAL_SECONDS = 24.0;
                 let elapsedSeconds = 0.0;
                 let isPaused = false;
+                let isInteractionPaused = false;
                 let isDissolved = false;
                 let timerRaf = 0;
                 let lastTime = 0;
@@ -2056,6 +2573,7 @@
                 // 粒子物理池
                 let particles = [];
                 let particleRaf = 0;
+                let particleLastTime = 0;
                 let isReversing = false;
 
                 function resizeCanvas() {
@@ -2072,6 +2590,8 @@
                         document.querySelector('header'),
                         document.querySelector('.right-col'),
                         document.querySelector('.cosmic-status-bar'),
+                        document.getElementById('paccaya-card'),
+                        document.querySelector('.void-trace-hint'),
                         document.querySelector('footer')
                     ].filter(Boolean);
 
@@ -2114,12 +2634,59 @@
                     });
                 }
 
+                // 局部「落墨化沙」粒子生成（供留言提交瞬间调用）
+                function spawnElementSand(targetEl) {
+                    if (isDissolved || !targetEl) return;
+                    const rect = targetEl.getBoundingClientRect();
+                    if (rect.width <= 0 || rect.height <= 0) return;
+
+                    particles = [];
+                    const colors = [
+                        'rgba(243, 190, 122, ',  // 琥珀金
+                        'rgba(255, 237, 213, ',  // 暖金白
+                        'rgba(217, 119, 6, ',    // 檀香金
+                        'rgba(255, 255, 255, '   // 净白
+                    ];
+                    const count = 150;
+                    for (let i = 0; i < count; i++) {
+                        const rx = rect.left + Math.random() * rect.width;
+                        const ry = rect.top + Math.random() * rect.height;
+                        const colorPrefix = colors[Math.floor(Math.random() * colors.length)];
+                        particles.push({
+                            x: rx,
+                            y: ry,
+                            originX: rx,
+                            originY: ry,
+                            vx: 0.6 + Math.random() * 2.4,
+                            vy: -1.4 - Math.random() * 2.8,
+                            size: 1.3 + Math.random() * 2.2,
+                            colorPrefix,
+                            alpha: 0.85 + Math.random() * 0.15,
+                            maxAlpha: 0.95,
+                            life: 0,
+                            maxLife: 1.3 + Math.random() * 0.7,
+                            delay: Math.random() * 0.16,
+                            active: false
+                        });
+                    }
+
+                    isReversing = false;
+                    particleStart = 0;
+                    particleLastTime = 0;
+                    cancelAnimationFrame(particleRaf);
+                    particleRaf = requestAnimationFrame(updateParticles);
+
+                    if (window.GrainientInstance && window.GrainientInstance.wake) {
+                        window.GrainientInstance.wake();
+                    }
+                }
+
                 // 粒子动画循环
                 let particleStart = 0;
                 function updateParticles(now) {
                     if (!particleStart) particleStart = now;
-                    const dt = Math.min(0.04, (now - (lastTime || now)) / 1000) || 0.016;
-                    lastTime = now;
+                    const dt = Math.min(0.04, (now - (particleLastTime || now)) / 1000) || 0.016;
+                    particleLastTime = now;
 
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -2129,7 +2696,10 @@
                         // 正向消散飞散
                         const elapsed = (now - particleStart) / 1000;
                         particles.forEach(p => {
-                            if (elapsed < p.delay) return;
+                            if (elapsed < p.delay) {
+                                activeCount++;
+                                return;
+                            }
                             p.active = true;
                             p.life += dt;
                             // 风力与轻微阻尼
@@ -2198,7 +2768,7 @@
                     // 生成粒子并开始动画
                     spawnDissolutionParticles();
                     particleStart = 0;
-                    lastTime = 0;
+                    particleLastTime = 0;
                     cancelAnimationFrame(particleRaf);
                     particleRaf = requestAnimationFrame(updateParticles);
 
@@ -2226,7 +2796,7 @@
 
                     // 开始粒子倒卷聚拢
                     isReversing = true;
-                    lastTime = 0;
+                    particleLastTime = 0;
                     cancelAnimationFrame(particleRaf);
                     particleRaf = requestAnimationFrame(updateParticles);
 
@@ -2246,7 +2816,7 @@
                     const dt = (now - lastTime) / 1000;
                     lastTime = now;
 
-                    if (!isPaused && !isDissolved && !document.hidden) {
+                    if (!isPaused && !isInteractionPaused && !isDissolved && !document.hidden) {
                         elapsedSeconds += dt;
                         const progress = Math.min(1, elapsedSeconds / TOTAL_SECONDS);
                         const remaining = Math.max(0, Math.ceil(TOTAL_SECONDS - elapsedSeconds));
@@ -2285,8 +2855,337 @@
                     rebirthBtn.addEventListener('click', triggerRebirth);
                 }
 
+                // 暴露联动接口供「因缘际会 · 落墨化沙」调用
+                window.KalaEngine = {
+                    setInteractionPause: function(paused) {
+                        isInteractionPaused = !!paused;
+                    },
+                    spawnElementSand: spawnElementSand
+                };
+
                 // 启动进度条倒计时
                 timerRaf = requestAnimationFrame(tickProgress);
+            })();
+
+            // 6. 「因缘际会 · 落墨化沙」访客计数、随喜一念与无相留痕 (Paccaya & Sand Trace)
+            (function() {
+                const SUPABASE_URL = 'https://hjrfufuyivgddqpzdrzp.supabase.co';
+                const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqcmZ1ZnV5aXZnZGRxcHpkcnpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ0MDU3NTAsImV4cCI6MjA3OTk4MTc1MH0.EyFBzpiBuOy9Cm9nwNB-_c7j77Ny8E1F13ltB3BXojs';
+                const supabaseClient = (window.supabase && window.supabase.createClient)
+                    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+                    : null;
+
+                const visitCountEl = document.getElementById('paccaya-visit-count');
+                const muditaBtn = document.getElementById('paccaya-mudita-btn');
+                const muditaLabel = document.getElementById('paccaya-mudita-label');
+                const muditaBox = document.getElementById('paccaya-mudita-box');
+                const muditaQuote = document.getElementById('paccaya-mudita-quote');
+                const muditaSource = document.getElementById('paccaya-mudita-source');
+                const muditaNext = document.getElementById('paccaya-mudita-next');
+
+                const writeBtn = document.getElementById('paccaya-write-btn');
+                const writeLabel = document.getElementById('paccaya-write-label');
+                const drawerEl = document.getElementById('paccaya-drawer');
+                const usernameInput = document.getElementById('paccaya-username');
+                const emailInput = document.getElementById('paccaya-email');
+                const contentInput = document.getElementById('paccaya-content');
+                const cancelBtn = document.getElementById('paccaya-cancel-btn');
+                const submitBtn = document.getElementById('paccaya-submit-btn');
+                const submitLabel = document.getElementById('paccaya-submit-label');
+
+                const receiptEl = document.getElementById('paccaya-receipt');
+                const againBtn = document.getElementById('paccaya-again-btn');
+
+                const echoTextEl = document.getElementById('paccaya-echo-text');
+                const echoNextBtn = document.getElementById('paccaya-echo-next');
+
+                let currentVisitorNum = null;
+
+                // 精选早期佛教随喜法句
+                const MUDITA_VERSES = [
+                    { quote: '“诸恶莫作，众善奉行，自净其意，是诸佛教。”', source: '——《法句经·183偈》' },
+                    { quote: '“一切施中，法施最胜；一切味中，法味最胜。”', source: '——《法句经·354偈》' },
+                    { quote: '“如花朵一般，有色亦有香；善说之法语，实行必有果。”', source: '——《法句经·52偈》' },
+                    { quote: '“滴水常流，终满大器；智者积善，虽微必盈。”', source: '——《法句经·122偈》' },
+                    { quote: '“于诸善法，生随喜心，心得清净，欢喜踊跃。”', source: '——《杂阿含经》' },
+                    { quote: '“自洲自依，法洲法依，不异洲不异依。”', source: '——《长部·大般涅槃经》' }
+                ];
+                let verseIndex = Math.floor(Math.random() * MUDITA_VERSES.length);
+
+                // 默认回响兜底（当尚未拉取到或网络离线时展示）
+                let echoes = [
+                    { username: '寻法者', content: '愿正法久住，如灯传灯，照破迷暗。', date: '常寂回响' },
+                    { username: '过路法友', content: '观四念处，于一呼一吸间照见生灭无常。', date: '法洲足音' }
+                ];
+                let echoIndex = 0;
+                let echoTimer = null;
+
+                // 数字缓动递增渲染
+                function animateCount(targetNum) {
+                    if (!visitCountEl) return;
+                    const startNum = Math.max(1, targetNum - 16);
+                    const duration = 650;
+                    const startTime = performance.now();
+
+                    function step(now) {
+                        const t = Math.min(1, (now - startTime) / duration);
+                        const ease = 1 - Math.pow(1 - t, 3);
+                        const val = Math.round(startNum + (targetNum - startNum) * ease);
+                        visitCountEl.textContent = val.toLocaleString('en-US');
+                        if (t < 1) {
+                            requestAnimationFrame(step);
+                        } else {
+                            visitCountEl.textContent = targetNum.toLocaleString('en-US');
+                        }
+                    }
+                    requestAnimationFrame(step);
+                }
+
+                // 1) 初始化并更新访问序数
+                async function initVisitCount() {
+                    if (!supabaseClient) {
+                        if (visitCountEl) visitCountEl.textContent = '有缘';
+                        return;
+                    }
+                    try {
+                        // 单次会话仅累加一次访问计数
+                        if (!sessionStorage.getItem('dhamma_about_visited')) {
+                            await supabaseClient.rpc('increment_visit_count');
+                            sessionStorage.setItem('dhamma_about_visited', '1');
+                        }
+
+                        const { data, error } = await supabaseClient
+                            .from('visit_counts')
+                            .select('total_visits')
+                            .single();
+
+                        if (!error && data && typeof data.total_visits === 'number') {
+                            currentVisitorNum = data.total_visits;
+                            animateCount(currentVisitorNum);
+                            if (usernameInput) {
+                                usernameInput.placeholder = `称呼（选填，留空即作「第 ${currentVisitorNum} 位寻法者」）`;
+                            }
+                        } else {
+                            if (visitCountEl) visitCountEl.textContent = '有缘';
+                        }
+                    } catch (err) {
+                        if (visitCountEl) visitCountEl.textContent = '有缘';
+                    }
+                }
+
+                // 2) 加载已通过审核的往昔法友留言
+                async function loadApprovedEchoes() {
+                    if (!supabaseClient) {
+                        renderCurrentEcho();
+                        return;
+                    }
+                    try {
+                        const { data, error } = await supabaseClient
+                            .from('messages')
+                            .select('username, content, created_at')
+                            .eq('is_approved', true)
+                            .order('created_at', { ascending: false })
+                            .limit(10);
+
+                        if (!error && data && data.length > 0) {
+                            echoes = data.map(item => {
+                                const d = item.created_at ? new Date(item.created_at) : null;
+                                const dateStr = (d && !isNaN(d))
+                                    ? `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+                                    : '';
+                                return {
+                                    username: item.username || '法友',
+                                    content: (item.content || '').replace(/\s+/g, ' ').trim(),
+                                    date: dateStr
+                                };
+                            });
+                            echoIndex = 0;
+                        }
+                    } catch (err) {
+                        // 静默使用兜底回响
+                    }
+                    renderCurrentEcho();
+                    startEchoRotation();
+                }
+
+                function renderCurrentEcho(withTransition = false) {
+                    if (!echoTextEl || echoes.length === 0) return;
+                    const item = echoes[echoIndex % echoes.length];
+                    const text = `「${item.username}：${item.content}」${item.date ? ' · ' + item.date : ''}`;
+
+                    if (withTransition) {
+                        echoTextEl.classList.add('switching');
+                        setTimeout(() => {
+                            echoTextEl.textContent = text;
+                            echoTextEl.title = text;
+                            echoTextEl.classList.remove('switching');
+                        }, 220);
+                    } else {
+                        echoTextEl.textContent = text;
+                        echoTextEl.title = text;
+                    }
+                }
+
+                function nextEcho() {
+                    if (echoes.length <= 1) return;
+                    echoIndex = (echoIndex + 1) % echoes.length;
+                    renderCurrentEcho(true);
+                }
+
+                function startEchoRotation() {
+                    if (echoTimer) clearInterval(echoTimer);
+                    if (echoes.length <= 1) return;
+                    echoTimer = setInterval(() => {
+                        if (!document.hidden) nextEcho();
+                    }, 7500);
+                }
+
+                if (echoNextBtn) {
+                    echoNextBtn.addEventListener('click', () => {
+                        nextEcho();
+                        startEchoRotation();
+                    });
+                }
+
+                // 3) 「随喜一念」交互
+                function showMuditaVerse() {
+                    const v = MUDITA_VERSES[verseIndex % MUDITA_VERSES.length];
+                    verseIndex = (verseIndex + 1) % MUDITA_VERSES.length;
+                    if (muditaQuote) muditaQuote.textContent = v.quote;
+                    if (muditaSource) muditaSource.textContent = v.source;
+                    if (muditaBox) muditaBox.classList.add('active');
+                    if (muditaBtn) muditaBtn.classList.add('active');
+                    if (muditaLabel) muditaLabel.textContent = '已结善缘 · 善哉';
+                    if (window.GrainientInstance && window.GrainientInstance.wake) {
+                        window.GrainientInstance.wake();
+                    }
+                }
+
+                if (muditaBtn) {
+                    muditaBtn.addEventListener('click', showMuditaVerse);
+                }
+                if (muditaNext) {
+                    muditaNext.addEventListener('click', showMuditaVerse);
+                }
+
+                // 4) 「落墨留语」面板展开与收起
+                function openDrawer() {
+                    if (!drawerEl) return;
+                    if (receiptEl) receiptEl.classList.remove('active');
+                    drawerEl.classList.remove('dissolving');
+                    drawerEl.classList.add('active');
+                    drawerEl.setAttribute('aria-hidden', 'false');
+                    if (writeBtn) {
+                        writeBtn.classList.add('active');
+                        writeBtn.setAttribute('aria-expanded', 'true');
+                    }
+                    if (writeLabel) writeLabel.textContent = '收起书笺';
+                    if (window.KalaEngine) window.KalaEngine.setInteractionPause(true);
+                    setTimeout(() => {
+                        if (contentInput) contentInput.focus();
+                    }, 80);
+                }
+
+                function closeDrawer() {
+                    if (!drawerEl) return;
+                    drawerEl.classList.remove('active', 'dissolving');
+                    drawerEl.setAttribute('aria-hidden', 'true');
+                    if (writeBtn) {
+                        writeBtn.classList.remove('active');
+                        writeBtn.setAttribute('aria-expanded', 'false');
+                    }
+                    if (writeLabel) writeLabel.textContent = '落墨留语';
+                    if (window.KalaEngine) window.KalaEngine.setInteractionPause(false);
+                }
+
+                if (writeBtn) {
+                    writeBtn.addEventListener('click', () => {
+                        if (drawerEl && drawerEl.classList.contains('active')) {
+                            closeDrawer();
+                        } else {
+                            openDrawer();
+                        }
+                    });
+                }
+
+                if (cancelBtn) {
+                    cancelBtn.addEventListener('click', closeDrawer);
+                }
+
+                if (againBtn) {
+                    againBtn.addEventListener('click', openDrawer);
+                }
+
+                // 5) 提交心语并触发「落墨化沙」
+                function isValidEmail(email) {
+                    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+                }
+
+                async function handleSubmit() {
+                    if (!contentInput) return;
+                    const rawContent = contentInput.value.trim();
+                    const rawName = usernameInput ? usernameInput.value.trim() : '';
+                    const rawEmail = emailInput ? emailInput.value.trim() : '';
+
+                    if (!rawContent) {
+                        contentInput.focus();
+                        contentInput.style.borderColor = '#ef4444';
+                        setTimeout(() => { contentInput.style.borderColor = ''; }, 1200);
+                        return;
+                    }
+
+                    if (rawEmail && !isValidEmail(rawEmail)) {
+                        emailInput.focus();
+                        emailInput.style.borderColor = '#ef4444';
+                        setTimeout(() => { emailInput.style.borderColor = ''; }, 1200);
+                        return;
+                    }
+
+                    const finalName = rawName || (currentVisitorNum ? `第 ${currentVisitorNum} 位寻法者` : '过路寻法者');
+
+                    if (submitBtn) submitBtn.disabled = true;
+                    if (submitLabel) submitLabel.textContent = '化沙印空中…';
+
+                    try {
+                        if (supabaseClient) {
+                            const { error } = await supabaseClient
+                                .from('messages')
+                                .insert([{
+                                    username: finalName,
+                                    email: rawEmail || null,
+                                    content: rawContent,
+                                    is_approved: false
+                                }]);
+                            if (error) throw error;
+                        }
+
+                        // 触发局部金沙微粒升腾消散特效
+                        if (window.KalaEngine && window.KalaEngine.spawnElementSand) {
+                            window.KalaEngine.spawnElementSand(drawerEl);
+                        }
+
+                        if (drawerEl) drawerEl.classList.add('dissolving');
+
+                        setTimeout(() => {
+                            contentInput.value = '';
+                            closeDrawer();
+                            if (receiptEl) receiptEl.classList.add('active');
+                            if (submitBtn) submitBtn.disabled = false;
+                            if (submitLabel) submitLabel.textContent = '印入虚空';
+                        }, 560);
+                    } catch (err) {
+                        console.error('提交留言异常:', err);
+                        if (submitBtn) submitBtn.disabled = false;
+                        if (submitLabel) submitLabel.textContent = '重试印入';
+                    }
+                }
+
+                if (submitBtn) {
+                    submitBtn.addEventListener('click', handleSubmit);
+                }
+
+                initVisitCount();
+                loadApprovedEchoes();
             })();
         })();
     </script>
