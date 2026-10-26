@@ -90,17 +90,14 @@
 
         /* Layout Grid */
         .grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 60px;
+            display: flex;
+            flex-direction: column;
             flex: 1;
         }
 
-        @media (max-width: 768px) {
-            .grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
+        .right-col {
+            width: 100%;
+            max-width: 600px;
         }
 
         .header-title {
@@ -1275,13 +1272,63 @@
             }
         }
 
-        .social-links {
+        .footer-left {
             display: flex;
-            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .social-links {
+            display: inline-flex;
+            align-items: center;
+            gap: 18px;
         }
         
         .social-links a {
             font-size: 18px;
+        }
+
+        .footer-divider {
+            opacity: 0.25;
+            user-select: none;
+        }
+
+        .footer-vocation {
+            font-size: 13.5px;
+            color: var(--secondary-color);
+            display: inline-flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .footer-vocation a {
+            color: var(--text-color);
+            opacity: 0.88;
+            border-bottom: 1px dashed rgba(243, 190, 122, 0.38);
+            transition: all 0.2s ease;
+        }
+
+        .footer-vocation a:hover {
+            opacity: 1;
+            color: #f3be7a;
+            border-bottom-color: #f3be7a;
+        }
+
+        body.light-mode .footer-vocation a {
+            border-bottom-color: rgba(141, 90, 42, 0.38);
+        }
+
+        body.light-mode .footer-vocation a:hover {
+            color: #8d5a2a;
+            border-bottom-color: #8d5a2a;
+        }
+
+        .footer-vocation .vocation-gh {
+            border-bottom: none;
+            opacity: 0.7;
+            margin-left: 2px;
         }
         
         .back-link {
@@ -1961,24 +2008,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="section job-info">
-                    <h1 class="section-title job-title">事业</h1>
-                    <ul class="item-list">
-                        <li class="item">
-                            <div class="item-content">
-                                <span class="item-title"><a href="https://suttacentral.net" target="_blank">SuttaCentral.net</a></span>
-                                <span class="item-title"><a href="https://bilara.suttacentral.net" target="_blank">Bilara.SuttaCentral.net</a></span>
-                                <span class="item-desc">开发工程师</span>
-                                <div class="item-desc" style="margin-top: 4px;">
-                                    <a href="https://github.com/suttacentral" target="_blank">
-                                        <i class="bi bi-github"></i> github.com/suttacentral
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>                
             </div>
 
             <script>
@@ -2173,14 +2202,21 @@
     </main>
 
     <footer>
-        <div class="social-links">
-            <a href="https://github.com/dhammaisland" target="_blank"><i class="bi bi-github"></i></a>
-            <a href="https://www.zhihu.com/people/paccakkha" target="_blank">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;">
-                    <path d="M5.721 0C2.251 0 0 2.25 0 5.719V18.28C0 21.751 2.252 24 5.721 24h12.56C21.751 24 24 21.75 24 18.281V5.72C24 2.249 21.75 0 18.281 0zm1.964 4.078c-.271.73-.5 1.434-.68 2.11h4.587c.545-.006.445 1.168.445 1.171H9.384a58.104 58.104 0 01-.112 3.797h2.712c.388.023.393 1.251.393 1.266H9.183a9.223 9.223 0 01-.408 2.102l.757-.604c.452.456 1.512 1.712 1.906 2.177.473.681.063 2.081.063 2.081l-2.794-3.382c-.653 2.518-1.845 3.607-1.845 3.607-.523.468-1.58.82-2.64.516 2.218-1.73 3.44-3.917 3.667-6.497H4.491c0-.015.197-1.243.806-1.266h2.71c.024-.32.086-3.254.086-3.797H6.598c-.136.406-.158.447-.268.753-.594 1.095-1.603 1.122-1.907 1.155.906-1.821 1.416-3.6 1.591-4.064.425-1.124 1.671-1.125 1.671-1.125zM13.078 6h6.377v11.33h-2.573l-2.184 1.373-.401-1.373h-1.219zm1.313 1.219v8.86h.623l.263.937 1.455-.938h1.456v-8.86z"/>
-                </svg>
-            </a>
-            <a href="mailto:paccakkha@yahoo.com"><i class="bi bi-envelope-fill"></i></a>
+        <div class="footer-left">
+            <div class="social-links">
+                <a href="https://github.com/dhammaisland" target="_blank" title="GitHub"><i class="bi bi-github"></i></a>
+                <a href="https://www.zhihu.com/people/paccakkha" target="_blank" title="知乎">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;">
+                        <path d="M5.721 0C2.251 0 0 2.25 0 5.719V18.28C0 21.751 2.252 24 5.721 24h12.56C21.751 24 24 21.75 24 18.281V5.72C24 2.249 21.75 0 18.281 0zm1.964 4.078c-.271.73-.5 1.434-.68 2.11h4.587c.545-.006.445 1.168.445 1.171H9.384a58.104 58.104 0 01-.112 3.797h2.712c.388.023.393 1.251.393 1.266H9.183a9.223 9.223 0 01-.408 2.102l.757-.604c.452.456 1.512 1.712 1.906 2.177.473.681.063 2.081.063 2.081l-2.794-3.382c-.653 2.518-1.845 3.607-1.845 3.607-.523.468-1.58.82-2.64.516 2.218-1.73 3.44-3.917 3.667-6.497H4.491c0-.015.197-1.243.806-1.266h2.71c.024-.32.086-3.254.086-3.797H6.598c-.136.406-.158.447-.268.753-.594 1.095-1.603 1.122-1.907 1.155.906-1.821 1.416-3.6 1.591-4.064.425-1.124 1.671-1.125 1.671-1.125zM13.078 6h6.377v11.33h-2.573l-2.184 1.373-.401-1.373h-1.219zm1.313 1.219v8.86h.623l.263.937 1.455-.938h1.456v-8.86z"/>
+                    </svg>
+                </a>
+                <a href="mailto:paccakkha@yahoo.com" title="Email"><i class="bi bi-envelope-fill"></i></a>
+            </div>
+            <span class="footer-divider" aria-hidden="true">|</span>
+            <span class="footer-vocation">
+                现于 <a href="https://suttacentral.net" target="_blank" rel="noopener">SuttaCentral.net</a> &amp; <a href="https://bilara.suttacentral.net" target="_blank" rel="noopener">Bilara</a> 任开发工程师
+                <a href="https://github.com/suttacentral" target="_blank" rel="noopener" class="vocation-gh" title="github.com/suttacentral"><i class="bi bi-github"></i></a>
+            </span>
         </div>
         <div class="lang-switch">
             <a href="home.html" class="back-link">阅读经文、法谈</a>
