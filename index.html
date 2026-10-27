@@ -3423,18 +3423,82 @@
 
                 if (nodes.length === 0) return;
 
-                // 业种水痕池 (点击驻留场源，最多并存 3 枚)
-                const MAX_SEEDS = 3;
-                const SEED_LIFE = 4.2; // 秒
-                const SEED_LABELS = [
-                    '因 · Hetu',
-                    '缘 · Paccaya',
+                // 「一念千波 · 因果回响涟漪场」多世代涟漪池与碰撞星芒池
+                const MAX_RIPPLES = 26;
+                const MAX_GEN = 3;
+                const CALM_START_SEC = 4.2; // 点击 4.2s 后进入渐归平静期
+                const CALM_END_SEC = 7.6;   // 7.6s 内彻底波平如镜
+                const ORIGIN_LABELS = [
+                    '初因 · Hetu',
+                    '缘起 · Paccaya',
                     '相依 · Nissaya',
                     '和合 · Sampayutta',
-                    '起 · Samuppāda'
+                    '流转 · Pavatti'
                 ];
-                let seedLabelIdx = 0;
-                const kammaSeeds = [];
+                let originLabelIdx = 0;
+                let rippleIdSeq = 1;
+                let lastClickChainTime = 0;
+                const ripples = [];
+                const sparks = []; // 撞击边框与双波交会处的瞬时微光星芒
+                const collidedPairs = new Set(); // 已发生过相交化生的涟漪对 "idA_idB"
+
+                function spawnRipple(opts) {
+                    if (ripples.length >= MAX_RIPPLES && opts.gen > 0) return null;
+                    if (ripples.length >= MAX_RIPPLES) {
+                        // 移除最老的次生波以为新点击腾出空间
+                        const oldestIdx = ripples.findIndex(r => r.gen > 0);
+                        if (oldestIdx >= 0) ripples.splice(oldestIdx, 1);
+                        else ripples.pop();
+                    }
+
+                    const gen = opts.gen || 0;
+                    const diag = Math.hypot(vw, vh);
+                    const speedByGen = [225, 175, 142, 115];
+                    const lifeByGen = [4.6, 3.4, 2.6, 2.0];
+                    const maxRByGen = [diag * 0.72, Math.min(460, diag * 0.42), 270, 165];
+                    const energyByGen = [1.0, 0.62, 0.40, 0.25];
+
+                    const ripple = {
+                        id: rippleIdSeq++,
+                        parentId: opts.parentId || 0,
+                        x: opts.x,
+                        y: opts.y,
+                        r: opts.initialR || 2,
+                        maxR: opts.maxR || maxRByGen[Math.min(gen, 3)],
+                        speed: opts.speed || speedByGen[Math.min(gen, 3)],
+                        age: 0,
+                        life: opts.life || lifeByGen[Math.min(gen, 3)],
+                        gen,
+                        kind: opts.kind || 'origin', // 'origin' | 'wall' | 'card' | 'collide'
+                        energy: opts.energy ?? energyByGen[Math.min(gen, 3)],
+                        label: opts.label || '',
+                        hitWalls: {
+                            left: opts.skipWall === 'left',
+                            right: opts.skipWall === 'right',
+                            top: opts.skipWall === 'top',
+                            bottom: opts.skipWall === 'bottom'
+                        },
+                        hitCards: new Set(opts.skipCardIdx !== undefined ? [opts.skipCardIdx] : [])
+                    };
+                    ripples.push(ripple);
+                    return ripple;
+                }
+
+                function spawnSpark(x, y, kind, label, parentA, parentB) {
+                    if (sparks.length > 36) sparks.shift();
+                    sparks.push({
+                        x,
+                        y,
+                        kind, // 'wall' | 'card' | 'collide'
+                        label: label || '',
+                        age: 0,
+                        life: kind === 'collide' ? 1.35 : 0.95,
+                        ax: parentA ? parentA.x : x,
+                        ay: parentA ? parentA.y : y,
+                        bx: parentB ? parentB.x : x,
+                        by: parentB ? parentB.y : y
+                    });
+                }
 
                 // 指针与场域状态
                 const pointer = {
@@ -3503,23 +3567,39 @@
 
                 // 更新底部法印提示文案
                 function updateStatusUI(mode, primaryNode) {
-                    if (mode === currentStatusMode && mode !== 'sway') return;
-                    currentStatusMode = mode;
                     if (!statusPill || !statusLabel || !hintTextEl) return;
 
-                    if (mode === 'seed' && kammaSeeds.length > 0) {
+                    if (mode === 'ripple' && ripples.length > 0) {
                         statusPill.classList.add('active');
-                        const latest = kammaSeeds[0];
-                        statusLabel.textContent = `造作留痕 · ${latest.label}`;
-                        hintTextEl.textContent = `“因集则相变，因灭则复寂” · 水痕驻留间牵动诸板块错位让渡，待水痕消融后复归原位`;
+                        const genCount = ripples.filter(r => r.gen > 0).length;
+                        const collideCount = ripples.filter(r => r.kind === 'collide').length;
+                        const chainSec = lastClickChainTime ? (performance.now() - lastClickChainTime) / 1000 : 0;
+
+                        if (chainSec > CALM_START_SEC) {
+                            statusLabel.textContent = `诸缘渐息 · 余波 ${ripples.length} 道`;
+                            hintTextEl.textContent = '“生灭灭已，寂灭为乐” · 涟漪能量随阻尼自然耗散，诸板块徐徐归位，复归如镜静谧';
+                        } else if (collideCount > 0) {
+                            statusLabel.textContent = `众波交会 · 化生 ${ripples.length} 道因果波`;
+                            hintTextEl.textContent = '“此生故彼生，辗转相依” · 边框回波与既有涟漪相撞，于交点处化生新澜，牵动全局布局';
+                        } else if (genCount > 0) {
+                            statusLabel.textContent = `触框回响 · 激起 ${ripples.length} 道涟漪`;
+                            hintTextEl.textContent = '“一念才动，万缘俱起” · 涟漪触及卡片与视口边框，反弹激起次生回波并继续交织';
+                        } else {
+                            const latest = ripples[ripples.length - 1];
+                            statusLabel.textContent = `一念起波 · ${latest.label || '初因 · Hetu'}`;
+                            hintTextEl.textContent = '“因集则相变” · 涟漪正向四方扩散，即将触及边框并引发连锁回响';
+                        }
+                        currentStatusMode = 'ripple';
                     } else if (mode === 'sway' && primaryNode) {
                         statusPill.classList.add('active');
                         statusLabel.textContent = `得缘 · ${primaryNode.name}`;
                         hintTextEl.textContent = `“譬如两束芦苇相依而立” · 【${primaryNode.name}】趋前得缘，其余板块反相错位让渡以维系平衡`;
-                    } else {
+                        currentStatusMode = 'sway';
+                    } else if (currentStatusMode !== 'idle') {
                         statusPill.classList.remove('active');
                         statusLabel.textContent = '束芦相依 · 静立';
-                        hintTextEl.textContent = '“此有故彼有，此动故彼动” · 游走或点击页面，体悟诸法相依让渡与因散复寂';
+                        hintTextEl.textContent = '“此有故彼有，此动故彼动” · 点击空白处观一念千波、触框回响与相撞化生';
+                        currentStatusMode = 'idle';
                     }
                 }
 
@@ -3547,17 +3627,191 @@
                     // 指针速度阻尼衰减
                     pointer.speed *= Math.exp(-dt * 6.0);
 
-                    // 1. 更新并清理过期的「业种水痕 (Kamma Seeds)」
-                    for (let i = kammaSeeds.length - 1; i >= 0; i--) {
-                        kammaSeeds[i].age += dt;
-                        kammaSeeds[i].waveRadius += dt * 440; // 冲击波扩散速度 440px/s
-                        if (kammaSeeds[i].age >= kammaSeeds[i].life) {
-                            kammaSeeds.splice(i, 1);
+                    // 计算自最近一次点击以来的全局止息包络 (Calm Envelope: 4.2s 后开始平复，7.6s 归零)
+                    const chainElapsed = lastClickChainTime ? (now - lastClickChainTime) / 1000 : 999;
+                    const canSpawnSecondary = !modalPaused && chainElapsed < (CALM_START_SEC + 0.6);
+                    const calmEnvelope = chainElapsed <= CALM_START_SEC
+                        ? 1.0
+                        : Math.max(0, 1 - (chainElapsed - CALM_START_SEC) / (CALM_END_SEC - CALM_START_SEC));
+
+                    // 1. 更新多世代涟漪池、检测「撞击边框」与「双波碰撞」
+                    const newlySpawned = [];
+
+                    for (let i = ripples.length - 1; i >= 0; i--) {
+                        const rp = ripples[i];
+                        rp.age += dt;
+                        // 平复期内扩散速度亦温和放缓
+                        const speedDamp = 0.65 + 0.35 * calmEnvelope;
+                        rp.r += rp.speed * speedDamp * dt;
+
+                        if (rp.age >= rp.life || rp.r >= rp.maxR || calmEnvelope <= 0.005) {
+                            ripples.splice(i, 1);
+                            continue;
+                        }
+
+                        // 若仍在活跃衍生期且世代未超上限，检测撞击边框
+                        if (canSpawnSecondary && rp.gen < MAX_GEN && rp.age > 0.06) {
+                            // (1a) 检测撞击视口四壁边框 (Viewport Edges)
+                            const margin = 3;
+                            if (!rp.hitWalls.left && rp.r >= rp.x - margin) {
+                                rp.hitWalls.left = true;
+                                const by = Math.max(20, Math.min(vh - 20, rp.y));
+                                newlySpawned.push({
+                                    parentId: rp.id, x: margin, y: by, gen: rp.gen + 1,
+                                    kind: 'wall', label: '回响 · Paṭighosa', skipWall: 'left'
+                                });
+                                spawnSpark(margin + 2, by, 'wall', '触壁回波', rp, null);
+                            }
+                            if (!rp.hitWalls.right && rp.r >= (vw - rp.x) - margin) {
+                                rp.hitWalls.right = true;
+                                const by = Math.max(20, Math.min(vh - 20, rp.y));
+                                newlySpawned.push({
+                                    parentId: rp.id, x: vw - margin, y: by, gen: rp.gen + 1,
+                                    kind: 'wall', label: '回响 · Paṭighosa', skipWall: 'right'
+                                });
+                                spawnSpark(vw - margin - 2, by, 'wall', '触壁回波', rp, null);
+                            }
+                            if (!rp.hitWalls.top && rp.r >= rp.y - margin) {
+                                rp.hitWalls.top = true;
+                                const bx = Math.max(20, Math.min(vw - 20, rp.x));
+                                newlySpawned.push({
+                                    parentId: rp.id, x: bx, y: margin, gen: rp.gen + 1,
+                                    kind: 'wall', label: '回响 · Paṭighosa', skipWall: 'top'
+                                });
+                                spawnSpark(bx, margin + 2, 'wall', '触壁回波', rp, null);
+                            }
+                            if (!rp.hitWalls.bottom && rp.r >= (vh - rp.y) - margin) {
+                                rp.hitWalls.bottom = true;
+                                const bx = Math.max(20, Math.min(vw - 20, rp.x));
+                                newlySpawned.push({
+                                    parentId: rp.id, x: bx, y: vh - margin, gen: rp.gen + 1,
+                                    kind: 'wall', label: '回响 · Paṭighosa', skipWall: 'bottom'
+                                });
+                                spawnSpark(bx, vh - margin - 2, 'wall', '触壁回波', rp, null);
+                            }
+
+                            // (1b) 检测撞击页面内核心卡片边框 (DOM Box Borders: 死随念盒、天地四时坞、因缘际会卡)
+                            if (rp.gen <= 1) {
+                                nodes.forEach(n => {
+                                    // 重点检测有实体边框的卡片节点 (index 2, 3, 4)
+                                    if (n.index !== 2 && n.index !== 3 && n.index !== 4) return;
+                                    if (rp.hitCards.has(n.index)) return;
+
+                                    const halfW = n.width * 0.5;
+                                    const halfH = n.height * 0.5;
+                                    const left = n.cx - halfW;
+                                    const right = n.cx + halfW;
+                                    const top = n.cy - halfH;
+                                    const bottom = n.cy + halfH;
+
+                                    // 若圆心在卡片外部，求圆心到卡片矩形边框的最近接触点 (px, py)
+                                    const outside = rp.x < left || rp.x > right || rp.y < top || rp.y > bottom;
+                                    if (!outside) {
+                                        rp.hitCards.add(n.index);
+                                        return;
+                                    }
+
+                                    const px = Math.max(left, Math.min(right, rp.x));
+                                    const py = Math.max(top, Math.min(bottom, rp.y));
+                                    const distToBorder = Math.hypot(rp.x - px, rp.y - py);
+
+                                    if (distToBorder > 8 && rp.r >= distToBorder) {
+                                        rp.hitCards.add(n.index);
+                                        n.resonateUntil = now + 520;
+                                        if (newlySpawned.length + ripples.length < MAX_RIPPLES) {
+                                            newlySpawned.push({
+                                                parentId: rp.id,
+                                                x: px,
+                                                y: py,
+                                                gen: rp.gen + 1,
+                                                kind: 'card',
+                                                label: `触缘 · ${n.name}`,
+                                                skipCardIdx: n.index
+                                            });
+                                            spawnSpark(px, py, 'card', `触缘 · ${n.name}`, rp, null);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+
+                    // (1c) 检测「涟漪与已存在涟漪碰撞 (Wave-Wave Interference)」
+                    if (canSpawnSecondary && ripples.length >= 2) {
+                        for (let i = 0; i < ripples.length; i++) {
+                            for (let j = i + 1; j < ripples.length; j++) {
+                                if (ripples.length + newlySpawned.length >= MAX_RIPPLES) break;
+                                const A = ripples[i];
+                                const B = ripples[j];
+                                const nextGen = Math.max(A.gen, B.gen) + 1;
+                                if (nextGen > MAX_GEN) continue;
+
+                                const pairKey = A.id < B.id ? `${A.id}_${B.id}` : `${B.id}_${A.id}`;
+                                if (collidedPairs.has(pairKey)) continue;
+
+                                const isParentChild = (A.parentId === B.id || B.parentId === A.id);
+                                // 母波含内环尾波 (r - 36)：边框反射子波向内扩散时，与母波内环迎头相撞；非母子波则直接以主波峰外环相撞
+                                const rA = (isParentChild && A.id === B.parentId) ? Math.max(0, A.r - 36) : A.r;
+                                const rB = (isParentChild && B.id === A.parentId) ? Math.max(0, B.r - 36) : B.r;
+                                if (rA < 24 || rB < 24) continue;
+
+                                const dx = B.x - A.x;
+                                const dy = B.y - A.y;
+                                const d = Math.hypot(dx, dy);
+                                if (d < 30) continue;
+
+                                // 判断两圆周是否相交: |rA - rB| < d <= rA + rB
+                                if (d <= (rA + rB) && d > Math.abs(rA - rB) + 4) {
+                                    // 求解两圆交点
+                                    const a = (rA * rA - rB * rB + d * d) / (2 * d);
+                                    const hSq = rA * rA - a * a;
+                                    if (hSq < 0) continue;
+                                    const h = Math.sqrt(hSq);
+
+                                    collidedPairs.add(pairKey);
+                                    if (collidedPairs.size > 400) {
+                                        const firstKey = collidedPairs.values().next().value;
+                                        collidedPairs.delete(firstKey);
+                                    }
+
+                                    const mx = A.x + (a / d) * dx;
+                                    const my = A.y + (a / d) * dy;
+                                    const rx = -(dy / d) * h;
+                                    const ry = (dx / d) * h;
+
+                                    // 两个几何交点 P1, P2，优先选择落在视口内的一点
+                                    const p1x = mx + rx, p1y = my + ry;
+                                    const p2x = mx - rx, p2y = my - ry;
+                                    const p1Inside = p1x > 16 && p1x < vw - 16 && p1y > 16 && p1y < vh - 16;
+                                    const ix = p1Inside ? p1x : Math.max(16, Math.min(vw - 16, p2x));
+                                    const iy = p1Inside ? p1y : Math.max(16, Math.min(vh - 16, p2y));
+
+                                    newlySpawned.push({
+                                        parentId: A.id,
+                                        x: ix,
+                                        y: iy,
+                                        gen: nextGen,
+                                        kind: 'collide',
+                                        label: '和合 · Sampayutta'
+                                    });
+                                    spawnSpark(ix, iy, 'collide', '双波和合', A, B);
+                                }
+                            }
+                        }
+                    }
+
+                    // 将本帧新激发的反射波与干涉波加入池中
+                    newlySpawned.forEach(opts => spawnRipple(opts));
+
+                    // 更新星芒寿命
+                    for (let i = sparks.length - 1; i >= 0; i--) {
+                        sparks[i].age += dt;
+                        if (sparks[i].age >= sparks[i].life) {
+                            sparks.splice(i, 1);
                         }
                     }
 
                     // 2. 计算每个节点的力学目标位移 (tx, ty, tRot, tScale, tOpacity)
-                    // 重置目标
                     nodes.forEach(n => {
                         n.tx = 0;
                         n.ty = 0;
@@ -3575,7 +3829,6 @@
                             nodes.forEach((n, idx) => {
                                 const dx = pointer.x - n.cx;
                                 const dy = pointer.y - n.cy;
-                                // 垂直方向权重略高以匹配纵向流式布局
                                 const dist = Math.hypot(dx * 0.65, dy);
                                 if (dist < nearestDist) {
                                     nearestDist = dist;
@@ -3584,9 +3837,7 @@
                             });
                         }
 
-                        // 若鼠标悬停在精确按钮/链接上，温和收敛牵引幅度以确保点击稳准
                         const controlDamp = pointer.overControl ? 0.32 : 1.0;
-                        // 鼠标静止渐隐因子
                         const idleFade = pointerActive ? Math.max(0, Math.min(1, 1 - Math.max(0, idleSec - 1.0) / 1.2)) : 0;
                         const activeFactor = controlDamp * idleFade;
 
@@ -3596,7 +3847,6 @@
                             const pdy = pointer.y - primary.cy;
                             const pDist = Math.max(1, Math.hypot(pdx, pdy));
 
-                            // 主节点向游标温和趋近 (峰值约 8~11px)
                             const pullStrength = Math.min(10.5, (pDist * 0.045 + 3.5)) * activeFactor / primary.mass;
                             const primaryPullX = (pdx / pDist) * pullStrength;
                             const primaryPullY = (pdy / pDist) * pullStrength * 0.78;
@@ -3607,11 +3857,9 @@
                             primary.tRot += ((pointer.x / vw - 0.5) * 0.28 * primary.polarity) * activeFactor;
                             primary.tOpacity = 1;
 
-                            // 其余节点：承担「全场动量守恒」反相让渡 + 「芦苇交错」水平相倚
-                            const normX = (pointer.x / vw) - 0.5; // [-0.5, 0.5]
+                            const normX = (pointer.x / vw) - 0.5;
                             const normY = (pointer.y / vh) - 0.5;
 
-                            // 计算相邻权重总和以分配反作用力
                             let weightSum = 0;
                             const weights = nodes.map((n, idx) => {
                                 if (idx === nearestIdx) return 0;
@@ -3624,13 +3872,11 @@
                             nodes.forEach((n, idx) => {
                                 if (idx === nearestIdx) return;
                                 const share = weightSum > 0 ? (weights[idx] / weightSum) : (1 / (nodes.length - 1));
-                                const verticalDir = idx < nearestIdx ? -1 : 1; // 上方节点上移让渡，下方节点下移让渡
+                                const verticalDir = idx < nearestIdx ? -1 : 1;
 
-                                // 1) 反相平衡力（此进则彼退）
                                 const counterX = -primaryPullX * share * 1.45;
                                 const counterY = (-primaryPullY * share * 1.1) + (verticalDir * 5.2 * share * activeFactor);
 
-                                // 2) 束芦奇偶交错摆动（一左一右相倚而立）
                                 const reedSwayX = normX * 14.0 * n.polarity * activeFactor / n.mass;
                                 const reedSwayY = normY * 4.5 * n.polarity * activeFactor / n.mass;
 
@@ -3642,41 +3888,42 @@
                             });
                         }
 
-                        // (B) 点击业种水痕 (Kamma Seeds)：径向冲击波 + 驻留斥力场
-                        kammaSeeds.forEach(seed => {
-                            const lifeProgress = seed.age / seed.life;
-                            // 三次幂温润消融包络：初生鲜明，随缘渐散
-                            const env = Math.sin(Math.min(1, seed.age / 0.25) * Math.PI * 0.5) * Math.pow(1 - lifeProgress, 2.2);
+                        // (B) 多世代涟漪场 (Origin / Wall / Card / Collide Ripples) 对页面各板块的波峰推力与驻留牵引
+                        ripples.forEach(rp => {
+                            const lifeProg = rp.age / rp.life;
+                            const fade = Math.pow(1 - lifeProg, 1.6) * rp.energy * calmEnvelope;
+                            if (fade <= 0.01) return;
 
                             nodes.forEach(n => {
-                                const dx = n.cx - seed.x;
-                                const dy = n.cy - seed.y;
-                                const dist = Math.max(24, Math.hypot(dx, dy));
+                                const dx = n.cx - rp.x;
+                                const dy = n.cy - rp.y;
+                                const dist = Math.max(20, Math.hypot(dx, dy));
                                 const ux = dx / dist;
                                 const uy = dy / dist;
 
-                                // 1) 持续驻留场的相依推力與微旋 (半径 420px 内有效)
-                                if (dist < 420) {
-                                    const spatial = Math.pow(1 - dist / 420, 1.6);
-                                    const push = 11.5 * env * spatial / n.mass;
-                                    // 径向推开 + 轻微切向交错
-                                    n.tx += (ux * push) + (-uy * push * 0.28 * n.polarity);
-                                    n.ty += (uy * push * 0.82);
-                                    n.tRot += (ux * push * 0.035 * n.polarity);
+                                // 1) 波峰掠过节点时的水波荡漾推力 (Wavefront Crest Push)
+                                const bandWidth = rp.gen === 0 ? 85 : 62;
+                                const waveDelta = dist - rp.r;
+                                if (Math.abs(waveDelta) < bandWidth) {
+                                    // 正弦双相水波：波前微推，波后微挽，犹如莲叶随波起伏
+                                    const phase = (waveDelta / bandWidth) * Math.PI;
+                                    const crest = Math.cos(phase * 0.5) * fade;
+                                    const push = (rp.gen === 0 ? 10.5 : 7.2) * crest / n.mass;
+                                    n.tx += ux * push + (-uy * push * 0.22 * n.polarity);
+                                    n.ty += uy * push * 0.82;
+                                    n.tRot += (ux * push * 0.032 * n.polarity);
+
+                                    if (crest > 0.42 && rp.gen <= 1 && now > n.resonateUntil) {
+                                        n.resonateUntil = now + 380;
+                                    }
                                 }
 
-                                // 2) 点击刹那的径向波峰冲击 (Wavefront Impulse)
-                                if (seed.age < 1.2) {
-                                    const waveDist = Math.abs(dist - seed.waveRadius);
-                                    if (waveDist < 75) {
-                                        const waveFactor = (1 - waveDist / 75) * (1 - seed.age / 1.2);
-                                        const impulse = 9.5 * waveFactor / n.mass;
-                                        n.tx += ux * impulse;
-                                        n.ty += uy * impulse * 0.85;
-                                        if (waveFactor > 0.45 && now > n.resonateUntil) {
-                                            n.resonateUntil = now + 420;
-                                        }
-                                    }
+                                // 2) 初因主波中心的短暂业种驻留张力
+                                if (rp.gen === 0 && dist < 360) {
+                                    const spatial = Math.pow(1 - dist / 360, 1.5);
+                                    const holdPush = 6.5 * fade * spatial / n.mass;
+                                    n.tx += ux * holdPush;
+                                    n.ty += uy * holdPush * 0.75;
                                 }
                             });
                         });
@@ -3687,7 +3934,6 @@
                     const isMobileViewport = vw <= 768;
 
                     nodes.forEach((n, idx) => {
-                        // 若在移动端或正悬停于段落内的佛经 Tooltip 词条上，锁定 bio 节点不设 transform，确保 Tooltip 定位丝毫不差
                         if (n.isBio && (isMobileViewport || pointer.overTooltipTrigger)) {
                             n.tx = 0;
                             n.ty = 0;
@@ -3695,12 +3941,10 @@
                             n.tScale = 1;
                         }
 
-                        // 钳制温和禅意范围
                         n.tx = Math.max(-15, Math.min(15, n.tx));
                         n.ty = Math.max(-12, Math.min(12, n.ty));
                         n.tRot = Math.max(-0.48, Math.min(0.48, n.tRot));
 
-                        // 依据节点惯性质量计算指数平滑速率
                         const springRate = (7.5 / n.mass) * dt;
                         const lerp = 1 - Math.exp(-springRate);
 
@@ -3713,7 +3957,6 @@
                         const disp = Math.hypot(n.x, n.y);
                         if (disp > maxDisplacement) maxDisplacement = disp;
 
-                        // 写入 CSS 变量驱动 GPU 合成层
                         if (disp < 0.05 && Math.abs(n.scale - 1) < 0.001 && Math.abs(n.opacity - 1) < 0.005) {
                             n.x = 0;
                             n.y = 0;
@@ -3735,29 +3978,27 @@
                             n.el.style.setProperty('--reed-opacity', n.opacity.toFixed(3));
                         }
 
-                        // 更新焦点与共鸣状态类
                         const isPrimary = (idx === nearestIdx && pointerActive && !modalPaused);
                         n.el.classList.toggle('reed-node--primary', isPrimary);
                         n.el.classList.toggle('reed-node--resonating', now < n.resonateUntil);
                     });
 
                     // 更新主节点记录与底部法印提示
-                    if (nearestIdx !== activePrimaryIdx || kammaSeeds.length > 0 || !pointerActive) {
-                        activePrimaryIdx = pointerActive ? nearestIdx : -1;
-                        if (kammaSeeds.length > 0) {
-                            updateStatusUI('seed', null);
-                        } else if (activePrimaryIdx >= 0) {
-                            updateStatusUI('sway', nodes[activePrimaryIdx]);
-                        } else {
-                            updateStatusUI('idle', null);
-                        }
+                    activePrimaryIdx = pointerActive ? nearestIdx : -1;
+                    if (ripples.length > 0) {
+                        updateStatusUI('ripple', null);
+                    } else if (activePrimaryIdx >= 0) {
+                        updateStatusUI('sway', nodes[activePrimaryIdx]);
+                    } else {
+                        updateStatusUI('idle', null);
                     }
 
-                    // 4. 在底层画布渲染「芦苇张力微丝」与「业种同心水痕」
+                    // 4. 在底层画布渲染「芦苇张力微丝」、「多世代因果涟漪」与「和合交点星芒」
                     if (ctx) {
                         ctx.clearRect(0, 0, vw, vh);
                         const isLight = document.body.classList.contains('light-mode');
                         const rgbBase = isLight ? '141, 90, 42' : '243, 190, 122';
+                        const rgbSub = isLight ? '180, 115, 55' : '254, 215, 170';
 
                         if (!modalPaused) {
                             // (1) 绘制相邻芦苇节点之间的相依微丝 (Reed Tension Threads)
@@ -3774,7 +4015,6 @@
                                     const x2 = nB.cx + nB.x;
                                     const y2 = nB.cy + nB.y;
 
-                                    // 控制点随两节点的水平错位产生温润弧度
                                     const midX = (x1 + x2) * 0.5 + (nA.x - nB.x) * 2.4;
                                     const midY = (y1 + y2) * 0.5;
 
@@ -3789,7 +4029,6 @@
                                         ctx.quadraticCurveTo(midX, midY, x2, y2);
                                         ctx.stroke();
 
-                                        // 绘制丝线上缓慢传导的因果微光粒子 (由主缘流向助缘)
                                         const flowDir = (activePrimaryIdx >= 0 && i < activePrimaryIdx) ? (1 - pulsePhase) : pulsePhase;
                                         const t = flowDir;
                                         const omt = 1 - t;
@@ -3805,63 +4044,104 @@
                                 ctx.restore();
                             }
 
-                            // (2) 绘制点击生成的「业种同心水痕光印 (Kamma Seeds)」
-                            kammaSeeds.forEach(seed => {
-                                const p = seed.age / seed.life;
-                                const fade = Math.pow(1 - p, 1.8);
+                            // (2) 绘制多世代因果涟漪 (初因主波、触框回响波、双波交会化生波)
+                            ripples.forEach(rp => {
+                                const p = rp.age / rp.life;
+                                const rRatio = rp.r / rp.maxR;
+                                const fade = Math.pow(1 - Math.max(p, rRatio * 0.85), 1.65) * rp.energy * calmEnvelope;
                                 if (fade <= 0.01) return;
 
                                 ctx.save();
-                                // 外圈扩散涟漪
-                                const r1 = 10 + p * 68;
-                                ctx.strokeStyle = `rgba(${rgbBase}, ${(fade * 0.28).toFixed(3)})`;
-                                ctx.lineWidth = 1;
-                                ctx.setLineDash([]);
+                                const color = rp.kind === 'collide' ? rgbSub : rgbBase;
+                                const mainAlpha = fade * (rp.gen === 0 ? 0.34 : 0.26);
+
+                                // 主波峰圆环
+                                ctx.strokeStyle = `rgba(${color}, ${mainAlpha.toFixed(3)})`;
+                                ctx.lineWidth = rp.gen === 0 ? 1.25 : 0.95;
+                                if (rp.gen === 0) {
+                                    ctx.setLineDash([]);
+                                } else if (rp.kind === 'collide') {
+                                    ctx.setLineDash([3, 4]);
+                                } else {
+                                    ctx.setLineDash([6, 5]);
+                                }
                                 ctx.beginPath();
-                                ctx.arc(seed.x, seed.y, r1, 0, Math.PI * 2);
+                                ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
                                 ctx.stroke();
 
-                                // 内圈呼吸水痕
-                                const r2 = 4 + p * 28;
-                                ctx.strokeStyle = `rgba(${rgbBase}, ${(fade * 0.18).toFixed(3)})`;
-                                ctx.setLineDash([3, 4]);
-                                ctx.beginPath();
-                                ctx.arc(seed.x, seed.y, r2, 0, Math.PI * 2);
-                                ctx.stroke();
+                                // 伴随内环尾波 (双环水纹质感，间距 36px 与碰撞几何对齐)
+                                if (rp.r > 40 && rp.gen <= 1) {
+                                    ctx.strokeStyle = `rgba(${color}, ${(mainAlpha * 0.48).toFixed(3)})`;
+                                    ctx.lineWidth = 0.75;
+                                    ctx.setLineDash([2, 5]);
+                                    ctx.beginPath();
+                                    ctx.arc(rp.x, rp.y, rp.r - 36, 0, Math.PI * 2);
+                                    ctx.stroke();
+                                }
 
-                                // 中心业种微光核
-                                ctx.fillStyle = `rgba(${rgbBase}, ${(fade * 0.55).toFixed(3)})`;
+                                // 涟漪圆心微光点與初因法印文字
+                                if (p < 0.65) {
+                                    const centerFade = (1 - p / 0.65) * fade;
+                                    ctx.fillStyle = `rgba(${color}, ${(centerFade * 0.55).toFixed(3)})`;
+                                    ctx.beginPath();
+                                    ctx.arc(rp.x, rp.y, rp.gen === 0 ? 2.4 : 1.6, 0, Math.PI * 2);
+                                    ctx.fill();
+
+                                    if (rp.gen === 0 && rp.label) {
+                                        ctx.font = 'italic 11px "Noto Serif SC", "Songti SC", Georgia, serif';
+                                        ctx.fillStyle = `rgba(${rgbBase}, ${(centerFade * 0.68).toFixed(3)})`;
+                                        ctx.fillText(rp.label, rp.x + 10, rp.y - 8 - p * 6);
+                                    }
+                                }
+                                ctx.restore();
+                            });
+
+                            // (3) 绘制撞击边框与双波交会点的「因缘星芒 (Sparks)」
+                            sparks.forEach(sp => {
+                                const spProg = sp.age / sp.life;
+                                const spFade = Math.pow(1 - spProg, 1.8) * calmEnvelope;
+                                if (spFade <= 0.01) return;
+
+                                ctx.save();
+                                const col = sp.kind === 'collide' ? rgbSub : rgbBase;
+
+                                // 若是双波交会化生，绘制连接两母波圆心至交点的微弱因果丝线
+                                if (sp.kind === 'collide') {
+                                    ctx.strokeStyle = `rgba(${col}, ${(spFade * 0.16).toFixed(3)})`;
+                                    ctx.lineWidth = 0.8;
+                                    ctx.setLineDash([2, 4]);
+                                    ctx.beginPath();
+                                    ctx.moveTo(sp.ax, sp.ay);
+                                    ctx.lineTo(sp.x, sp.y);
+                                    ctx.lineTo(sp.bx, sp.by);
+                                    ctx.stroke();
+                                }
+
+                                // 交点微光星点与小光晕
+                                ctx.fillStyle = `rgba(${col}, ${(spFade * 0.72).toFixed(3)})`;
                                 ctx.beginPath();
-                                ctx.arc(seed.x, seed.y, 2.2 * (1 - p * 0.4), 0, Math.PI * 2);
+                                ctx.arc(sp.x, sp.y, 2.2 * (1 - spProg * 0.4), 0, Math.PI * 2);
                                 ctx.fill();
 
-                                // 业种与最近两束芦苇的牵引细丝
-                                nodes.forEach(n => {
-                                    const nx = n.cx + n.x;
-                                    const ny = n.cy + n.y;
-                                    const dist = Math.hypot(nx - seed.x, ny - seed.y);
-                                    if (dist < 320) {
-                                        const linkAlpha = fade * (1 - dist / 320) * 0.14;
-                                        ctx.strokeStyle = `rgba(${rgbBase}, ${linkAlpha.toFixed(3)})`;
-                                        ctx.setLineDash([2, 5]);
-                                        ctx.beginPath();
-                                        ctx.moveTo(seed.x, seed.y);
-                                        ctx.lineTo(nx, ny);
-                                        ctx.stroke();
-                                    }
-                                });
+                                ctx.strokeStyle = `rgba(${col}, ${(spFade * 0.32).toFixed(3)})`;
+                                ctx.lineWidth = 0.8;
+                                ctx.setLineDash([]);
+                                ctx.beginPath();
+                                ctx.arc(sp.x, sp.y, 4 + spProg * 12, 0, Math.PI * 2);
+                                ctx.stroke();
 
-                                // 旁侧巴利缘起微印文字
-                                ctx.font = 'italic 11px "Noto Serif SC", "Songti SC", Georgia, serif';
-                                ctx.fillStyle = `rgba(${rgbBase}, ${(fade * 0.62).toFixed(3)})`;
-                                ctx.fillText(seed.label, seed.x + 12, seed.y - 8 - p * 6);
+                                if (sp.label && spProg < 0.75) {
+                                    ctx.font = 'italic 10px "Noto Serif SC", "Songti SC", Georgia, serif';
+                                    ctx.fillStyle = `rgba(${col}, ${(spFade * 0.56).toFixed(3)})`;
+                                    ctx.fillText(sp.label, sp.x + 7, sp.y - 5 - spProg * 4);
+                                }
                                 ctx.restore();
                             });
                         }
                     }
 
                     // 5. 判断是否继续下一帧动画
-                    const stillMoving = maxDisplacement > 0.08 || kammaSeeds.length > 0 || pointerActive;
+                    const stillMoving = maxDisplacement > 0.08 || ripples.length > 0 || sparks.length > 0 || pointerActive;
                     if (stillMoving) {
                         fieldRaf = requestAnimationFrame(stepField);
                     } else {
@@ -3899,37 +4179,49 @@
                     wakeField();
                 });
 
-                // 监听鼠标点击：种下「业种水痕 (Kamma Seed)」并激起因果传导波
+                // 监听鼠标点击空白处：开启「一念千波 · 触框回响与相撞化生」因果链
                 window.addEventListener('pointerdown', function(e) {
                     if (isModalOrDrawerOpen()) return;
                     const target = e.target;
-                    // 若点击的是表单输入框或顶栏灭度按钮，不额外生成水痕以免干扰
-                    if (target && target.closest && target.closest('input, textarea, #kala-quick-btn, #anatta-ego')) {
+                    // 若点击在按钮、链接、输入框等交互控件上，不触发空白涟漪场以免干扰操作
+                    if (target && target.closest && target.closest('a, button, input, textarea, [role="button"]')) {
                         return;
                     }
 
                     measureNodes();
-                    const label = SEED_LABELS[seedLabelIdx % SEED_LABELS.length];
-                    seedLabelIdx++;
+                    const now = performance.now();
+                    lastClickChainTime = now;
 
-                    kammaSeeds.unshift({
-                        x: e.clientX,
-                        y: e.clientY,
-                        age: 0,
-                        life: SEED_LIFE,
-                        waveRadius: 0,
-                        label
+                    const label = ORIGIN_LABELS[originLabelIdx % ORIGIN_LABELS.length];
+                    originLabelIdx++;
+
+                    // 若圆心恰好在某个有框卡片内部，标记跳过该卡片的首次边框反射检测
+                    let insideCardIdx;
+                    nodes.forEach(n => {
+                        if (
+                            e.clientX >= n.cx - n.width * 0.5 &&
+                            e.clientX <= n.cx + n.width * 0.5 &&
+                            e.clientY >= n.cy - n.height * 0.5 &&
+                            e.clientY <= n.cy + n.height * 0.5
+                        ) {
+                            insideCardIdx = n.index;
+                        }
                     });
 
-                    if (kammaSeeds.length > MAX_SEEDS) {
-                        kammaSeeds.pop();
-                    }
+                    spawnRipple({
+                        x: e.clientX,
+                        y: e.clientY,
+                        gen: 0,
+                        kind: 'origin',
+                        label,
+                        skipCardIdx: insideCardIdx
+                    });
 
                     pointer.x = e.clientX;
                     pointer.y = e.clientY;
                     pointer.inside = true;
-                    pointer.lastMoveTime = performance.now();
-                    updateStatusUI('seed', null);
+                    pointer.lastMoveTime = now;
+                    updateStatusUI('ripple', null);
                     wakeField();
                 }, { passive: true });
             })();
